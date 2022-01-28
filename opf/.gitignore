@@ -22,7 +22,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# backend env setup
+# backend environment setup
 /backend/api/__pycache__
 /backend/env/
 /backend/__pycache__
