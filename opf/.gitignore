@@ -25,6 +25,7 @@ yarn-error.log*
 # backend environment setup
 /backend/api/database.db
 /backend/api/models/__pycache__
+/backend/api/serializers/__pycache__
 /backend/api/__pycache__
 /backend/env/
 /backend/__pycache__
