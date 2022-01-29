@@ -4,10 +4,10 @@ from flask_sqlalchemy import SQLAlchemy
 from api import database
 
 # Creating a new user model
-print("user")
+print("MODEL ACCESSED - User")
 class User(database.Model):
-
-    id = database.Column(database.Integer, primary_Key = True)
+  
+    id = database.Column(database.Integer, primary_key = True)
     first_name = database.Column(database.String(50), nullable = False)
     last_name = database.Column(database.String(50), nullable = False)
     isStudent = database.Column(database.Boolean)
