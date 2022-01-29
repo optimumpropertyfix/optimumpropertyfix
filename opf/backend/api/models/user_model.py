@@ -4,8 +4,8 @@ from flask_sqlalchemy import SQLAlchemy
 from api import database
 
 # Creating a new user model
-
-class User(db.Model):
+print("user")
+class User(database.Model):
 
     id = database.Column(database.Integer, primary_Key = True)
     first_name = database.Column(database.String(50), nullable = False)
@@ -15,8 +15,8 @@ class User(db.Model):
     email = database.Column(database.String(50), nullable = False)
     net_id = database.Column(database.String(50), nullable = False, unique =True)
     nshe_id = database.Column(database.String(50), unique =True )
-    gender = database.Column(database.String(50), nullable = True)
-    year = database.Colomn(database.Integer)
+    gender = database.Column(database.String(50), nullable = False)
+    year = database.Column(database.Integer)
 
     user_tickets = database.relationship("Ticket", backref= "user", lazy= "dynamic", cascade = "all, delete")
 

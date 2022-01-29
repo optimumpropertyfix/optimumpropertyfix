@@ -5,7 +5,7 @@ from api import database
 
 # Creating a new ticket model
 
-class Ticket(db.Model):
+class Ticket(database.Model):
 
     id = database.Column(database.Integer, primary_Key = True)
     creator = database.Colomn(database.Integer, database.ForeignKey('user.id'),nullable = False)
@@ -18,7 +18,7 @@ class Ticket(db.Model):
     priority_level = database.Colomn(database.String(25), nullable = False)
     description = database.Colomn(database.Text, nullable = False)
     title = database.Colomn(database.String(25), nullable = False)
-    tags = database.Colomn(database.Integer, ForeignKey(tag.id))
+    #tags = database.Colomn(database.Integer, ForeignKey(tag.id))
  
     ticket_building = database.relationship("Building", backref= "ticket", lazy= "dynamic")
     #ticket_tag = database.relationship("Tag", backref= "ticket", lazy= "dynamic", cascade="all, delete")
