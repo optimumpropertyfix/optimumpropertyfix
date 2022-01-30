@@ -1,3 +1,4 @@
+'''
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from api import database
@@ -18,3 +19,4 @@ class Password(database.Model):
 
     #def __repr__(self):
         #return f'<User - {self.id}> {self.first_name}'
+'''
