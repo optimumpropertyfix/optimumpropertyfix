@@ -17,6 +17,7 @@ class User(database.Model):
     #nshe_id = database.Column(database.String(50), unique =True )
     #gender = database.Column(database.String(50), nullable = False)
     #year = database.Column(database.Integer)
+    password = database.Column(database.String(50), nullable = False)
 
     #user_tickets = database.relationship("Ticket", backref= "user", lazy= "dynamic", cascade = "all, delete")
 
