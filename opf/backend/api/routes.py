@@ -7,7 +7,7 @@ from api.models.user_model import User
 from api.serializers.user_serializer import user_serializer
 
 response_successful = json.dumps({'success':True}), 200, {'ContentType':'application/json'}
-response_unsuccessful = json.dumps({'success':True}), 200, {'ContentType':'application/json'}
+response_unsuccessful = json.dumps({'success':False}), 421, {'ContentType':'application/json'}
 
 @api.route("/debug/create_user/<string:new_name>", methods=["POST"])
 def view_debug(new_name):
@@ -24,3 +24,7 @@ def view_debug(new_name):
     database.session.commit()
     print(f"Name: {new_name} - {nshe_id} is successfully added.")
     return response_successful
+
+@api.route("/login", methods=["POST"])
+def login_user():
+    return response_unsuccessful
