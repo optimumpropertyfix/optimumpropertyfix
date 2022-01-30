@@ -30,3 +30,12 @@ yarn-error.log*
 /backend/env/
 /backend/__pycache__
 
+# araamz/login_authentication dependencies
+package-lock.json
+package.json
+/src
+/public
+/backend/api/models/
+/backend/api.py
+/backend/.flaskenv
+/backend/api/serializers/
