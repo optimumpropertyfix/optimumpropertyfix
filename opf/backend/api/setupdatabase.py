@@ -1,4 +1,5 @@
-from api import database, User
+from api import api, database
+from api.models.user_model import User
 
 #create all the table models 
 database.create_all()
