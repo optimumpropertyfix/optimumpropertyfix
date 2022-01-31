@@ -1,0 +1,23 @@
+@media only screen and (min-width: 300px) {
+  :root {
+    --color-gray: #90a4ae;
+    --color-red: #e57373;
+    --color-yellow: #ffd54f;
+    --color-green: #81c784;
+    --color-lightred: #ffcdd2;
+    --color-lightyellow: #ffecb3;
+    --color-lightgreen: #c8e6c9;
+  }
+
+  p {
+    margin: 0;
+    font-family: "PT Sans", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+@media only screen and (min-width: 600px) {
+}
+
+@media only screen and (min-width: 800px) {
+}
