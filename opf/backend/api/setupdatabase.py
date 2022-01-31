@@ -1,6 +1,10 @@
 from api import api, database
 from api.models.user_model import User
 
+##############################################################
+# to run:$ python3 setupdatabase.py
+##############################################################
+
 #create all the table models 
 database.create_all()
 
