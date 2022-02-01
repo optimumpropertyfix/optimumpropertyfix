@@ -1,10 +1,10 @@
 from flask import jsonify, request
 from flask_jwt_extended import create_access_token, unset_jwt_cookies
 from api import api, database
-from api.models.user_model import User
+#from api.models.user_model import User
 
 @api.route("/token", methods=["POST"])
-def create_token():
+def generate_token():
 
     net_id = request.get_json().get("net_id")
     password = request.get_json().get("password")
@@ -21,24 +21,24 @@ def create_token():
     #    return unauthorized_user_response
 
     if net_id != "testing net_id":
+        print("Failed")
         return unauthorized_user_response
 
     if password != "testing password":
+        print("Failed")
         return unauthorized_user_response
-
 
     access_token = create_access_token(identity = net_id)
 
-    authenticated_user_response = jsonify({access_token: access_token, "msg": "Authorization Granted"}), 200
+    authenticated_user_response = jsonify({"token": access_token, "msg": "Authorization Granted"}), 200
     
     return authenticated_user_response
 
 
-@api.route("/login", methods=["POST"])
-def login_user():
+@api.route("/revoke", methods=["POST"])
+def revoke_token():
 
-    revoke_user_response = jsonify({"msg":"Revoked Authorization"}), 200
-
+    revoke_user_response = jsonify({"msg":"Authorization Revoked"})
     unset_jwt_cookies(revoke_user_response)
 
-    return revoke_user_response
+    return revoke_user_response, 200
