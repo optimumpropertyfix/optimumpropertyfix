@@ -1,9 +1,8 @@
 let TokenManager = {
   get_token() {
-    return "test";
+    return localStorage.getItem("token");
   },
   generate_token(credential) {
-    console.log(JSON.stringify(credential));
     fetch("/token", {
       method: "POST",
       headers: {
@@ -15,12 +14,12 @@ let TokenManager = {
         if (!response.ok) {
           throw Error(`${response.statusText} - ${response.status}`);
         }
-
         return response.json();
       })
       .then((data) => {
-        console.log(data);
-        return data.token;
+        console.log(data.token);
+        localStorage.setItem("token", data.token);
+        console.log(localStorage.getItem("token"));
       })
       .catch((error) => {
         console.log(error);
@@ -34,6 +33,7 @@ let TokenManager = {
         "Content-Type": "application/json",
       },
     });
+    localStorage.setItem("token", null);
   },
 };
 

@@ -6,9 +6,9 @@ from api import api, database
 @api.route("/token", methods=["POST"])
 def generate_token():
 
-    net_id = request.get_json().get("net_id")
-    password = request.get_json().get("password")
-    unauthorized_user_response = jsonify({'success':False, "msg":"Authentication Failed"}), 401
+    content = request.get_json()
+    net_id = content.get("net_id")
+    password = content.get("password")
 
     # https://docs.sqlalchemy.org/en/20/orm/session_basics.html 
     # https://flask-jwt-extended.readthedocs.io/en/stable/basic_usage/
@@ -19,12 +19,12 @@ def generate_token():
 
     #if database.session.query(User.id).filter_by(net_id).first().password != password:
     #    return unauthorized_user_response
-
-    if net_id != "testing net_id":
+    unauthorized_user_response = jsonify({'success':False, "msg":"Authentication Failed"}), 401
+    if net_id != "net_id":
         print("Failed")
         return unauthorized_user_response
 
-    if password != "testing password":
+    if password != "password":
         print("Failed")
         return unauthorized_user_response
 

@@ -14,6 +14,8 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import SignInView from "./pages/LoginPage/views/SignInView";
 import CreateAccountView from "./pages/LoginPage/views/CreateAccountView";
 
+import AdminPage from "./pages/Admin/AdminPage";
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
@@ -24,6 +26,14 @@ ReactDOM.render(
               <Route index element={<SignInView />} />
               <Route path="create" element={<CreateAccountView />} />
             </Route>
+            <Route
+              path="admin"
+              element={
+                <RequireAuthentication>
+                  <AdminPage />
+                </RequireAuthentication>
+              }
+            ></Route>
           </Route>
         </Routes>
       </AuthenticationProvider>
