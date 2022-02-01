@@ -18,5 +18,6 @@ print(joanna.id)
 database.session.add_all([araam, joanna])
 database.session.commit()
 
+#should print here: 
 print(araam.id)
 print(joanna.id)

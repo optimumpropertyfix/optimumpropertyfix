@@ -30,8 +30,8 @@ class Ticket(database.Model):
     ticket_tag = database.relationship('Tag', backref = 'ticket', lazy = 'dynamic')
         # ONE to ONE
         # Ticket to one ___.
-    ticket_building = database.relationship('Building', backref= 'ticket', useList= False)
-    ticket_room = database.relationship('Room', backref = 'ticket', useList= False)
+    ticket_building = database.relationship('Building', backref= 'ticket', useList = False)
+    ticket_room = database.relationship('Room', backref = 'ticket', useList = False)
 
     def __init__(self, creator, building, room, date, time, status, severity_level, priority_level, description, title):
         self.creator = creator
