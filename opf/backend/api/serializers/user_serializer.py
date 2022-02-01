@@ -1,7 +1,7 @@
-###############################################################
-# serializers- Ask @araam if lines 24, & 64 are set up correctly? 
+##########################################################################
+# serializers- Ask @araam if foreign keys are set up are set up correctly? 
 #              & if need to seperate serializers into different files?
-###############################################################
+##########################################################################
 print("SERIALIZER ACCESSED - User")
 def user_serializer(user):
     return {
@@ -17,38 +17,37 @@ def user_serializer(user):
       "year": user.year,
       "password": user.password,
     }
+    
 #################################################
 print("SERIALIZER ACCESSED - Ticket")
-def user_serializer(ticket):
+def ticket_serializer(ticket):
     return {
       "id": ticket.id,
       #"creator": user_serializer.id,
-      "building": ticket.building,
-      "room": ticket.room, 
+      #"building": ticket.building,
+      #"room": ticket.room, 
       "date": ticket.date,
-      "time": ticket.time, 
       "status": ticket.status, 
       "severity_level": ticket.severity_level, 
-      "priority_level": ticket.priority_level,
       "description": ticket.description,
       "title": ticket.title,
     }
 #################################################
 print("SERIALIZER ACCESSED - Building")
-def user_serializer(building):
+def building_serializer(building):
     return {  
       "id": building.id,
-      "room": building.room,
+      #"room": building.room,
       "name": building.name, 
       "number": building.number, 
       "year": building.year,
       "date_renovated": building.date_renovated,
       "isRenovated": building.isRenovated,
-      "tags": building.tags,
+      #"tags": building.tags,
     }
 #################################################
 print("SERIALIZER ACCESSED - Room")
-def user_serializer(room):
+def room_serializer(room):
     return {
       "id": room.id,
       "building": room.building, 
@@ -58,7 +57,7 @@ def user_serializer(room):
     }
 #################################################
 print("SERIALIZER ACCESSED - Tag")
-def user_serializer(tag):
+def tag_serializer(tag):
   return{
     "id": tag.id, 
     #"creator": user_serializer.id,

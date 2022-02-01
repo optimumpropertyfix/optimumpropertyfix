@@ -1,10 +1,11 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-from api import database
 #####################################################################################################
 # Creating a new user model
 #####################################################################################################
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+#from flask_migrate import Migrate
+from api import database
+
 class User(database.Model):
     __tablename__ = 'user'
     id = database.Column(database.Integer, primary_key = True)
@@ -34,12 +35,11 @@ class User(database.Model):
     #Relationships:
         # ONE to MANY
         # User to many ___.
-    user_ticket = database.relationship('Ticket', backref= 'user', lazy = 'dynamic')
-    user_tag = database.relationship('Tag', backref = 'user', lazy = 'dynamic')
+    #user_ticket = database.relationship('Ticket', backref= 'user', lazy = 'dynamic')
+    #user_tag = database.relationship('Tag', backref = 'user', lazy = 'dynamic')
         # ONE to One
         # User to one ___.
    
-
     #debug- string representation of user model
     def __repr__(self):
         return f'<User {self.first_name} and {self.last_name} is a {self.gender} with an email {self.email} with net id {self.net_id}, nsheid {self.nshe_id} completed {self.year} years at UNR with password {self.password}'
