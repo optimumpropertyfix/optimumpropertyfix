@@ -1,4 +1,4 @@
-from api import api, database
+from api import api,database
 from api.models.user_model import User
 
 ##############################################################

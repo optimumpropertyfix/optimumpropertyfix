@@ -1,6 +1,12 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 from api import database
+
+#api = Flask(__name__)
+#database =SQLAlchemy(api)
+#Migrate(api,database)
+
 #####################################################################################################
 # Creating a new ticket model
 #####################################################################################################
@@ -18,8 +24,14 @@ class Ticket(database.Model):
     description = database.Colomn(database.Text, nullable = False)
     title = database.Colomn(database.String(25), nullable = False)
     
-    #relationship
-    ticket_building = database.relationship("Building", backref= "ticket", lazy= "dynamic")
+    #Relationships 
+        # ONE to MANY
+        # Ticket to many ___.
+    ticket_tag = database.relationship('Tag', backref = 'ticket', lazy = 'dynamic')
+        # ONE to ONE
+        # Ticket to one ___.
+    ticket_building = database.relationship('Building', backref= 'ticket', useList= False)
+    ticket_room = database.relationship('Room', backref = 'ticket', useList= False)
 
     def __init__(self, creator, building, room, date, time, status, severity_level, priority_level, description, title):
         self.creator = creator
@@ -33,6 +45,6 @@ class Ticket(database.Model):
         self.description = description
         self. title = title
 
-    #for debugging
+    #debug- string representation of ticket model
     def __repr__(self):
-        return f'<Ticket creator {self.creator} creates a ticket in {self.building}'
+        return f'Ticket creator {self.creator} creates a ticket in {self.building} and room {self.room}'

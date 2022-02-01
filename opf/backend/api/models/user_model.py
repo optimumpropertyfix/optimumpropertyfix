@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 from api import database
 #####################################################################################################
 # Creating a new user model
@@ -30,8 +31,14 @@ class User(database.Model):
         self.year = year
         self.password = password
 
-    #relationship
-    user_tickets = database.relationship('Ticket', backref= 'user', lazy= 'dynamic')
+    #Relationships:
+        # ONE to MANY
+        # User to many ___.
+    user_ticket = database.relationship('Ticket', backref= 'user', lazy = 'dynamic')
+    user_tag = database.relationship('Tag', backref = 'user', lazy = 'dynamic')
+        # ONE to One
+        # User to one ___.
+   
 
     #debug- string representation of user model
     def __repr__(self):

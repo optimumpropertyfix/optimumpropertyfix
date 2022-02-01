@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 from api import database
 #####################################################################################################
 # Creating a new ticket model
@@ -15,8 +16,12 @@ class Building(database.Model):
     isRenovated = database.Column(database.Boolean)
     tags = database.Colomn(database.Integer, database.ForeignKey('tag.id'))
 
-    #relationship
-    building_room = database.relationship("Room", backref= "building", lazy= "dynamic", cascade="all, delete")
+    #Relationship
+        # ONE to MANY
+        # Building to many ___.
+    building_room = database.relationship('Room', backref= 'building', uselist = False)
+        # ONE to One
+        # Building to one ___.
 
     def __init__(self, room, name, number, year, date_renovation, isRenovated, tags): 
         self.room = room

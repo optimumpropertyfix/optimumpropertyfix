@@ -20,3 +20,4 @@ from api.models.user_model import User
 from api.serializers.user_serializer import user_serializer
 from api import routes
 from api import setupdatabase
+from api import crud

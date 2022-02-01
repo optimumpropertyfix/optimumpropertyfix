@@ -9,6 +9,14 @@ from api.serializers.user_serializer import user_serializer
 response_successful = json.dumps({'success':True}), 200, {'ContentType':'application/json'}
 response_unsuccessful = json.dumps({'success':False}), 421, {'ContentType':'application/json'}
 
+####################################################################
+# ACTION | 'REST TERM' | Definition :
+# Create | 'POST' | Creates a new object
+# Read | 'GET' | Read information about object (or multiple objects)
+# Update | 'PUT | Updates info about existing object
+# Delete | 'DELETE' | Delete an object
+#####################################################################
+
 @api.route("/debug/create_user/<string:new_name>", methods=["POST"])
 def view_debug(new_name):
 
