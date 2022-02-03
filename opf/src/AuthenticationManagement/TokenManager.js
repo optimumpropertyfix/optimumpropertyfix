@@ -2,13 +2,13 @@ let TokenManager = {
   get_token() {
     return localStorage.getItem("token");
   },
-  generate_token(credential) {
+  generate_token(credentials) {
     fetch("/token", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(credential),
+      body: JSON.stringify(credentials),
     })
       .then((response) => {
         if (!response.ok) {
@@ -17,9 +17,7 @@ let TokenManager = {
         return response.json();
       })
       .then((data) => {
-        console.log(data.token);
         localStorage.setItem("token", data.token);
-        console.log(localStorage.getItem("token"));
       })
       .catch((error) => {
         console.log(error);
@@ -33,7 +31,7 @@ let TokenManager = {
         "Content-Type": "application/json",
       },
     });
-    localStorage.setItem("token", null);
+    localStorage.removeItem("token");
   },
 };
 

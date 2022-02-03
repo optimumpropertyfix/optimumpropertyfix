@@ -3,11 +3,6 @@ import ReactDOM from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
 
-import {
-  AuthenticationProvider,
-  RequireAuthentication,
-} from "./AuthenticationManagement/AuthenticationManager";
-
 import App from "./App";
 
 import LoginPage from "./pages/LoginPage/LoginPage";
@@ -15,6 +10,10 @@ import SignInView from "./pages/LoginPage/views/SignInView";
 import CreateAccountView from "./pages/LoginPage/views/CreateAccountView";
 
 import AdminPage from "./pages/Admin/AdminPage";
+import {
+  AuthenticationProvider,
+  RequireAuthentication,
+} from "./AuthenticationManagement/AuthenticationManager";
 
 ReactDOM.render(
   <React.StrictMode>

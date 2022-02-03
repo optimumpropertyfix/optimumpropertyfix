@@ -1,78 +1,68 @@
-import React, { useState, useContext } from "react";
-import { Navigate, useLocation } from "react-router-dom";
+import * as React from "react";
+import TokenManager from "./TokenManager";
 
-const AuthenticationContext = React.createContext("");
+const AuthenticationContext = React.createContext();
 
-function UseAuthentication() {
-  return useContext(AuthenticationContext);
+function useAuthentication() {
+  const [session, setSession] = React.useState({
+    alive: false,
+    token: null,
+  });
+
+  React.useEffect(() => {
+    let token = TokenManager.get_token();
+    if (token) {
+      setSession({
+        alive: true,
+        token: token,
+      });
+    }
+  }, []);
+
+  return {
+    session,
+    signin(credentials, callback) {
+      TokenManager.generate_token(credentials);
+      setSession({
+        alive: true,
+        token: TokenManager.get_token(),
+      });
+      callback();
+    },
+    signout(callback) {
+      TokenManager.revoke_token();
+      setSession({
+        alive: false,
+        token: null,
+      });
+      callback();
+    },
+  };
 }
 
-function AuthenticationProvider(props) {
-  let [token, setToken] = useState("");
+export function AuthenticationProvider(props) {
+  let session = useAuthentication();
 
-  let sign_in = (credential, callback) => {
-    fetch("/token", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(credential),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw Error(`${response.statusText} - ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setToken(data.token);
-        localStorage.setItem("token", data.token);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    callback();
-  };
-
-  let sign_out = (callback) => {
-    fetch("/revoke", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw Error(`${response.statusText} - ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        localStorage.removeItem("token");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    callback();
-  };
-
-  let value = { token, sign_in, sign_out };
   return (
-    <AuthenticationContext.Provider value={value}>
+    <AuthenticationContext.Provider value={session}>
       {props.children}
     </AuthenticationContext.Provider>
   );
 }
 
-function RequireAuthentication(props) {
-  let location = useLocation();
-  if (localStorage.getItem("token") == null) {
-    console.log("Erro");
-    return <Navigate to="/login" state={{ from: location }} replace />;
-  } else {
-    return <>{props.children}</>;
-  }
+export default function AuthenticationConsumer() {
+  return React.useContext(AuthenticationContext);
 }
 
-export { UseAuthentication, AuthenticationProvider, RequireAuthentication };
+export function RequireAuthentication(props) {
+  const { session } = useAuthentication();
+  const alive = session.alive;
+  if (!alive) {
+    return (
+      <div>
+        <p>Not Allowed</p>
+      </div>
+    );
+  }
+  return props.children;
+}
