@@ -16,7 +16,11 @@ Migrate(api, database)
 
 # Accessing comamnd for User Model => 'from api.models.user_model import User' within backend base folder (within python environment).
 
+<<<<<<< HEAD
+from api import authentication
+=======
 from api.models.user_model import User
 from api.serializers.user_serializer import user_serializer
 from api import routes
 from api import setupdatabase
+>>>>>>> main

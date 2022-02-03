@@ -1,0 +1,33 @@
+@media only screen and (min-width: 300px) {
+  .LoginPage {
+  }
+  header {
+    display: flex;
+    flex-direction: row;
+  }
+  .logo {
+    background-color: blue;
+  }
+  .logo > img {
+    width: 330px;
+  }
+  nav {
+    align-self: flex-end;
+    background: black;
+  }
+  .SectionNavLink {
+    display: none !important;
+    background: red;
+    width: 90px;
+    text-decoration: none !important;
+    display: flex;
+    width: fit-content;
+    align-items: center;
+  }
+  .active {
+    display: block !important;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+}
