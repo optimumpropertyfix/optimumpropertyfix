@@ -7,6 +7,14 @@ from api.serializers.user_serializer import user_serializer
 successful_response = json.dumps({'success':True}), 200, {'ContentType':'application/json'}
 unsuccessful_response = json.dumps({'success':False}), 421, {'ContentType':'application/json'}
 
+####################################################################
+# ACTION | 'REST TERM' | Definition :
+# Create | 'POST' | Creates a new object
+# Read | 'GET' | Read information about object (or multiple objects)
+# Update | 'PUT | Updates info about existing object
+# Delete | 'DELETE' | Delete an object
+#####################################################################
+
 @api.route("/debug/create_user/<string:new_name>", methods=["POST"])
 @jwt_required()
 def view_debug(new_name):
