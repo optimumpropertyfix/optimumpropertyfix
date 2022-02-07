@@ -1,4 +1,4 @@
-function AdminPage() {
+function Ticket() {
   return (
     <div>
       <p>AdminPage</p>
@@ -6,4 +6,4 @@ function AdminPage() {
   );
 }
 
-export default AdminPage;
+export default Ticket;

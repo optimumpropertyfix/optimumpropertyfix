@@ -5,22 +5,34 @@ import "./index.css";
 
 import App from "./App";
 
-import LoginPage from "./pages/LoginPage/LoginPage";
-import SignInView from "./pages/LoginPage/views/SignInView";
-import CreateAccountView from "./pages/LoginPage/views/CreateAccountView/CreateAccountView";
+import AdminPage from "./pages/AdminExperience/AdminPage";
 
-import AdminPage from "./pages/AdminPage/AdminPage";
+import DashboardPage from "./pages/AdminExperience/DashboardPage/DashboardPage";
+
+import FeedbackPage from "./pages/AdminExperience/FeedbackPage/FeedbackPage";
+
+import MaintenanceRequestsPage from "./pages/AdminExperience/MaintenanceRequestsPage/MaintenanceRequestsPage";
+import CreateTicketView from "./pages/AdminExperience/MaintenanceRequestsPage/views/CreateTicketView/CreateTicketView";
+import TicketsView from "./pages/AdminExperience/MaintenanceRequestsPage/views/TicketsView/TicketsView";
+import Ticket from "./pages/AdminExperience/MaintenanceRequestsPage/views/Ticket/Ticket";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>
-          <Route path="login" element={<LoginPage />}>
-            <Route index element={<SignInView />} />
-            <Route path="create" element={<CreateAccountView />} />
+          <Route path="admin" element={<AdminPage />}>
+            <Route index element={<DashboardPage />} />
+            <Route
+              path="maintenance_requests"
+              element={<MaintenanceRequestsPage />}
+            >
+              <Route index element={<TicketsView />} />
+              <Route path="create" element={<CreateTicketView />} />
+              <Route path=":ticket" element={<Ticket />} />
+            </Route>
+            <Route path="feedback" element={<FeedbackPage />} />
           </Route>
-          <Route path="admin" element={<AdminPage />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
