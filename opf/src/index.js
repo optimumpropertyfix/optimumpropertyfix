@@ -7,35 +7,22 @@ import App from "./App";
 
 import LoginPage from "./pages/LoginPage/LoginPage";
 import SignInView from "./pages/LoginPage/views/SignInView";
-import CreateAccountView from "./pages/LoginPage/views/CreateAccountView";
+import CreateAccountView from "./pages/LoginPage/views/CreateAccountView/CreateAccountView";
 
-import AdminPage from "./pages/Admin/AdminPage";
-import {
-  AuthenticationProvider,
-  RequireAuthentication,
-} from "./AuthenticationManagement/AuthenticationManager";
+import AdminPage from "./pages/AdminPage/AdminPage";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <AuthenticationProvider>
-        <Routes>
-          <Route path="/" element={<App />}>
-            <Route path="login" element={<LoginPage />}>
-              <Route index element={<SignInView />} />
-              <Route path="create" element={<CreateAccountView />} />
-            </Route>
-            <Route
-              path="admin"
-              element={
-                <RequireAuthentication>
-                  <AdminPage />
-                </RequireAuthentication>
-              }
-            ></Route>
+      <Routes>
+        <Route path="/" element={<App />}>
+          <Route path="login" element={<LoginPage />}>
+            <Route index element={<SignInView />} />
+            <Route path="create" element={<CreateAccountView />} />
           </Route>
-        </Routes>
-      </AuthenticationProvider>
+          <Route path="admin" element={<AdminPage />}></Route>
+        </Route>
+      </Routes>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
