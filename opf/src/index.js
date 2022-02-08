@@ -5,6 +5,10 @@ import "./index.css";
 
 import App from "./App";
 
+import LoginPage from "./pages/LoginPage/LoginPage";
+import SignInView from "./pages/LoginPage/views/SignInView/SignInView";
+import CreateAccountView from "./pages/LoginPage/views/CreateAccountView/CreateAccountView";
+
 import AdminPage from "./pages/AdminPage/AdminPage";
 import StudentPage from "./pages/StudentPage/StudentPage";
 
@@ -38,6 +42,10 @@ ReactDOM.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>
+          <Route path="login" element={<LoginPage />}>
+            <Route index element={<SignInView />} />
+            <Route path="create" element={<CreateAccountView />} />
+          </Route>
           <Route path="admin" element={<AdminPage />}>
             <Route index element={<AdminDashboardPage />} />
             <Route
