@@ -5,21 +5,33 @@ import "./index.css";
 
 import App from "./App";
 
-import AdminPage from "./pages/AdminExperience/AdminPage";
-import AdminDashboardPage from "./pages/AdminExperience/DashboardPage/DashboardPage";
-import AdminMaintenanceRequestsPage from "./pages/AdminExperience/MaintenanceRequestsPage/MaintenanceRequestsPage";
-import AdminTicketsView from "./pages/AdminExperience/MaintenanceRequestsPage/views/TicketsView/TicketsView";
-import AdminCreateTicketView from "./pages/AdminExperience/MaintenanceRequestsPage/views/CreateTicketView/CreateTicketView";
-import AdminTicketView from "./pages/AdminExperience/MaintenanceRequestsPage/views/TicketView/TicketView";
-import AdminFeedbackPage from "./pages/AdminExperience/FeedbackPage/FeedbackPage";
+import AdminPage from "./pages/AdminPage/AdminPage";
+import StudentPage from "./pages/StudentPage/StudentPage";
 
-import StudentPage from "./pages/StudentExperience/StudentPage";
-import StudentDashboardPage from "./pages/StudentExperience/DashboardPage/DashboardPage";
-import StudentMaintenanceRequestsPage from "./pages/StudentExperience/MaintenanceRequestsPage/MaintenanceRequestsPage";
-import StudentTicketsView from "./pages/StudentExperience/MaintenanceRequestsPage/views/TicketsView/TicketsView";
-import StudentCreateTicketView from "./pages/StudentExperience/MaintenanceRequestsPage/views/CreateTicketView/CreateTicketView";
-import StudentTicketView from "./pages/StudentExperience/MaintenanceRequestsPage/views/TicketView/TicketView";
-import StudentFeedbackPage from "./pages/StudentExperience/FeedbackPage/FeedbackPage";
+import {
+  AdminDashboardPage,
+  StudentDashboardPage,
+} from "./pages/DashboardPage/DashboardPage";
+import {
+  AdminMaintenanceRequestsPage,
+  StudentMaintenanceRequestsPage,
+} from "./pages/MaintenanceRequestsPage/MaintenanceRequestsPage";
+import {
+  AdminTicketsView,
+  StudentTicketsView,
+} from "./pages/MaintenanceRequestsPage/views/TicketsView/TicketsView";
+import {
+  AdminCreateTicketView,
+  StudentCreateTicketView,
+} from "./pages/MaintenanceRequestsPage/views/CreateTicketView/CreateTicketView";
+import {
+  AdminTicketView,
+  StudentTicketView,
+} from "./pages/MaintenanceRequestsPage/views/TicketView/TicketView";
+import {
+  AdminFeedbackPage,
+  StudentFeedbackPage,
+} from "./pages/FeedbackPage/FeedbackPage";
 
 ReactDOM.render(
   <React.StrictMode>
