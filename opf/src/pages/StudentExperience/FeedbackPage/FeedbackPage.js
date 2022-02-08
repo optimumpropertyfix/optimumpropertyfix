@@ -1,4 +1,4 @@
-function Ticket() {
+function FeedbackPage() {
   return (
     <div>
       <p>AdminPage</p>
@@ -6,4 +6,4 @@ function Ticket() {
   );
 }
 
-export default Ticket;
+export default FeedbackPage;
