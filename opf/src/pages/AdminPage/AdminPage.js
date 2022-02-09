@@ -1,7 +1,26 @@
+import { Outlet } from "react-router-dom";
+import {
+  Navigation,
+  NavigationLink,
+} from "../../components/Navigation/Navigation";
+
 function AdminPage() {
   return (
     <div>
-      <p>AdminPage</p>
+      <Navigation>
+        <NavigationLink end to="/admin">
+          Dashboard
+        </NavigationLink>
+        <NavigationLink to="maintenance_requests">
+          Maintenance Requests
+        </NavigationLink>
+        <NavigationLink end to="feedback">
+          Feedback
+        </NavigationLink>
+      </Navigation>
+      <div>
+        <Outlet />
+      </div>
     </div>
   );
 }

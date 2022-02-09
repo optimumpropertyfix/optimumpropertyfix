@@ -1,38 +1,24 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Outlet, Link, useLocation } from "react-router-dom";
+import { Navigation } from "../../components/Navigation/Navigation";
 import styles from "./LoginPage.module.css";
-import logo from "./logo.png";
 
 function LoginPage() {
+  const location = useLocation();
+
   return (
     <div className={styles.LoginPage}>
       <header>
-        <div className={styles.logo}>
-          <img src={logo} />
+        <img />
+        <div>
+          <Navigation>
+            {location.pathname === "/login" ? (
+              <Link to={"/login/create"}>Create Account</Link>
+            ) : (
+              <Link to={"/login"}>Sign In</Link>
+            )}
+          </Navigation>
         </div>
-        <nav>
-          <NavLink
-            end
-            to={"/login"}
-            className={({ isActive }) =>
-              isActive ? `${styles.SectionNavLink}` : `${styles.active}`
-            }
-          >
-            <p>
-              Sign In <span>Test</span>
-            </p>
-          </NavLink>
-          <NavLink
-            end
-            to={"/login/create"}
-            className={({ isActive }) =>
-              isActive ? `${styles.active}` : `${styles.SectionNavLink}`
-            }
-          >
-            <p>
-              Don't hava an account? <span>Create one.</span>
-            </p>
-          </NavLink>
-        </nav>
       </header>
       <Outlet />
     </div>

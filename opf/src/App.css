@@ -1,16 +1,18 @@
 @media only screen and (min-width: 300px) {
   :root {
-    --color-gray: #90a4ae;
-    --color-red: #e57373;
-    --color-yellow: #ffd54f;
-    --color-green: #81c784;
-    --color-lightred: #ffcdd2;
-    --color-lightyellow: #ffecb3;
-    --color-lightgreen: #c8e6c9;
+    --color-red: #d12727;
+    --color-standard-gray: #707070;
+    --color-white: #fcfafb;
+    --color-green: #4dac6d;
+    --color-blue-gray: #85949f;
+    --color-dark-orange: #f15a29;
+    --color-orange: #fa9a50;
+    --color-navy-blue: #004b7f;
   }
 
   p {
     margin: 0;
+    padding: 0;
     font-family: "PT Sans", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

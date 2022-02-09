@@ -1,4 +1,7 @@
 @media only screen and (min-width: 300px) {
+  .active {
+    font-weight: 700;
+  }
 }
 
 @media only screen and (min-width: 600px) {
