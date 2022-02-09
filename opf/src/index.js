@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "./index.css";
 
 import App from "./App";
 
@@ -36,6 +35,8 @@ import {
   AdminFeedbackPage,
   StudentFeedbackPage,
 } from "./pages/FeedbackPage/FeedbackPage";
+
+import "./index.css";
 
 ReactDOM.render(
   <React.StrictMode>

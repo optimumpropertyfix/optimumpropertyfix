@@ -27,7 +27,7 @@ export function StudentMaintenanceRequestsPage() {
     <div>
       <div>
         <Navigation>
-          <NavigationLink end to="/admin/maintenance_requests">
+          <NavigationLink end to="/student/maintenance_requests">
             Tickets
           </NavigationLink>
           <NavigationLink to="create">Create Ticket</NavigationLink>
