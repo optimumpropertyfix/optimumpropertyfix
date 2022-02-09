@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import styles from "./Navigation.module.css";
 
 export function Navigation(props) {
@@ -26,18 +26,10 @@ export function NavigationLink(props) {
   );
 }
 
-export function SectionNavigationLink(props) {
+export function NormalLink(props) {
   return (
-    <NavLink
-      to={props.to}
-      state={props.state}
-      className={({ isActive }) =>
-        isActive
-          ? `${styles.active} ${props.active_class} ${styles.NavigationLink} ${props.className}`
-          : `${styles.NavigationLink} ${props.className}`
-      }
-    >
+    <Link to={props.to} state={props.state}>
       <p>{props.children}</p>
-    </NavLink>
+    </Link>
   );
 }
