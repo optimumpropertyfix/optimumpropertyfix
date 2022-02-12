@@ -1,9 +1,9 @@
 from flask import jsonify, request
-from flask_jwt_extended import create_access_token, unset_jwt_cookies
-from api import api, database
-#from api.models.user_model import User
+#from flask_jwt_extended import create_access_token, unset_jwt_cookies
+from app import app, database
+from app.models import User
 
-@api.route("/token", methods=["POST"])
+@app.route("/token", methods=["POST"])
 def generate_token():
 
     content = request.get_json()
@@ -35,7 +35,7 @@ def generate_token():
     return authenticated_user_response
 
 
-@api.route("/revoke", methods=["POST"])
+@app.route("/revoke", methods=["POST"])
 def revoke_token():
 
     revoke_user_response = jsonify({"msg":"Authorization Revoked"})
