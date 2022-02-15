@@ -1,5 +1,41 @@
 @media only screen and (min-width: 300px) {
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 0 5px 1px var(--color-standard-gray);
+  }
+  .logo {
+    width: 15rem;
+    margin-bottom: 0.8rem;
+  }
+  .link {
+    color: var(--color-navy-blue) !important;
+  }
+  .outlet {
+    margin: 2rem;
+  }
 }
 
 @media only screen and (min-width: 600px) {
+  .header {
+    flex-direction: row;
+    justify-items: center;
+  }
+  .logo {
+    margin-right: auto;
+    margin-bottom: 0;
+  }
+  .nav {
+    margin-left: auto;
+  }
+  .linkContainer {
+    display: flex;
+  }
+  .link {
+    margin-left: 5px;
+  }
+}
+
+@media only screen and (min-width: 900px) {
 }

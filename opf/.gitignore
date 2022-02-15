@@ -24,7 +24,3 @@ yarn-error.log*
 
 # backend environment setup
 /backend
-
-# araamz/login_authentication dependencies
-/backend/api.py
-/backend/.flaskenv

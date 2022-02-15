@@ -17,8 +17,58 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+  header {
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    padding: 1rem;
+  }
+
+  textarea {
+    resize: none;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  input[type="text"],
+  textarea {
+    border: solid var(--color-standard-gray) 2px;
+    padding: 0.4rem;
+    border-radius: 8px;
+    outline: none;
+    appearance: none;
+    font-size: 0.8rem;
+  }
+  label {
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: var(--color-standard-gray);
+  }
+
+  .text_page_title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--color-orange);
+    margin-bottom: 1rem;
+  }
+  .layout_helper_ParentSet {
+    display: flex;
+    flex-direction: column;
+  }
+  .layout_helper_ChildItem {
+    flex-grow: 1;
+  }
+  .layout_helper_FormGroup {
+    display: flex;
+    flex-direction: column;
+  }
 }
 @media only screen and (min-width: 600px) {
+  header {
+    height: 10vh;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
 }
 
 @media only screen and (min-width: 800px) {
