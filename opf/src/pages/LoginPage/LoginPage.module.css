@@ -29,11 +29,16 @@
   .nav {
     margin-left: auto;
   }
-  .linkContainer {
+  .link_container {
     display: flex;
   }
   .link {
     margin-left: 5px;
+  }
+  .outlet {
+    margin: 3rem auto 0 auto;
+    width: 75%;
+    max-width: 40rem;
   }
 }
 

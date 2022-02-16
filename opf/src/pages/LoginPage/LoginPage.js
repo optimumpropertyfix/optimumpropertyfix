@@ -12,14 +12,14 @@ function LoginPage() {
         <img className={styles.logo} src={logo} />
         <Navigation className={styles.nav}>
           {location.pathname === "/login" ? (
-            <div className={styles.linkContainer}>
+            <div className={styles.link_container}>
               <p>Don't have an account?</p>
               <NormalLink to={"/login/create"} className={styles.link}>
                 Create one now.
               </NormalLink>
             </div>
           ) : (
-            <div className={styles.linkContainer}>
+            <div className={styles.link_container}>
               <p>Already Here? </p>
               <NormalLink to={"/login"} className={styles.link}>
                 Sign In.

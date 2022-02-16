@@ -17,6 +17,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+
   header {
     display: flex;
     flex-direction: row;
@@ -31,13 +32,25 @@
   }
 
   input[type="text"],
-  textarea {
+  textarea,
+  select {
     border: solid var(--color-standard-gray) 2px;
     padding: 0.4rem;
     border-radius: 8px;
     outline: none;
     appearance: none;
     font-size: 0.8rem;
+  }
+  button,
+  input[type="submit"] {
+    background: var(--color-orange);
+    border: none;
+    font-size: 0.8em;
+    font-weight: 700;
+    color: white;
+    padding: 0.6rem 1rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px 1px lightgray;
   }
   label {
     font-weight: 700;
@@ -46,10 +59,10 @@
   }
 
   .text_page_title {
+    line-height: 3rem;
     font-size: 3rem;
     font-weight: 700;
     color: var(--color-orange);
-    margin-bottom: 1rem;
   }
   .layout_helper_ParentSet {
     display: flex;
@@ -68,6 +81,9 @@
     height: 10vh;
     padding-top: 0;
     padding-bottom: 0;
+  }
+  .layout_helper_ParentSet {
+    flex-direction: row;
   }
 }
 

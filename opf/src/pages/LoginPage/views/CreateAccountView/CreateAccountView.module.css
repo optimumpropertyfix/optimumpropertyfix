@@ -1,11 +1,25 @@
 @media only screen and (min-width: 300px) {
   .CreateAccountView {
+    gap: 1rem;
   }
-  .form > div {
-    margin-bottom: 0.5rem !important;
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  .form > input[type="submit"] {
+    width: 5rem;
+    align-self: center;
   }
 }
 @media only screen and (min-width: 600px) {
+  .CreateAccountView {
+    gap: 2rem;
+  }
+  .page_title {
+    width: 15%;
+    max-width: 50rem;
+  }
 }
 @media only screen and (min-width: 800px) {
 }
