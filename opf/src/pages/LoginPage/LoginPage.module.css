@@ -1,33 +1,46 @@
 @media only screen and (min-width: 300px) {
-  .LoginPage {
-  }
-  header {
+  .header {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 0 5px 1px var(--color-standard-gray);
   }
   .logo {
-    background-color: blue;
+    width: 15rem;
+    margin-bottom: 0.8rem;
   }
-  .logo > img {
-    width: 330px;
+  .link {
+    color: var(--color-navy-blue) !important;
   }
-  nav {
-    align-self: flex-end;
-    background: black;
-  }
-  .SectionNavLink {
-    display: none !important;
-    background: red;
-    width: 90px;
-    text-decoration: none !important;
-    display: flex;
-    width: fit-content;
-    align-items: center;
-  }
-  .active {
-    display: block !important;
+  .outlet {
+    margin: 2rem;
   }
 }
 
 @media only screen and (min-width: 600px) {
+  .header {
+    flex-direction: row;
+    justify-items: center;
+  }
+  .logo {
+    margin-right: auto;
+    margin-bottom: 0;
+  }
+  .nav {
+    margin-left: auto;
+  }
+  .link_container {
+    display: flex;
+  }
+  .link {
+    margin-left: 5px;
+  }
+  .outlet {
+    margin: 3rem auto 0 auto;
+    width: 75%;
+    max-width: 40rem;
+  }
+}
+
+@media only screen and (min-width: 900px) {
 }

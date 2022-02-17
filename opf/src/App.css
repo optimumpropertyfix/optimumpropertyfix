@@ -1,22 +1,90 @@
 @media only screen and (min-width: 300px) {
   :root {
-    --color-gray: #90a4ae;
-    --color-red: #e57373;
-    --color-yellow: #ffd54f;
-    --color-green: #81c784;
-    --color-lightred: #ffcdd2;
-    --color-lightyellow: #ffecb3;
-    --color-lightgreen: #c8e6c9;
+    --color-red: #d12727;
+    --color-standard-gray: #707070;
+    --color-white: #fcfafb;
+    --color-green: #4dac6d;
+    --color-blue-gray: #85949f;
+    --color-dark-orange: #f15a29;
+    --color-orange: #fa9a50;
+    --color-navy-blue: #004b7f;
   }
 
   p {
     margin: 0;
+    padding: 0;
     font-family: "PT Sans", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+
+  header {
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    padding: 1rem;
+  }
+
+  textarea {
+    resize: none;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  input[type="text"],
+  textarea,
+  select {
+    border: solid var(--color-standard-gray) 2px;
+    padding: 0.4rem;
+    border-radius: 8px;
+    outline: none;
+    appearance: none;
+    font-size: 0.8rem;
+  }
+  button,
+  input[type="submit"] {
+    background: var(--color-orange);
+    border: none;
+    font-size: 0.8em;
+    font-weight: 700;
+    color: white;
+    padding: 0.6rem 1rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px 1px lightgray;
+  }
+  label {
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: var(--color-standard-gray);
+  }
+
+  .text_page_title {
+    line-height: 3rem;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--color-orange);
+  }
+  .layout_helper_ParentSet {
+    display: flex;
+    flex-direction: column;
+  }
+  .layout_helper_ChildItem {
+    flex-grow: 1;
+  }
+  .layout_helper_FormGroup {
+    display: flex;
+    flex-direction: column;
+  }
 }
 @media only screen and (min-width: 600px) {
+  header {
+    height: 10vh;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .layout_helper_ParentSet {
+    flex-direction: row;
+  }
 }
 
 @media only screen and (min-width: 800px) {
