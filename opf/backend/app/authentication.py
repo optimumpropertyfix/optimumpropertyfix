@@ -38,7 +38,7 @@ def generate_token():
 @app.route("/revoke", methods=["POST"])
 def revoke_token():
 
-    #revoke_user_response = jsonify({"msg":"Authorization Revoked"})
-    #unset_jwt_cookies(revoke_user_response)
+    revoke_user_response = jsonify({"msg":"Authorization Revoked"})
+    unset_jwt_cookies(revoke_user_response)
 
     return revoke_user_response, 200

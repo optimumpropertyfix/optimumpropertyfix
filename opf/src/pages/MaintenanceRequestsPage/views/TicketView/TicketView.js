@@ -9,7 +9,7 @@ export function AdminTicketView() {
 export function StudentTicketView() {
   return (
     <div>
-      <p>AdminPage</p>
+      <p>StudentPage</p>
     </div>
   );
 }
