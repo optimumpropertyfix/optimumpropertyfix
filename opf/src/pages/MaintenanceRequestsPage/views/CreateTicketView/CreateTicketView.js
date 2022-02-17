@@ -1,11 +1,9 @@
 import React, {useState} from "react";
 
 export function AdminCreateTicketView() {
-
   return (
     <div>
-      <p>Create a New Maintenance Ticket.</p>
-      
+      <p>CreateTicketView</p>
     </div>
   );
 }
