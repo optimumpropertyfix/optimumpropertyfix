@@ -1,14 +1,13 @@
 @media only screen and (min-width: 300px) {
-
-  .NavigationLink,
-  .NormalLink {
+  .NavigationLink > *,
+  .NormalLink > * {
     font-weight: 700;
-    text-decoration: none;
     color: var(--color-standard-gray);
+    text-decoration: none;
   }
 
   .active {
-    font-weight: 700;
+    color: black;
   }
 }
 
