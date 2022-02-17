@@ -20,7 +20,7 @@ function CreateAccountView() {
   };
 
   const handle_UserType = (event) => {
-    setEmail(event.target.value);
+    setUserType(event.target.value);
   };
 
   const handle_Email = (event) => {

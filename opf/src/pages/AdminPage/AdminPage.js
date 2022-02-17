@@ -4,18 +4,22 @@ import {
   NavigationLink,
 } from "../../components/Navigation/Navigation";
 import styles from "./AdminPage.module.css";
+import symbol from "../../assets/symbol.png";
+
 function AdminPage() {
   return (
     <div className={`${styles.AdminPage} page_helper_container`}>
       <Navigation
         className={`${styles.nav} page_navigation page_helper_NavigationSection`}
       >
+        <img src={symbol} alt={""} />
         <NavigationLink
           active_class="page_navigation_link_active"
           className={"page_navigation_link"}
           end
           to="/admin"
         >
+          {" "}
           Dashboard
         </NavigationLink>
         <NavigationLink
