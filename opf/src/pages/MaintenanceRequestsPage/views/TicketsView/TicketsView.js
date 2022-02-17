@@ -1,7 +1,7 @@
 export function AdminTicketsView() {
   return (
     <div>
-      <p>Testing TicketsView</p>
+      <p>View Maintenance Request.</p>
     </div>
   );
 }
