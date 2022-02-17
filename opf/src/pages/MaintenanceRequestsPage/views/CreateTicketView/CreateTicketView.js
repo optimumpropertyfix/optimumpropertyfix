@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-
 export function AdminCreateTicketView() {
   return (
     <div>

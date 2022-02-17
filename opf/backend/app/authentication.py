@@ -28,11 +28,11 @@ def generate_token():
         print("Failed")
         return unauthorized_user_response
 
-    access_token = create_access_token(identity = net_id)
+    #access_token = create_access_token(identity = net_id)
 
-    authenticated_user_response = jsonify({"token": access_token, "msg": "Authorization Granted"}), 200
+    #authenticated_user_response = jsonify({"token": access_token, "msg": "Authorization Granted"}), 200
     
-    return authenticated_user_response
+    return unauthorized_user_response
 
 
 @app.route("/revoke", methods=["POST"])

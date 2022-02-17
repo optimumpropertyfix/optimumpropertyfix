@@ -21,15 +21,19 @@ export function NavigationLink(props) {
           : `${styles.NavigationLink} ${props.className}`
       }
     >
-      <p>{props.children}</p>
+      {props.children}
     </NavLink>
   );
 }
 
 export function NormalLink(props) {
   return (
-    <Link to={props.to} state={props.state}>
-      <p>{props.children}</p>
+    <Link
+      to={props.to}
+      state={props.state}
+      className={`${props.className} ${styles.NormalLink}`}
+    >
+      {props.children}
     </Link>
   );
 }

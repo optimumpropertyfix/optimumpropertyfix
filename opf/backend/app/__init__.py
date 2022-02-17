@@ -11,10 +11,10 @@ database = SQLAlchemy(app)
 #jwt = JWTManager(app)
 
 
-#from app import authentication
+from app import authentication
 
 
 from app.models import User, Ticket
 from app import routes
 from app import test
-from app import serializer
+from app import serializers
