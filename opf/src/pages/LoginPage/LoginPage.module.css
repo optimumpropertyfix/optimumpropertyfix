@@ -1,5 +1,52 @@
 @media only screen and (min-width: 300px) {
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 0 5px 1px var(--color-standard-gray);
+    padding: 1rem;
+  }
+  .logo {
+    width: 15rem;
+    margin-bottom: 0.8rem;
+  }
+  .link {
+    color: var(--color-navy-blue) !important;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .outlet {
+    margin: 2rem;
+  }
 }
 
 @media only screen and (min-width: 600px) {
+  .header {
+    flex-direction: row;
+    justify-items: center;
+    height: 10vh;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .logo {
+    margin-right: auto;
+    margin-bottom: 0;
+  }
+  .nav {
+    margin-left: auto;
+  }
+  .link_container {
+    display: flex;
+  }
+  .link {
+    margin-left: 5px;
+  }
+  .outlet {
+    margin: 3rem auto 0 auto;
+    width: 75%;
+    max-width: 40rem;
+  }
+}
+
+@media only screen and (min-width: 900px) {
 }
