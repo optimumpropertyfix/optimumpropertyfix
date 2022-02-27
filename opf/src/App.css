@@ -2,21 +2,22 @@
   :root {
     --color-red: #d12727;
     --color-standard-gray: #707070;
+    --color-dark-gray: #313131;
     --color-white: #fcfafb;
     --color-green: #4dac6d;
     --color-blue-gray: #85949f;
     --color-light-blue-gray: #e0e4e7;
-    --color-dark-orange: #f15a29;
+    --color-dark-orange: #ee6c4d;
     --color-orange: #fa9a50;
+    --color-navy-blue: #293241;
     --color-orange-two: #ee6c4d;
     --color-navy-blue: #004b7f;
-    --color-dark-blue: #293241;
   }
 
   p {
     margin: 0;
     padding: 0;
-    font-family: "PT Sans", sans-serif;
+    font-family: "Effra", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -28,12 +29,12 @@
     resize: none;
     width: 100%;
     box-sizing: border-box;
+    
   }
 
   input[type="text"],
   textarea,
   select {
-    border: solid var(--color-standard-gray) 2px;
     padding: 0.4rem;
     border-radius: 8px;
     outline: none;
@@ -42,7 +43,7 @@
   }
   button,
   input[type="submit"] {
-    background: var(--color-orange);
+    background: var(--color-dark-orange);
     border: none;
     font-size: 0.8em;
     font-weight: 700;
@@ -50,11 +51,12 @@
     padding: 0.6rem 1rem;
     border-radius: 5px;
     box-shadow: 0 2px 5px 1px lightgray;
+    
   }
   label {
     font-weight: 700;
     font-size: 0.8rem;
-    color: var(--color-standard-gray);
+    color: var(--color-dark-gray);
   }
 
   .text_page_title {
@@ -104,6 +106,7 @@
     align-items: center;
     gap: 1.5rem;
     z-index: 1000;
+    background: var(--color-navy-blue);
   }
   .page_navigation > img {
     width: 65%;
@@ -113,7 +116,7 @@
     font-size: 1rem;
   }
   .page_navigation_link_active {
-    color: var(--color-orange) !important;
+    color: var(--color-dark-orange) !important;
   }
 
   .page_header {
