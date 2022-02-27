@@ -24,4 +24,6 @@ def ticket_serializer(ticket):
       "description": ticket.description,
       "title": ticket.title,
       "location": ticket.location,
+      "additional_notes": ticket.additional_notes,
+      "facility_notes": ticket.facility_notes,
     }

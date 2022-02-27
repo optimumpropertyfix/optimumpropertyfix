@@ -45,14 +45,16 @@ class Ticket(database.Model):
     id = database.Column(database.Integer, primary_key = True)
     creator_id = database.Column(database.Integer, database.ForeignKey('user.id'),nullable = False)
     date = database.Column(database.Date, nullable = False)
-    status = database.Column(database.Text, nullable = False)
-    severity_level = database.Column(database.Text, nullable = False)
-    description = database.Column(database.Text, nullable = False)
-    title = database.Column(database.Text, nullable = False)
-    location = database.Column(database.Text, nullable = False)
+    status = database.Column(database.String, nullable = False)
+    severity_level = database.Column(database.String, nullable = False)
+    description = database.Column(database.String, nullable = False)
+    title = database.Column(database.String, nullable = False)
+    location = database.Column(database.String, nullable = False)
+    additional_notes = database.Column(database.String, nullable = True)
+    facility_notes = database.Column(database.String, nullable = True)
 
 
-    def __init__(self, creator_id, date, status, severity_level, description, title, location):
+    def __init__(self, creator_id, date, status, severity_level, description, title, location, additional_notes, facility_notes):
         self.creator_id = creator_id
         self.date= date
         self.status = status
@@ -60,8 +62,10 @@ class Ticket(database.Model):
         self.description = description
         self. title = title
         self.location = location
+        self.additional_notes = additional_notes
+        self._facility_notes = facility_notes
 
 
     #debug- string representation of ticket model
     def __repr__(self):
-        return f'[Ticket date & time: {self.date}, creator: {self.creator_id}, status:{self.status}, severity_level:{self.severity_level}, description:{self.description}, title:{self.title} located: {self.location}]'
+        return f'[Ticket date & time: {self.date}, creator: {self.creator_id}, status:{self.status}, severity_level:{self.severity_level}, description:{self.description}, title:{self.title} located: {self.location}, additional_notes: {self.additional_notes}, facility_notes: {self.facility_notes}]'
