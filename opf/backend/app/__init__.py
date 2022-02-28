@@ -12,9 +12,7 @@ database = SQLAlchemy(app)
 
 
 from app import authentication
-
-
-from app.models import User, Ticket
+from app.models import User, Ticket, Appointment, Building, Unit
 from app import backend_operations
 from app import routes
 from app import test
