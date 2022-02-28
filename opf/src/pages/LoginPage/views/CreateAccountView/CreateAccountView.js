@@ -131,7 +131,6 @@ function CreateAccountView() {
             <label>Password</label>
             <input type="text" onChange={handle_Password} />
           </div>
-
           <input type="submit" value="Sign Up" />
         </form>
       </div>
