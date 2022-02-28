@@ -11,18 +11,18 @@ export function Navigation(props) {
 
 export function NavigationLink(props) {
   return (
-    <div className={`${styles.NavigationLink} ${props.className}`}>
-      <NavLink
-        end={props.end}
-        to={props.to}
-        state={props.state}
-        className={({ isActive }) =>
-          isActive ? `${styles.active} ${props.active_class}` : ``
-        }
-      >
-        {props.children}
-      </NavLink>
-    </div>
+    <NavLink
+      end={props.end}
+      to={props.to}
+      state={props.state}
+      className={({ isActive }) =>
+        isActive
+          ? `${styles.active} ${props.active_class} ${styles.NavigationLink} ${props.className}`
+          : `${styles.NavigationLink} ${props.className}`
+      }
+    >
+      {props.children}
+    </NavLink>
   );
 }
 
