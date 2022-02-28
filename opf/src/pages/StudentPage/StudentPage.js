@@ -46,11 +46,11 @@ function StudentPage() {
         </NavigationLink>
       </Navigation>
       <header
-        className={`${styles.header} page_header page_header page_helper_HeaderSection`}
+        className={`${styles.header} page_header page_helper_HeaderSection`}
       >
         test
       </header>
-      <div className={`${styles.outlet} page_helper_OutletSection`}>
+      <div className={`${styles.outlet} page_outlet page_helper_OutletSection`}>
         <Outlet />
       </div>
     </div>

@@ -4,6 +4,7 @@ import {
   student_create_ticket_route,
   admin_create_ticket_route,
 } from "../../../../Routes";
+import styles from "./CreateTicketView.module.css";
 
 export function AdminCreateTicketView() {
   const [title, setTitle] = useState("");
@@ -35,6 +36,7 @@ export function AdminCreateTicketView() {
   return (
     <div>
       <p>CreateTicketView</p>
+      <p></p>
       <textarea onChange={handleTest}></textarea>
       <button onClick={handleSubmit}>TestingButton</button>
     </div>
@@ -105,107 +107,81 @@ export function StudentCreateTicketView() {
     setLocation(e.target.value);
   };
 
-  const handleSubmit = (e) => {
-    let request = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(serialize_ticket()),
-    };
-    e.preventDefault();
-    fetch("/", request);
-  };
-
-  const serialize_ticket = () => {
-    return {
-      ticket_title: title,
-      ticket_description: description,
-      enter_building: enterBuilding,
-      ticket_building: building,
-      ticket_notes: notes,
-      ticket_severity: severity,
-      ticket_location: location,
-    };
-  };
-
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <h1>Create new ticket</h1>
-        <label>
-          Title
-          <br></br>
-          ex. "Faucet Leak"
-        </label>
-        <br></br>
-        <input type="title" value={title} onChange={handleTitle} />
-        <br></br>
-        <label>Please describe the problem</label>
-        <textarea value={description} onChange={handleDescription}></textarea>
-        <label>
-          <br></br>
-          Does our maintenance team have permission to enter your residence
-          without your permission?
-          <br></br>
-        </label>
-        <input
-          type="radio"
-          name="enterBuilding"
-          value="Yes"
-          onChange={handleEnterBuilding}
-        />
-        Yes
-        <input
-          type="radio"
-          name="enterBuilding"
-          value="No"
-          onChange={handleEnterBuilding}
-        />
-        No
-        <br></br>
-        <label>Set Severity</label>
-        <br></br>
-        <select value={severity} onChange={handleSeverity}>
-          <option value="low">LOW</option>
-          <option value="medium">MEDIUM</option>
-          <option value="high">HIGH</option>
-        </select>
-        <br></br>
-        <label>
-          Building
-          <br></br>
-        </label>
-        <select value={building} onChange={handleBuilding}>
-          <option value="argenta">Argenta Hall</option>
-          <option value="canada">Canada Hall</option>
-          <option value="canyon">Canyon Flats</option>
-          <option value="greatbasin">Great Basin Hall</option>
-          <option value="juniper">Juniper Hall</option>
-          <option value="manzanita">Manzanita Hall</option>
-          <option value="llc">The Nevada LLC</option>
-          <option value="nye">Nye Hall</option>
-          <option value="uncommon">Uncommon</option>
-          <option value="peavine">Peavine Hall</option>
-          <option value="sierra">Sierra Hall</option>
-        </select>
-        <br></br>
-        <label>
-          Location of problem
-          <br></br>
-        </label>
-        <select value={location} onChange={handleLocation}>
-          <option value="livingroom">Living room</option>
-          <option value="kitchen">Kitchen</option>
-          <option value="bathroom">Bathroom</option>
-          <option value="bedroom">Bedroom</option>
-        </select>
-        <br></br>
-        <label>Additional Notes</label>
-        <textarea value={notes} onChange={handleNotes}></textarea>
-        <br></br>
-        <button onClick={handleSubmit}>Submit Ticket!</button>
-      </form>
+    <div className={styles.StudentCreateTicketView}>
+      <div className={styles.page_header}>
+        <p className="text_page_title">Create New Ticket</p>
+      </div>
+      <div className={styles.ticket_form}>
+        <div>
+          <div className={`${styles.form} layout_helper_FormGroup`}>
+            <label>
+              Title <span>ex. "Faucet Leak"</span>
+            </label>
+            <input type="text" />
+          </div>
+          <div className={`${styles.form} layout_helper_FormGroup`}>
+            <label>Please describe the problem</label>
+            <textarea className={styles.description_form} />
+          </div>
+          <div className={`${styles.form} layout_helper_FormGroup`}>
+            <label>Select Appointment time</label>
+            <div className={styles.appointment_form}>
+              <input type="date" />
+              <input type="time" />
+            </div>
+          </div>
+          <div className={`${styles.form} layout_helper_FormGroup`}>
+            <label>Set Severity</label>
+            <select className={styles.severity_form}>
+              <option type="radio" value="LOW">
+                LOW
+              </option>
+              <option type="radio" value="MILD">
+                MILD
+              </option>
+              <option type="radio" value="HIGH">
+                HIGH
+              </option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <div className={`${styles.form} layout_helper_FormGroup`}>
+            <label>Location of problem</label>
+            <select className={styles.location_form}>
+              <option value="livingroom">Living Room</option>
+              <option value="bathroom">Bathroom</option>
+              <option value="kitchen">Kitchen</option>
+              <option value="bedroom">Bedroom</option>
+            </select>
+          </div>
+          <div className={`${styles.form} layout_helper_FormGroup`}>
+            <label>Building</label>
+            <select className={styles.building_form}>
+              <option value="argenta">Argenta Hall</option>
+              <option value="nye">Nye Hall</option>
+              <option value="greatbasin">Great Basin Hall</option>
+              <option value="juniper">Juniper Hall</option>
+              <option value="llc">Living Learning Center</option>
+              <option value="sierra">Sierra Hall</option>
+              <option value="canada">Cananda Hall</option>
+              <option value="manzanita">Manzanita Hall</option>
+            </select>
+          </div>
+          <div className={`${styles.form} layout_helper_FormGroup`}>
+            <label>Your unit #</label>
+            <input type="text" />
+          </div>
+          <div className={`${styles.form} layout_helper_FormGroup`}>
+            <label>Additional Notes</label>
+            <textarea className={styles.description_form} />
+          </div>
+        </div>
+      </div>
+      <div className={styles.page_footer}>
+        <button>Submit Ticket</button>
+      </div>
     </div>
   );
 }
