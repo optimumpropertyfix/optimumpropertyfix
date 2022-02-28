@@ -8,7 +8,7 @@
 import json
 from flask import Flask, jsonify, request
 from app import app, database
-from app.models import User, Ticket
+from app.models import User, Ticket, Appointment, Building, Unit
 from app.serializers import ticket_serializer
 
 
