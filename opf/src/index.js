@@ -35,6 +35,10 @@ import {
   AdminFeedbackPage,
   StudentFeedbackPage,
 } from "./pages/FeedbackPage/FeedbackPage";
+import {
+  AdminFAQPage,
+  StudentFAQPage,
+} from "./pages/FrequentAskedQuestions/FrequentlyAskedQuestions";
 
 import "./index.css";
 
@@ -51,25 +55,25 @@ ReactDOM.render(
             <Route index element={<AdminDashboardPage />} />
             <Route
               path="maintenance_requests"
-              element={<AdminMaintenanceRequestsPage />}
-            >
+              element={<AdminMaintenanceRequestsPage />} >
               <Route index element={<AdminTicketsView />} />
               <Route path="create" element={<AdminCreateTicketView />} />
               <Route path=":ticket" element={<AdminTicketView />} />
             </Route>
             <Route path="feedback" element={<AdminFeedbackPage />} />
+            <Route path="frequently_asked_questions" element={<AdminFAQPage />} />
           </Route>
-          <Route path="student" element={<StudentPage />}>
+          <Route path="student" element={<StudentPage />} >
             <Route index element={<StudentDashboardPage />} />
             <Route
               path="maintenance_requests"
-              element={<StudentMaintenanceRequestsPage />}
-            >
+              element={<StudentMaintenanceRequestsPage />} >
               <Route index element={<StudentTicketsView />} />
               <Route path="create" element={<StudentCreateTicketView />} />
               <Route path=":ticket" element={<StudentTicketView />} />
             </Route>
             <Route path="feedback" element={<StudentFeedbackPage />} />
+            <Route path="frequently_asked_questions" element={<StudentFAQPage />} />
           </Route>
         </Route>
       </Routes>

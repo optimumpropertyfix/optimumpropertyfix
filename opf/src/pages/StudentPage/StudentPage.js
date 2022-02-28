@@ -36,6 +36,14 @@ function StudentPage() {
         >
           Feedback
         </NavigationLink>
+        <NavigationLink
+          active_class="page_navigation_link_active"
+          className={"page_navigation_link"}
+          end
+          to="frequently_asked_questions"
+        >
+          FAQ
+        </NavigationLink>
       </Navigation>
       <header
         className={`${styles.header} page_header page_header page_helper_HeaderSection`}
