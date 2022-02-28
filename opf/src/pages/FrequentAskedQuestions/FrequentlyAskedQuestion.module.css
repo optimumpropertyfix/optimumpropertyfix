@@ -1,0 +1,36 @@
+.item {
+  padding: 0.4rem;
+}
+
+.question {
+  color: var(--color-orange-two);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  cursor: pointer;
+  font-weight: 700;
+  background-color: var(--color-white);
+}
+
+.question:hover {
+  background-color: var(--color-standard-gray);
+}
+
+.question,
+.answer {
+  padding: 0.5rem;
+}
+
+.answer {
+  background-color: var(--color-white);
+  text-align: left;
+}
+
+.header {
+  text-align: center;
+  margin: 0 auto;
+  width: 70%;
+}
+.container {
+  padding: 0.5rem;
+}
