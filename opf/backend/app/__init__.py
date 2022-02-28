@@ -14,7 +14,12 @@ database = SQLAlchemy(app)
 from app import authentication
 
 
+<<<<<<< HEAD
 from app.models import User, Ticket, Appointment, Building, Unit
+=======
+from app.models import User, Ticket
+from app import backend_operations
+>>>>>>> cd6e2438e73175167dbb945b6af296628162b4e7
 from app import routes
 from app import test
 from app import serializers

@@ -1,0 +1,43 @@
+@media only screen and (min-width: 300px) {
+  .page_header {
+    margin-bottom: 1rem;
+  }
+  .ticket_form {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 1rem;
+    width: 70%;
+  }
+  .form {
+    margin-bottom: 1rem;
+  }
+  .description_form {
+    height: 10rem;
+  }
+  .page_footer {
+    margin-top: 1rem;
+    width: 70%;
+    display: flex;
+  }
+  .page_footer > button {
+    margin-left: auto;
+  }
+}
+@media only screen and (min-width: 600px) {
+  .ticket_form {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  .appointment_form {
+    display: flex !important;
+    flex-direction: row;
+    gap: 3rem;
+  }
+  .appointment_form > input {
+    padding-right: 5rem;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+}
