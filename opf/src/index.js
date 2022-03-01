@@ -39,6 +39,9 @@ import {
   AdminFAQPage,
   StudentFAQPage,
 } from "./pages/FrequentAskedQuestions/FrequentlyAskedQuestions";
+import {
+  AdminFormsPage,
+} from "./pages/FormPage/FormPage";
 
 import "./index.css";
 
@@ -60,6 +63,7 @@ ReactDOM.render(
               <Route path="create" element={<AdminCreateTicketView />} />
               <Route path=":ticket" element={<AdminTicketView />} />
             </Route>
+            <Route path="forms" element={<AdminFormsPage />} />
             <Route path="feedback" element={<AdminFeedbackPage />} />
             <Route path="frequently_asked_questions" element={<AdminFAQPage />} />
           </Route>
