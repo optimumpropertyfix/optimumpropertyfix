@@ -20,9 +20,9 @@ import {
   StudentMaintenanceRequestsPage,
 } from "./pages/MaintenanceRequestsPage/MaintenanceRequestsPage";
 import {
-  AdminTicketsView,
-  StudentTicketsView,
-} from "./pages/MaintenanceRequestsPage/views/TicketsView/TicketsView";
+  AdminAllTicketsView,
+  StudentAllTicketsView,
+} from "./pages/MaintenanceRequestsPage/views/AllTicketsView/AllTicketsView";
 import {
   AdminCreateTicketView,
   StudentCreateTicketView,
@@ -58,26 +58,34 @@ ReactDOM.render(
             <Route index element={<AdminDashboardPage />} />
             <Route
               path="maintenance_requests"
-              element={<AdminMaintenanceRequestsPage />} >
-              <Route index element={<AdminTicketsView />} />
+              element={<AdminMaintenanceRequestsPage />}
+            >
+              <Route index element={<AdminAllTicketsView />} />
               <Route path="create" element={<AdminCreateTicketView />} />
               <Route path=":ticket" element={<AdminTicketView />} />
             </Route>
             <Route path="forms" element={<AdminFormsPage />} />
             <Route path="feedback" element={<AdminFeedbackPage />} />
-            <Route path="frequently_asked_questions" element={<AdminFAQPage />} />
+            <Route
+              path="frequently_asked_questions"
+              element={<AdminFAQPage />}
+            />
           </Route>
-          <Route path="student" element={<StudentPage />} >
+          <Route path="student" element={<StudentPage />}>
             <Route index element={<StudentDashboardPage />} />
             <Route
               path="maintenance_requests"
-              element={<StudentMaintenanceRequestsPage />} >
-              <Route index element={<StudentTicketsView />} />
+              element={<StudentMaintenanceRequestsPage />}
+            >
+              <Route index element={<StudentAllTicketsView />} />
               <Route path="create" element={<StudentCreateTicketView />} />
               <Route path=":ticket" element={<StudentTicketView />} />
             </Route>
             <Route path="feedback" element={<StudentFeedbackPage />} />
-            <Route path="frequently_asked_questions" element={<StudentFAQPage />} />
+            <Route
+              path="frequently_asked_questions"
+              element={<StudentFAQPage />}
+            />
           </Route>
         </Route>
       </Routes>
