@@ -17,7 +17,7 @@ Installing Stipes requires the following software to be installed on the host sy
 9. Within the virtual environment, install Flask-SQLAlchemy with `$pip install Flask-SQLAlchemy`
 10. Within the virtual environment, install Flask-SQLAlchemy with `$pip install flask-jwt-extended`
 11. Within the virtual environment, Launch a python shell with `$python3`
-12. Within the python shell, import the database object with `$from api import db`
+12. Within the python shell, import the database object with `$from app import database`
 13. Within the python shell, create the database with `$db.create_all()`
 
 #Starting OPF: 
