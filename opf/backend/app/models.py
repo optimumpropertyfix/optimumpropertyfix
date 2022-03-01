@@ -9,8 +9,7 @@ class User(database.Model):
     id = database.Column(database.Integer, primary_key = True)
     first_name = database.Column(database.String(50), nullable = False)
     last_name = database.Column(database.String(50), nullable = False)
-    isStudent = database.Column(database.Boolean)
-    isAdmin = database.Column(database.Boolean)
+    isStudent = database.Column(database.Boolean, nullable = False)
     contact_email = database.Column(database.String(120), nullable = False)
     net_id = database.Column(database.String(50), nullable = False)
     nshe_id = database.Column(database.String(50))
@@ -22,11 +21,10 @@ class User(database.Model):
     ticketcreator = database.relationship('Ticket', backref= 'user', lazy = 'dynamic', cascade= "all, delete")
 
 
-    def __init__(self, first_name, last_name, isStudent, isAdmin, contact_email, net_id, nshe_id, gender, year, password):
+    def __init__(self, first_name, last_name, isStudent, contact_email, net_id, nshe_id, gender, year, password):
         self.first_name = first_name
         self.last_name = last_name
         self.isStudent = isStudent
-        self.isAdmin = isAdmin
         self.contact_email = contact_email
         self.net_id = net_id
         self.nshe_id = nshe_id
@@ -119,3 +117,38 @@ class Unit(database.Model):
     #debug- string representation of room model
     def __repr__(self):
         return f'[Unit number: {self.unit_number}]'
+
+
+class Announcement(database.Model):
+    __tablename__ = 'announcement'
+    id = database.Column(database.Integer, primary_key = True)
+    title = database.Column(database.String(50), nullable = False)
+    content = database.Column(database.String(250), nullable = False)
+    date = database.Column(database.DateTime, nullable = False, default = datetime.datetime.utcnow)
+
+    def __init__(self, title, content, date):
+        self.title = title
+        self.content = content
+        self.date= date
+
+    
+    #debug- string representation of building model
+    def __repr__(self):
+        return f'[Announcement title: {self.title}, content: {self.content}, date: {self.date}]'
+
+
+class FAQ(database.Model):
+    __tablename__ = 'faq'
+    id = database.Column(database.Integer, primary_key = True)
+    question = database.Column(database.String(50), nullable = False)
+    answer = database.Column(database.String(250), nullable = False)
+
+
+    def __init__(self, question, answer):
+        self.question = question
+        self.answer = answer
+
+    
+    #debug- string representation of building model
+    def __repr__(self):
+        return f'[FAQ question: {self.question}, answer: {self.answer}]'
