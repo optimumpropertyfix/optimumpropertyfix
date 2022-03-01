@@ -1,20 +1,22 @@
 @media only screen and (min-width: 300px) {
   :root {
-    --color-red: #d12727;
-    --color-standard-gray: #707070;
-    --color-white: #fcfafb;
     --color-green: #4dac6d;
+    --color-white: white;
+
+    --color-standard-gray: #969696;
+    --color-dark-gray: #313131;
     --color-blue-gray: #85949f;
-    --color-light-blue-gray: #e0e4e7;
-    --color-dark-orange: #f15a29;
-    --color-orange: #fa9a50;
-    --color-navy-blue: #004b7f;
+
+    --color-light-gray: #efefef;
+    --color-navy-blue: #293241;
+    --color-orange: #ee6c4d;
+    --color-dark-red: #c34040;
   }
 
   p {
     margin: 0;
     padding: 0;
-    font-family: "PT Sans", sans-serif;
+    font-family: "Effra", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -29,14 +31,17 @@
   }
 
   input[type="text"],
+  input[type="date"],
+  input[type="time"],
   textarea,
   select {
-    border: solid var(--color-standard-gray) 2px;
-    padding: 0.4rem;
-    border-radius: 8px;
+    padding: 0.3rem;
+    border-radius: 7px;
     outline: none;
     appearance: none;
-    font-size: 0.8rem;
+    font-size: 1.05rem;
+    border: 1px var(--color-standard-gray) solid;
+    background: var(--color-white);
   }
   button,
   input[type="submit"] {
@@ -46,20 +51,26 @@
     font-weight: 700;
     color: white;
     padding: 0.6rem 1rem;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px 1px lightgray;
+    border-radius: 7px;
   }
   label {
     font-weight: 700;
-    font-size: 0.8rem;
+    font-size: 1.05rem;
+    color: var(--color-dark-gray);
+    margin-bottom: 0.3rem;
+  }
+  label > span {
     color: var(--color-standard-gray);
   }
 
   .text_page_title {
     line-height: 3rem;
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: 700;
-    color: var(--color-orange);
+    color: var(--color-dark-gray);
+  }
+  .page_outlet {
+    background: var(--color-light-gray);
   }
   .layout_helper_ParentSet {
     display: flex;
@@ -102,6 +113,7 @@
     align-items: center;
     gap: 1.5rem;
     z-index: 1000;
+    background: var(--color-navy-blue);
   }
   .page_navigation > img {
     width: 65%;
@@ -115,7 +127,7 @@
   }
 
   .page_header {
-    background: var(--color-light-blue-gray);
+    background: var(--color-white);
   }
 }
 @media only screen and (min-width: 600px) {

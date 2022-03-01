@@ -2,7 +2,7 @@
   .NavigationLink > *,
   .NormalLink > * {
     font-weight: 700;
-    color: var(--color-standard-gray);
+    color: var(--color-white);
     text-decoration: none;
   }
 
