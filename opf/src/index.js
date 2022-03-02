@@ -15,6 +15,7 @@ import {
   AdminDashboardPage,
   StudentDashboardPage,
 } from "./pages/DashboardPage/DashboardPage";
+import { AdminAppointmentsPage } from "./pages/AppointmentsPage/AppointmentsPage";
 import {
   AdminMaintenanceRequestsPage,
   StudentMaintenanceRequestsPage,
@@ -67,6 +68,8 @@ ReactDOM.render(
               <Route path="create" element={<AdminCreateTicketView />} />
               <Route path=":ticket" element={<AdminTicketView />} />
             </Route>
+            <Route path="appointments" element={<AdminAppointmentsPage />} />
+
             <Route path="forms" element={<AdminFormsPage />}>
               <Route index element={<AdminLandingView />} />
               <Route
@@ -75,7 +78,6 @@ ReactDOM.render(
               />
               <Route path="create_faq" element={<AdminCreateFAQView />} />
             </Route>
-
             <Route path="feedback" element={<AdminFeedbackPage />} />
             <Route
               path="frequently_asked_questions"

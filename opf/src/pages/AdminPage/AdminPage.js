@@ -25,6 +25,13 @@ function AdminPage() {
         <NavigationLink
           active_class="page_navigation_link_active"
           className={"page_navigation_link"}
+          to="appointments"
+        >
+          Appointments
+        </NavigationLink>
+        <NavigationLink
+          active_class="page_navigation_link_active"
+          className={"page_navigation_link"}
           to="maintenance_requests"
         >
           Maintenance Requests
