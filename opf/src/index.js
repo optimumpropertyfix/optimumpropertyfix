@@ -23,6 +23,12 @@ import {
   AdminAllTicketsView,
   StudentAllTicketsView,
 } from "./pages/MaintenanceRequestsPage/views/AllTicketsView/AllTicketsView";
+
+import { AdminFormsPage } from "./pages/FormPage/FormPage";
+import { AdminCreateAnnouncementView } from "./pages/FormPage/views/AnnouncementView/AnnouncementView";
+import { AdminCreateFAQView } from "./pages/FormPage/views/FAQView/FAQView";
+import { AdminLandingView } from "./pages/FormPage/views/LandingView/LandingView";
+
 import {
   AdminCreateTicketView,
   StudentCreateTicketView,
@@ -61,6 +67,15 @@ ReactDOM.render(
               <Route path="create" element={<AdminCreateTicketView />} />
               <Route path=":ticket" element={<AdminTicketView />} />
             </Route>
+            <Route path="forms" element={<AdminFormsPage />}>
+              <Route index element={<AdminLandingView />} />
+              <Route
+                path="create_announcement"
+                element={<AdminCreateAnnouncementView />}
+              />
+              <Route path="create_faq" element={<AdminCreateFAQView />} />
+            </Route>
+
             <Route path="feedback" element={<AdminFeedbackPage />} />
             <Route
               path="frequently_asked_questions"
