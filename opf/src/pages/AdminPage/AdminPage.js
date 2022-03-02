@@ -39,6 +39,13 @@ function AdminPage() {
         <NavigationLink
           active_class="page_navigation_link_active"
           className={"page_navigation_link"}
+          to="forms"
+        >
+          Forms
+        </NavigationLink>
+        <NavigationLink
+          active_class="page_navigation_link_active"
+          className={"page_navigation_link"}
           end
           to="feedback"
         >
