@@ -1,12 +1,14 @@
 import "./App.css";
 import { Outlet } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import user from "./SessionManager";
 
 function App() {
-  const [user, setUser] = useState({
-    net_id: "net_id",
-    name: "name",
-  });
+  useEffect(() => {
+    setUser(user);
+  }, []);
+
+  const [user, setUser] = useState();
 
   return (
     <div className="App">

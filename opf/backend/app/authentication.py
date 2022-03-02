@@ -1,14 +1,29 @@
 from flask import jsonify, request
-#from flask_jwt_extended import create_access_token, unset_jwt_cookies
-from app import app, database
-from app.models import User
+from flask_jwt_extended import create_access_token, unset_jwt_cookies
+from sqlalchemy import create_engine, text
+from app import app
+
+def login_user(netid, password):
+
+    engine = create_engine('sqlite:///app/database.db')
+    
+    with engine.connect() as connection:
+        command = f'SELECT DISTINCT first_name, last_name, net_id, contact_email, isStudent, password FROM user WHERE net_id = "{netid}";'
+        result = connection.execute(text(command))
+        for row in result:
+            print(row['password'])
+
+    return True
+# check if netid password from 
 
 @app.route("/token", methods=["POST"])
 def generate_token():
 
-    content = request.get_json()
-    net_id = content.get("net_id")
-    password = content.get("password")
+    credentials = request.get_json()
+    netid = credentials.get("netid")
+    password = credentials.get("password")
+
+    login_user(netid=netid, password=password)
 
     # https://docs.sqlalchemy.org/en/20/orm/session_basics.html 
     # https://flask-jwt-extended.readthedocs.io/en/stable/basic_usage/
@@ -20,7 +35,7 @@ def generate_token():
     #if database.session.query(User.id).filter_by(net_id).first().password != password:
     #    return unauthorized_user_response
     unauthorized_user_response = jsonify({'success':False, "msg":"Authentication Failed"}), 401
-    if net_id != "net_id":
+    if netid != "net_id":
         print("Failed")
         return unauthorized_user_response
 
