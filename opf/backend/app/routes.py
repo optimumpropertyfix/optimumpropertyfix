@@ -9,7 +9,7 @@ from crypt import methods
 import json
 from flask import Flask, jsonify, request
 from app import app, database
-from app.models import User, Ticket, Appointment, Building, Unit
+from app.models import User, Ticket, Appointment, Building, Unit, Announcement, FAQ
 from app.serializers import ticket_serializer
 from app.backend_operations import student_createTicket, admin_createTicket, get_AllTickets, student_deleteTicket
 

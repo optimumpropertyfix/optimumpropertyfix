@@ -1,11 +1,9 @@
-//import styles from "./AnnouncementView.module.css";
+import AnnouncementForm from "../../../../components/Forms/Announcement/AnnouncementForm";
 
-export function AdminCreateAnnouncementView() {
+export const AdminCreateAnnouncementView = () => {
   return (
     <div>
-      <p>Test: Announcement View</p>
-      <button>Submit</button>
+      <AnnouncementForm />
     </div>
   );
-}
-export default { AdminCreateAnnouncementView };
+};
