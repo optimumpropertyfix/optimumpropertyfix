@@ -3,7 +3,7 @@
 }
 
 .question {
-  color: var(--color-orange-two);
+  color: var(--color-orange);
   display: flex;
   flex-direction: row;
   justify-content: space-between;

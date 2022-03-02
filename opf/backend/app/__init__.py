@@ -12,7 +12,7 @@ jwt = JWTManager(app)
 
 
 from app import authentication
-from app.models import User, Ticket, Appointment, Building, Unit
+from app.models import User, Ticket, Appointment, Building, Unit, Announcement, FAQ
 from app import backend_operations
 from app import routes
 from app import test

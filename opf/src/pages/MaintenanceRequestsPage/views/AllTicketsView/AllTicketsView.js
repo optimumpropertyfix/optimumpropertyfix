@@ -5,7 +5,7 @@ import {
   admin_all_tickets_route,
 } from "../../../../Routes";
 
-export function AdminTicketsView() {
+export function AdminAllTicketsView() {
   const [tickets, setTickets] = useState([]);
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export function AdminTicketsView() {
   );
 }
 
-export function StudentTicketsView() {
+export function StudentAllTicketsView() {
   const [tickets, setTickets] = useState([]);
 
   useEffect(() => {
