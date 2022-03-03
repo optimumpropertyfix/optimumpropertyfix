@@ -1,57 +1,94 @@
+from os import access
+from typing import Tuple
 from flask import jsonify, request
 from flask_jwt_extended import create_access_token, unset_jwt_cookies
-from sqlalchemy import create_engine, text
+from sqlalchemy import text
+from app import database_engine
 from app import app
 
-def login_user(netid, password):
-
-    engine = create_engine('sqlite:///app/database.db')
+def serialize_user(first_name, last_name, net_id, contact_email, isStudent): 
     
-    with engine.connect() as connection:
-        command = f'SELECT DISTINCT first_name, last_name, net_id, contact_email, isStudent, password FROM user WHERE net_id = "{netid}";'
-        result = connection.execute(text(command))
-        for row in result:
-            print(row['password'])
+    user = {
+        "first_name": first_name,
+        "last_name": last_name,
+        "net_id": net_id,
+        "contact_email": contact_email,
+        "isStudent": isStudent,
+    }
 
-    return True
-# check if netid password from 
+    return user
+
+def login_user(given_net_id, given_password):
+
+    connection = database_engine.connect()
+    user_query = text(f'SELECT DISTINCT first_name, last_name, net_id, contact_email, isStudent, password FROM user WHERE net_id = "{given_net_id}";')
+    
+    user_record = connection.execute(user_query).first()
+
+    if user_record == None:
+        return False
+
+    first_name = user_record['first_name']
+    last_name = user_record['last_name']
+    net_id = user_record['net_id']
+    contact_email = user_record['contact_email']
+    isStudent = int(user_record[4]) == 1 if  True else False
+    password = user_record['password']
+
+    if (given_password == password):
+
+        user = serialize_user(
+            first_name=first_name, 
+            last_name=last_name, 
+            net_id=net_id, 
+            contact_email=contact_email, 
+            isStudent=isStudent)
+
+        access_token = access_token = create_access_token(identity = net_id)
+
+        return tuple((user, access_token))
+
+
+    return False
 
 @app.route("/token", methods=["POST"])
-def generate_token():
+def process_incoming_login():
 
-    credentials = request.get_json()
-    netid = credentials.get("netid")
-    password = credentials.get("password")
-
-    login_user(netid=netid, password=password)
+    unauthorized_user_response = jsonify({"success":False}), 401
 
     # https://docs.sqlalchemy.org/en/20/orm/session_basics.html 
     # https://flask-jwt-extended.readthedocs.io/en/stable/basic_usage/
-    # https://dev.to/nagatodev/how-to-add-login-authentication-to-a-flask-and-react-application-23i7
 
-    #if database.session.query(User.id).filter_by(net_id = net_id).first() == None:
-    #    return unauthorized_user_response
+    credentials = request.get_json()
+    net_id = credentials.get("net_id")
+    password = credentials.get("password")
 
-    #if database.session.query(User.id).filter_by(net_id).first().password != password:
-    #    return unauthorized_user_response
-    unauthorized_user_response = jsonify({'success':False, "msg":"Authentication Failed"}), 401
-    if netid != "net_id":
-        print("Failed")
+    authenticated_user = login_user(
+        given_net_id=net_id, 
+        given_password=password)
+
+    if authenticated_user == False:
+
         return unauthorized_user_response
 
-    if password != "password":
-        print("Failed")
-        return unauthorized_user_response
+    user = authenticated_user[0]
+    access_token = authenticated_user[1]
 
-    #access_token = create_access_token(identity = net_id)
+    if authenticated_user: 
 
-    #authenticated_user_response = jsonify({"token": access_token, "msg": "Authorization Granted"}), 200
+        authorized_user_response = jsonify({
+            "success":True, 
+            "access_token": access_token,
+            "user": user}), 200
+
+        return authorized_user_response
     
-    return unauthorized_user_response
+    else:
 
+        return unauthorized_user_response
 
 @app.route("/revoke", methods=["POST"])
-def revoke_token():
+def process_incoming_logout():
 
     revoke_user_response = jsonify({"msg":"Authorization Revoked"})
     unset_jwt_cookies(revoke_user_response)

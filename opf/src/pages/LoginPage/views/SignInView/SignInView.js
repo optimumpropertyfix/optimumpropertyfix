@@ -10,7 +10,7 @@ function SignInView() {
   const handle_submit = (event) => {
     event.preventDefault();
     let credentials = serialize_credentials(NetID, password);
-    login_user(credentials, create_session);
+    create_session(credentials);
   };
 
   const handle_passwordNetID = (event) => {

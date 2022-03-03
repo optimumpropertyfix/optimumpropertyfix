@@ -19,7 +19,6 @@ function SessionManager() {
     };
 
     let route = login_route();
-
     fetch(route, request)
       .then((response) => {
         if (!response.ok) {
@@ -30,10 +29,11 @@ function SessionManager() {
       .then((data) => {
         localStorage.setItem("user", {
           access_token: data.access_token,
-          first_name: data.first_name,
-          last_name: data.last_name,
-          netid: data.netid,
-          role: data.role,
+          first_name: data.user.first_name,
+          last_name: data.user.last_name,
+          net_id: data.user.net_id,
+          contact_email: data.user.contact_email,
+          isStudent: data.user.isStudent,
         });
         return true;
       })
@@ -59,16 +59,6 @@ function SessionManager() {
           throw Error(`${response.statusText} - ${response.status}`);
         }
         localStorage.removeItem("user");
-        return true;
-      })
-      .then((data) => {
-        localStorage.setItem("user", {
-          access_token: data.access_token,
-          first_name: data.first_name,
-          last_name: data.last_name,
-          netid: data.netid,
-          role: data.role,
-        });
         return true;
       })
       .catch((error) => {
