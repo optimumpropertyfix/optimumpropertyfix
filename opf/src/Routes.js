@@ -3,6 +3,13 @@
 Backend Route List for Frontend Calls. Add new routes here with descriptive names for application availability.
 
 */
+const admin_create_faq_route = (netid) => {
+  return `admin/${netid}/faq/create`;
+};
+
+const admin_create_announcement_route = (netid) => {
+  return `admin/${netid}/announcement/create`;
+};
 
 const student_create_ticket_route = (netid) => {
   return `/student/${netid}/tickets/create`;
@@ -38,4 +45,6 @@ export {
   admin_all_tickets_route,
   student_get_single_ticket_route,
   student_delete_ticket_route,
+  admin_create_faq_route,
+  admin_create_announcement_route,
 };
