@@ -19,6 +19,9 @@ export function AdminFormsPage() {
           <NavigationLink to="create_faq">
             <p>Create FAQ</p>
           </NavigationLink>
+          <NavigationLink to="create_appointment">
+            <p>Create Appointment</p>
+          </NavigationLink>
         </Navigation>
       </div>
       <Outlet />

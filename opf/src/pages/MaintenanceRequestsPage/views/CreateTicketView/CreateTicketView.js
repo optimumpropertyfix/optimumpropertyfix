@@ -65,8 +65,6 @@ export function StudentCreateTicketView() {
       title,
       description,
       "NOTES",
-      "APPOINT_TIME",
-      "APPOINT_DATE",
       "BUILDING",
       "LOCATION",
       "UNIT_NUMBER",
@@ -123,13 +121,6 @@ export function StudentCreateTicketView() {
           <div className={`${styles.form} layout_helper_FormGroup`}>
             <label>Please describe the problem</label>
             <textarea className={styles.description_form} />
-          </div>
-          <div className={`${styles.form} layout_helper_FormGroup`}>
-            <label>Select Appointment time</label>
-            <div className={styles.appointment_form}>
-              <input type="date" />
-              <input type="time" />
-            </div>
           </div>
           <div className={`${styles.form} layout_helper_FormGroup`}>
             <label>Set Severity</label>

@@ -1,50 +1,41 @@
-import AppointmentItem from "../../components/Appointment/AppointmentItem";
+import Appointment from "../../components/Appointment/Appointment";
+import AppointmentView from "../../pages/FormPage/views/AppointmentView/AppointmentView";
 
 export const AdminAppointmentsPage = () => {
   const appointments = [
     {
       id: "1",
       building: "Argenta Hall",
+      room: "101",
       date: new Date(2022, 2, 28),
     },
     {
       id: "2",
       building: "Canada Hall",
+      room: "102",
       date: new Date(2022, 3, 1),
     },
     {
       id: "3",
       building: "Great Basin Hall",
+      room: "103",
       date: new Date(2022, 4, 25),
     },
     {
       id: "4",
       building: "Manzanita Hall",
+      room: "104",
       date: new Date(2022, 5, 10),
     },
   ];
+  const addAppointmentHandler = (appointments) => {
+    console.log(appointments);
+  };
 
   return (
     <div>
-      <div>
-        <h1>Appointment Page</h1>
-      </div>
-      <AppointmentItem
-        building={appointments[0].building}
-        date={appointments[0].date}
-      />
-      <AppointmentItem
-        building={appointments[1].building}
-        date={appointments[1].date}
-      />
-      <AppointmentItem
-        building={appointments[2].building}
-        date={appointments[2].date}
-      />
-      <AppointmentItem
-        building={appointments[3].building}
-        date={appointments[3].date}
-      />
+      <AppointmentView onAddAppointent={addAppointmentHandler} />
+      <Appointment items={appointments} />
     </div>
   );
 };
