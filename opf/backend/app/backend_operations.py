@@ -18,44 +18,66 @@ severity,
 contact_email,
 creation_date_time):
 
-    print("Added New Ticket")
-    print(netid)
-    print(contact_email)
 
-    return True
+def student_CreateTicket(
+    netid, 
+    title, 
+    description,
+    severity, 
+    location,
+    building,
+    unit_number,
+    additional_notes, 
+    ):
+        connection = database_engine.connect()
+        createStudentTicket_command = text(f'INSERT INTO ticket(netid, title, description, severity, location, building, unit_number, additional_notes) VALUES ("{netid}", "{title}", "{description}", "{severity}", "{location}", "{building}", "{unit_number}", "{additional_notes}");')
+        connection.execute(createStudentTicket_command)
+        connection.close()
 
-def admin_createTicket(
-netid, 
-title, 
-description, 
-additional_notes, 
-appointment_time, 
-appointment_date,
-building,
-location,
-unit_number,
-severity,
-contact_email,
-creation_date_time):
 
-    print("Added New Ticket")
-    print(netid)
-    print(contact_email)
+def student_ViewAllTickets():
+    connection = database_engine.connect()
+    createStudentTicket_command = text(f"SELECT ticket.id, title, description, severity_level, location, building_name, unit_number, additional_notes FROM unit, ticket, building, user WHERE net_id= 'net_id';")
+    connection.execute(createStudentTicket_command)
+    connection.close()
 
-    return True
 
-def get_AllTickets(netid):
+def student_ViewTicket():
+    connection = database_engine.connect()
+    createStudentTicket_command = text(f"SELECT ticket.id, title, description, severity_level, location, building_name, unit_number, additional_notes FROM unit, ticket, building, user WHERE net_id= 'net_id' AND ticket_id = 'ticket_id';")
+    connection.execute(createStudentTicket_command)
+    connection.close()
 
-    tickets = json.dumps([*map(serialize_ticket, ticket_record)])
 
-    return tickets
+def admin_CreateTicket(
+    netid, 
+    title, 
+    description,
+    severity, 
+    location,
+    building,
+    unit_number,
+    additional_notes, 
+    ):
+        connection = database_engine.connect()
+        createAdminTicket_command = text(f'INSERT INTO ticket(netid, title, description, severity, location, building, unit_number, additional_notes) VALUES ("{netid}", "{title}", "{description}", "{severity}", "{location}", "{building}", "{unit_number}", "{additional_notes}");')
+        connection.execute(createAdminTicket_command)
+        connection.close()
 
-def student_deleteTicket(netid, ticket_id):
 
-    # Backend logic to delete ticket
+def admin_ViewAllTickets():
+    connection = database_engine.connect()
+    createAdminTicket_command = text(f"SELECT ticket.id, title, description, severity_level, location, building_name, unit_number, additional_notes FROM unit, ticket, building, user WHERE net_id= 'net_id';")
+    connection.execute(createAdminTicket_command)
+    connection.close()
 
-    return True
-'''
+
+def admin_ViewTicket():
+        connection = database_engine.connect()
+        createAdminTicket_command = text(f"SELECT ticket.id, title, description, severity_level, location, building_name, unit_number, additional_notes FROM unit, ticket, building, user WHERE net_id= 'net_id' AND ticket_id = 'ticket_id';")
+        connection.execute(createAdminTicket_command)
+        connection.close()
+
 
 def create_account(
     first_name, 
@@ -67,7 +89,6 @@ def create_account(
     year,
     password,
     nshe_id = ""):
-
     connection = database_engine.connect()
     account_command = text(f'INSERT INTO user (first_name, last_name, isStudent, contact_email, net_id, nshe_id, gender, year, password) VALUES ("{first_name}","{last_name}","{isStudent}","{contact_email}","{net_id}","{nshe_id}","{gender}","{year}","{password}");')
     connection.execute(account_command)
