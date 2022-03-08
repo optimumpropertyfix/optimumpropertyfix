@@ -54,11 +54,11 @@ class Ticket(database.Model):
 
     def __init__(self, creator_id, date, status, severity_level, description, title, location, additional_notes, facility_notes):
         self.creator_id = creator_id
-        self.date= date
+        self.date = date
         self.status = status
         self.severity_level = severity_level
         self.description = description
-        self. title = title
+        self.title = title
         self.location = location
         self.additional_notes = additional_notes
         self._facility_notes = facility_notes

@@ -4,6 +4,7 @@ import datetime
 
 
 database.create_all()
+'''
 araam = User('Araam', 'Zaraman', 1, 'araam@gmail.com', 'aramzaramjardi', '01234567', 'M', 4, '*CatLover24')
 joanna = User('Joan', 'Lopez', 1, 'joannalopez@gmail.com', 'joannalopez', '12345678', 'F', 1, '^ThizzleDance')
 nasrin = User('Nasrin', 'Juana', 1, 'nasrinjuana@gmail.com', 'nasrinjuana', '23456789', 'F', 4, '$Cashdada')
@@ -12,7 +13,7 @@ aisha = User('Aisha', 'Co', 1, 'aishaco@gmail.com', 'aishaco', '23456789', 'F', 
 erin = User('Erin', 'Keith', 0, 'erinkeith@gmail.com', 'erinkeith', '', 'F', '', 'CSEisAwEsOmE01')
 database.session.add_all([araam, joanna, nasrin, melissa, aisha, erin])
 database.session.commit()
-
+'''
 
 ticket_one = Ticket('1', datetime.date(2019, 12, 4), 'Completed', 'High', 'Leak in kitchen underneath the sink.', 'Leaking', 'Kitchen', 'Extra Notes', 'Blah')
 ticket_second = Ticket('2', datetime.date(2019, 12, 4), 'Pending', 'Low', 'Missing trash can bin and I need it ASAP.', 'Mising Item', 'Livingroom', 'Extra Notes', 'Blah')

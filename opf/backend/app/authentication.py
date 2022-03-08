@@ -32,12 +32,6 @@ def login_user(given_net_id, given_password):
 
     return False
 
-@app.route("/", methods=["GET"])
-@jwt_required()
-def testing(): 
-
-    print(get_jwt_identity())
-
 @app.route("/token", methods=["POST"])
 def process_incoming_login():
 

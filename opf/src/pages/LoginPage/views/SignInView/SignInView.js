@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useOutletContext } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import TokenManager from "../../../../TokenManager";
 import styles from "./SignInView.module.css";
 function SignInView() {
@@ -9,9 +9,9 @@ function SignInView() {
   const { generate_token } = TokenManager();
   const navigate = useNavigate();
 
-  const serialize_credentials = (netid, password) => {
+  const serialize_credentials = (net_id, password) => {
     let credentials = {
-      net_id: netid,
+      net_id: net_id,
       password: password,
     };
 
@@ -25,7 +25,7 @@ function SignInView() {
     setPassword(event.target.value);
   };
 
-  const handle_submit = (event) => {
+  const handle_SignIn = (event) => {
     event.preventDefault();
 
     let credentials = serialize_credentials(NetID, password);
@@ -54,7 +54,7 @@ function SignInView() {
           <label>Password</label>
           <input onChange={handle_passwordChange} type="text" />
         </div>
-        <input onClick={handle_submit} type="submit" value="Sign In" />
+        <input onClick={handle_SignIn} type="submit" value="Sign In" />
       </form>
     </div>
   );
