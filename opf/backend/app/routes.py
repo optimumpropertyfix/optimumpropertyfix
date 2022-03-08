@@ -7,7 +7,8 @@
 #####################################################################
 from crypt import methods
 import json
-from app.backend_operations import create_account
+from app.backend_operations import create_account, view_session
+from flask_jwt_extended import jwt_required, get_jwt_identity
 from flask import Flask, jsonify, request
 from app import app, database
 from app.models import User, Ticket, Appointment, Building, Unit, Announcement, FAQ

@@ -41,11 +41,17 @@ const student_delete_ticket_route = (netid, ticket_id) => {
 const new_account_route = () => {
   return `/new_account`;
 };
+
 const login_route = () => {
   return `/token`;
 };
+
 const logout_route = () => {
   return `/revoke`;
+};
+
+const view_session_route = () => {
+  return `/session`;
 };
 
 export {
@@ -58,6 +64,7 @@ export {
   login_route,
   logout_route,
   new_account_route,
+  view_session_route,
   admin_create_faq_route,
   admin_create_announcement_route,
 };

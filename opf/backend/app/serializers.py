@@ -1,10 +1,9 @@
-def serialize_session(first_name, last_name, net_id, contact_email, isStudent): 
+def serialize_session(first_name, last_name, net_id, isStudent): 
     
     session = {
         "first_name": first_name,
         "last_name": last_name,
         "net_id": net_id,
-        "contact_email": contact_email,
         "isStudent": isStudent,
     }
 

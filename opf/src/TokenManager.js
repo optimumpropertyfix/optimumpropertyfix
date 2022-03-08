@@ -7,8 +7,6 @@ function TokenManager() {
     return user && user;
   }
 
-  const [token, setToken] = useState(get_token());
-
   function generate_token(credentials) {
     let request = {
       method: "POST",
@@ -55,12 +53,13 @@ function TokenManager() {
       })
       .catch((error) => {
         console.log(error);
+        throw Error(error);
       });
   }
 
   return {
     generate_token,
-    token,
+    get_token,
     revoke_token,
   };
 }

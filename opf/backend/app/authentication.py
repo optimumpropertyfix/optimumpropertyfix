@@ -4,12 +4,12 @@ from sqlalchemy import text
 from app import database_engine
 from app import app
 from app.serializers import serialize_authorization
+from app.backend_operations import view_session
 
 def login_user(given_net_id, given_password):
 
     connection = database_engine.connect()
     user_query = text(f'SELECT DISTINCT isStudent, password FROM user WHERE net_id = "{given_net_id}";')
-    # user_query = text(f'SELECT DISTINCT first_name, last_name, net_id, contact_email, isStudent, password FROM user WHERE net_id = "{given_net_id}";')
     user_record = connection.execute(user_query).first()
     connection.close()
 
@@ -25,7 +25,7 @@ def login_user(given_net_id, given_password):
 
         authorization = serialize_authorization(
             access_token = access_token, 
-            isStudent=isStudent)
+            isStudent = isStudent)
 
         return authorization
 
@@ -63,3 +63,15 @@ def process_incoming_logout():
     unset_jwt_cookies(revoke_user_response)
 
     return revoke_user_response, 200
+
+@app.route("/session", methods=["GET"])
+@jwt_required()
+def process_incoming_viewSession():
+
+  current_user = get_jwt_identity()
+
+  session = view_session(current_user)
+
+  current_session_response = jsonify(session), 201
+
+  return current_session_response
