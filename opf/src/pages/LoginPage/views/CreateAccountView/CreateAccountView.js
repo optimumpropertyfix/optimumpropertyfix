@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import styles from "./CreateAccountView.module.css";
-import SessionManager from "../../../../SessionManager";
 function CreateAccountView() {
   const [FirstName, setFirstName] = useState("");
   const [LastName, setLastName] = useState("");
@@ -12,10 +11,7 @@ function CreateAccountView() {
   const [Year, setYear] = useState(null);
   const [Password, setPassword] = useState("");
 
-  const { user } = SessionManager();
-  useEffect(() => {
-    console.log(user);
-  });
+  useEffect(() => {});
 
   const handle_FirstName = (event) => {
     setFirstName(event.target.value);

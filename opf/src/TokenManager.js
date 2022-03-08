@@ -29,7 +29,7 @@ function TokenManager() {
       })
       .then((data) => {
         localStorage.setItem("token", data.access_token);
-        return data.user;
+        return data.isStudent;
       })
       .catch((error) => {
         throw Error(error);

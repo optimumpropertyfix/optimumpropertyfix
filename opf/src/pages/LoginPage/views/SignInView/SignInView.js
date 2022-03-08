@@ -1,25 +1,45 @@
-import { useState } from "react";
-import { serialize_credentials, login_user } from "../../LoginLogic";
-import SessionManager from "../../../../SessionManager";
+import { useEffect, useState } from "react";
+import { useNavigate, useOutletContext } from "react-router-dom";
+import TokenManager from "../../../../TokenManager";
 import styles from "./SignInView.module.css";
 function SignInView() {
   const [NetID, setNetID] = useState("");
   const [password, setPassword] = useState("");
-  const { create_session } = SessionManager();
 
-  const handle_submit = (event) => {
-    event.preventDefault();
-    let credentials = serialize_credentials(NetID, password);
-    create_session(credentials);
+  const { generate_token } = TokenManager();
+  const navigate = useNavigate();
+
+  const serialize_credentials = (netid, password) => {
+    let credentials = {
+      net_id: netid,
+      password: password,
+    };
+
+    return JSON.stringify(credentials);
   };
 
   const handle_passwordNetID = (event) => {
-    event.preventDefault();
     setNetID(event.target.value);
   };
   const handle_passwordChange = (event) => {
-    event.preventDefault();
     setPassword(event.target.value);
+  };
+
+  const handle_submit = (event) => {
+    event.preventDefault();
+
+    let credentials = serialize_credentials(NetID, password);
+    generate_token(credentials)
+      .then((isStudent) => {
+        if (isStudent) {
+          navigate("/student");
+        } else {
+          navigate("/admin");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (

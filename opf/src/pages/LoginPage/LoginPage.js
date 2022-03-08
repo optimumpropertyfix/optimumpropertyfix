@@ -1,7 +1,8 @@
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation, useOutletContext } from "react-router-dom";
 import { Navigation, NormalLink } from "../../components/Navigation/Navigation";
 import styles from "./LoginPage.module.css";
 import logo from "./../../assets/logo.png";
+import { useEffect } from "react";
 
 function LoginPage() {
   const location = useLocation();

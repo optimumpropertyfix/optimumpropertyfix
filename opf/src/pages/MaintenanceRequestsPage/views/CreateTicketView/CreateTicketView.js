@@ -11,7 +11,7 @@ export function AdminCreateTicketView() {
 
   const handleSubmit = (event) => {
     let ticket = serialize_ticket(
-      "TITLE",
+      title,
       "DESCRIPTION",
       "NOTES",
       "APPOINT_TIME",
@@ -24,7 +24,7 @@ export function AdminCreateTicketView() {
       "CREATION DATE TIME"
     );
 
-    const route = admin_create_ticket_route("azaremehrjardi");
+    const route = admin_create_ticket_route();
 
     handle_CreateTicket(route, ticket);
   };

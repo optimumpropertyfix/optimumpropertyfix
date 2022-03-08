@@ -1,3 +1,25 @@
+def serialize_session(first_name, last_name, net_id, contact_email, isStudent): 
+    
+    session = {
+        "first_name": first_name,
+        "last_name": last_name,
+        "net_id": net_id,
+        "contact_email": contact_email,
+        "isStudent": isStudent,
+    }
+
+    return session
+
+def serialize_authorization(access_token, isStudent):
+
+    authorization = {
+        "access_token": access_token,
+        "isStudent": isStudent,
+        "success":True
+    }
+
+    return authorization
+    
 def user_serializer(user):
     return {
       "id": user.id,
