@@ -3,9 +3,9 @@ import styles from "./DashboardPage.module.css";
 export function AdminDashboardPage() {
   return (
     <div className={styles.header}>
-      <h1>Dashboard Page <span class="material-icons">
-dashboard
-</span></h1>
+      <h1>
+        Dashboard Page <span className="material-icons">dashboard</span>
+      </h1>
     </div>
   );
 }
@@ -13,9 +13,9 @@ dashboard
 export function StudentDashboardPage() {
   return (
     <div className={styles.header}>
-      <h1>Dashboard Page <span class="material-icons">
-dashboard
-</span></h1>
+      <h1>
+        Dashboard Page <span className="material-icons">dashboard</span>
+      </h1>
     </div>
   );
 }

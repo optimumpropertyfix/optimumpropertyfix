@@ -1,22 +1,26 @@
 import { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { login_route, logout_route } from "./Routes";
 
 function TokenManager() {
   function get_token() {
-    const access_token = localStorage.getItem("token");
-    return access_token && access_token;
+    const user = localStorage.getItem("token");
+    return user && user;
   }
 
   const [token, setToken] = useState(get_token());
 
   function generate_token(credentials) {
-    fetch("/token", {
+    let request = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(credentials),
-    })
+      body: credentials,
+    };
+
+    let route = login_route();
+
+    return fetch(route, request)
       .then((response) => {
         if (!response.ok) {
           throw Error(`${response.statusText} - ${response.status}`);
@@ -24,29 +28,34 @@ function TokenManager() {
         return response.json();
       })
       .then((data) => {
-        localStorage.setItem("token", {
-          token: data.token,
-          admin: data.isAdmin,
-        });
-        setToken({
-          token: data.token,
-          admin: data.isAdmin,
-        });
+        localStorage.setItem("token", data.access_token);
+        return data.isStudent;
       })
       .catch((error) => {
-        console.log(error);
+        throw Error(error);
       });
   }
 
   function revoke_token() {
-    fetch("/revoke", {
+    let request = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-    });
-    localStorage.removeItem("token");
-    setToken(null);
+    };
+
+    let route = logout_route();
+
+    return fetch(route, request)
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(`${response.statusText} - ${response.status}`);
+        }
+        localStorage.removeItem("token");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   return {
@@ -58,6 +67,7 @@ function TokenManager() {
 
 export default TokenManager;
 
+/*
 export function ProtectedRoute(props) {
   const { token } = TokenManager();
   console.log("Protected Route - ", token);
@@ -77,3 +87,4 @@ export function ProtectedRoute(props) {
     }
   }
 }
+*/

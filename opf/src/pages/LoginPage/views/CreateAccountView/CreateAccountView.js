@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./CreateAccountView.module.css";
 function CreateAccountView() {
   const [FirstName, setFirstName] = useState("");
@@ -10,6 +10,8 @@ function CreateAccountView() {
   const [Gender, setGender] = useState("Male");
   const [Year, setYear] = useState(null);
   const [Password, setPassword] = useState("");
+
+  useEffect(() => {});
 
   const handle_FirstName = (event) => {
     setFirstName(event.target.value);

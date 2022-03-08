@@ -1,42 +1,69 @@
 from flask import jsonify, request
-#from flask_jwt_extended import create_access_token, unset_jwt_cookies
-from app import app, database
-from app.models import User
+from flask_jwt_extended import create_access_token, unset_jwt_cookies, get_jwt_identity, jwt_required
+from sqlalchemy import text
+from app import database_engine
+from app import app
+from app.serializers import serialize_authorization
+
+def login_user(given_net_id, given_password):
+
+    connection = database_engine.connect()
+    user_query = text(f'SELECT DISTINCT isStudent, password FROM user WHERE net_id = "{given_net_id}";')
+    # user_query = text(f'SELECT DISTINCT first_name, last_name, net_id, contact_email, isStudent, password FROM user WHERE net_id = "{given_net_id}";')
+    user_record = connection.execute(user_query).first()
+    connection.close()
+
+    if user_record == None:
+        return False
+
+    isStudent = int(user_record['isStudent']) == 1 if  True else False
+    password = user_record['password']
+
+    if (given_password == password):
+
+        access_token = access_token = create_access_token(identity = given_net_id)
+
+        authorization = serialize_authorization(
+            access_token = access_token, 
+            isStudent=isStudent)
+
+        return authorization
+
+
+    return False
+
+@app.route("/", methods=["GET"])
+@jwt_required()
+def testing(): 
+
+    print(get_jwt_identity())
 
 @app.route("/token", methods=["POST"])
-def generate_token():
-
-    content = request.get_json()
-    net_id = content.get("net_id")
-    password = content.get("password")
+def process_incoming_login():
 
     # https://docs.sqlalchemy.org/en/20/orm/session_basics.html 
     # https://flask-jwt-extended.readthedocs.io/en/stable/basic_usage/
-    # https://dev.to/nagatodev/how-to-add-login-authentication-to-a-flask-and-react-application-23i7
 
-    #if database.session.query(User.id).filter_by(net_id = net_id).first() == None:
-    #    return unauthorized_user_response
+    credentials = request.get_json()
+    net_id = credentials.get("net_id")
+    password = credentials.get("password")
 
-    #if database.session.query(User.id).filter_by(net_id).first().password != password:
-    #    return unauthorized_user_response
-    unauthorized_user_response = jsonify({'success':False, "msg":"Authentication Failed"}), 401
-    if net_id != "net_id":
-        print("Failed")
+    authorization = login_user(
+        given_net_id=net_id, 
+        given_password=password)
+
+    if authorization == False:
+
+        unauthorized_user_response = jsonify({"success":False}), 401
+
         return unauthorized_user_response
 
-    if password != "password":
-        print("Failed")
-        return unauthorized_user_response
+    authorized_user_response = jsonify(authorization), 200
 
-    #access_token = create_access_token(identity = net_id)
-
-    #authenticated_user_response = jsonify({"token": access_token, "msg": "Authorization Granted"}), 200
-    
-    return unauthorized_user_response
-
+    return authorized_user_response
 
 @app.route("/revoke", methods=["POST"])
-def revoke_token():
+def process_incoming_logout():
 
     revoke_user_response = jsonify({"msg":"Authorization Revoked"})
     unset_jwt_cookies(revoke_user_response)
