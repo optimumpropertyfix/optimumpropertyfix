@@ -193,15 +193,3 @@ def process_incoming_newAccount():
   successful_account_creation_response = jsonify({'success':True}), 201
 
   return successful_account_creation_response
-
-@app.route("/session", methods=["GET"])
-@jwt_required()
-def process_incoming_viewSession():
-
-  current_user = get_jwt_identity()
-
-  session = view_session(current_user)
-
-  current_session_response = jsonify(session), 201
-
-  return current_session_response

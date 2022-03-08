@@ -5,7 +5,7 @@ import TokenManager from "../src/TokenManager";
 import "./App.css";
 
 function App() {
-  const { token } = TokenManager();
+  const { get_token } = TokenManager();
 
   const get_session = () => {
     let route = view_session_route();
@@ -14,7 +14,7 @@ function App() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${get_token()}`,
       },
     };
 
@@ -23,22 +23,19 @@ function App() {
         if (!response.ok) {
           throw Error(response.status);
         }
-
         return response.json();
       })
       .then((session) => {
-        console.log(session);
+        return session;
+      })
+      .catch((error) => {
+        throw Error(error);
       });
-  };
-
-  const handle_get = () => {
-    get_session();
   };
 
   return (
     <div className="App">
       <Outlet />
-      <button onClick={handle_get}></button>
     </div>
   );
 }

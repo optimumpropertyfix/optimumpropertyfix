@@ -4,6 +4,7 @@ from sqlalchemy import text
 from app import database_engine
 from app import app
 from app.serializers import serialize_authorization
+from app.backend_operations import view_session
 
 def login_user(given_net_id, given_password):
 
@@ -62,3 +63,15 @@ def process_incoming_logout():
     unset_jwt_cookies(revoke_user_response)
 
     return revoke_user_response, 200
+
+@app.route("/session", methods=["GET"])
+@jwt_required()
+def process_incoming_viewSession():
+
+  current_user = get_jwt_identity()
+
+  session = view_session(current_user)
+
+  current_session_response = jsonify(session), 201
+
+  return current_session_response
