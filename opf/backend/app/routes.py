@@ -89,26 +89,46 @@ def process_incoming_adminTicket(netid):
     return json.dumps({'success':False}), 501, {'ContentType':'application/json'}
 '''
 
-
-
-@app.route("/student/<string:netid>/tickets")
+@app.route("/student/<string:netid>/tickets", methods=["GET"])
 def process_outgoing_studentTickets(netid):
-
-  tickets = get_AllTickets(netid)
-
-  return jsonify(tickets)
-
+  
+  
+  student= request.get_json()
 
 
+  netid = student.get('netid')
+  title  = student.get('title')
+  description = student.get('description')
+  severity = student.get('severity')
+  location = student.get('location')
+  building = student.get('building')
+  unit_number = student.get('unit_number')
+  additional_notes = student.get('additional_notes')
 
-@app.route("/admin/<string:netid>/tickets")
+
+  successful_studentTicket = jsonify({'sucess':True}), 200
+  return successful_studentTicket
+
+
+@app.route("/admin/<string:netid>/tickets", methods=["POST"])
 def process_outgoing_adminTickets(netid):
+  
 
-  tickets = get_AllTickets(netid)
-
-  return jsonify(tickets)
+  admin = request.get_json()
 
 
+  netid = admin.get('netid')
+  title  = admin.get('title')
+  description = admin.get('description')
+  severity = admin.get('severity')
+  location = admin.get('location')
+  building = admin.get('building')
+  unit_number = admin.get('unit_number')
+  additional_notes = admin.get('additional_notes')
+  
+
+  successful_adminTicket = jsonify({'sucess':True}), 200
+  return successful_adminTicket
 
 '''
 @app.route("/student/<string:netid>/tickets/<int:ticket_id>/delete")

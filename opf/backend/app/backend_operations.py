@@ -5,18 +5,18 @@ from flask import jsonify
 from app.serializers import serialize_session
 '''
 def student_createTicket(
-netid, 
-title, 
-description, 
-additional_notes, 
-appointment_time, 
-appointment_date,
-building,
-location,
-unit_number,
-severity,
-contact_email,
-creation_date_time):
+    netid, 
+    title, 
+    description, 
+    additional_notes, 
+    appointment_time, 
+    appointment_date,
+    building,
+    location,
+    unit_number,
+    severity,
+    contact_email,
+    creation_date_time):
 
 
 def student_CreateTicket(
@@ -34,13 +34,13 @@ def student_CreateTicket(
         connection.execute(createStudentTicket_command)
         connection.close()
 
-
+'''
 def student_ViewAllTickets():
     connection = database_engine.connect()
     createStudentTicket_command = text(f"SELECT ticket.id, title, description, severity_level, location, building_name, unit_number, additional_notes FROM unit, ticket, building, user WHERE net_id= 'net_id';")
     connection.execute(createStudentTicket_command)
     connection.close()
-
+'''
 
 def student_ViewTicket():
     connection = database_engine.connect()
@@ -64,20 +64,20 @@ def admin_CreateTicket(
         connection.execute(createAdminTicket_command)
         connection.close()
 
-
+'''
 def admin_ViewAllTickets():
     connection = database_engine.connect()
     createAdminTicket_command = text(f"SELECT ticket.id, title, description, severity_level, location, building_name, unit_number, additional_notes FROM unit, ticket, building, user WHERE net_id= 'net_id';")
     connection.execute(createAdminTicket_command)
     connection.close()
-
+'''
 
 def admin_ViewTicket():
         connection = database_engine.connect()
         createAdminTicket_command = text(f"SELECT ticket.id, title, description, severity_level, location, building_name, unit_number, additional_notes FROM unit, ticket, building, user WHERE net_id= 'net_id' AND ticket_id = 'ticket_id';")
         connection.execute(createAdminTicket_command)
         connection.close()
-
+'''
 
 def create_account(
     first_name, 
