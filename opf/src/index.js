@@ -7,7 +7,6 @@ import App from "./App";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import SignInView from "./pages/LoginPage/views/SignInView/SignInView";
 import CreateAccountView from "./pages/LoginPage/views/CreateAccountView/CreateAccountView";
-
 import AdminPage from "./pages/AdminPage/AdminPage";
 import StudentPage from "./pages/StudentPage/StudentPage";
 
@@ -15,7 +14,7 @@ import {
   AdminDashboardPage,
   StudentDashboardPage,
 } from "./pages/DashboardPage/DashboardPage";
-import { AdminAppointmentsPage } from "./pages/AppointmentsPage/AppointmentsPage";
+
 import {
   AdminMaintenanceRequestsPage,
   StudentMaintenanceRequestsPage,
@@ -28,6 +27,7 @@ import {
 import { AdminFormsPage } from "./pages/FormPage/FormPage";
 import { AdminCreateAnnouncementView } from "./pages/FormPage/views/AnnouncementView/AnnouncementView";
 import { AdminCreateFAQView } from "./pages/FormPage/views/FAQView/FAQView";
+
 import { AdminLandingView } from "./pages/FormPage/views/LandingView/LandingView";
 
 import {
@@ -46,8 +46,9 @@ import {
   AdminFAQPage,
   StudentFAQPage,
 } from "./pages/FrequentAskedQuestions/FrequentlyAskedQuestions";
-
+import { AppointmentView } from "./pages/FormPage/views/AppointmentView/AppointmentView";
 import "./index.css";
+import { AdminAppointmentsPage } from "./pages/AppointmentsPage/AppointmentsPage";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -77,6 +78,7 @@ ReactDOM.render(
                 element={<AdminCreateAnnouncementView />}
               />
               <Route path="create_faq" element={<AdminCreateFAQView />} />
+              <Route path="create_appointment" element={<AppointmentView />} />
             </Route>
             <Route path="feedback" element={<AdminFeedbackPage />} />
             <Route

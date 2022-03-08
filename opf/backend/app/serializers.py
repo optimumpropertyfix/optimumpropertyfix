@@ -36,17 +36,19 @@ def user_serializer(user):
 
 
 def ticket_serializer(ticket):
-    return {
-      "id": ticket.id,
-      "creator_id": ticket.user.id, 
-      "date": ticket.date,
-      "status": ticket.status, 
-      "severity_level": ticket.severity_level, 
-      "description": ticket.description,
-      "title": ticket.title,
-      "location": ticket.location,
-      "additional_notes": ticket.additional_notes,
-      "facility_notes": ticket.facility_notes,
+     return {
+        "ticket_id": ticket.ticket_id,
+        "title": ticket.title,
+        "location": ticket.location,
+        "severity": ticket.severity,
+        "creation_date_time": ticket.creation_date_time,
+        "description": ticket.description,
+        "additional_notes": ticket.additional_notes,
+        "appointment_time": ticket.appointment_time,
+        "appointment_date": ticket.appointment_date,
+        "building": ticket.building,
+        "unit_number": ticket.unit_number,
+        "contact_email": ticket.contact_email
     }
 
 

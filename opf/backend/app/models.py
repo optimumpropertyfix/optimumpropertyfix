@@ -18,7 +18,7 @@ class User(database.Model):
     password = database.Column(database.String(50), nullable = False)
 
 
-    ticketcreator = database.relationship('Ticket', backref= 'user', lazy = 'dynamic', cascade= "all, delete")
+    ticket_creator = database.relationship('Ticket', backref= 'user', lazy = 'dynamic', cascade= "all, delete")
 
 
     def __init__(self, first_name, last_name, isStudent, contact_email, net_id, nshe_id, gender, year, password):
@@ -91,7 +91,7 @@ class Building(database.Model):
     building_unit = database.Column(database.Integer, database.ForeignKey('unit.id'),nullable = False)
 
 
-    buildingroom = database.relationship('Unit', backref= database.backref('building', lazy = 'dynamic'))
+    building_room = database.relationship('Unit', backref= database.backref('building', lazy = 'dynamic'))
 
 
     def __init__(self, building_name, building_unit):

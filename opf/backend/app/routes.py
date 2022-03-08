@@ -107,18 +107,6 @@ def process_incoming_deleteTicket(netid, ticket_id):
   else: 
     return json.dumps({'success':False}), 501, {'ContentType':'application/json'}
 
-#@app.route("/maintenanceticket", methods=["GET"])
-#def view_tickets():
-#  ticket_records = database.session.query(Ticket).all()
-#  return jsonify([*map(ticket_serializer, ticket_records)])
-
-
-
-#@app.route("/maintenanceticket/<int:ticket_id>", methods=["GET"])
-#def view_ticket(ticket_id):
-#  ticket_records = Ticket.query.filter_by(id = ticket_id)
-#  return jsonify(ticket_serializer(ticket_records))
-
 @app.route("/new_user", methods=["POST"])
 def create_user():
   user = request.get_json()
@@ -156,3 +144,10 @@ def create_user():
   password = user.get("password"))
 
   return json.dumps({'success':True}), 200, {'ContentType':'application/json'}
+
+
+# Define a route to fetch the FAQ: Quetsions & Answers
+
+
+# Define a route to fetch the Announcement: Title, Message, & Date
+
