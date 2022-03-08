@@ -11,8 +11,8 @@ from flask import Flask, jsonify, request
 from app import app, database
 from app.models import User, Ticket, Appointment, Building, Unit, Announcement, FAQ
 from app.serializers import ticket_serializer
-from app.backend_operations import student_createTicket, admin_createTicket, get_AllTickets, student_deleteTicket
 
+'''
 @app.route("/student/<string:netid>/tickets/create", methods=["POST"])
 def process_incoming_studentTicket(netid):
 
@@ -151,3 +151,4 @@ def create_user():
 
 # Define a route to fetch the Announcement: Title, Message, & Date
 
+'''

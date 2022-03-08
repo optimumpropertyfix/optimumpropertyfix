@@ -50,3 +50,4 @@ def student_deleteTicket(netid, ticket_id):
     # Backend logic to delete ticket
 
     return True
+'''
