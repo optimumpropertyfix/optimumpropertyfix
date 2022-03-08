@@ -48,7 +48,10 @@ def process_incoming_studentTicket(netid):
     return json.dumps({'success':True}), 200, {'ContentType':'application/json'}
   else: 
     return json.dumps({'success':False}), 501, {'ContentType':'application/json'}
+'''
 
+
+'''
 @app.route("/admin/<string:netid>/tickets/create", methods=["POST"])
 def process_incoming_adminTicket(netid):
 
@@ -83,6 +86,9 @@ def process_incoming_adminTicket(netid):
     return json.dumps({'success':True}), 200, {'ContentType':'application/json'}
   else: 
     return json.dumps({'success':False}), 501, {'ContentType':'application/json'}
+'''
+
+
 
 @app.route("/student/<string:netid>/tickets")
 def process_outgoing_studentTickets(netid):
@@ -91,6 +97,9 @@ def process_outgoing_studentTickets(netid):
 
   return jsonify(tickets)
 
+
+
+
 @app.route("/admin/<string:netid>/tickets")
 def process_outgoing_adminTickets(netid):
 
@@ -98,6 +107,9 @@ def process_outgoing_adminTickets(netid):
 
   return jsonify(tickets)
 
+
+
+'''
 @app.route("/student/<string:netid>/tickets/<int:ticket_id>/delete")
 def process_incoming_deleteTicket(netid, ticket_id):
 
@@ -107,7 +119,10 @@ def process_incoming_deleteTicket(netid, ticket_id):
     return json.dumps({'success':True}), 200, {'ContentType':'application/json'}
   else: 
     return json.dumps({'success':False}), 501, {'ContentType':'application/json'}
+'''
 
+
+'''
 @app.route("/new_user", methods=["POST"])
 def create_user():
   user = request.get_json()
@@ -146,13 +161,8 @@ def create_user():
 
   return json.dumps({'success':True}), 200, {'ContentType':'application/json'}
 
-
-# Define a route to fetch the FAQ: Quetsions & Answers
-
-
-# Define a route to fetch the Announcement: Title, Message, & Date
-
 '''
+
 
 @app.route("/new_account", methods=["POST"])
 def process_incoming_newAccount():
