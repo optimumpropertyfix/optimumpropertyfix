@@ -9,7 +9,6 @@ def login_user(given_net_id, given_password):
 
     connection = database_engine.connect()
     user_query = text(f'SELECT DISTINCT isStudent, password FROM user WHERE net_id = "{given_net_id}";')
-    # user_query = text(f'SELECT DISTINCT first_name, last_name, net_id, contact_email, isStudent, password FROM user WHERE net_id = "{given_net_id}";')
     user_record = connection.execute(user_query).first()
     connection.close()
 
@@ -25,7 +24,7 @@ def login_user(given_net_id, given_password):
 
         authorization = serialize_authorization(
             access_token = access_token, 
-            isStudent=isStudent)
+            isStudent = isStudent)
 
         return authorization
 

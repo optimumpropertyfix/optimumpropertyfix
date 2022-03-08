@@ -7,7 +7,8 @@
 #####################################################################
 from crypt import methods
 import json
-from app.backend_operations import create_account
+from app.backend_operations import create_account, view_session
+from flask_jwt_extended import jwt_required, get_jwt_identity
 from flask import Flask, jsonify, request
 from app import app, database
 from app.models import User, Ticket, Appointment, Building, Unit, Announcement, FAQ
@@ -192,3 +193,15 @@ def process_incoming_newAccount():
   successful_account_creation_response = jsonify({'success':True}), 201
 
   return successful_account_creation_response
+
+@app.route("/session", methods=["GET"])
+@jwt_required()
+def process_incoming_viewSession():
+
+  current_user = get_jwt_identity()
+
+  session = view_session(current_user)
+
+  current_session_response = jsonify(session), 201
+
+  return current_session_response
