@@ -1,5 +1,7 @@
-import { useState } from "react";
 import { login_route, logout_route } from "./Routes";
+import { Navigate } from "react-router-dom";
+import { view_session_route } from "../src/Routes";
+import { useEffect, useState } from "react";
 
 function TokenManager() {
   function get_token() {
@@ -66,24 +68,49 @@ function TokenManager() {
 
 export default TokenManager;
 
-/*
 export function ProtectedRoute(props) {
-  const { token } = TokenManager();
-  console.log("Protected Route - ", token);
-  if (props.isAdmin) {
-    if (props.isAdmin === token.admin && token.token) {
-      return <>{props.children}</>;
-    } else {
-      <>
-        <Navigate to="/login"></Navigate>
-      </>;
-    }
+  const { get_token, revoke_token } = TokenManager();
+  const [allow, setAllow] = useState(false);
+
+  useEffect(() => {
+    get_session();
+  });
+
+  const get_session = () => {
+    let route = view_session_route();
+
+    let request = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${get_token()}`,
+      },
+    };
+
+    return fetch(route, request)
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(response.status);
+        }
+        return response.json();
+      })
+      .then((session) => {
+        console.log(session.isStudent + " " + props.permission_group);
+        if (session.isStudent === props.permission_group) {
+          setAllow(true);
+        } else {
+          setAllow(false);
+        }
+      })
+      .catch((error) => {
+        throw Error(error);
+      });
+  };
+
+  if (allow) {
+    return <>{props.childern}</>;
   } else {
-    if (token.token) {
-      return <>{props.children}</>;
-    } else {
-      return <Navigate to="/login"></Navigate>;
-    }
+    revoke_token();
+    return <Navigate to="/login" />;
   }
 }
-*/
