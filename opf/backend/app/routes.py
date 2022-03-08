@@ -7,7 +7,7 @@
 #####################################################################
 from crypt import methods
 import json
-from app.backend_operations import create_account, view_session
+from app.backend_operations import create_account, view_session, student_create_ticket
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from flask import Flask, jsonify, request
 from app import app, database
@@ -89,25 +89,35 @@ def process_incoming_adminTicket(netid):
     return json.dumps({'success':False}), 501, {'ContentType':'application/json'}
 '''
 
-@app.route("/student/<string:netid>/tickets", methods=["GET"])
-def process_outgoing_studentTickets(netid):
+@app.route("/student/tickets/create", methods=["POST"])
+@jwt_required()
+def process_outgoing_studentTickets():
   
-  
-  student= request.get_json()
+  current_user = get_jwt_identity()
 
+  student = request.get_json()
 
-  netid = student.get('netid')
   title  = student.get('title')
   description = student.get('description')
   severity = student.get('severity')
   location = student.get('location')
   building = student.get('building')
-  unit_number = student.get('unit_number')
+  unit_number = student.get('unit')
   additional_notes = student.get('additional_notes')
 
+  student_create_ticket(
+    net_id=current_user,
+    title=title,
+    description=description,
+    severity=severity,
+    location=location,
+    building=building,
+    unit_number=unit_number,
+    additional_notes=additional_notes
+  )
 
-  successful_studentTicket = jsonify({'sucess':True}), 200
-  return successful_studentTicket
+  successful_student_ticket_response = jsonify({'sucess':True}), 200
+  return successful_student_ticket_response
 
 
 @app.route("/admin/<string:netid>/tickets", methods=["POST"])

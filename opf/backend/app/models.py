@@ -51,7 +51,7 @@ class Ticket(database.Model):
     additional_notes = database.Column(database.Text, nullable = True)
     facility_notes = database.Column(database.Text, nullable = True)
 
-
+'''
     def __init__(self, creator_id, date, status, severity_level, description, title, location, additional_notes, facility_notes):
         self.creator_id = creator_id
         self.date = date
@@ -62,11 +62,11 @@ class Ticket(database.Model):
         self.location = location
         self.additional_notes = additional_notes
         self._facility_notes = facility_notes
-
+'''
 
     #debug- string representation of ticket model
-    def __repr__(self):
-        return f'[Ticket date & time: {self.date}, creator: {self.creator_id}, status:{self.status}, severity_level:{self.severity_level}, description:{self.description}, title:{self.title} located: {self.location}, additional_notes: {self.additional_notes}, facility_notes: {self.facility_notes}]'
+    #def __repr__(self):
+    #    return f'[Ticket date & time: {self.date}, creator: {self.creator_id}, status:{self.status}, severity_level:{self.severity_level}, description:{self.description}, title:{self.title} located: {self.location}, additional_notes: {self.additional_notes}, facility_notes: {self.facility_notes}]'
 
 
 class Appointment(database.Model):
@@ -111,7 +111,7 @@ class Unit(database.Model):
     
 
     def __init__(self, unit_number):
-        self.unit_number = unit_number
+       self.unit_number = unit_number
 
     
     #debug- string representation of room model

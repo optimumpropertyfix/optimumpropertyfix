@@ -1,8 +1,9 @@
 //create a ticket view for a single ticket
 import { useState } from "react";
-import { new_ticket_route } from "../../../../Routes";
+import { student_new_ticket_route } from "../../../../Routes";
 import styles from "./CreateTicketView.module.css";
 import { useNavigate } from "react-router-dom";
+import TokenManager from "../../../../TokenManager";
 
 export function AdminCreateTicketView() {
   const [Title, setTitle] = useState("");
@@ -28,7 +29,7 @@ export function AdminCreateTicketView() {
     let ticket = {
       title: title,
       description: description,
-      serverity: severity,
+      severity: severity,
       location: location,
       building: building,
       unit: unit,
@@ -41,7 +42,7 @@ export function AdminCreateTicketView() {
   const ticket = (
     title,
     description,
-    serverity,
+    severity,
     location,
     building,
     unit,
@@ -50,7 +51,7 @@ export function AdminCreateTicketView() {
     let ticket = serialize_ticket(
       title,
       description,
-      serverity,
+      severity,
       location,
       building,
       unit,
@@ -65,7 +66,7 @@ export function AdminCreateTicketView() {
       body: ticket,
     };
 
-    let route = new_ticket_route();
+    let route = student_new_ticket_route();
 
     return fetch(route, request)
       .then((response) => {
@@ -207,6 +208,7 @@ export function StudentCreateTicketView() {
   const [Notes, setNotes] = useState("");
 
   const navigate = useNavigate();
+  const { get_token } = TokenManager();
 
   //serialize account
   const serialize_ticket = (
@@ -221,7 +223,7 @@ export function StudentCreateTicketView() {
     let ticket = {
       title: title,
       description: description,
-      serverity: severity,
+      severity: severity,
       location: location,
       building: building,
       unit: unit,
@@ -231,10 +233,10 @@ export function StudentCreateTicketView() {
     return JSON.stringify(ticket);
   };
 
-  const ticket = (
+  const create_ticket = (
     title,
     description,
-    serverity,
+    severity,
     location,
     building,
     unit,
@@ -243,7 +245,7 @@ export function StudentCreateTicketView() {
     let ticket = serialize_ticket(
       title,
       description,
-      serverity,
+      severity,
       location,
       building,
       unit,
@@ -254,11 +256,12 @@ export function StudentCreateTicketView() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${get_token()}`,
       },
       body: ticket,
     };
 
-    let route = new_ticket_route();
+    let route = student_new_ticket_route();
 
     return fetch(route, request)
       .then((response) => {
@@ -302,7 +305,7 @@ export function StudentCreateTicketView() {
 
   const handle_SubmitTicket = (event) => {
     event.preventDefault();
-    ticket(Title, Description, Severity, Location, Building, Unit, Notes)
+    create_ticket(Title, Description, Severity, Location, Building, Unit, Notes)
       .then((successful) => {
         navigate("/student/maintenance_requests");
       })
@@ -388,5 +391,3 @@ export function StudentCreateTicketView() {
     </div>
   );
 }
-
-export default { AdminCreateTicketView, StudentCreateTicketView };

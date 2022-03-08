@@ -1,8 +1,11 @@
-from sqlalchemy import text
+from datetime import datetime
+from sqlalchemy import desc, text
 from app import database_engine
-from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import get_jwt_identity, jwt_required
 from flask import jsonify
 from app.serializers import serialize_session
+from app.models import Ticket, User
+from app import database
 '''
 def student_createTicket(
     netid, 
@@ -37,14 +40,14 @@ def student_CreateTicket(
 '''
 def student_ViewAllTickets():
     connection = database_engine.connect()
-    createStudentTicket_command = text(f"SELECT ticket.id, title, description, severity_level, location, building_name, unit_number, additional_notes FROM unit, ticket, building, user WHERE net_id= 'net_id';")
+    createStudentTicket_command = text(f"SELECT ticket.id, title, description, severity_level, location, building_name, additional_notes FROM ticket, building, user WHERE net_id= 'net_id';")
     connection.execute(createStudentTicket_command)
     connection.close()
 '''
 
 def student_ViewTicket():
     connection = database_engine.connect()
-    createStudentTicket_command = text(f"SELECT ticket.id, title, description, severity_level, location, building_name, unit_number, additional_notes FROM unit, ticket, building, user WHERE net_id= 'net_id' AND ticket_id = 'ticket_id';")
+    createStudentTicket_command = text(f"SELECT ticket.id, title, description, severity_level, location, building_name, additional_notes FROM ticket, building, user WHERE net_id= 'net_id' AND ticket_id = 'ticket_id';")
     connection.execute(createStudentTicket_command)
     connection.close()
 
@@ -67,7 +70,7 @@ def admin_CreateTicket(
 '''
 def admin_ViewAllTickets():
     connection = database_engine.connect()
-    createAdminTicket_command = text(f"SELECT ticket.id, title, description, severity_level, location, building_name, unit_number, additional_notes FROM unit, ticket, building, user WHERE net_id= 'net_id';")
+    createAdminTicket_command = text(f"SELECT ticket.id, title, description, severity_level, location, building_name, additional_notes FROM ticket, building, user WHERE net_id= 'net_id';")
     connection.execute(createAdminTicket_command)
     connection.close()
 '''
@@ -119,6 +122,35 @@ def view_session(given_net_id):
 
     return session
 
+def student_create_ticket(
+    net_id,
+    title, 
+    description, 
+    severity,
+    location,
+    building,
+    unit_number,
+    additional_notes):
+
+    ticket_record = Ticket(
+    title=title, 
+    status = "Pending",
+    description=description,
+    severity_level=severity,
+    location=location,
+    additional_notes=additional_notes)
+
+    user_record = User.query.filter_by(net_id = net_id).first()
+
+    user_record.ticket_creator.append(ticket_record)
+    database.session.commit()
+
+    #ticket_record = Ticket()
+
+    #connection = database_engine.connect()
+    #ticket_command = text(f'INSERT INTO ticket(netid, title, description, severity, location, building, unit_number, additional_notes) VALUES ("{net_id}", "{title}", "{description}", "{severity}", "{location}", "{building}", "{unit_number}", "{additional_notes}");')
+    #connection.execute(ticket_command)
+    #connection.close()
 
 
     

@@ -54,6 +54,18 @@ const view_session_route = () => {
   return `/session`;
 };
 
+const student_new_ticket_route = () => {
+  return "/student/tickets/create";
+};
+
+const student_view_all_tickets_route = () => {
+  return "/student/tickets";
+};
+
+const student_view_ticket_route = (ticket_id) => {
+  return `/student/tickets/${ticket_id}`;
+};
+
 export {
   student_create_ticket_route,
   admin_create_ticket_route,
@@ -67,4 +79,7 @@ export {
   view_session_route,
   admin_create_faq_route,
   admin_create_announcement_route,
+  student_new_ticket_route,
+  student_view_all_tickets_route,
+  student_view_ticket_route,
 };

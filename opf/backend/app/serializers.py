@@ -68,7 +68,7 @@ def building_serializer(building):
 def unit_serializer(unit):
     return{
       "id": unit.id,
-      "unit_number": unit.unit_number,
+      #"unit_number": unit.unit_number,
     }
 
 def announcement_serializer(announcement):

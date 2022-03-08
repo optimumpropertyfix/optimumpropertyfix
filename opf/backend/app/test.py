@@ -14,7 +14,7 @@ erin = User('Erin', 'Keith', 0, 'erinkeith@gmail.com', 'erinkeith', '', 'F', '',
 database.session.add_all([araam, joanna, nasrin, melissa, aisha, erin])
 database.session.commit()
 '''
-
+'''
 ticket_one = Ticket('1', datetime.date(2019, 12, 4), 'Completed', 'High', 'Leak in kitchen underneath the sink.', 'Leaking', 'Kitchen', 'Extra Notes', 'Blah')
 ticket_second = Ticket('2', datetime.date(2019, 12, 4), 'Pending', 'Low', 'Missing trash can bin and I need it ASAP.', 'Mising Item', 'Livingroom', 'Extra Notes', 'Blah')
 ticket_three = Ticket('3', datetime.date(2013, 12, 4), 'Completed', 'Mild', 'Leaking shower head in bathroom.', 'Leaking', 'Bathroom','Extra Notes', 'Blah')
@@ -23,7 +23,7 @@ ticket_five = Ticket('5', datetime.date(2021, 12, 4), 'Deleted', 'Low', 'Leaking
 ticket_six = Ticket('6', datetime.date(2020, 12, 4), 'Pending', 'High', 'Smells like gas by the stove.', 'Leaking', 'Kitchen', ' ',' ')
 database.session.add_all([ticket_one, ticket_second, ticket_three, ticket_four, ticket_five, ticket_six])
 database.session.commit()
-
+'''
 
 apt_one = Appointment(datetime.date(2020,1,11))
 apt_second = Appointment(datetime.date(2020,12,14))
