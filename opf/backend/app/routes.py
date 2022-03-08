@@ -7,6 +7,7 @@
 #####################################################################
 from crypt import methods
 import json
+from app.backend_operations import create_account
 from flask import Flask, jsonify, request
 from app import app, database
 from app.models import User, Ticket, Appointment, Building, Unit, Announcement, FAQ
@@ -152,3 +153,42 @@ def create_user():
 # Define a route to fetch the Announcement: Title, Message, & Date
 
 '''
+
+@app.route("/new_account", methods=["POST"])
+def process_incoming_newAccount():
+
+  account = request.get_json()
+
+  first_name = account.get('first_name')
+  last_name = account.get('last_name')
+  isStudent = account.get('user_type')
+  contact_email = account.get('contact_email')
+  net_id = account.get('net_id')
+  nshe_id = account.get('nshe_id')
+  gender = account.get('gender')
+  year = account.get('year')
+  password = account.get('password')
+
+  if (isStudent == "Student"):
+    isStudent = 1
+  else: 
+    isStudent = 0
+  
+  if (gender == "Male"):
+    gender = "M"
+  else: 
+    gender = "F"
+
+  create_account(first_name=first_name, 
+  last_name=last_name,
+  isStudent=isStudent,
+  contact_email=contact_email,
+  net_id=net_id,
+  gender=gender,
+  year=year,
+  password=password,
+  nshe_id=nshe_id)
+
+  successful_account_creation_response = jsonify({'success':True}), 201
+
+  return successful_account_creation_response

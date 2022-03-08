@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { new_account_route } from "../../../../Routes";
+import { useNavigate } from "react-router-dom";
 import styles from "./CreateAccountView.module.css";
 function CreateAccountView() {
   const [FirstName, setFirstName] = useState("");
@@ -11,7 +13,78 @@ function CreateAccountView() {
   const [Year, setYear] = useState(null);
   const [Password, setPassword] = useState("");
 
-  useEffect(() => {});
+  const navigate = useNavigate();
+
+  const serialize_account = (
+    first_name,
+    last_name,
+    user_type,
+    contact_email,
+    net_id,
+    nshe_id,
+    gender,
+    year,
+    password
+  ) => {
+    let account = {
+      first_name: first_name,
+      last_name: last_name,
+      user_type: user_type,
+      contact_email: contact_email,
+      net_id: net_id,
+      nshe_id: nshe_id,
+      gender: gender,
+      year: year,
+      password: password,
+    };
+
+    return JSON.stringify(account);
+  };
+
+  const create_account = (
+    first_name,
+    last_name,
+    user_type,
+    contact_email,
+    net_id,
+    nshe_id,
+    gender,
+    year,
+    password
+  ) => {
+    let account = serialize_account(
+      first_name,
+      last_name,
+      user_type,
+      contact_email,
+      net_id,
+      nshe_id,
+      gender,
+      year,
+      password
+    );
+
+    let request = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: account,
+    };
+
+    let route = new_account_route();
+
+    return fetch(route, request)
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(`${response.statusText} - ${response.status}`);
+        }
+        return true;
+      })
+      .catch((error) => {
+        throw Error(error);
+      });
+  };
 
   const handle_FirstName = (event) => {
     setFirstName(event.target.value);
@@ -50,30 +123,24 @@ function CreateAccountView() {
   };
 
   const handle_SignUp = (event) => {
-    let request = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(serialize_profile()),
-    };
-
     event.preventDefault();
-    fetch("/new_user", request);
-  };
-
-  const serialize_profile = () => {
-    return {
-      first_name: FirstName,
-      last_name: LastName,
-      user_type: UserType,
-      email: Email,
-      net_id: NetID,
-      nshe_Id: NSHEID,
-      gender: NSHEID,
-      year: Year,
-      password: Password,
-    };
+    create_account(
+      FirstName,
+      LastName,
+      UserType,
+      Email,
+      NetID,
+      NSHEID,
+      Gender,
+      Year,
+      Password
+    )
+      .then((successful) => {
+        navigate("/login");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -133,7 +200,7 @@ function CreateAccountView() {
             <label>Password</label>
             <input type="text" onChange={handle_Password} />
           </div>
-          <input type="submit" value="Sign Up" />
+          <input onClick={handle_SignUp} type="submit" value="Sign Up" />
         </form>
       </div>
     </div>
