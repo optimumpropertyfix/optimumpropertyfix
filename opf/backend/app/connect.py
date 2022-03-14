@@ -1,24 +1,28 @@
-import mysql.connector
-from mysql.connector import Error
+from mysql.connector import MySQLConnection, Error
+from python_mysql_dbconfig import read_db_config
 
 
 def connect():
     """ Connect to MySQL database """
+
+    db_config = read_db_config()
     conn = None
     try:
-        conn = mysql.connector.connect(host='localhost',
-                                       database='opf',
-                                       user='root',
-                                       password='#Capstone2022')
-        if conn.is_connected():
-            print('Connected to MySQL database')
+        print('Connecting to MySQL database...')
+        conn = MySQLConnection(**db_config)
 
-    except Error as e:
-        print(e)
+        if conn.is_connected():
+            print('Connection established.')
+        else:
+            print('Connection failed.')
+
+    except Error as error:
+        print(error)
 
     finally:
         if conn is not None and conn.is_connected():
             conn.close()
+            print('Connection closed.')
 
 
 if __name__ == '__main__':
