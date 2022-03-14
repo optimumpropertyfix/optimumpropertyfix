@@ -5,6 +5,7 @@
 # Update | 'PUT | Updates info about existing object
 # Delete | 'DELETE' | Delete an object
 #####################################################################
+from crypt import methods
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from flask import Flask, jsonify, request
 
@@ -26,3 +27,39 @@ feedback_controller = FeedbackController()
 ticket_controller = TicketController()
 unit_controller = UnitController()
 user_controller = UserController()
+
+@app.route("/announcements", methods=["GET"])     
+def view_all_announcement_route():
+
+    return "All Announcements"
+
+@app.route("/announcements/latest", methods=["GET"])     
+def view_latest_announcement_route():
+
+    return "Latest Announcements"
+
+@app.route("/announcements/<int:ticket_id>", methods=["GET"])     
+def view_individual_announcement_route(ticket_id):
+
+    return f'{ticket_id}'
+
+@app.route("/announcements/<int:ticket_id>/update", methods=["PATCH"])     
+def edit_individual_announcement_route(ticket_id):
+
+    announcement = request.get_json()
+    title = announcement.get('announcement_title')
+    message = announcement.get('announcement_message')
+
+    return "Edit Announcement"
+
+@app.route("/announcements/<int:ticket_id>/delete", methods=["DELETE"])     
+def delete_individual_announcement_route(ticket_id):
+
+    return "Delete Announcement"
+
+@app.route("/announcements/create", methods=["POST"])
+def create_announcement_route():
+
+    announcement = request.get_json()
+    title = announcement.get('announcement_title')
+    message = announcement.get('announcement_message')
