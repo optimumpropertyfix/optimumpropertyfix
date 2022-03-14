@@ -1,0 +1,7 @@
+.item {
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.4rem;
+  margin: 1rem 0;
+  background-color: var(--color-light-gray);
+}

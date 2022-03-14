@@ -1,0 +1,23 @@
+@media only screen and (min-width: 300px) {
+  .page_title {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  .form > input[type="submit"] {
+    width: 5rem;
+    align-self: center;
+  }
+}
+@media only screen and (min-width: 600px) {
+  .SignInView {
+    width: 20rem;
+    margin: 0 auto;
+  }
+}
+@media only screen and (min-width: 800px) {
+}

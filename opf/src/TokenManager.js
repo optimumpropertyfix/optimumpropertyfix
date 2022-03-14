@@ -1,22 +1,26 @@
-import { useState } from "react";
+import { login_route, logout_route } from "./Routes";
 import { Navigate } from "react-router-dom";
+import { view_session_route } from "../src/Routes";
+import { useEffect, useState } from "react";
 
 function TokenManager() {
   function get_token() {
-    const access_token = localStorage.getItem("token");
-    return access_token && access_token;
+    const user = localStorage.getItem("token");
+    return user && user;
   }
 
-  const [token, setToken] = useState(get_token());
-
   function generate_token(credentials) {
-    fetch("/token", {
+    let request = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(credentials),
-    })
+      body: credentials,
+    };
+
+    let route = login_route();
+
+    return fetch(route, request)
       .then((response) => {
         if (!response.ok) {
           throw Error(`${response.statusText} - ${response.status}`);
@@ -24,34 +28,40 @@ function TokenManager() {
         return response.json();
       })
       .then((data) => {
-        localStorage.setItem("token", {
-          token: data.token,
-          admin: data.isAdmin,
-        });
-        setToken({
-          token: data.token,
-          admin: data.isAdmin,
-        });
+        localStorage.setItem("token", data.access_token);
+        return data.isStudent;
       })
       .catch((error) => {
-        console.log(error);
+        throw Error(error);
       });
   }
 
   function revoke_token() {
-    fetch("/revoke", {
+    let request = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-    });
-    localStorage.removeItem("token");
-    setToken(null);
+    };
+
+    let route = logout_route();
+
+    return fetch(route, request)
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(`${response.statusText} - ${response.status}`);
+        }
+        localStorage.removeItem("token");
+      })
+      .catch((error) => {
+        console.log(error);
+        throw Error(error);
+      });
   }
 
   return {
     generate_token,
-    token,
+    get_token,
     revoke_token,
   };
 }
@@ -59,21 +69,48 @@ function TokenManager() {
 export default TokenManager;
 
 export function ProtectedRoute(props) {
-  const { token } = TokenManager();
-  console.log("Protected Route - ", token);
-  if (props.isAdmin) {
-    if (props.isAdmin === token.admin && token.token) {
-      return <>{props.children}</>;
-    } else {
-      <>
-        <Navigate to="/login"></Navigate>
-      </>;
-    }
+  const { get_token, revoke_token } = TokenManager();
+  const [allow, setAllow] = useState(false);
+
+  useEffect(() => {
+    get_session();
+  });
+
+  const get_session = () => {
+    let route = view_session_route();
+
+    let request = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${get_token()}`,
+      },
+    };
+
+    return fetch(route, request)
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(response.status);
+        }
+        return response.json();
+      })
+      .then((session) => {
+        console.log(session.isStudent + " " + props.permission_group);
+        if (session.isStudent === props.permission_group) {
+          setAllow(true);
+        } else {
+          setAllow(false);
+        }
+      })
+      .catch((error) => {
+        throw Error(error);
+      });
+  };
+
+  if (allow) {
+    return <>{props.childern}</>;
   } else {
-    if (token.token) {
-      return <>{props.children}</>;
-    } else {
-      return <Navigate to="/login"></Navigate>;
-    }
+    revoke_token();
+    return <Navigate to="/login" />;
   }
 }

@@ -11,25 +11,29 @@ export function Navigation(props) {
 
 export function NavigationLink(props) {
   return (
-    <NavLink
-      end={props.end}
-      to={props.to}
-      state={props.state}
-      className={({ isActive }) =>
-        isActive
-          ? `${styles.active} ${props.active_class} ${styles.NavigationLink} ${props.className}`
-          : `${styles.NavigationLink} ${props.className}`
-      }
-    >
-      <p>{props.children}</p>
-    </NavLink>
+    <div className={`${styles.NavigationLink} ${props.className}`}>
+      <NavLink
+        end={props.end}
+        to={props.to}
+        state={props.state}
+        className={({ isActive }) =>
+          isActive ? `${styles.active} ${props.active_class}` : ``
+        }
+      >
+        {props.children}
+      </NavLink>
+    </div>
   );
 }
 
 export function NormalLink(props) {
   return (
-    <Link to={props.to} state={props.state}>
-      <p>{props.children}</p>
+    <Link
+      to={props.to}
+      state={props.state}
+      className={`${props.className} ${styles.NormalLink}`}
+    >
+      {props.children}
     </Link>
   );
 }
