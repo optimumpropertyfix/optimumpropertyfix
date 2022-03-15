@@ -29,7 +29,7 @@ unit_controller = UnitController()
 user_controller = UserController()
 
 @app.route("/announcements", methods=["GET"])     
-def view_all_announcement_route():
+def view_all_announcements_route():
 
     return "All Announcements"
 
@@ -63,3 +63,304 @@ def create_announcement_route():
     announcement = request.get_json()
     title = announcement.get('announcement_title')
     message = announcement.get('announcement_message')
+
+@app.route("/appointments", methods=["GET"])
+def view_all_appointments_route():
+
+    return "View All Appointments"
+
+@app.route("/appointments/<int:ticket_id>/read", methods=["GET"])
+def view_individual_appointment_route(ticket_id):
+
+    return f'View Individual Appointments {ticket_id}'
+
+@app.route("/appointments/filter/ticket_created/<string:time>", methods=["GET"])
+def view_all_appointments_by_datetime_route(time):
+
+    return time
+
+@app.route("/appointments/filter/ticket_status/<string:status>", methods=["GET"])
+def view_all_appointments_by_status_route(status):
+
+    return status
+
+@app.route("/appointments/<int:ticket_id>/update", methods=["PATCH"])
+def edit_appointment_route(ticket_id):
+
+    appointment = request.get_json()
+    start_time = appointment.get('appointment_start_time')
+    end_time = appointment.get('appointment_end_time')
+    is_cancelled = appointment.get('appointment_is_cancelled')
+    is_cancelled_reason = appointment.get('appointment_is_cancelled_reason')
+
+    return f'Edit Appointment {ticket_id}' 
+
+@app.route("/appointments/<int:ticket_id>/create", methods=["POST"])
+def create_appointment_route(ticket_id):
+
+    appointment = request.get_json()
+    start_time = appointment.get('appointment_start_time')
+    end_time = appointment.get('appointment_end_time')
+
+    return f'Create Appointment {ticket_id}' 
+
+
+@app.route("/appointments/<int:ticket_id>/delete", methods=["DELETE"])
+def delete_appointment_route(ticket_id):
+
+    return f'Delete Appointment {ticket_id}' 
+
+@app.route("/buildings", methods=["GET"])
+def view_all_buildings_route():
+
+    return f'View All Buildings' 
+
+@app.route("/buildings/<int:building_id>", methods=["GET"])
+def view_individual_building_route(building_id):
+
+    return f'View Building {building_id}' 
+
+@app.route("/buildings/create", methods=["POST"])
+def create_building_route():
+
+    building = request.get_json()
+    name = building.get('building_name')
+    abbreviation = building.get('building_abbreviation')
+    year = building.get('building_year')
+    address = building.get('building_address')
+    capacity = building.get('building_capacity')
+    map_number = building.get('building_map_number')
+
+    return f'Create Building' 
+
+@app.route("/buildings/<int:building_id>/update", methods=["PATCH"])
+def edit_building_route(building_id):
+
+    building = request.get_json()
+    name = building.get('building_name')
+    abbreviation = building.get('building_abbreviation')
+    year = building.get('building_year')
+    address = building.get('building_address')
+    capacity = building.get('building_capacity')
+    map_number = building.get('building_map_number')
+
+    return f'Edit Building {building_id}' 
+
+@app.route("/buildings/<int:building_id>/delete", methods=["DELETE"])
+def delete_building_route(building_id):
+
+    return f'Delete Building {building_id}' 
+
+@app.route("/faq", methods=["GET"])
+def view_all_faqs_route():
+
+    return f'View All FAQs'
+
+@app.route("/faq/<int:faq_id>", methods=["GET"])
+def view_individual_faq_route(faq_id):
+
+    return f'View FAQ {faq_id}'
+
+@app.route("/faq/create", methods=["POST"])
+def create_faq_route():
+
+    faq = request.get_json()
+    question = faq.get('faq_question')
+    answer = faq.get('faq_answer')
+
+    return f'Create FAQ'
+
+@app.route("/faq/<int:faq_id>/update", methods=["PATCH"])
+def edit_faq_route(faq_id):
+
+    faq = request.get_json()
+    question = faq.get('faq_question')
+    answer = faq.get('faq_answer')
+
+    return f'Edit FAQ {faq_id}'
+
+@app.route("/faq/<int:faq_id>/delete", methods=["DELETE"])
+def delete_faq_route(faq_id):
+
+    return f'Delete FAQ {faq_id}'
+
+@app.route("/feedback", methods=["GET"])
+def view_all_feedback_route():
+
+    return f'View All Feedback'
+
+@app.route("/feedback/<int:ticket_id>", methods=["GET"])
+def view_individual_feedback_route(ticket_id):
+
+    return f'View Feedback {ticket_id}'
+
+@app.route("/feedback/<int:ticket_id>/create", methods=["POST"])
+def create_feedback_route(ticket_id):
+
+    return f'Create Feedback {ticket_id}'
+
+@app.route("/feedback/<int:ticket_id>/update", methods=["PATCH"])
+def edit_feedback_route(ticket_id):
+
+    return f'Edit Feedback {ticket_id}'
+
+@app.route("/feedback/<int:ticket_id>/delete", methods=["DELETE"])
+def delete_feedback_route(ticket_id):
+
+    return f'Delete Feedback {ticket_id}'
+
+@app.route("/tickets", methods=["GET"])
+def view_all_tickets_route():
+
+    return f'View All Tickets'
+
+@app.route("/tickets/<int:ticket_id>", methods=["GET"])
+def view_individual_ticket_route(ticket_id):
+
+    return f'View Ticket {ticket_id}'
+
+@app.route("/tickets/filter/severity/<string:severity>", methods=["GET"])
+def view_individual_tickets_by_severity_route(severity):
+
+    return f'View Ticket {severity}'
+
+@app.route("/tickets/filter/status/<string:status>", methods=["GET"])
+def view_all_tickets_by_status_route(status):
+
+    return f'View Ticket {status}'
+
+@app.route("/tickets/filter/user/<string:user>", methods=["GET"])
+def view_all_tickets_by_user_route(user):
+
+    return f'View Ticket {user}'
+
+@app.route("/tickets/create", methods=["POST"])
+def create_ticket_route():
+
+    ticket = request.get_json()
+    title = ticket.get('ticket_title')
+    description = ticket.get('ticket_description')
+    severity = ticket.get('ticket_severity')
+    location = ticket.get('ticket_location')
+    building_name = ticket.get('ticket_building_name')
+    unit_number = ticket.get('ticket_unit_number')
+    additonal_notes = ticket.get('ticket_additonal_notes')
+    ticket_status = ticket.get('ticket_ticket_status')
+
+    return f'Create Ticket'
+
+@app.route("/tickets/<int:ticket_id>/update", methods=["PATCH"])
+def edit_ticket_route(ticket_id):
+
+    ticket = request.get_json()
+    title = ticket.get('ticket_title')
+    description = ticket.get('ticket_description')
+    severity = ticket.get('ticket_severity')
+    location = ticket.get('ticket_location')
+    building_name = ticket.get('ticket_building_name')
+    unit_number = ticket.get('ticket_unit_number')
+    additonal_notes = ticket.get('ticket_additonal_notes')
+    ticket_status = ticket.get('ticket_ticket_status')
+
+    return f'Edit Ticket {ticket_id}'
+
+@app.route("/tickets/<int:ticket_id>/delete", methods=["DELETE"])
+def delete_ticket_route(ticket_id):
+
+    return f'Delete Ticket {ticket_id}'
+
+@app.route("/unit/<int:building_id>", methods=["GET"])
+def view_all_units_route(building_id):
+
+    return f'View Units {building_id}'
+
+@app.route("/unit/<int:building_id>/<int:unit_id>", methods=["GET"])
+def view_individual_units_route(building_id, unit_id):
+
+    return f'View Unit {building_id} - {unit_id}'
+
+@app.route("/unit/<int:building_id>/create", methods=["POST"])
+def create_unit_route(building_id):
+
+    unit = request.get_json()
+    type = unit.get('unit_type')
+    number = unit.get('unit_number')
+    letter = unit.get('unit_letter')
+    occupancy = unit.get('unit_occupancy')
+
+    return f'Create Unit {building_id}'
+
+@app.route("/unit/<int:building_id>/<int:unit_id>/delete", methods=["DELETE"])
+def delete_unit_route(building_id, unit_id):
+
+    return f'Delete Unit {building_id} - {unit_id}'
+
+@app.route("/user", methods=["GET"])
+def view_current_user():
+
+    return f'CURRENT USER'
+
+@app.route("/user/create", methods=["POST"])
+def create_user_route():
+
+    user = request.get_json()
+    first_name = user.get('user_first_name')
+    last_name = user.get('user_last_name')
+    is_student = user.get('user_is_student')
+    contact_email = user.get('user_contact_email')
+    nshe_id = user.get('user_nshe_id')
+    gender = user.get('user_gender')
+    year = user.get('user_year')
+    password = user.get('user_password')
+
+    return f'Create User'
+
+@app.route("/user/all", methods=["GET"])
+def view_all_users_route():
+
+    return f'View Users'
+
+@app.route("/user/<int:user_id>", methods=["GET"])
+def view_individual_user_route(user_id):
+
+    return f'View User {user_id}'
+
+@app.route("/user/delete", methods=["DELETE"])
+def student_delete_user_route():
+
+    return f'Delete Self User';
+
+@app.route("/user/update", methods=["PATCH"])
+def student_edit_user_route():
+
+    return f'Edit Self User';
+
+@app.route("/user/<int:user_id>/delete", methods=["DELETE"])
+def admin_delete_user_route(user_id):
+
+    return f'Delete Self User {user_id}';
+
+@app.route("/user/<int:user_id>/update", methods=["PATCH"])
+def admin_edit_user_route(user_id):
+
+    return f'Edit Self User {user_id}';
+
+@app.route("/login", methods=["POST"])
+def login_route():
+
+    return f'Login User';
+
+@app.route("/logout", methods=["POST"])
+def logout_route():
+
+    return f'Logout User';
+
+@app.route("/reset_password", methods=["POST"])
+def reset_password_route():
+
+    credentials = request.get_json();
+    contact_email = credentials.get('user_contact_email')
+    nshe_id = credentials.get('user_nshe_id')
+    password = credentials.get('user_password')
+
+    return f'Reset User Password';
