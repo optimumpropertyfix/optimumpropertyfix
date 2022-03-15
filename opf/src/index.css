@@ -1,6 +1,10 @@
 body {
   margin: 0;
+<<<<<<< HEAD
+  font-family: "PT Sans", sans-serif;
+=======
   font-family: "Effra", sans-serif;
+>>>>>>> main
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
