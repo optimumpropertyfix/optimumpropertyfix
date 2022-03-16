@@ -5,7 +5,8 @@
 # Update | 'PUT | Updates info about existing object
 # Delete | 'DELETE' | Delete an object
 #####################################################################
-from crypt import methods
+from distutils.log import error
+from msilib.schema import Error
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from flask import Flask, jsonify, request
 
@@ -212,7 +213,9 @@ def delete_feedback_route(ticket_id):
 @app.route("/tickets", methods=["GET"])
 def view_all_tickets_route():
 
-    return f'View All Tickets'
+    ticket_objects = ticket_controller.get_all_tickets("araamzaremehjardi",False)
+
+    return jsonify(ticket_objects)
 
 @app.route("/tickets/<int:ticket_id>", methods=["GET"])
 def view_individual_ticket_route(ticket_id):
