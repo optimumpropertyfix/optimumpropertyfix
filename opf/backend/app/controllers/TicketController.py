@@ -1,7 +1,4 @@
-from ast import arg
 from time import strftime
-from turtle import title
-from xml.etree.ElementTree import tostring
 from mysql.connector import MySQLConnection, Error
 from app.DatabaseConfiguration import database_configuration
 from flask import Flask, jsonify 
@@ -17,11 +14,6 @@ import json
 
 
 class TicketController:
-        # Query Database for All Tickets Depending if its a Admin or Student User
-        # Prepare query to be serialized
-        # Functions Returns JSON Object
-    
-
     def get_all_tickets(self, net_id = None, is_student = True):
         tickets = None
         if (is_student):
@@ -31,6 +23,36 @@ class TicketController:
         else:
             query = "admin_get_all_tickets"
             tickets = self.query_database(query)
+
+        ticket_table = self.generate_ticket_objects(tickets)
+        return ticket_table
+
+
+    def get_all_tickets_by_ticket_id(self, ticket_id, net_id = None, is_student = True): 
+        tickets = None
+        if (is_student):
+            query = "get_ticket_id"
+            args = [ticket_id]
+            tickets = self.query_database(query, args)
+        else:
+            query = "get_ticket_id"
+            args = [ticket_id]
+            tickets = self.query_database(query, args)
+            
+        ticket_table = self.generate_ticket_objects(tickets)
+        return ticket_table
+
+    def get_all_tickets_by_severity(self, severity, net_id = None, is_student = True): 
+        tickets = None
+        if (is_student):
+            query = "user_get_all_tickets_severity"
+            args = [net_id, severity]
+            tickets = self.query_database(query, args)
+        else:
+            query = "admin_get_all_tickets_severity"
+            args = [severity]
+            tickets = self.query_database(query, args)
+
         ticket_table = self.generate_ticket_objects(tickets)
         return ticket_table
 
@@ -45,6 +67,17 @@ class TicketController:
             query = "admin_get_all_tickets_status"
             args = [status]
             tickets = self.query_database(query, args)
+
+        ticket_table = self.generate_ticket_objects(tickets)
+        return ticket_table
+
+
+    def get_all_tickets_by_net_id(self, net_id, is_student = True): 
+        tickets = None
+        query = "admin_get_all_tickets_net_id"
+        args = [net_id]
+        tickets = self.query_database(query, args)
+
         ticket_table = self.generate_ticket_objects(tickets)
         return ticket_table
 
@@ -116,4 +149,4 @@ class TicketController:
 
     def __init__(self):
         print("DEBUG: TicketController Loaded.")
-        print(self.get_all_tickets_by_status('araamzaremehjardi', True, 'Received'))
+        #print(self.get_all_tickets_by_status('araamzaremehjardi', True, 'Received'))

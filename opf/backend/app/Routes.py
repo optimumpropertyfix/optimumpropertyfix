@@ -31,18 +31,19 @@ user_controller = UserController()
 
 @app.route("/announcements", methods=["GET"])     
 def view_all_announcements_route():
-
-    return "All Announcements"
+    annoucement_objects = announcement_controller.view_all_announcements()
+    return jsonify(annoucement_objects)
 
 @app.route("/announcements/latest", methods=["GET"])     
 def view_latest_announcement_route():
+    annoucement_objects = announcement_controller.view_latest_announcements()
+    return jsonify(annoucement_objects)
 
-    return "Latest Announcements"
+@app.route("/announcements/<int:announcement_id>", methods=["GET"])     
+def view_individual_announcement_route(announcement_id):
 
-@app.route("/announcements/<int:ticket_id>", methods=["GET"])     
-def view_individual_announcement_route(ticket_id):
-
-    return f'{ticket_id}'
+   annoucement_objects = announcement_controller.view_announcement_by_id(announcement_id=announcement_id)
+   return jsonify(annoucement_objects)
 
 @app.route("/announcements/<int:ticket_id>/update", methods=["PATCH"])     
 def edit_individual_announcement_route(ticket_id):
@@ -214,29 +215,28 @@ def delete_feedback_route(ticket_id):
 def view_all_tickets_route():
 
     ticket_objects = ticket_controller.get_all_tickets(net_id = "araamzaremehjardi", is_student = False)
-
     return jsonify(ticket_objects)
 
 @app.route("/tickets/<int:ticket_id>", methods=["GET"])
 def view_individual_ticket_route(ticket_id):
 
-    return f'View Ticket {ticket_id}'
+    ticket_objects = ticket_controller.get_all_tickets_by_ticket_id(net_id = "araamzaremehjardi", is_student = False, ticket_id = ticket_id)
+    return jsonify(ticket_objects)
 
 @app.route("/tickets/filter/severity/<string:severity>", methods=["GET"])
 def view_individual_tickets_by_severity_route(severity):
-
-    return f'View Ticket {severity}'
+    ticket_objects = ticket_controller.get_all_tickets_by_severity(net_id = 'araamzaremehjardi', is_student = True, severity = severity)
+    return jsonify(ticket_objects)
 
 @app.route("/tickets/filter/status/<string:status>", methods=["GET"])
 def view_all_tickets_by_status_route(status):
     ticket_objects = ticket_controller.get_all_tickets_by_status(net_id = 'araamzaremehjardi', is_student = True, status = status)
- 
     return jsonify(ticket_objects)
 
-@app.route("/tickets/filter/user/<string:user>", methods=["GET"])
-def view_all_tickets_by_user_route(user):
-
-    return f'View Ticket {user}'
+@app.route("/tickets/filter/user/<string:net_id>", methods=["GET"])
+def view_all_tickets_by_user_route(net_id):
+    ticket_objects = ticket_controller.get_all_tickets_by_net_id( is_student = False, net_id = net_id)
+    return jsonify(ticket_objects)
 
 @app.route("/tickets/create", methods=["POST"])
 def create_ticket_route():
@@ -254,7 +254,7 @@ def create_ticket_route():
     return f'Create Ticket'
 
 @app.route("/tickets/<int:ticket_id>/update", methods=["PATCH"])
-def edit_ticket_route(ticket_id):
+def edit_ticket_route( location, building_name, unit_number, additional_notes):
 
     ticket = request.get_json()
     title = ticket.get('ticket_title')
@@ -266,7 +266,6 @@ def edit_ticket_route(ticket_id):
     additonal_notes = ticket.get('ticket_additonal_notes')
     ticket_status = ticket.get('ticket_ticket_status')
 
-    return f'Edit Ticket {ticket_id}'
 
 @app.route("/tickets/<int:ticket_id>/delete", methods=["DELETE"])
 def delete_ticket_route(ticket_id):
