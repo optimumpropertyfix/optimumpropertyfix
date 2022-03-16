@@ -1,6 +1,5 @@
+# Reading Configuration File for Database Connection To Operate Store Procedures @@@ Credit: Joanna
 from configparser import ConfigParser
-
-
 def read_db_config(filename='config.ini', section='mysql'):
     """ Read database configuration file and return a dictionary object
     :param filename: name of the configuration file
@@ -21,3 +20,5 @@ def read_db_config(filename='config.ini', section='mysql'):
         raise Exception('{0} not found in the {1} file'.format(section, filename))
 
     return db
+
+database_configuration = read_db_config(filename='app/mysql_config.ini', section='mysql')
