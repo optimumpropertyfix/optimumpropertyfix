@@ -10,6 +10,7 @@ import json
 
 # General Structure of Controller: 
 #   General Logic
+#   Helper Functions
 #   Write Query
 #   Read Query
 #   Serializer
@@ -19,8 +20,9 @@ class TicketController:
         # Query Database for All Tickets Depending if its a Admin or Student User
         # Prepare query to be serialized
         # Functions Returns JSON Object
-    def get_all_tickets(self, net_id, is_student):
+    
 
+    def get_all_tickets(self, net_id = None, is_student = True):
         tickets = None
         if (is_student):
             query = "user_get_all_tickets"
@@ -29,9 +31,26 @@ class TicketController:
         else:
             query = "admin_get_all_tickets"
             tickets = self.query_database(query)
+        ticket_table = self.generate_ticket_objects(tickets)
+        return ticket_table
 
+
+    def get_all_tickets_by_status(self, status, net_id = None, is_student = True): 
+        tickets = None
+        if (is_student):
+            query = "user_get_all_tickets_status"
+            args = [net_id, status]
+            tickets = self.query_database(query, args)
+        else:
+            query = "admin_get_all_tickets_status"
+            args = [status]
+            tickets = self.query_database(query, args)
+        ticket_table = self.generate_ticket_objects(tickets)
+        return ticket_table
+
+
+    def generate_ticket_objects(self, tickets):
         ticket_objects = list()
-
         for ticket in tickets:
             ticket_id = ticket[0]
             ticket_title = ticket[1]
@@ -49,8 +68,8 @@ class TicketController:
                 severity = ticket_severity,
             )
             ticket_objects.append(ticket_json)
+        
         return ticket_objects
-
 
     def query_database(self, query, args = None): 
         query_result = None
@@ -72,7 +91,7 @@ class TicketController:
         except Error as error:
             print(error)
 
-            
+
         finally:
             cursor.close()
             connection.close()
@@ -97,4 +116,4 @@ class TicketController:
 
     def __init__(self):
         print("DEBUG: TicketController Loaded.")
-        self.get_all_tickets("joannalopez", True)
+        print(self.get_all_tickets_by_status('araamzaremehjardi', True, 'Received'))

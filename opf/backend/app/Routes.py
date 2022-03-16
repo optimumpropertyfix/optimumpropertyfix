@@ -213,7 +213,7 @@ def delete_feedback_route(ticket_id):
 @app.route("/tickets", methods=["GET"])
 def view_all_tickets_route():
 
-    ticket_objects = ticket_controller.get_all_tickets("araamzaremehjardi",False)
+    ticket_objects = ticket_controller.get_all_tickets(net_id = "araamzaremehjardi", is_student = False)
 
     return jsonify(ticket_objects)
 
@@ -229,8 +229,9 @@ def view_individual_tickets_by_severity_route(severity):
 
 @app.route("/tickets/filter/status/<string:status>", methods=["GET"])
 def view_all_tickets_by_status_route(status):
-
-    return f'View Ticket {status}'
+    ticket_objects = ticket_controller.get_all_tickets_by_status(net_id = 'araamzaremehjardi', is_student = True, status = status)
+ 
+    return jsonify(ticket_objects)
 
 @app.route("/tickets/filter/user/<string:user>", methods=["GET"])
 def view_all_tickets_by_user_route(user):
