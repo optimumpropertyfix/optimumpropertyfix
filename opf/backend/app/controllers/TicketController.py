@@ -1,7 +1,3 @@
-from ast import arg
-from time import strftime
-from turtle import title
-from xml.etree.ElementTree import tostring
 from mysql.connector import MySQLConnection, Error
 from app.DatabaseConfiguration import database_configuration
 from flask import Flask, jsonify 
