@@ -35,7 +35,7 @@ function App() {
 
   return (
     <div className="App">
-      <Outlet context={[user, setUser]} />
+      <Outlet />
     </div>
   );
 }

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TokenManager from "../../../../TokenManager";
 import styles from "./SignInView.module.css";
+import login_styles from "../../LoginPage.module.css";
 function SignInView() {
   const [NetID, setNetID] = useState("");
   const [password, setPassword] = useState("");
@@ -44,18 +45,25 @@ function SignInView() {
 
   return (
     <div className={styles.SignInView}>
-      <p className={`${styles.page_title} text_page_title`}>Sign In</p>
+      <p className={`${login_styles.page_title} ${styles.page_title}`}>
+        Let's Get You Signed In
+      </p>
       <form className={styles.form}>
-        <div className="layout_helper_FormGroup">
-          <label>NetID</label>
+        <div className={`layout_helper_FormGroup ${styles.form_group}`}>
+          <label className={login_styles.label}>NetID</label>
           <input onChange={handle_passwordNetID} type="text" />
         </div>
-        <div className="layout_helper_FormGroup">
-          <label>Password</label>
+        <div className={`layout_helper_FormGroup ${styles.form_group}`}>
+          <label className={login_styles.label}>Password</label>
           <input onChange={handle_passwordChange} type="text" />
         </div>
-        <input onClick={handle_SignIn} type="submit" value="Sign In" />
       </form>
+      <input
+        onClick={handle_SignIn}
+        className={`${login_styles.submit_button} ${styles.submit_button}`}
+        type="submit"
+        value="Sign In"
+      />
     </div>
   );
 }

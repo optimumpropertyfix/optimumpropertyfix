@@ -2,6 +2,7 @@ import { useState } from "react";
 import { new_account_route } from "../../../../Routes";
 import { useNavigate } from "react-router-dom";
 import styles from "./CreateAccountView.module.css";
+import login_styles from "../../LoginPage.module.css";
 function CreateAccountView() {
   const [FirstName, setFirstName] = useState("");
   const [LastName, setLastName] = useState("");
@@ -144,65 +145,54 @@ function CreateAccountView() {
   };
 
   return (
-    <div className={`${styles.CreateAccountView} layout_helper_ParentSet`}>
-      <div className={`${styles.page_title} layout_helper_ChildItem`}>
-        <p className="text_page_title">Create an Account</p>
-      </div>
-      <div className="layout_helper_ChildItem">
-        <form className={styles.form} onSubmit={handle_SignUp}>
-          <div className="layout_helper_FormGroup">
-            <label>First Name</label>
-            <input type="text" onChange={handle_FirstName} />
-          </div>
+    <div className={styles.CreateAccountView}>
+      <p className={`${login_styles.page_title} ${styles.page_title}`}>
+        Create Account and Join The Party
+      </p>
+      <form className={styles.form} onSubmit={handle_SignUp}>
+        <div className={`layout_helper_FormGroup ${styles.form_group}`}>
+          <label className={login_styles.label}>First Name</label>
+          <input type="text" onChange={handle_FirstName} />
+        </div>
+        <div className={`layout_helper_FormGroup ${styles.form_group}`}>
+          <label className={login_styles.label}>Last Name</label>
+          <input type="text" onChange={handle_LastName} />
+        </div>
+        <div className={`layout_helper_FormGroup ${styles.form_group}`}>
+          <label className={login_styles.label}>Email Address</label>
+          <input type="text" onChange={handle_Email} />
+        </div>
+        <div className={`layout_helper_FormGroup ${styles.form_group}`}>
+          <label className={login_styles.label}>NetID</label>
+          <input type="text" onChange={handle_NetID} />
+        </div>
 
-          <div className="layout_helper_FormGroup">
-            <label>Last Name</label>
-            <input type="text" onChange={handle_LastName} />
-          </div>
-
-          <div className="layout_helper_FormGroup">
-            <label>Who are you?</label>
-            <select value={UserType} onChange={handle_UserType}>
-              <option value="Student">Student</option>
-              <option value="Administrator">Administrator</option>
-            </select>
-          </div>
-
-          <div className="layout_helper_FormGroup">
-            <label>Email Address</label>
-            <input type="text" onChange={handle_Email} />
-          </div>
-
-          <div className="layout_helper_FormGroup">
-            <label>NetID</label>
-            <input type="text" onChange={handle_NetID} />
-          </div>
-
-          <div className="layout_helper_FormGroup">
-            <label>NSHEID</label>
-            <input type="text" onChange={handle_NSHEID} />
-          </div>
-
-          <div className="layout_helper_FormGroup">
-            <label>Who are you?</label>
-            <select value={Gender} onChange={handle_Gender}>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-            </select>
-          </div>
-
-          <div className="layout_helper_FormGroup">
-            <label>Year</label>
-            <input type="text" onChange={handle_Year} />
-          </div>
-
-          <div className="layout_helper_FormGroup">
-            <label>Password</label>
-            <input type="text" onChange={handle_Password} />
-          </div>
-          <input onClick={handle_SignUp} type="submit" value="Sign Up" />
-        </form>
-      </div>
+        <div className={`layout_helper_FormGroup ${styles.form_group}`}>
+          <label className={login_styles.label}>NSHEID</label>
+          <input type="text" onChange={handle_NSHEID} />
+        </div>
+        <div className={`layout_helper_FormGroup ${styles.form_group}`}>
+          <label className={login_styles.label}>Who are you?</label>
+          <select value={Gender} onChange={handle_Gender}>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </div>
+        <div className={`layout_helper_FormGroup ${styles.form_group}`}>
+          <label className={login_styles.label}>Year</label>
+          <input type="text" onChange={handle_Year} />
+        </div>
+        <div className={`layout_helper_FormGroup ${styles.form_group}`}>
+          <label className={login_styles.label}>Password</label>
+          <input type="text" onChange={handle_Password} />
+        </div>
+      </form>
+      <input
+        onClick={handle_SignUp}
+        className={`${login_styles.submit_button} ${styles.submit_button}`}
+        type="submit"
+        value="Sign Up"
+      />
     </div>
   );
 }
