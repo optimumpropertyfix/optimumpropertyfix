@@ -124,13 +124,13 @@ def delete_appointment_route(ticket_id):
 
 @app.route("/buildings", methods=["GET"])
 def view_all_buildings_route():
-
-    return f'View All Buildings' 
+    building_objects = building_controller.view_all_buildings()
+    return jsonify(building_objects) 
 
 @app.route("/buildings/<int:building_id>", methods=["GET"])
 def view_individual_building_route(building_id):
-
-    return f'View Building {building_id}' 
+    building_objects = building_controller.view_individual_building(building_id = building_id)
+    return jsonify(building_objects)
 
 
 '''
@@ -233,13 +233,11 @@ def delete_feedback_route(ticket_id):
 
 @app.route("/tickets", methods=["GET"])
 def view_all_tickets_route():
-
     ticket_objects = ticket_controller.get_all_tickets(net_id = "araamzaremehjardi", is_student = False)
     return jsonify(ticket_objects)
 
 @app.route("/tickets/<int:ticket_id>", methods=["GET"])
 def view_individual_ticket_route(ticket_id):
-
     ticket_objects = ticket_controller.get_all_tickets_by_ticket_id(net_id = "araamzaremehjardi", is_student = False, ticket_id = ticket_id)
     return jsonify(ticket_objects)
 
