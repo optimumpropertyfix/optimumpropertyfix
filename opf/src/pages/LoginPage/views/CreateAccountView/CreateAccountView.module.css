@@ -1,25 +1,36 @@
 @media only screen and (min-width: 300px) {
   .CreateAccountView {
-    gap: 1rem;
+    overflow-y: scroll;
   }
-  .form {
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
+  .page_title {
+    margin-bottom: 1.5rem;
   }
-  .form > input[type="submit"] {
-    width: 5rem;
-    align-self: center;
+  .form_group {
+    margin-bottom: 1.5rem;
+    overflow-y: scroll !important;
   }
 }
 @media only screen and (min-width: 600px) {
   .CreateAccountView {
-    gap: 2rem;
-  }
-  .page_title {
-    width: 15%;
-    max-width: 50rem;
+    width: 300px;
+    margin: 0 auto;
   }
 }
 @media only screen and (min-width: 800px) {
+  .CreateAccountView {
+    width: 50rem;
+  }
+  .form {
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 1.5rem;
+    column-gap: 3rem;
+  }
+  .form_group {
+    margin-bottom: 0;
+  }
+  .submit_button {
+    margin-top: 1.5rem !important;
+  }
 }

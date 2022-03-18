@@ -1,50 +1,122 @@
 @media only screen and (min-width: 300px) {
+  .LoginPage {
+    background: linear-gradient(245deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.9)),
+      url("../../assets/peavine.jpg");
+    background-size: cover;
+    height: 100vh;
+  }
+  .container {
+    margin: 0 2rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    gap: 2rem;
+    height: 100%;
+  }
   .header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: 0 0 5px 1px var(--color-standard-gray);
-    padding: 1rem;
+    margin-top: 2rem;
   }
   .logo {
-    width: 15rem;
-    margin-bottom: 0.8rem;
-  }
-  .link {
-    color: var(--color-navy-blue) !important;
-    font-weight: 700;
-    text-decoration: none;
+    width: 300px;
   }
   .outlet {
-    margin: 2rem;
+    overflow-y: scroll;
+  }
+  .nav {
+    margin-bottom: 2rem;
+  }
+  .link_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+  }
+  .link_container > p {
+    color: white;
+    font-size: 1rem;
+    margin-bottom: 0.2rem;
+  }
+  .link {
+    color: white;
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.1s ease-in;
+  }
+  .link:hover {
+    color: var(--color-orange);
   }
 }
 
 @media only screen and (min-width: 600px) {
+  .header,
+  .nav,
+  .container {
+    margin: 0;
+  }
+  .container {
+    padding: 2rem;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    row-gap: 5rem;
+    height: 100%;
+    box-sizing: border-box !important;
+  }
   .header {
+    grid-row-start: 0;
+    grid-row-end: 1;
+    grid-column-start: 1;
+    grid-column-end: span 2;
+    height: 100%;
     flex-direction: row;
-    justify-items: center;
-    height: 10vh;
-    padding-top: 0;
-    padding-bottom: 0;
   }
   .logo {
-    margin-right: auto;
-    margin-bottom: 0;
-  }
-  .nav {
-    margin-left: auto;
-  }
-  .link_container {
-    display: flex;
-  }
-  .link {
-    margin-left: 5px;
+    align-items: flex-start;
   }
   .outlet {
-    margin: 3rem auto 0 auto;
-    width: 75%;
-    max-width: 40rem;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    grid-column-start: 0;
+    grid-column-end: span 2;
+  }
+  .nav {
+    grid-row-start: 0;
+    grid-row-end: 1;
+    grid-column-start: 1;
+    grid-column-end: span 2;
+  }
+  .link_container {
+    gap: 0.5rem;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100%;
+  }
+
+  /* View Styles */
+  .page_title {
+    width: 300px;
+    color: white;
+    line-height: 2.6rem;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+  }
+  .label {
+    color: white;
+  }
+  .submit_button {
+    background: white !important;
+    color: var(--color-orange) !important;
+    box-shadow: 0 1px 5px 2px var(--color-dark-gray);
+    transition: background 0.1s ease-in !important;
+    transition: color 0.1s ease-in !important;
+  }
+  .submit_button:hover {
+    background: var(--color-orange) !important;
+    color: white !important;
   }
 }
 

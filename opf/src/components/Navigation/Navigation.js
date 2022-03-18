@@ -37,3 +37,15 @@ export function NormalLink(props) {
     </Link>
   );
 }
+
+export function TextLink(props) {
+  return (
+    <Link
+      to={props.to}
+      state={props.state}
+      className={`${props.className} ${styles.NormalLink}`}
+    >
+      {props.children}
+    </Link>
+  );
+}
