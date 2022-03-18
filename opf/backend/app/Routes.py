@@ -41,10 +41,10 @@ def view_latest_announcement_route():
 
 @app.route("/announcements/<int:announcement_id>", methods=["GET"])     
 def view_individual_announcement_route(announcement_id):
-
    annoucement_objects = announcement_controller.view_announcement_by_id(announcement_id=announcement_id)
    return jsonify(annoucement_objects)
 
+'''
 @app.route("/announcements/<int:ticket_id>/update", methods=["PATCH"])     
 def edit_individual_announcement_route(ticket_id):
 
@@ -66,27 +66,36 @@ def create_announcement_route():
     title = announcement.get('announcement_title')
     message = announcement.get('announcement_message')
 
-@app.route("/appointments", methods=["GET"])
-def view_all_appointments_route():
+'''
 
-    return "View All Appointments"
+@app.route("/appointment", methods=["GET"])
+def view_all_appointment_route():
+    net_id = "1"
+    appointment_objects = appointment_controller.view_all_appointments(net_id = net_id)
+    return jsonify(appointment_objects)
 
-@app.route("/appointments/<int:ticket_id>/read", methods=["GET"])
+
+@app.route("/appointment/<int:ticket_id>/read", methods=["GET"])
 def view_individual_appointment_route(ticket_id):
+    appointment_objects = appointment_controller.view_individual_appointment(ticket_id = ticket_id)
+    return jsonify(appointment_objects)
 
-    return f'View Individual Appointments {ticket_id}'
+'''
+@app.route("/appointment/filter/ticket_created", methods=["GET"])
+def view_all_appointments_by_datetime_route():
+    appointment_objects = appointment_controller.view_all_appointments_by_datetime()
+    return jsonify(appointment_objects)
+'''
 
-@app.route("/appointments/filter/ticket_created/<string:time>", methods=["GET"])
-def view_all_appointments_by_datetime_route(time):
 
-    return time
-
-@app.route("/appointments/filter/ticket_status/<string:status>", methods=["GET"])
+@app.route("/appointment/filter/ticket_status/<string:status>", methods=["GET"])
 def view_all_appointments_by_status_route(status):
+    appointment_objects = appointment_controller.view_all_appointments_by_status(status = status)
+    return jsonify(appointment_objects)
 
-    return status
 
-@app.route("/appointments/<int:ticket_id>/update", methods=["PATCH"])
+'''
+@app.route("/appointment/<int:ticket_id>/update", methods=["PATCH"])
 def edit_appointment_route(ticket_id):
 
     appointment = request.get_json()
@@ -111,6 +120,7 @@ def create_appointment_route(ticket_id):
 def delete_appointment_route(ticket_id):
 
     return f'Delete Appointment {ticket_id}' 
+'''
 
 @app.route("/buildings", methods=["GET"])
 def view_all_buildings_route():
@@ -122,6 +132,8 @@ def view_individual_building_route(building_id):
 
     return f'View Building {building_id}' 
 
+
+'''
 @app.route("/buildings/create", methods=["POST"])
 def create_building_route():
 
@@ -152,6 +164,7 @@ def edit_building_route(building_id):
 def delete_building_route(building_id):
 
     return f'Delete Building {building_id}' 
+'''
 
 @app.route("/faq", methods=["GET"])
 def view_all_faqs_route():
@@ -163,6 +176,8 @@ def view_individual_faq_route(faq_id):
 
     return f'View FAQ {faq_id}'
 
+
+'''
 @app.route("/faq/create", methods=["POST"])
 def create_faq_route():
 
@@ -185,6 +200,7 @@ def edit_faq_route(faq_id):
 def delete_faq_route(faq_id):
 
     return f'Delete FAQ {faq_id}'
+'''
 
 @app.route("/feedback", methods=["GET"])
 def view_all_feedback_route():
@@ -195,6 +211,8 @@ def view_all_feedback_route():
 def view_individual_feedback_route(ticket_id):
 
     return f'View Feedback {ticket_id}'
+
+'''
 
 @app.route("/feedback/<int:ticket_id>/create", methods=["POST"])
 def create_feedback_route(ticket_id):
@@ -210,6 +228,8 @@ def edit_feedback_route(ticket_id):
 def delete_feedback_route(ticket_id):
 
     return f'Delete Feedback {ticket_id}'
+'''
+
 
 @app.route("/tickets", methods=["GET"])
 def view_all_tickets_route():
@@ -238,6 +258,8 @@ def view_all_tickets_by_user_route(net_id):
     ticket_objects = ticket_controller.get_all_tickets_by_net_id( is_student = False, net_id = net_id)
     return jsonify(ticket_objects)
 
+
+'''
 @app.route("/tickets/create", methods=["POST"])
 def create_ticket_route():
 
@@ -271,6 +293,7 @@ def edit_ticket_route( location, building_name, unit_number, additional_notes):
 def delete_ticket_route(ticket_id):
 
     return f'Delete Ticket {ticket_id}'
+'''
 
 @app.route("/unit/<int:building_id>", methods=["GET"])
 def view_all_units_route(building_id):

@@ -42,6 +42,7 @@ class TicketController:
         ticket_table = self.generate_ticket_objects(tickets)
         return ticket_table
 
+
     def get_all_tickets_by_severity(self, severity, net_id = None, is_student = True): 
         tickets = None
         if (is_student):
@@ -104,6 +105,7 @@ class TicketController:
         
         return ticket_objects
 
+
     def query_database(self, query, args = None): 
         query_result = None
 
@@ -120,10 +122,8 @@ class TicketController:
             for result in cursor.stored_results():
                 query_result = list(result.fetchall())
 
-
         except Error as error:
             print(error)
-
 
         finally:
             cursor.close()

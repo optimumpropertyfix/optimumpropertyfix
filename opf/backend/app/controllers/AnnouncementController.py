@@ -72,7 +72,6 @@ class AnnouncementController:
                 cursor.callproc(query)
             else:
                 cursor.callproc(query, args)
-            # print out the result
 
             for result in cursor.stored_results():
                 query_result = list(result.fetchall())
