@@ -168,14 +168,13 @@ def delete_building_route(building_id):
 
 @app.route("/faq", methods=["GET"])
 def view_all_faqs_route():
-
-    return f'View All FAQs'
+    faq_objects = faq_controller.view_all_faqs()
+    return jsonify(faq_objects)
 
 @app.route("/faq/<int:faq_id>", methods=["GET"])
 def view_individual_faq_route(faq_id):
-
-    return f'View FAQ {faq_id}'
-
+    faq_objects = faq_controller.view_individual_faq(faq_id=faq_id)
+    return jsonify(faq_objects)
 
 '''
 @app.route("/faq/create", methods=["POST"])
