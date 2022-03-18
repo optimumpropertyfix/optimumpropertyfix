@@ -204,12 +204,13 @@ def delete_faq_route(faq_id):
 @app.route("/feedback", methods=["GET"])
 def view_all_feedback_route():
 
-    return f'View All Feedback'
+    feedback_objects = feedback_controller.view_all_feedback()
+    return jsonify(feedback_objects)
 
 @app.route("/feedback/<int:ticket_id>", methods=["GET"])
 def view_individual_feedback_route(ticket_id):
-
-    return f'View Feedback {ticket_id}'
+    feedback_objects = feedback_controller.view_individual_feedback(ticket_id = ticket_id)
+    return jsonify(feedback_objects)
 
 '''
 
