@@ -42,7 +42,7 @@ class UnitController:
                 occupancy = unit_occupancy,
             )
             unit_objects.append(unit_json) 
-              
+
         return unit_objects
 
 

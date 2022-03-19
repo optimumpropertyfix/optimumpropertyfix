@@ -280,6 +280,7 @@ def edit_ticket_route( location, building_name, unit_number, additional_notes):
 def delete_ticket_route(ticket_id):
     return f'Delete Ticket {ticket_id}'
 '''
+
 @app.route("/unit/<int:building_id>", methods=["GET"])
 def view_all_units_route(building_id):
     unit_objects = unit_controller.view_all_units(building_id = building_id)
@@ -310,9 +311,10 @@ def delete_unit_route(building_id, unit_id):
 
 
 @app.route("/user", methods=["GET"])
-def view_current_user():
-    return f'CURRENT USER'
-
+def view_current_user_route():
+    net_id = 'joannalopez'
+    user_objects = user_controller.view_current_user(net_id = net_id)
+    return jsonify(user_objects)
 
 '''
 @app.route("/user/create", methods=["POST"])
