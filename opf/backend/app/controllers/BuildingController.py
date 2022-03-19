@@ -5,7 +5,6 @@ import json
 
 
 class BuildingController:
-
     def view_all_buildings(self):
         buildings = None
         query = "admin_view_all_buildings"
