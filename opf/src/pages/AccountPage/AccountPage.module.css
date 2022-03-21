@@ -1,0 +1,14 @@
+@media only screen and (min-width: 300px) {
+  .AccountPage {
+    background: var(--color-light-gray);
+    height: 100%;
+  }
+  .account_options {
+    display: flex;
+    gap: 1rem;
+  }
+}
+@media only screen and (min-width: 600px) {
+}
+@media only screen and (min-width: 900px) {
+}
