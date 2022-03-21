@@ -48,6 +48,7 @@ import {
 import { AppointmentView } from "./pages/FormPage/views/AppointmentView/AppointmentView";
 import "./index.css";
 import { AdminAppointmentsPage } from "./pages/AppointmentsPage/AppointmentsPage";
+import AccountPage from "./pages/AccountPage/AccountPage";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -95,11 +96,11 @@ ReactDOM.render(
               <Route path="create" element={<StudentCreateTicketView />} />
               <Route path=":ticket" element={<StudentTicketView />} />
             </Route>
-            <Route path="feedback" element={<StudentFeedbackPage />} />
             <Route
               path="frequently_asked_questions"
               element={<StudentFAQPage />}
             />
+            <Route path="account" element={<AccountPage />} />
           </Route>
         </Route>
       </Routes>

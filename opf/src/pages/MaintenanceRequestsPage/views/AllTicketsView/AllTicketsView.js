@@ -57,8 +57,12 @@ export function StudentAllTicketsView() {
   }, []);
 
   return (
-    <div>
-      <p>Testing TicketsView</p>
+    <div className={` section_helper_Section`}>
+      <div className="section_helper_Container">
+        <div className="text_page_title">
+          <p>All Your Tickets </p>
+        </div>
+      </div>
     </div>
   );
 }

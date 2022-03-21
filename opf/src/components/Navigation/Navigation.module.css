@@ -1,15 +1,90 @@
 @media only screen and (min-width: 300px) {
-  .NavigationLink > *,
-  .NormalLink > * {
-    font-weight: 700;
-    color: var(--color-white);
-    text-decoration: none;
+  .SectionNavigation {
+    padding: 0.5rem 0;
+    background: var(--color-light-gray);
   }
-
-  .active {
-    color: black;
+  .SectionNavigation > nav {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+  .SectionNavigation > img {
+    display: none;
+  }
+  .SectionNavLink {
+    text-decoration: none;
+    flex-basis: 100%;
+    color: #969696 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+  }
+  .SectionNavLink > p {
+    font-weight: 700;
+    font-size: 0.7rem;
+  }
+  .SectionNavLink > span {
+    font-size: 1.4rem;
+  }
+  .SectionNavLink_active {
+    color: var(--color-orange) !important;
+  }
+  .ViewNavigation {
+  }
+  .ViewNavigation > nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 1rem;
+  }
+  .ViewNavLink {
+    text-decoration: none;
+    flex-basis: 100%;
+    color: white !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+    background: var(--color-navy-blue);
+    border-radius: 7px;
+    padding: 0.5rem;
+  }
+  .ViewNavLink > p {
+    font-weight: 700;
+    font-size: 0.8rem;
+  }
+  .ViewNavLink > span {
+    font-size: 2.2rem;
+  }
+  .ViewNavLink_active {
   }
 }
 
 @media only screen and (min-width: 600px) {
+  .SectionNavigation {
+    padding: 0 1rem;
+    display: block;
+  }
+  .SectionNavigation > img {
+    display: block;
+    width: 80px;
+    margin: 2rem auto;
+  }
+  .SectionNavigation > nav {
+    display: block;
+  }
+  .SectionNavLink {
+    flex-basis: auto;
+    flex-direction: row;
+    margin-bottom: 1rem;
+    gap: 0.4rem;
+  }
+  .SectionNavLink > p {
+    font-weight: 700;
+    font-size: 0.8rem;
+  }
+  .SectionNavLink > span {
+    font-size: 1rem;
+  }
 }
