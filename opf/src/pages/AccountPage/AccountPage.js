@@ -15,11 +15,12 @@ export default function AccountPage(props) {
   };
 
   return (
-    <div className={`${styles.AccountPage} section_helper_Section`}>
-      <div className="section_helper_Container">
+    <div className={`${styles.AccountPage}`}>
+      <div className={styles.cunt}>
         <div className="text_page_title">
           <p>Your Account Details </p>
         </div>
+        <AccountCard user={user_profile} />
         <AccountCard user={user_profile} />
         <div className={styles.account_options}>
           <button>Edit Profile</button>

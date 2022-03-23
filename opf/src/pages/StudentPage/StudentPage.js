@@ -20,9 +20,7 @@ function StudentPage() {
 
   return (
     <div className={`${styles.StudentPage} page_helper_Page`}>
-      <div className="page_helper_OutletSection">
-        <Outlet />
-      </div>
+      <Outlet />
       <SectionNavigation className="page_helper_NavigationSection">
         <SectionNavLink end to="/student" icon="dashboard">
           DASHBOARD

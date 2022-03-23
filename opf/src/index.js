@@ -59,33 +59,6 @@ ReactDOM.render(
             <Route index element={<SignInView />} />
             <Route path="create" element={<CreateAccountView />} />
           </Route>
-          <Route path="admin" element={<AdminPage />}>
-            <Route index element={<AdminDashboardPage />} />
-            <Route
-              path="maintenance_requests"
-              element={<AdminMaintenanceRequestsPage />}
-            >
-              <Route index element={<AdminAllTicketsView />} />
-              <Route path="create" element={<AdminCreateTicketView />} />
-              <Route path=":ticket" element={<AdminTicketView />} />
-            </Route>
-            <Route path="appointments" element={<AdminAppointmentsPage />} />
-
-            <Route path="forms" element={<AdminFormsPage />}>
-              <Route index element={<AdminLandingView />} />
-              <Route
-                path="create_announcement"
-                element={<AdminCreateAnnouncementView />}
-              />
-              <Route path="create_faq" element={<AdminCreateFAQView />} />
-              <Route path="create_appointment" element={<AppointmentView />} />
-            </Route>
-            <Route path="feedback" element={<AdminFeedbackPage />} />
-            <Route
-              path="frequently_asked_questions"
-              element={<AdminFAQPage />}
-            />
-          </Route>
           <Route path="student" element={<StudentPage />}>
             <Route index element={<StudentDashboardPage />} />
             <Route
