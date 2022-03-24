@@ -16,7 +16,7 @@ export default function AccountPage(props) {
 
   return (
     <div className={`${styles.AccountPage}`}>
-      <div className={styles.cunt}>
+      <div className={styles.container}>
         <div className="text_page_title">
           <p>Your Account Details </p>
         </div>

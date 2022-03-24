@@ -50,13 +50,13 @@ function SignInView() {
       </p>
       <form className={styles.form}>
         <div
-          className={`layout_helper_FormGroup ${styles.form_group} ${login_styles.form_group}`}
+          className={`form_group ${styles.form_group} ${login_styles.form_group}`}
         >
           <label className={login_styles.label}>NetID</label>
           <input onChange={handle_passwordNetID} type="text" />
         </div>
         <div
-          className={`layout_helper_FormGroup ${styles.form_group} ${login_styles.form_group}`}
+          className={`form_group ${styles.form_group} ${login_styles.form_group}`}
         >
           <label className={login_styles.label}>Password</label>
           <input onChange={handle_passwordChange} type="text" />

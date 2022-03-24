@@ -25,10 +25,11 @@
   }
   .account_information > div > p:nth-child(1) {
     font-weight: 700;
-    color: var(--color-standard-gray);
+    color: var(--color-dark-gray);
+    font-size: 0.8rem;
   }
   .account_information > div > p:nth-child(2) {
-    color: var(--color-dark-gray);
+    color: var(--color-gray);
   }
 }
 @media only screen and (min-width: 600px) {

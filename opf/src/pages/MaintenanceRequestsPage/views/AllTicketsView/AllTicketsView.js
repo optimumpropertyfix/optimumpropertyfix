@@ -4,6 +4,7 @@ import {
   student_all_tickets_route,
   admin_all_tickets_route,
 } from "../../../../Routes";
+import styles from "./AllTicketsView.module.css";
 
 export function AdminAllTicketsView() {
   const [tickets, setTickets] = useState([]);
@@ -57,10 +58,10 @@ export function StudentAllTicketsView() {
   }, []);
 
   return (
-    <div className={` section_helper_Section`}>
-      <div className="section_helper_Container">
-        <div className="text_page_title">
-          <p>All Your Tickets </p>
+    <div className={styles.AllTicketsView}>
+      <div className={styles.AllTicketsViewContainer}>
+        <div className={styles.page_header}>
+          <p className="text_page_title">See All Your Tickets</p>
         </div>
       </div>
     </div>

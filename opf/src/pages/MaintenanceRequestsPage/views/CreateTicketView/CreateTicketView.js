@@ -4,6 +4,7 @@ import { student_new_ticket_route } from "../../../../Routes";
 import styles from "./CreateTicketView.module.css";
 import { useNavigate } from "react-router-dom";
 import TokenManager from "../../../../TokenManager";
+import { InformationCard } from "../../../../components/InformationCard/InformationCard";
 
 export function AdminCreateTicketView() {
   const [Title, setTitle] = useState("");
@@ -327,138 +328,76 @@ export function StudentCreateTicketView() {
 
   return (
     <div className={styles.StudentCreateTicketView}>
-      <div className={styles.cunt}>
-        <div className={styles.page_header}>
-          <p className="text_page_title">Create New Ticket</p>
-        </div>
+      <div className={styles.container}>
+        <p className={`${styles.page_title_text} page_title_text`}>
+          Create New Maintenance Ticket
+        </p>
+        <InformationCard
+          className={styles.ticket_instructions}
+        ></InformationCard>
         <div className={styles.ticket_form}>
-          <div className={styles.ticket_form_container}>
-            <div className={`${styles.form} layout_helper_FormGroup`}>
-              <label>
-                Title <span>ex. "Faucet Leak"</span>
-              </label>
-              <input type="text" onChange={handle_Title} />
-            </div>
-            <div className={`${styles.form} layout_helper_FormGroup`}>
-              <label>Please describe the problem</label>
-              <textarea
-                className={styles.description_form}
-                onChange={handle_Description}
-              />
-            </div>
-            <div className={`${styles.form} layout_helper_FormGroup`}>
-              <label>Please describe the problem</label>
-              <textarea
-                className={styles.description_form}
-                onChange={handle_Description}
-              />
-            </div>
-            <div className={`${styles.form} layout_helper_FormGroup`}>
-              <label>Please describe the problem</label>
-              <textarea
-                className={styles.description_form}
-                onChange={handle_Description}
-              />
-            </div>
-            <div className={`${styles.form} layout_helper_FormGroup`}>
-              <label>Please describe the problem</label>
-              <textarea
-                className={styles.description_form}
-                onChange={handle_Description}
-              />
-            </div>
-            <div className={`${styles.form} layout_helper_FormGroup`}>
-              <label>Please describe the problem</label>
-              <textarea
-                className={styles.description_form}
-                onChange={handle_Description}
-              />
-            </div>
-            <div className={`${styles.form} layout_helper_FormGroup`}>
-              <label>Set Severity</label>
-              <select
-                className={styles.severity_form}
-                onChange={handle_Severity}
-              >
-                <option type="radio" value="LOW">
-                  LOW
-                </option>
-                <option type="radio" value="MILD">
-                  MILD
-                </option>
-                <option type="radio" value="HIGH">
-                  HIGH
-                </option>
-              </select>
-            </div>
+          <div className={`${styles.form_group} form_group`}>
+            <label>
+              Title <span>ex. "Faucet Leak"</span>
+            </label>
+            <input type="text" onChange={handle_Title} />
           </div>
-          <div>
-            <div className={`${styles.form} layout_helper_FormGroup`}>
-              <label>Location of problem</label>
-              <select
-                className={styles.location_form}
-                onChange={handle_Location}
-              >
-                <option value="livingroom">Living Room</option>
-                <option value="bathroom">Bathroom</option>
-                <option value="kitchen">Kitchen</option>
-                <option value="bedroom">Bedroom</option>
-              </select>
-            </div>
-            <div className={`${styles.form} layout_helper_FormGroup`}>
-              <label>Location of problem</label>
-              <select
-                className={styles.location_form}
-                onChange={handle_Location}
-              >
-                <option value="livingroom">Living Room</option>
-                <option value="bathroom">Bathroom</option>
-                <option value="kitchen">Kitchen</option>
-                <option value="bedroom">Bedroom</option>
-              </select>
-            </div>
-            <div className={`${styles.form} layout_helper_FormGroup`}>
-              <label>Location of problem</label>
-              <select
-                className={styles.location_form}
-                onChange={handle_Location}
-              >
-                <option value="livingroom">Living Room</option>
-                <option value="bathroom">Bathroom</option>
-                <option value="kitchen">Kitchen</option>
-                <option value="bedroom">Bedroom</option>
-              </select>
-            </div>
-            <div className={`${styles.form} layout_helper_FormGroup`}>
-              <label>Building</label>
-              <select
-                className={styles.building_form}
-                onChange={handle_Building}
-              >
-                <option value="argenta">Argenta Hall</option>
-                <option value="nye">Nye Hall</option>
-                <option value="greatbasin">Great Basin Hall</option>
-                <option value="juniper">Juniper Hall</option>
-                <option value="llc">Living Learning Center</option>
-                <option value="sierra">Sierra Hall</option>
-                <option value="canada">Cananda Hall</option>
-                <option value="manzanita">Manzanita Hall</option>
-              </select>
-            </div>
-            <div className={`${styles.form} layout_helper_FormGroup`}>
-              <label>Your unit #</label>
-              <input type="text" onChange={handle_Unit} />
-            </div>
-            <div className={`${styles.form} layout_helper_FormGroup`}>
-              <label>Additional Notes</label>
-              <textarea
-                className={styles.description_form}
-                onChange={handle_Notes}
-              />
-            </div>
+          <div className={`${styles.form_group} form_group`}>
+            <label>Please describe the problem</label>
+            <textarea
+              className={styles.description_form}
+              onChange={handle_Description}
+            />
+          </div>
+          <div className={`${styles.form_group} form_group`}>
+            <label>Set Severity</label>
+            <select className={styles.severity_form} onChange={handle_Severity}>
+              <option type="radio" value="LOW">
+                LOW
+              </option>
+              <option type="radio" value="MILD">
+                MILD
+              </option>
+              <option type="radio" value="HIGH">
+                HIGH
+              </option>
+            </select>
+          </div>
+          <div className={`${styles.form_group} form_group`}>
+            <label>Location of problem</label>
+            <select className={styles.location_form} onChange={handle_Location}>
+              <option value="livingroom">Living Room</option>
+              <option value="bathroom">Bathroom</option>
+              <option value="kitchen">Kitchen</option>
+              <option value="bedroom">Bedroom</option>
+            </select>
+          </div>
+          <div className={`${styles.form_group} form_group`}>
+            <label>Building</label>
+            <select className={styles.building_form} onChange={handle_Building}>
+              <option value="argenta">Argenta Hall</option>
+              <option value="nye">Nye Hall</option>
+              <option value="greatbasin">Great Basin Hall</option>
+              <option value="juniper">Juniper Hall</option>
+              <option value="llc">Living Learning Center</option>
+              <option value="sierra">Sierra Hall</option>
+              <option value="canada">Cananda Hall</option>
+              <option value="manzanita">Manzanita Hall</option>
+            </select>
+          </div>
+          <div className={`${styles.form_group} form_group`}>
+            <label>Unit Number</label>
+            <input type="text" onChange={handle_Unit} />
+          </div>
+          <div className={`${styles.form_group} form_group`}>
+            <label>Additional Notes</label>
+            <textarea
+              className={styles.description_form}
+              onChange={handle_Notes}
+            />
           </div>
         </div>
-        <div className={styles.page_footer}>
+        <div className={styles.ticket_options}>
           <button onClick={handle_SubmitTicket}>Submit Ticket</button>
         </div>
       </div>

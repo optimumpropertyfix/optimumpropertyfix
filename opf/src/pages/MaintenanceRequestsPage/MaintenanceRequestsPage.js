@@ -20,13 +20,13 @@ export function AdminMaintenanceRequestsPage() {
 
 export function StudentMaintenanceRequestsPage() {
   return (
-    <div className="section_helper_Section">
-      <Outlet />
-      <ViewNavigation className="section_helper_NavigationSection">
-        <ViewNavLink icon="list" to="/student/maintenance_requests">
+    <div className={styles.StudentMaintenanceRequestsPage}>
+      <Outlet className={styles.view_outlet} />
+      <ViewNavigation label="TICKET OPTIONS" className={styles.view_navigation}>
+        <ViewNavLink end icon="list" to="/student/maintenance_requests">
           View Tickets
         </ViewNavLink>
-        <ViewNavLink icon="add" to="create">
+        <ViewNavLink end icon="add" to="create">
           Create Tickets
         </ViewNavLink>
       </ViewNavigation>

@@ -1,10 +1,13 @@
 import { Link, NavLink } from "react-router-dom";
-import styles from "./Navigation.module.css";
+import section_navigation_styles from "./SectionNavigation.module.css";
+import view_navigation_styles from "./ViewNavigation.module.css";
 import symbol from "../../assets/symbol.png";
 
 export function SectionNavigation(props) {
   return (
-    <div className={`${styles.SectionNavigation} ${props.className}`}>
+    <div
+      className={`${section_navigation_styles.navigation} ${props.className}`}
+    >
       <img src={symbol} />
       <nav>{props.children}</nav>
     </div>
@@ -19,8 +22,8 @@ export function SectionNavLink(props) {
       state={props.state}
       className={({ isActive }) =>
         isActive
-          ? `${styles.SectionNavLink_active} ${props.active_class} ${styles.SectionNavLink}`
-          : `${styles.SectionNavLink}`
+          ? `${section_navigation_styles.active_link} ${props.active_class} ${section_navigation_styles.link}`
+          : `${section_navigation_styles.link}`
       }
     >
       <span className="material-icons"> {props.icon} </span>
@@ -31,7 +34,7 @@ export function SectionNavLink(props) {
 
 export function ViewNavigation(props) {
   return (
-    <div className={`${styles.ViewNavigation} ${props.className}`}>
+    <div className={`${view_navigation_styles.navigation} ${props.className}`}>
       <p>{props.label}</p>
       <nav>{props.children}</nav>
     </div>
@@ -46,8 +49,8 @@ export function ViewNavLink(props) {
       state={props.state}
       className={({ isActive }) =>
         isActive
-          ? `${styles.ViewNavLink_active} ${props.active_class} ${styles.ViewNavLink}`
-          : `${styles.ViewNavLink}`
+          ? `${view_navigation_styles.active_class} ${props.active_class} ${view_navigation_styles.link}`
+          : `${view_navigation_styles.link}`
       }
     >
       <span className="material-icons"> {props.icon} </span>
