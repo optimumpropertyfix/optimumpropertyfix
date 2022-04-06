@@ -1,9 +1,8 @@
 @media only screen and (min-width: 300px) {
   .AccountPage {
     background: var(--color-light-gray);
-    height: 0;
-    min-height: 100%;
     overflow-y: auto;
+    box-sizing: content-box;
   }
   .container {
     padding: 2rem;
@@ -19,7 +18,14 @@
 }
 @media only screen and (min-width: 600px) {
   .AccountPage {
-    height: 100% !important;
+    display: flex;
+    height: 100%;
+    box-sizing: border-box;
+  }
+  .container {
+    padding: 2rem;
+    align-self: flex-start;
+    width: 100%;
   }
 }
 @media only screen and (min-width: 900px) {

@@ -1,6 +1,48 @@
 @media only screen and (min-width: 300px) {
   .InformationCard {
-    background-color: red;
+    background-color: var(--color-navy-blue);
+    padding: 1rem;
+    border-radius: 7px;
+    height: min-content;
+  }
+  .card_header {
+    display: flex;
+    align-content: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .card_header > div {
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .card_header > div > span {
+    font-size: 1.4rem;
+  }
+  .card_header > div > p {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  .card_header > button {
+    padding: 0;
+    background: none;
+    box-shadow: none;
+    align-self: flex-end;
+    height: 100%;
+    align-self: center;
+  }
+  .card_header > button > span {
+    font-size: 1.8rem;
+  }
+  .card_body {
+    padding: 1rem;
+  }
+  .card_opened {
+    display: block;
+  }
+  .card_closed {
+    display: none;
   }
 }
 @media only screen and (min-width: 600px) {

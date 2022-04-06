@@ -1,36 +1,33 @@
-.item {
-  padding: 0.4rem;
-}
+@media only screen and (min-width: 300px) {
+  .StudentFAQPage {
+    height: 0;
+    min-height: 100%;
+    overflow-y: auto;
+  }
+  .container {
+    padding: 2rem;
 
-.question {
-  color: var(--color-orange);
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  cursor: pointer;
-  font-weight: 700;
-  background-color: var(--color-white);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .faq_card {
+    box-shadow: 0 1px 5px 2px var(--color-standard-gray);
+  }
+  .faq_answer {
+    color: white;
+    line-height: 1.4rem;
+  }
 }
-
-.question:hover {
-  background-color: var(--color-standard-gray);
+@media only screen and (min-width: 600px) {
+  .StudentFAQPage {
+    margin: 2rem;
+    min-height: 90%;
+  }
+  .container {
+    padding: 1rem;
+    height: 100%;
+  }
 }
-
-.question,
-.answer {
-  padding: 0.5rem;
-}
-
-.answer {
-  background-color: var(--color-white);
-  text-align: left;
-}
-
-.header {
-  text-align: center;
-  margin: 0 auto;
-  width: 70%;
-}
-.container {
-  padding: 0.5rem;
+@media only screen and (min-width: 900px) {
 }

@@ -1,18 +1,39 @@
+import { useState } from "react";
 import styles from "./InformationCard.module.css";
 
 export function InformationCard(props) {
-  const toggled = false;
+  const [toggled, setToggle] = useState(false);
+
+  const toggle_card_body = () => {
+    if (toggled) {
+      setToggle(false);
+    } else {
+      setToggle(true);
+    }
+  };
 
   return (
     <div className={`${styles.InformationCard} ${props.className}`}>
-      <div>
+      <div className={styles.card_header}>
         <div>
           <span className="material-icons">info</span>
           <p>{props.label}</p>
         </div>
-        <button>+</button>
+        <button onClick={toggle_card_body}>
+          {toggled ? (
+            <span className="material-icons">arrow_drop_up</span>
+          ) : (
+            <span className="material-icons">arrow_drop_down</span>
+          )}
+        </button>
       </div>
-      <div>{props.children}</div>
+      <div
+        className={`${styles.card_body} ${
+          toggled ? styles.card_opened : styles.card_closed
+        }`}
+      >
+        {props.children}
+      </div>
     </div>
   );
 }

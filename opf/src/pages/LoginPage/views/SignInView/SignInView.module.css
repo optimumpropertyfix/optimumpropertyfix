@@ -1,28 +1,22 @@
 @media only screen and (min-width: 300px) {
-  .page_title {
-    width: 300px;
-    color: white;
-    line-height: 2.6rem;
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-  }
-  .label {
-    color: white;
+  .SignInView {
+    padding: 0 1rem 1rem 1rem;
   }
   .form_group {
     margin-bottom: 1.5rem;
   }
-  .submit_button {
-    background: white !important;
-    color: var(--color-orange) !important;
-    box-shadow: 0 0 5px 2px var(--color-dark-gray);
-    transition: background 0.1s ease-in !important;
-    transition: color 0.1s ease-in !important;
+  .signin_options {
+    display: flex;
+    gap: 1rem;
   }
-  .submit_button:hover {
-    background: var(--color-orange) !important;
+  .reset_password_button {
+    background: none !important;
+    box-shadow: none !important;
     color: white !important;
+    transition: background 0.1s ease-in !important;
+  }
+  .reset_password_button:hover {
+    text-decoration: underline;
   }
 }
 @media only screen and (min-width: 600px) {

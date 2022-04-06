@@ -31,12 +31,19 @@ function StudentPage() {
         <SectionNavLink
           end
           to="/student/frequently_asked_questions"
-          icon="help_outline"
+          icon="schedule"
         >
-          FAQ
+          APPOINTMENTS
         </SectionNavLink>
         <SectionNavLink end to="/student/account" icon="account_circle">
           ACCOUNT
+        </SectionNavLink>
+        <SectionNavLink
+          end
+          to="/student/frequently_asked_questions"
+          icon="help_outline"
+        >
+          FAQ
         </SectionNavLink>
       </SectionNavigation>
     </div>

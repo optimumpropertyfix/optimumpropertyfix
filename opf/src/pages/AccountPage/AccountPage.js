@@ -1,4 +1,3 @@
-import picture from "../../assets/profile_test.jpg";
 import AccountCard from "../../components/AccountCard/AccountCard";
 import styles from "./AccountPage.module.css";
 
@@ -17,10 +16,9 @@ export default function AccountPage(props) {
   return (
     <div className={`${styles.AccountPage}`}>
       <div className={styles.container}>
-        <div className="text_page_title">
-          <p>Your Account Details </p>
-        </div>
-        <AccountCard user={user_profile} />
+        <p className={`${styles.page_title_text} page_title_text`}>
+          Your Account Details
+        </p>
         <AccountCard user={user_profile} />
         <div className={styles.account_options}>
           <button>Edit Profile</button>

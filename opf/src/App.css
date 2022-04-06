@@ -1,5 +1,9 @@
 @media only screen and (min-width: 300px) {
   :root {
+    --color-light-red: #ef5350;
+    --color-light-green: #66bb6a;
+    --color-light-yellow: #ffca28;
+
     --color-green: #4dac6d;
     --color-white: white;
 
@@ -37,6 +41,7 @@
   input[type="text"],
   input[type="date"],
   input[type="time"],
+  input[type="password"],
   textarea,
   select {
     padding: 0.5rem;
@@ -54,6 +59,7 @@
   input[type="text"]:hover,
   input[type="date"]:hover,
   input[type="time"]:hover,
+  input[type="password"]:hover,
   textarea:hover,
   select:hover {
     border: var(--color-orange) 3px solid;
@@ -61,6 +67,7 @@
   input[type="text"]:focus,
   input[type="date"]:focus,
   input[type="time"]:focus,
+  input[type="password"]:focus,
   textarea:focus,
   select:focus {
     border: var(--color-orange) 3px solid;
@@ -76,12 +83,10 @@
     border-radius: 7px;
     box-shadow: 0 1px 5px 2px var(--color-standard-gray);
     transition: background 0.1s ease-in !important;
-    transition: color 0.1s ease-in !important;
   }
   button:hover,
   input[type="submit"]:hover {
-    background: white !important;
-    color: var(--color-orange);
+    background: var(--color-navy-blue);
   }
   label {
     font-size: 1.05rem;
@@ -117,6 +122,8 @@
     grid-template-columns: auto 1fr;
     grid-template-rows: 1fr;
     grid-auto-flow: auto;
+    min-height: 0;
+    height: 100vh;
     max-height: 100vh;
   }
   .page_navigation {

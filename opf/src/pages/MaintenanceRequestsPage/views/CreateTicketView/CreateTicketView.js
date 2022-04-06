@@ -129,9 +129,7 @@ export function AdminCreateTicketView() {
         <div className={styles.ticket_form}>
           <div>
             <div className={`${styles.form} layout_helper_FormGroup`}>
-              <label>
-                Title <span>ex. "Faucet Leak"</span>
-              </label>
+              <label>Title</label>
               <input type="text" onChange={handle_Title} />
             </div>
             <div className={`${styles.form} layout_helper_FormGroup`}>
@@ -147,15 +145,9 @@ export function AdminCreateTicketView() {
                 className={styles.severity_form}
                 onChange={handle_Severity}
               >
-                <option type="radio" value="LOW">
-                  LOW
-                </option>
-                <option type="radio" value="MILD">
-                  MILD
-                </option>
-                <option type="radio" value="HIGH">
-                  HIGH
-                </option>
+                <option value="LOW">LOW</option>
+                <option value="MILD">MILD</option>
+                <option value="HIGH">HIGH</option>
               </select>
             </div>
           </div>
@@ -213,9 +205,9 @@ export function StudentCreateTicketView() {
   //first state is content passing in empty string, second is ticket
   const [Title, setTitle] = useState("");
   const [Description, setDescription] = useState("");
-  const [Severity, setSeverity] = useState("");
-  const [Location, setLocation] = useState("");
-  const [Building, setBuilding] = useState("");
+  const [Severity, setSeverity] = useState("Select Severity");
+  const [Location, setLocation] = useState("Select Location");
+  const [Building, setBuilding] = useState("Select Building");
   const [Unit, setUnit] = useState("");
   const [Notes, setNotes] = useState("");
 
@@ -328,77 +320,140 @@ export function StudentCreateTicketView() {
 
   return (
     <div className={styles.StudentCreateTicketView}>
-      <div className={styles.container}>
+      <div className={styles.ultra_container}>
         <p className={`${styles.page_title_text} page_title_text`}>
           Create New Maintenance Ticket
         </p>
-        <InformationCard
-          className={styles.ticket_instructions}
-        ></InformationCard>
-        <div className={styles.ticket_form}>
-          <div className={`${styles.form_group} form_group`}>
-            <label>
-              Title <span>ex. "Faucet Leak"</span>
-            </label>
-            <input type="text" onChange={handle_Title} />
+        <div className={styles.container}>
+          <InformationCard
+            className={styles.ticket_instructions}
+            label="Creating Ticket Instructions"
+          >
+            <div className={styles.instructions}>
+              <div className={styles.instruction}>
+                <p>Enter a Descriptive Title</p>
+                <p>Example: "Water Leak."</p>
+              </div>
+              <div className={styles.instruction}>
+                <p>A Description of the Problem</p>
+                <p>Example: "Water is leaking from the bathroom sink area."</p>
+              </div>
+              <div className={styles.instruction}>
+                <p>Select a Location From The Dropdown Menu</p>
+                <p>Example: "Bathroom", "Kitchen", "Bathroom", etc.</p>
+              </div>
+              <div className={styles.instruction}>
+                <p>Select a Severity Level</p>
+                <p>
+                  Example: "LOW" (4-7 days), "MILD" (2-3 days), "HIGH" (1 day).
+                </p>
+              </div>
+              <div className={styles.instruction}>
+                <p>Select a Building From The Dropdown Menu</p>
+                <p>
+                  Example: "Cananda Hall", "Argenta Hall", "Sierra Hall", etc.
+                </p>
+              </div>
+              <div className={styles.instruction}>
+                <p>Select a Unit Number From The Dropdwon Menu</p>
+                <p>Example: "300", "1C", "69F", etc.</p>
+              </div>
+              <div className={styles.instruction}>
+                <p>Enter Any Additional Notes</p>
+                <p>Example: "The water leak stops when I flush the toilet."</p>
+              </div>
+            </div>
+          </InformationCard>
+          <div className={styles.ticket_form}>
+            <div
+              className={`${styles.form_group} form_group ${styles.title_form}`}
+            >
+              <label>Title</label>
+              <input
+                type="text"
+                placeholder="Water Leak in Kitchen"
+                onChange={handle_Title}
+              />
+            </div>
+            <div
+              className={`${styles.form_group} form_group ${styles.problem_form}`}
+            >
+              <label>Please describe the problem</label>
+              <textarea
+                placeholder="Water is leaking in the kitchen below the sink. The water currently just leaking to the floor."
+                className={styles.description_form}
+                onChange={handle_Description}
+              />
+            </div>
+            <div className={`${styles.form_group} form_group`}>
+              <label>Severity</label>
+              <select
+                className={styles.severity_form}
+                value={Severity}
+                onChange={handle_Severity}
+              >
+                <option value="Select Severity" disabled>
+                  Select Severity
+                </option>
+                <option value="low">Low</option>
+                <option value="mild">Mild</option>
+                <option value="high">High</option>
+              </select>
+            </div>
+            <div className={`${styles.form_group} form_group`}>
+              <label>Location of problem</label>
+              <select
+                value={Location}
+                className={styles.location_form}
+                onChange={handle_Location}
+              >
+                <option value="Select Location" disabled>
+                  Select Location
+                </option>
+                <option value="livingroom">Living Room</option>
+                <option value="bathroom">Bathroom</option>
+                <option value="kitchen">Kitchen</option>
+                <option value="bedroom">Bedroom</option>
+              </select>
+            </div>
+            <div className={`${styles.form_group} form_group`}>
+              <label>Building</label>
+              <select
+                className={styles.building_form}
+                onChange={handle_Building}
+                value={Building}
+              >
+                <option value="Select Building" disabled>
+                  Select Building
+                </option>
+                <option value="argenta">Argenta Hall</option>
+                <option value="nye">Nye Hall</option>
+                <option value="greatbasin">Great Basin Hall</option>
+                <option value="juniper">Juniper Hall</option>
+                <option value="llc">Living Learning Center</option>
+                <option value="sierra">Sierra Hall</option>
+                <option value="canada">Cananda Hall</option>
+                <option value="manzanita">Manzanita Hall</option>
+              </select>
+            </div>
+            <div className={`${styles.form_group} form_group`}>
+              <label>Unit Number</label>
+              <input type="text" placeholder="1C" onChange={handle_Unit} />
+            </div>
+            <div
+              className={`${styles.form_group} form_group ${styles.additional_notes_form}`}
+            >
+              <label>Additional Notes</label>
+              <textarea
+                placeholder="There is some water on the floor as you enter in the kitchen."
+                className={styles.description_form}
+                onChange={handle_Notes}
+              />
+            </div>
           </div>
-          <div className={`${styles.form_group} form_group`}>
-            <label>Please describe the problem</label>
-            <textarea
-              className={styles.description_form}
-              onChange={handle_Description}
-            />
+          <div className={styles.ticket_options}>
+            <button onClick={handle_SubmitTicket}>Submit Ticket</button>
           </div>
-          <div className={`${styles.form_group} form_group`}>
-            <label>Set Severity</label>
-            <select className={styles.severity_form} onChange={handle_Severity}>
-              <option type="radio" value="LOW">
-                LOW
-              </option>
-              <option type="radio" value="MILD">
-                MILD
-              </option>
-              <option type="radio" value="HIGH">
-                HIGH
-              </option>
-            </select>
-          </div>
-          <div className={`${styles.form_group} form_group`}>
-            <label>Location of problem</label>
-            <select className={styles.location_form} onChange={handle_Location}>
-              <option value="livingroom">Living Room</option>
-              <option value="bathroom">Bathroom</option>
-              <option value="kitchen">Kitchen</option>
-              <option value="bedroom">Bedroom</option>
-            </select>
-          </div>
-          <div className={`${styles.form_group} form_group`}>
-            <label>Building</label>
-            <select className={styles.building_form} onChange={handle_Building}>
-              <option value="argenta">Argenta Hall</option>
-              <option value="nye">Nye Hall</option>
-              <option value="greatbasin">Great Basin Hall</option>
-              <option value="juniper">Juniper Hall</option>
-              <option value="llc">Living Learning Center</option>
-              <option value="sierra">Sierra Hall</option>
-              <option value="canada">Cananda Hall</option>
-              <option value="manzanita">Manzanita Hall</option>
-            </select>
-          </div>
-          <div className={`${styles.form_group} form_group`}>
-            <label>Unit Number</label>
-            <input type="text" onChange={handle_Unit} />
-          </div>
-          <div className={`${styles.form_group} form_group`}>
-            <label>Additional Notes</label>
-            <textarea
-              className={styles.description_form}
-              onChange={handle_Notes}
-            />
-          </div>
-        </div>
-        <div className={styles.ticket_options}>
-          <button onClick={handle_SubmitTicket}>Submit Ticket</button>
         </div>
       </div>
     </div>

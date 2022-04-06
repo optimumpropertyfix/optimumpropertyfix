@@ -56,9 +56,15 @@
   }
   .link {
     justify-content: flex-start;
+    transition: background 0.1s ease-in !important;
+    transition: color 0.1s ease-in !important;
   }
   .link > span {
     margin-left: 0.5rem !important;
+  }
+  .link:hover {
+    background: var(--color-navy-blue) !important;
+    color: white !important;
   }
 }
 @media only screen and (min-width: 900px) {

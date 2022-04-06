@@ -2,42 +2,71 @@
   .StudentCreateTicketView {
     overflow-y: scroll;
   }
-  .container {
+  .ultra_container {
     padding: 2rem;
-    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .container {
+    overflow: auto;
 
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    padding: 0.3rem !important;
   }
   .ticket_form {
     display: flex;
     flex-direction: column;
     gap: 2rem;
   }
+  .instructions {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1rem;
+  }
+  .instruction {
+    color: white;
+  }
+  .instruction > p:nth-child(1) {
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.2rem;
+    font-size: 1rem;
+  }
+  .instruction > p:nth-child(2) {
+    font-size: 0.9rem;
+    line-height: 1.1rem;
+  }
 }
 @media only screen and (min-width: 600px) {
   .StudentCreateTicketView {
     height: 90%;
   }
-  .container {
+  .ultra_container {
     padding: 1rem;
   }
 }
 
 @media only screen and (min-width: 900px) {
+  .title_form {
+    grid-column-start: 1;
+    grid-column-end: span 2;
+  }
+  .problem_form {
+    grid-column-start: 1;
+    grid-column-end: span 2;
+  }
+  .additional_notes_form {
+    grid-column-start: 1;
+    grid-column-end: span 2;
+  }
   .container {
     display: grid;
-    grid-template-columns: 1fr 200px;
-    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 1fr 250px;
+    grid-template-rows: auto min-content max-content;
   }
-  .page_title_text {
-    grid-row-start: 1;
-    grid-row-end: 2;
-    grid-column-start: 1;
-    grid-column-end: 2;
-  }
-
   .ticket_form {
     grid-row-start: 1;
     grid-row-start: 2;
@@ -54,6 +83,6 @@
   }
   .ticket_instructions {
     grid-row-start: 2;
-    grid-row-end: 4;
+    grid-row-end: span 3;
   }
 }
