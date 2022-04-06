@@ -39,6 +39,11 @@
     font-size: 0.9rem;
     line-height: 1.1rem;
   }
+  .ticket_options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
 }
 @media only screen and (min-width: 600px) {
   .StudentCreateTicketView {
@@ -47,20 +52,23 @@
   .ultra_container {
     padding: 1rem;
   }
+  .ticket_options {
+    flex-direction: row;
+  }
 }
 
 @media only screen and (min-width: 900px) {
   .title_form {
     grid-column-start: 1;
-    grid-column-end: span 2;
+    grid-column-end: span 3;
   }
   .problem_form {
     grid-column-start: 1;
-    grid-column-end: span 2;
+    grid-column-end: span 3;
   }
   .additional_notes_form {
     grid-column-start: 1;
-    grid-column-end: span 2;
+    grid-column-end: span 3;
   }
   .container {
     display: grid;
@@ -74,7 +82,7 @@
     grid-column-end: 2;
 
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: auto;
   }
   .ticket_options {

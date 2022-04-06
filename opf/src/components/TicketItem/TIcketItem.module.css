@@ -44,4 +44,7 @@
     color: var(--color-gray);
     font-weight: initial;
   }
+  .view_ticket {
+    align-self: flex-start;
+  }
 }

@@ -61,7 +61,7 @@ export function StudentAllTicketsView() {
   const user_tickets = [
     {
       id: 800,
-      title: "Fix Sink",
+      title: "Sink dripping water even though sink is turned off",
       status: "D",
       location: "Kitchen",
       severity: "HIGH",
@@ -85,7 +85,7 @@ export function StudentAllTicketsView() {
         </p>
         <div className={styles.container}>
           {user_tickets.map((ticket) => {
-            return <TicketItem {...ticket} />;
+            return <TicketItem key={ticket.id} {...ticket} />;
           })}
         </div>
       </div>

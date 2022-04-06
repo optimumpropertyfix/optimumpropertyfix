@@ -34,16 +34,25 @@ function TicketItem(props) {
     }
   };
 
+  const title_text = (title) => {
+    let title_string = new String(title);
+    let maximum_length = 30;
+    if (title_string.length > maximum_length) {
+      return title_string.slice(0, maximum_length).trim() + "...";
+    }
+    return title_string;
+  };
+
   return (
     <div className={styles.TicketItem}>
       <ItemGroup
         className={styles.title}
         label="Title"
-        text={props.title}
+        text={title_text(props.title)}
       ></ItemGroup>
       <ItemGroup label="Status">
         <Widget className={`${styles.status} ${status_color(props.status)}`}>
-          <p> {status_text(props.status)} </p>
+          {status_text(props.status)}
         </Widget>
       </ItemGroup>
       <ItemGroup label="Ticket Location" text={props.location} />

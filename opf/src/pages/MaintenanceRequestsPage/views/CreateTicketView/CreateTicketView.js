@@ -208,7 +208,7 @@ export function StudentCreateTicketView() {
   const [Severity, setSeverity] = useState("Select Severity");
   const [Location, setLocation] = useState("Select Location");
   const [Building, setBuilding] = useState("Select Building");
-  const [Unit, setUnit] = useState("");
+  const [Unit, setUnit] = useState("Select Unit");
   const [Notes, setNotes] = useState("");
 
   const navigate = useNavigate();
@@ -378,7 +378,7 @@ export function StudentCreateTicketView() {
             <div
               className={`${styles.form_group} form_group ${styles.problem_form}`}
             >
-              <label>Please describe the problem</label>
+              <label>Problem Description</label>
               <textarea
                 placeholder="Water is leaking in the kitchen below the sink. The water currently just leaking to the floor."
                 className={styles.description_form}
@@ -386,22 +386,7 @@ export function StudentCreateTicketView() {
               />
             </div>
             <div className={`${styles.form_group} form_group`}>
-              <label>Severity</label>
-              <select
-                className={styles.severity_form}
-                value={Severity}
-                onChange={handle_Severity}
-              >
-                <option value="Select Severity" disabled>
-                  Select Severity
-                </option>
-                <option value="low">Low</option>
-                <option value="mild">Mild</option>
-                <option value="high">High</option>
-              </select>
-            </div>
-            <div className={`${styles.form_group} form_group`}>
-              <label>Location of problem</label>
+              <label>Problem Location</label>
               <select
                 value={Location}
                 className={styles.location_form}
@@ -437,8 +422,20 @@ export function StudentCreateTicketView() {
               </select>
             </div>
             <div className={`${styles.form_group} form_group`}>
-              <label>Unit Number</label>
-              <input type="text" placeholder="1C" onChange={handle_Unit} />
+              <label>Unit</label>
+              <select
+                className={`${styles.unit_form}`}
+                onChange={handle_Unit}
+                value={Unit}
+              >
+                <option value="Select Unit" disabled>
+                  Select Unit
+                </option>
+                <option value="1A">1A</option>
+                <option value="1B">1B</option>
+                <option value="1C">1C</option>
+                <option value="1D">1D</option>
+              </select>
             </div>
             <div
               className={`${styles.form_group} form_group ${styles.additional_notes_form}`}
@@ -453,6 +450,7 @@ export function StudentCreateTicketView() {
           </div>
           <div className={styles.ticket_options}>
             <button onClick={handle_SubmitTicket}>Submit Ticket</button>
+            <button>Clear Ticket</button>
           </div>
         </div>
       </div>
