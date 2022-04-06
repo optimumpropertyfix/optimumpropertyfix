@@ -1,0 +1,47 @@
+@media only screen and (min-width: 300px) {
+  .TicketItem {
+    background: var(--color-light-gray);
+    padding: 1rem;
+    border-radius: 7px;
+    box-shadow: 0 1px 5px 2px var(--color-standard-gray);
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  .title > p:nth-child(1) {
+    display: none;
+  }
+  .title > p:nth-child(2) {
+    font-size: 2rem;
+    font-weight: 700;
+    color: black;
+  }
+  .complete_status {
+    background: var(--color-light-green) !important;
+  }
+  .pending_status {
+    background: var(--color-light-yellow) !important;
+  }
+  .delete_status {
+    background: var(--color-light-red) !important;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+}
+
+@media only screen and (min-width: 900px) {
+  .TicketItem {
+    display: grid;
+    grid-template-columns: 10rem 1fr 1fr 1fr 1fr 1fr 10rem;
+    grid-template-rows: 1fr;
+  }
+  .title > p:nth-child(1) {
+    display: block;
+  }
+  .title > p:nth-child(2) {
+    font-size: initial;
+    color: var(--color-gray);
+    font-weight: initial;
+  }
+}
