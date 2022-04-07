@@ -51,13 +51,20 @@
   }
   .ultra_container {
     padding: 1rem;
+    background: blue;
   }
   .ticket_options {
     flex-direction: row;
   }
+  .container {
+    background: red;
+  }
 }
 
 @media only screen and (min-width: 900px) {
+  .ticket_form {
+    background: orange;
+  }
   .title_form {
     grid-column-start: 1;
     grid-column-end: span 3;

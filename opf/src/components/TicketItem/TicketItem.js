@@ -36,7 +36,7 @@ function TicketItem(props) {
 
   const title_text = (title) => {
     let title_string = new String(title);
-    let maximum_length = 30;
+    let maximum_length = 35;
     if (title_string.length > maximum_length) {
       return title_string.slice(0, maximum_length).trim() + "...";
     }
