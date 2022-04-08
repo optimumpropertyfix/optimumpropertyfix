@@ -1,7 +1,5 @@
 import { Outlet } from "react-router-dom";
 import {
-  SectionNavigation,
-  SectionNavLink,
   ViewNavigation,
   ViewNavLink,
 } from "../../components/Navigation/Navigation";

@@ -5,7 +5,7 @@
 */
 
 import React, { useEffect, useState } from "react";
-import { InformationCard } from "../../components/InformationCard/InformationCard";
+import { ToggleableCard } from "../../components/Card/Card";
 import { studentData, adminData } from "./Data";
 import styles from "./FrequentlyAskedQuestion.module.css";
 
@@ -57,9 +57,9 @@ export function StudentFAQPage() {
         </p>
         {studentData.map((faq) => {
           return (
-            <InformationCard label={faq.question} className={styles.faq_card}>
+            <ToggleableCard label={faq.question} className={styles.faq_card}>
               <p className={styles.faq_answer}>{faq.answer}</p>
-            </InformationCard>
+            </ToggleableCard>
           );
         })}
       </div>

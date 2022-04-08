@@ -38,6 +38,20 @@
     box-sizing: border-box;
   }
 
+  input[type="radio"] {
+    appearance: none;
+    background-color: #fff;
+    margin: 0;
+    width: 1.4em;
+    height: 1.4em;
+    border: 0.15em solid var(--color-gray);
+    border-radius: 50%;
+    transform: translateY(-0.075em);
+  }
+  input[type="radio"]:checked {
+    background: var(--color-orange) !important;
+  }
+
   input[type="text"],
   input[type="date"],
   input[type="time"],
@@ -89,7 +103,7 @@
     border-radius: 7px;
     box-shadow: 0 1px 5px 2px var(--color-standard-gray);
     transition: background 0.1s ease-in !important;
-    max-height: 2rem !important;
+    height: min-content;
   }
   button:hover,
   input[type="submit"]:hover {
@@ -105,10 +119,16 @@
     color: var(--color-gray);
   }
 
-  .form_group {
-    display: flex;
-    gap: 0.4rem;
-    flex-direction: column;
+  .block_contrast_items {
+    background: var(--color-light-gray);
+    padding: 1rem;
+    border-radius: 7px;
+    box-shadow: 0 1px 5px 2px var(--color-standard-gray);
+  }
+  .page_subtitle_text {
+    color: var(--color-gray);
+    font-size: 1rem;
+    font-weight: 700;
   }
   .page_title_text {
     line-height: 2.7rem;
@@ -123,6 +143,30 @@
     grid-template-columns: 1fr;
     grid-template-rows: 1fr auto;
   }
+
+  .view_layout {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .view_content_layout {
+    overflow: auto;
+
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 0.5rem !important;
+  }
+  .complete_status {
+    background: var(--color-light-green) !important;
+  }
+  .pending_status {
+    background: var(--color-light-yellow) !important;
+  }
+  .delete_status {
+    background: var(--color-light-red) !important;
+  }
 }
 @media only screen and (min-width: 600px) {
   .page_layout {
@@ -133,6 +177,12 @@
     height: 100vh;
     max-height: 100vh;
   }
+  .view_layout {
+    padding: 1rem;
+  }
+  .view_content_layout {
+    padding: 1rem;
+  }
   .page_navigation {
     grid-column-start: 0;
     grid-column-end: span 1;
@@ -141,5 +191,8 @@
   }
 }
 
-@media only screen and (min-width: 800px) {
+@media only screen and (min-width: 900px) {
+  .view_content_layout {
+    padding: 0.5rem;
+  }
 }

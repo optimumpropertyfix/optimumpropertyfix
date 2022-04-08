@@ -1,4 +1,3 @@
-import { useState } from "react";
 import ItemGroup from "../ItemGroup/ItemGroup";
 import Widget from "../Widget/Widget";
 import styles from "./TIcketItem.module.css";
@@ -6,21 +5,21 @@ import styles from "./TIcketItem.module.css";
 function TicketItem(props) {
   const status_color = (status) => {
     if (status === "C") {
-      return styles.complete_status;
+      return "complete_status";
     } else if (status === "P") {
-      return styles.pending_status;
+      return "pending_status";
     } else {
-      return styles.delete_status;
+      return "delete_status";
     }
   };
 
   const status_text = (status) => {
-    if (status === "D") {
-      return "DELETED";
+    if (status === "C") {
+      return "COMPLETED";
     } else if (status === "P") {
       return "PENDING";
     } else {
-      return "COMPLETED";
+      return "DELETED";
     }
   };
 
@@ -44,7 +43,7 @@ function TicketItem(props) {
   };
 
   return (
-    <div className={styles.TicketItem}>
+    <div className={`${styles.TicketItem} block_contrast_items`}>
       <ItemGroup
         className={styles.title}
         label="Title"

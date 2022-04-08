@@ -4,12 +4,12 @@ import { student_new_ticket_route } from "../../../../Routes";
 import styles from "./CreateTicketView.module.css";
 import { useNavigate } from "react-router-dom";
 import TokenManager from "../../../../TokenManager";
-import { InformationCard } from "../../../../components/InformationCard/InformationCard";
+import { ToggleableCard } from "../../../../components/Card/Card";
+import FormGroup from "../../../../components/FormGroup/FormGroup";
 
 export function AdminCreateTicketView() {
   const [Title, setTitle] = useState("");
   const [Description, setDescription] = useState("");
-  const [Severity, setSeverity] = useState("");
   const [Location, setLocation] = useState("");
   const [Building, setBuilding] = useState("");
   const [Unit, setUnit] = useState("");
@@ -89,10 +89,6 @@ export function AdminCreateTicketView() {
     setDescription(event.target.value);
   };
 
-  const handle_Severity = (event) => {
-    setSeverity(event.target.value);
-  };
-
   const handle_Location = (event) => {
     setLocation(event.target.value);
   };
@@ -111,13 +107,6 @@ export function AdminCreateTicketView() {
 
   const handle_SubmitTicket = (event) => {
     event.preventDefault();
-    ticket(Title, Description, Severity, Location, Building, Unit, Notes)
-      .then((successful) => {
-        navigate("/admin/maintenance_requests");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   };
 
   return (
@@ -138,17 +127,6 @@ export function AdminCreateTicketView() {
                 className={styles.description_form}
                 onChange={handle_Description}
               />
-            </div>
-            <div className={`${styles.form} layout_helper_FormGroup`}>
-              <label>Set Severity</label>
-              <select
-                className={styles.severity_form}
-                onChange={handle_Severity}
-              >
-                <option value="LOW">LOW</option>
-                <option value="MILD">MILD</option>
-                <option value="HIGH">HIGH</option>
-              </select>
             </div>
           </div>
           <div>
@@ -320,12 +298,12 @@ export function StudentCreateTicketView() {
 
   return (
     <div className={styles.StudentCreateTicketView}>
-      <div className={styles.ultra_container}>
+      <div className={`${styles.view_container} view_layout`}>
         <p className={`${styles.page_title_text} page_title_text`}>
           Create New Maintenance Ticket
         </p>
-        <div className={styles.container}>
-          <InformationCard
+        <div className={`${styles.content_container} view_content_layout`}>
+          <ToggleableCard
             className={styles.ticket_instructions}
             label="Creating Ticket Instructions"
           >
@@ -363,30 +341,32 @@ export function StudentCreateTicketView() {
                 <p>Example: "The water leak stops when I flush the toilet."</p>
               </div>
             </div>
-          </InformationCard>
+          </ToggleableCard>
           <div className={styles.ticket_form}>
-            <div
+            <FormGroup
               className={`${styles.form_group} form_group ${styles.title_form}`}
+              label="Title"
             >
-              <label>Title</label>
               <input
                 type="text"
                 placeholder="Water Leak in Kitchen"
                 onChange={handle_Title}
               />
-            </div>
-            <div
+            </FormGroup>
+            <FormGroup
               className={`${styles.form_group} form_group ${styles.problem_form}`}
+              label="Problem Description"
             >
-              <label>Problem Description</label>
               <textarea
                 placeholder="Water is leaking in the kitchen below the sink. The water currently just leaking to the floor."
                 className={styles.description_form}
                 onChange={handle_Description}
               />
-            </div>
-            <div className={`${styles.form_group} form_group`}>
-              <label>Problem Location</label>
+            </FormGroup>
+            <FormGroup
+              className={`${styles.form_group} form_group`}
+              label="Problem Location"
+            >
               <select
                 value={Location}
                 className={styles.location_form}
@@ -400,9 +380,11 @@ export function StudentCreateTicketView() {
                 <option value="kitchen">Kitchen</option>
                 <option value="bedroom">Bedroom</option>
               </select>
-            </div>
-            <div className={`${styles.form_group} form_group`}>
-              <label>Building</label>
+            </FormGroup>
+            <FormGroup
+              className={`${styles.form_group} form_group`}
+              label="Building"
+            >
               <select
                 className={styles.building_form}
                 onChange={handle_Building}
@@ -420,9 +402,11 @@ export function StudentCreateTicketView() {
                 <option value="canada">Cananda Hall</option>
                 <option value="manzanita">Manzanita Hall</option>
               </select>
-            </div>
-            <div className={`${styles.form_group} form_group`}>
-              <label>Unit</label>
+            </FormGroup>
+            <FormGroup
+              className={`${styles.form_group} form_group`}
+              label="Unit"
+            >
               <select
                 className={`${styles.unit_form}`}
                 onChange={handle_Unit}
@@ -436,17 +420,17 @@ export function StudentCreateTicketView() {
                 <option value="1C">1C</option>
                 <option value="1D">1D</option>
               </select>
-            </div>
-            <div
+            </FormGroup>
+            <FormGroup
               className={`${styles.form_group} form_group ${styles.additional_notes_form}`}
+              label="Additional Notes"
             >
-              <label>Additional Notes</label>
               <textarea
                 placeholder="There is some water on the floor as you enter in the kitchen."
                 className={styles.description_form}
                 onChange={handle_Notes}
               />
-            </div>
+            </FormGroup>
           </div>
           <div className={styles.ticket_options}>
             <button onClick={handle_SubmitTicket}>Submit Ticket</button>
