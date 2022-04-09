@@ -1,0 +1,14 @@
+@media only screen and (min-width: 300px) {
+  .Timestamps {
+    color: var(--color-standard-gray);
+    font-size: 0.8rem;
+  }
+  .Timestamps > p > span {
+    font-weight: 700;
+    color: var(--color-gray);
+  }
+}
+@media only screen and (min-width: 600px) {
+}
+@media only screen and (min-width: 900px) {
+}
