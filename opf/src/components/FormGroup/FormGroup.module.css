@@ -1,8 +1,11 @@
 @media only screen and (min-width: 300px) {
+  .FormGroup {
+    display: flex;
+    gap: 0.4rem;
+    flex-direction: column;
+  }
 }
-
 @media only screen and (min-width: 600px) {
 }
-
 @media only screen and (min-width: 900px) {
 }

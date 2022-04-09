@@ -4,7 +4,8 @@
 <span class = "material-icons">blah</span>
 */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { ToggleableCard } from "../../components/Card/Card";
 import { studentData, adminData } from "./Data";
 import styles from "./FrequentlyAskedQuestion.module.css";
 
@@ -45,13 +46,22 @@ export function AdminFAQPage() {
 }
 
 export function StudentFAQPage() {
+  useEffect(() => {
+    console.log(studentData);
+  });
   return (
-    <div className={styles.header}>
-      <h1>Frequently Asked Questions</h1>
+    <div className={styles.StudentFAQPage}>
       <div className={styles.container}>
-        {studentData.map(({ question, answer }) => (
-          <FAQ question={question} answer={answer} />
-        ))}
+        <p className={`${styles.page_title_text} page_title_text`}>
+          Frequent Asked Questions
+        </p>
+        {studentData.map((faq) => {
+          return (
+            <ToggleableCard label={faq.question} className={styles.faq_card}>
+              <p className={styles.faq_answer}>{faq.answer}</p>
+            </ToggleableCard>
+          );
+        })}
       </div>
     </div>
   );

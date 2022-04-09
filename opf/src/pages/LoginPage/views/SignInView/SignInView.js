@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TokenManager from "../../../../TokenManager";
+import FormGroup from "../../../../components/FormGroup/FormGroup";
 import styles from "./SignInView.module.css";
 import login_styles from "../../LoginPage.module.css";
 function SignInView() {
@@ -43,27 +44,52 @@ function SignInView() {
       });
   };
 
+  const reset_password = (event) => {
+    event.preventDefault();
+    navigate("/login/reset");
+  };
+
   return (
     <div className={styles.SignInView}>
       <p className={`${login_styles.page_title} ${styles.page_title}`}>
         Let's Get You Signed In
       </p>
       <form className={styles.form}>
-        <div className={`layout_helper_FormGroup ${styles.form_group}`}>
-          <label className={login_styles.label}>NetID</label>
-          <input onChange={handle_passwordNetID} type="text" />
-        </div>
-        <div className={`layout_helper_FormGroup ${styles.form_group}`}>
-          <label className={login_styles.label}>Password</label>
-          <input onChange={handle_passwordChange} type="text" />
-        </div>
+        <FormGroup
+          label="NetID"
+          className={`form_group ${styles.form_group} ${login_styles.form_group}`}
+        >
+          <input
+            onChange={handle_passwordNetID}
+            type="text"
+            placeholder="NetID"
+          />
+        </FormGroup>
+        <FormGroup
+          label="Password"
+          className={`form_group ${styles.form_group} ${login_styles.form_group}`}
+        >
+          <input
+            onChange={handle_passwordChange}
+            type="text"
+            placeholder="Password"
+          />
+        </FormGroup>
       </form>
-      <input
-        onClick={handle_SignIn}
-        className={`${login_styles.submit_button} ${styles.submit_button}`}
-        type="submit"
-        value="Sign In"
-      />
+      <div className={styles.signin_options}>
+        <input
+          onClick={handle_SignIn}
+          className={`${login_styles.button} ${styles.button}`}
+          type="submit"
+          value="Sign In"
+        />
+        <button
+          onClick={reset_password}
+          className={`${login_styles.button} ${styles.reset_password_button}`}
+        >
+          Reset Password
+        </button>
+      </div>
     </div>
   );
 }

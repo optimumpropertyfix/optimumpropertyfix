@@ -1,0 +1,35 @@
+@media only screen and (min-width: 300px) {
+  .StudentMaintenanceRequestsPage {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto;
+    height: 0;
+    min-height: 100%;
+  }
+  .view_navigation {
+    margin: 0 2rem;
+    padding: 0.5rem 0 1rem 0;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .StudentMaintenanceRequestsPage {
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr;
+    margin: 2rem;
+    max-height: 100%;
+  }
+  .view_navigation {
+    margin: 0;
+    padding: 1rem;
+    grid-row-start: 1;
+    grid-row-end: 2;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .StudentMaintenanceRequestsPage {
+    grid-template-columns: 200px 4fr;
+    grid-template-rows: 1fr;
+  }
+}

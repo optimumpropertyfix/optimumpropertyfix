@@ -1,0 +1,28 @@
+@media only screen and (min-width: 300px) {
+  .Widget {
+    width: min-content;
+    height: min-content;
+    padding: 0.25rem 0.5rem;
+    background: var(--color-dark-gray);
+    display: flex;
+    gap: 0.5rem;
+    border-radius: 7px;
+  }
+  .Widget > p {
+    color: white;
+    font-size: 0.8rem;
+  }
+  .label {
+    font-weight: 400;
+    color: var(--color-dark-gray);
+  }
+  .text {
+    font-weight: 700;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+}
+
+@media only screen and (min-width: 900px) {
+}

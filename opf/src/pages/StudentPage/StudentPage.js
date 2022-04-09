@@ -1,11 +1,10 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import {
-  Navigation,
-  NavigationLink,
+  SectionNavigation,
+  SectionNavLink,
 } from "../../components/Navigation/Navigation";
 import TokenManager from "../../TokenManager";
 import styles from "./StudentPage.module.css";
-import symbol from "../../assets/symbol.png";
 
 function StudentPage() {
   const { revoke_token } = TokenManager();
@@ -20,57 +19,33 @@ function StudentPage() {
   };
 
   return (
-    <div className={`${styles.AdminPage} page_helper_container`}>
-      <Navigation
-        className={`${styles.nav} page_navigation page_helper_NavigationSection`}
-      >
-        <img src={symbol} alt={""} />
-        <NavigationLink
-          active_class="page_navigation_link_active"
-          className={"page_navigation_link"}
+    <div className={`${styles.StudentPage} page_layout`}>
+      <Outlet />
+      <SectionNavigation className="page_navigation">
+        <SectionNavLink end to="/student" icon="dashboard">
+          DASHBOARD
+        </SectionNavLink>
+        <SectionNavLink to="/student/maintenance_requests" icon="receipt_long">
+          TICKETS
+        </SectionNavLink>
+        <SectionNavLink
           end
-          to="/student"
+          to="/student/frequently_asked_questions"
+          icon="schedule"
         >
-          Dashboard
-        </NavigationLink>
-        <NavigationLink
-          active_class="page_navigation_link_active"
-          className={"page_navigation_link"}
-          to="maintenance_requests"
-        >
-          Maintenance Requests
-        </NavigationLink>
-        <NavigationLink
-          active_class="page_navigation_link_active"
-          className={"page_navigation_link"}
+          APPOINTMENTS
+        </SectionNavLink>
+        <SectionNavLink end to="/student/account" icon="account_circle">
+          ACCOUNT
+        </SectionNavLink>
+        <SectionNavLink
           end
-          to="feedback"
-        >
-          Feedback
-        </NavigationLink>
-        <NavigationLink
-          active_class="page_navigation_link_active"
-          className={"page_navigation_link"}
-          end
-          to="frequently_asked_questions"
+          to="/student/frequently_asked_questions"
+          icon="help_outline"
         >
           FAQ
-        </NavigationLink>
-      </Navigation>
-      <header
-        className={`${styles.header} page_header page_helper_HeaderSection`}
-      >
-        <button
-          onClick={handle_SignOut}
-          className="header_widget logout_widget"
-        >
-          <p>Sign Out</p>
-          <span className="material-icons">logout</span>
-        </button>
-      </header>
-      <div className={`${styles.outlet} page_outlet page_helper_OutletSection`}>
-        <Outlet />
-      </div>
+        </SectionNavLink>
+      </SectionNavigation>
     </div>
   );
 }

@@ -6,6 +6,7 @@ import App from "./App";
 
 import LoginPage from "./pages/LoginPage/LoginPage";
 import SignInView from "./pages/LoginPage/views/SignInView/SignInView";
+import ResetPasswordView from "./pages/LoginPage/views/ResetPasswordView/ResetPasswordView";
 import CreateAccountView from "./pages/LoginPage/views/CreateAccountView/CreateAccountView";
 import AdminPage from "./pages/AdminPage/AdminPage";
 import StudentPage from "./pages/StudentPage/StudentPage";
@@ -48,6 +49,7 @@ import {
 import { AppointmentView } from "./pages/FormPage/views/AppointmentView/AppointmentView";
 import "./index.css";
 import { AdminAppointmentsPage } from "./pages/AppointmentsPage/AppointmentsPage";
+import AccountPage from "./pages/AccountPage/AccountPage";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -57,33 +59,7 @@ ReactDOM.render(
           <Route path="login" element={<LoginPage />}>
             <Route index element={<SignInView />} />
             <Route path="create" element={<CreateAccountView />} />
-          </Route>
-          <Route path="admin" element={<AdminPage />}>
-            <Route index element={<AdminDashboardPage />} />
-            <Route
-              path="maintenance_requests"
-              element={<AdminMaintenanceRequestsPage />}
-            >
-              <Route index element={<AdminAllTicketsView />} />
-              <Route path="create" element={<AdminCreateTicketView />} />
-              <Route path=":ticket" element={<AdminTicketView />} />
-            </Route>
-            <Route path="appointments" element={<AdminAppointmentsPage />} />
-
-            <Route path="forms" element={<AdminFormsPage />}>
-              <Route index element={<AdminLandingView />} />
-              <Route
-                path="create_announcement"
-                element={<AdminCreateAnnouncementView />}
-              />
-              <Route path="create_faq" element={<AdminCreateFAQView />} />
-              <Route path="create_appointment" element={<AppointmentView />} />
-            </Route>
-            <Route path="feedback" element={<AdminFeedbackPage />} />
-            <Route
-              path="frequently_asked_questions"
-              element={<AdminFAQPage />}
-            />
+            <Route path="reset" element={<ResetPasswordView />} />
           </Route>
           <Route path="student" element={<StudentPage />}>
             <Route index element={<StudentDashboardPage />} />
@@ -95,11 +71,11 @@ ReactDOM.render(
               <Route path="create" element={<StudentCreateTicketView />} />
               <Route path=":ticket" element={<StudentTicketView />} />
             </Route>
-            <Route path="feedback" element={<StudentFeedbackPage />} />
             <Route
               path="frequently_asked_questions"
               element={<StudentFAQPage />}
             />
+            <Route path="account" element={<AccountPage />} />
           </Route>
         </Route>
       </Routes>

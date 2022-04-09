@@ -1,43 +1,85 @@
 @media only screen and (min-width: 300px) {
-  .page_header {
-    margin-bottom: 1rem;
+  .StudentCreateTicketView {
+    overflow-y: scroll;
   }
   .ticket_form {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    gap: 1rem;
-    width: 70%;
-  }
-  .form {
-    margin-bottom: 1rem;
-  }
-  .description_form {
-    height: 10rem;
-  }
-  .page_footer {
-    margin-top: 1rem;
-    width: 70%;
     display: flex;
+    flex-direction: column;
+    gap: 2rem;
   }
-  .page_footer > button {
-    margin-left: auto;
+  .instructions {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1rem;
+  }
+  .instruction {
+    color: white;
+  }
+  .instruction > p:nth-child(1) {
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.2rem;
+    font-size: 1rem;
+  }
+  .instruction > p:nth-child(2) {
+    font-size: 0.9rem;
+    line-height: 1.1rem;
+  }
+  .ticket_options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
 }
 @media only screen and (min-width: 600px) {
-  .ticket_form {
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+  .StudentCreateTicketView {
+    height: 90%;
   }
-  .appointment_form {
-    display: flex !important;
+  .ticket_options {
     flex-direction: row;
-    gap: 3rem;
-  }
-  .appointment_form > input {
-    padding-right: 5rem;
   }
 }
 
-@media only screen and (min-width: 800px) {
+@media only screen and (min-width: 900px) {
+  .StudentCreateTicketView {
+    height: min-content;
+  }
+  .view_container {
+    gap: 0 !important;
+  }
+  .title_form {
+    grid-column-start: 1;
+    grid-column-end: span 3;
+  }
+  .problem_form {
+    grid-column-start: 1;
+    grid-column-end: span 3;
+  }
+  .additional_notes_form {
+    grid-column-start: 1;
+    grid-column-end: span 3;
+  }
+  .content_container {
+    display: grid;
+    grid-template-columns: 1fr 250px;
+    grid-template-rows: auto min-content max-content;
+  }
+  .ticket_form {
+    grid-row-start: 1;
+    grid-row-start: 2;
+    grid-column-start: 1;
+    grid-column-end: 2;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
+  }
+  .ticket_options {
+    grid-row-start: 2;
+    grid-row-start: 3;
+  }
+  .ticket_instructions {
+    grid-row-start: 2;
+    grid-row-end: span 3;
+  }
 }
