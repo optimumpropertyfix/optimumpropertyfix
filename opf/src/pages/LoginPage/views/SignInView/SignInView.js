@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TokenManager from "../../../../TokenManager";
+import FormGroup from "../../../../components/FormGroup/FormGroup";
 import styles from "./SignInView.module.css";
 import login_styles from "../../LoginPage.module.css";
 function SignInView() {
@@ -54,26 +55,26 @@ function SignInView() {
         Let's Get You Signed In
       </p>
       <form className={styles.form}>
-        <div
+        <FormGroup
+          label="NetID"
           className={`form_group ${styles.form_group} ${login_styles.form_group}`}
         >
-          <label className={login_styles.label}>NetID</label>
           <input
             onChange={handle_passwordNetID}
             type="text"
             placeholder="NetID"
           />
-        </div>
-        <div
+        </FormGroup>
+        <FormGroup
+          label="Password"
           className={`form_group ${styles.form_group} ${login_styles.form_group}`}
         >
-          <label className={login_styles.label}>Password</label>
           <input
             onChange={handle_passwordChange}
             type="text"
             placeholder="Password"
           />
-        </div>
+        </FormGroup>
       </form>
       <div className={styles.signin_options}>
         <input

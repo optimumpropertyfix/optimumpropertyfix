@@ -19,14 +19,14 @@ function LoginPage() {
             <div className={styles.link_container}>
               <p>Don't have an account?</p>
               <Link to={"/login/create"} className={styles.link}>
-                Create one now
+                Create Account
               </Link>
             </div>
           ) : (
             <div className={styles.link_container}>
               <p>Already Here?</p>
               <Link to={"/login"} className={styles.link}>
-                Sign In.
+                Sign In
               </Link>
             </div>
           )}

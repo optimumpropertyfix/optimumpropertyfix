@@ -1,3 +1,4 @@
+import FormGroup from "../../../../components/FormGroup/FormGroup";
 import styles from "./ResetPasswordView.module.css";
 import login_styles from "../../LoginPage.module.css";
 function ResetPasswordView() {
@@ -7,30 +8,30 @@ function ResetPasswordView() {
         Reset Your Password
       </p>
       <form className={styles.form}>
-        <div
+        <FormGroup
+          label="NetID"
           className={`form_group ${styles.form_group} ${login_styles.form_group}`}
         >
-          <label className={login_styles.label}>NetID</label>
           <input type="text" placeholder="NetID" />
-        </div>
-        <div
+        </FormGroup>
+        <FormGroup
+          label="NSHEID"
           className={`form_group ${styles.form_group} ${login_styles.form_group}`}
         >
-          <label className={login_styles.label}>NSHEID</label>
           <input type="text" placeholder="NSHEID" />
-        </div>
-        <div
+        </FormGroup>
+        <FormGroup
+          label="Password"
           className={`form_group ${styles.form_group} ${login_styles.form_group}`}
         >
-          <label className={login_styles.label}>Password</label>
           <input type="text" placeholder="Password" />
-        </div>
-        <div
+        </FormGroup>
+        <FormGroup
+          label="Re-enter Password"
           className={`form_group ${styles.form_group} ${login_styles.form_group}`}
         >
-          <label className={login_styles.label}>Re-enter Password</label>
           <input type="text" placeholder="Re-enter Password" />
-        </div>
+        </FormGroup>
       </form>
       <input
         className={`${login_styles.button} ${styles.button}`}

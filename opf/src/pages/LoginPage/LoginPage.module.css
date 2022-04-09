@@ -67,8 +67,8 @@
   .form_group > select {
     box-shadow: 0 1px 5px 2px var(--color-dark-gray) !important;
   }
-  .label {
-    color: white;
+  .form_group > label {
+    color: white !important;
   }
   .button {
     box-shadow: 0 1px 5px 2px var(--color-dark-gray) !important;

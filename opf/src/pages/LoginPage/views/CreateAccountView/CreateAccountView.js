@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { new_account_route } from "../../../../Routes";
 import { useNavigate } from "react-router-dom";
+import FormGroup from "../../../../components/FormGroup/FormGroup";
 import styles from "./CreateAccountView.module.css";
 import login_styles from "../../LoginPage.module.css";
 function CreateAccountView() {
@@ -150,61 +151,58 @@ function CreateAccountView() {
         Create Account To Join The Party
       </p>
       <form className={styles.form} onSubmit={handle_SignUp}>
-        <div
+        <FormGroup
+          label="First Name"
           className={`form_group ${styles.form_group} ${login_styles.form_group}`}
         >
-          <label className={`${login_styles.label} ${login_styles.first_name}`}>
-            First Name
-          </label>
           <input type="text" placeholder="John" onChange={handle_FirstName} />
-        </div>
-        <div
+        </FormGroup>
+        <FormGroup
+          label="Last Name"
           className={`form_group ${styles.form_group} ${login_styles.form_group}`}
         >
-          <label className={login_styles.label}>Last Name</label>
           <input type="text" placeholder="Doe" onChange={handle_LastName} />
-        </div>
-        <div
+        </FormGroup>
+        <FormGroup
+          label="Email Address"
           className={`form_group ${styles.form_group} ${login_styles.form_group}`}
         >
-          <label className={login_styles.label}>Email Address</label>
           <input
             type="text"
             placeholder="example@email.com"
             onChange={handle_Email}
           />
-        </div>
-        <div
+        </FormGroup>
+        <FormGroup
+          label="Password"
           className={`form_group ${styles.form_group} ${login_styles.form_group}`}
         >
-          <label className={login_styles.label}>Password</label>
           <input
             type="password"
             placeholder="Password"
             onChange={handle_Password}
           />
-        </div>
-        <div
+        </FormGroup>
+        <FormGroup
+          label="NetID"
           className={`form_group ${styles.form_group} ${login_styles.form_group}`}
         >
-          <label className={login_styles.label}>NetID</label>
           <input type="text" placeholder="jdoe" onChange={handle_NetID} />
-        </div>
-
-        <div
+        </FormGroup>
+        <FormGroup
+          label="NSHEID"
           className={`form_group ${styles.form_group} ${login_styles.form_group}`}
         >
-          <label className={login_styles.label}>NSHEID</label>
           <input
             type="text"
             placeholder="8001234567"
             onChange={handle_NSHEID}
           />
-        </div>
-        <div
+        </FormGroup>
+        <FormGroup
+          label="Select Gender"
           className={`form_group ${styles.form_group} ${login_styles.form_group}`}
         >
-          <label className={login_styles.label}>Who are you?</label>
           <select value={Gender} onChange={handle_Gender}>
             <option value="Select Gender" disabled>
               Select Gender
@@ -213,13 +211,13 @@ function CreateAccountView() {
             <option value="Female">Female</option>
             <option value="Non-binary">Non-binary</option>
           </select>
-        </div>
-        <div
+        </FormGroup>
+        <FormGroup
+          label="Year"
           className={`form_group ${styles.form_group} ${login_styles.form_group}`}
         >
-          <label className={login_styles.label}>Year</label>
           <input type="text" placeholder="2018" onChange={handle_Year} />
-        </div>
+        </FormGroup>
       </form>
       <input
         onClick={handle_SignUp}
