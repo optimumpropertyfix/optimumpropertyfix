@@ -1,6 +1,6 @@
 import { Outlet, useLocation, Link } from "react-router-dom";
 import styles from "./LoginPage.module.css";
-import logo from "./../../assets/logo.png";
+import logo from "./../../assets/logo_alternative.png";
 
 function LoginPage() {
   const location = useLocation();
