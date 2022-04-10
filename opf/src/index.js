@@ -8,7 +8,6 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import SignInView from "./pages/LoginPage/views/SignInView/SignInView";
 import ResetPasswordView from "./pages/LoginPage/views/ResetPasswordView/ResetPasswordView";
 import CreateAccountView from "./pages/LoginPage/views/CreateAccountView/CreateAccountView";
-import AdminPage from "./pages/AdminPage/AdminPage";
 import StudentPage from "./pages/StudentPage/StudentPage";
 
 import {
@@ -48,8 +47,9 @@ import {
 } from "./pages/FrequentAskedQuestions/FrequentlyAskedQuestions";
 import { AppointmentView } from "./pages/FormPage/views/AppointmentView/AppointmentView";
 import "./index.css";
-import { AdminAppointmentsPage } from "./pages/AppointmentsPage/AppointmentsPage";
+import AppointmentsPage from "./pages/AppointmentsPage/AppointmentsPage";
 import AccountPage from "./pages/AccountPage/AccountPage";
+import AllAppointmentsView from "./pages/AppointmentsPage/views/AllAppointmentsView/AllAppointmentsView";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -75,6 +75,10 @@ ReactDOM.render(
               path="frequently_asked_questions"
               element={<StudentFAQPage />}
             />
+            <Route path="appointments" element={<AppointmentsPage />}>
+              <Route index element={<AllAppointmentsView />} />
+              <Route path=":appointment" element={<AllAppointmentsView />} />
+            </Route>
             <Route path="account" element={<AccountPage />} />
           </Route>
         </Route>

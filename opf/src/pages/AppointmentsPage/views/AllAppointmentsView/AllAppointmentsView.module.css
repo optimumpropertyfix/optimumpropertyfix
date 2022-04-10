@@ -1,17 +1,11 @@
 @media only screen and (min-width: 300px) {
-  .AppointmentsPage {
-    min-height: 100%;
+  .AllAppointmentsView {
+    overflow-y: auto;
   }
 }
 
 @media only screen and (min-width: 600px) {
-  .AppointmentsPage {
-    margin: 2rem;
-    max-height: 100%;
-  }
 }
 
 @media only screen and (min-width: 900px) {
-  .AppointmentsPage {
-  }
 }
