@@ -1,16 +1,9 @@
 from time import strftime
+from turtle import title
 from mysql.connector import MySQLConnection, Error
 from app.DatabaseConfiguration import database_configuration
 from flask import Flask, jsonify 
 import json
-
-
-# General Structure of Controller: 
-#   General Logic
-#   Helper Functions
-#   Write Query
-#   Read Query
-#   Serializer
 
 
 class AnnouncementController:
@@ -38,10 +31,22 @@ class AnnouncementController:
         args = [announcement_id]
         announcements = self.query_database(query, args)
         
-
         announcement_table = self.generate_announcement_objects(announcements)
         return announcement_table 
 
+
+#-------------------------------------------------------------------------------------------#
+    def edit_individual_announcement(self, announcement_id = None, title = None, message = None):
+        announcements = None
+        query = "edit_individual_announcement"
+        args = [announcement_id, title, message]
+        announcements = self.query_database(query, args)
+
+        announcements_table = self.generate_announcement_objects(announcements)
+        return announcements_table 
+
+
+#-------------------------------------------------------------------------------------------#
     def generate_announcement_objects(self, announcements):
         announcement_objects = list()
 
