@@ -48,7 +48,9 @@
   .content_container {
     display: grid;
     grid-template-columns: 2fr 250px;
-    grid-template-rows: auto min-content max-content;
+    grid-template-rows: auto min-content auto;
+    background: red;
+    box-sizing: content-box;
   }
   .filter_options {
     grid-column-start: 2;

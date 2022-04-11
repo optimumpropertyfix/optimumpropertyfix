@@ -28,6 +28,23 @@
     color: white;
     line-height: 1.3rem;
   }
+  .feedback_instructions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .feedback_instructions > p {
+    color: white;
+  }
+  .feedback_instructions_ratings {
+    display: flex;
+    gap: 0.1rem;
+    flex-direction: column;
+  }
+  .feedback_instructions_ratings > p {
+    color: white;
+    font-weight: 700;
+  }
   .page_subtitle_text {
     margin-bottom: 0.5rem;
   }

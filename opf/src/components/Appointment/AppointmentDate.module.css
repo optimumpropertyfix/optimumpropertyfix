@@ -1,24 +1,47 @@
-.date {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid #ee6c4d;
-  background-color: #293241;
-  color: white;
-  border-radius: 15px;
-  align-items: center;
-  justify-content: center;
-  width: 5rem;
-  height: 5rem;
+@media only screen and (min-width: 300px) {
+  .AppointmentDate {
+    background: var(--color-navy-blue);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 5rem;
+    height: 5rem;
+    padding: 1rem;
+    border-radius: 7px;
+  }
+  .AppointmentDate > div > p {
+    color: white;
+  }
+  .month > p {
+    font-size: 1rem;
+    text-transform: uppercase;
+  }
+  .day_date > p {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+  .day > p {
+    font-size: 1rem;
+  }
 }
-
-.day {
-  font-size: 2rem;
-  font-weight: bold;
+@media only screen and (min-width: 600px) {
 }
-.month {
-  font-size: 1rem;
-  font-weight: bold;
-}
-.year {
-  font-size: 1rem;
+@media only screen and (min-width: 900px) {
+  .AppointmentDate {
+    width: 3rem;
+    height: 3rem;
+    padding: 1rem;
+  }
+  .month > p {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+  }
+  .day_date > p {
+    font-size: 1.4rem;
+    font-weight: 700;
+  }
+  .day > p {
+    font-size: 0.8rem;
+  }
 }

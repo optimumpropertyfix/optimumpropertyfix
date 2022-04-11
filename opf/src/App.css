@@ -26,6 +26,13 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  .italic {
+    font-style: italic;
+  }
+  .bold {
+    font-weight: 700;
+  }
+
   .app {
     height: 100vh;
     max-height: 100vh;
@@ -157,6 +164,7 @@
     flex-direction: column;
     gap: 2rem;
     padding: 0.5rem !important;
+    box-sizing: border-box;
   }
   .complete_status {
     background: var(--color-light-green) !important;
