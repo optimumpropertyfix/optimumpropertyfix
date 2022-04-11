@@ -130,7 +130,21 @@ export function StudentTicketView() {
             {ticket.ticket_status === "C" ? (
               <div className={styles.feedback_container}>
                 <ToggleableCard label="Instructions for Creating Feedback">
-                  <p>Instructions</p>
+                  <div className={styles.feedback_instructions}>
+                    <p>Select the rating for your completed ticket:</p>
+                    <div className={styles.feedback_instructions_ratings}>
+                      <p>1 = Extremely poor</p>
+                      <p>2 = Bad</p>
+                      <p>3 = Average</p>
+                      <p>4 = Good</p>
+                      <p>5 = Excellent</p>
+                    </div>
+                    <p>
+                      Under <span className="italic">‘Feedback’</span>, provide
+                      a descriptive message for the facilities and services
+                      personnel.
+                    </p>
+                  </div>
                 </ToggleableCard>
                 {true ? (
                   <div className={`${styles.feedback_response}`}>
