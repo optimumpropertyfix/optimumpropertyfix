@@ -58,7 +58,7 @@ ReactDOM.render(
         <Route path="/" element={<App />}>
           <Route path="login" element={<LoginPage />}>
             <Route index element={<SignInView />} />
-            <Route path="create" element={<CreateAccountView />} />
+            <Route path="create" element={<CreateUserView />} />
             <Route path="reset" element={<ResetPasswordView />} />
           </Route>
           <Route path="student" element={<StudentPage />}>

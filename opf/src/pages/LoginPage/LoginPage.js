@@ -1,4 +1,4 @@
-import { Outlet, useLocation, useOutletContext, Link } from "react-router-dom";
+import { Outlet, useLocation, Link } from "react-router-dom";
 import styles from "./LoginPage.module.css";
 import logo from "./../../assets/logo_alternative.png";
 
