@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 function TokenManager() {
   function get_token() {
-    const user = localStorage.getItem("token");
+    const user = sessionStorage.getItem("token");
     return user && user;
   }
 
@@ -20,20 +20,19 @@ function TokenManager() {
 
     let route = login_route();
 
-    return fetch(route, request)
-      .then((response) => {
-        if (!response.ok) {
-          throw Error(`${response.statusText} - ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        localStorage.setItem("token", data.access_token);
-        return data.isStudent;
-      })
-      .catch((error) => {
-        throw Error(error);
-      });
+    return fetch(route, request).then(response => {
+
+      if (!response.ok) {
+        throw Error(response.statusText)
+      }
+
+      return response.json()
+    }).then(data => {
+      sessionStorage.setItem("token", data.access_token);
+      return data.user_is_student;
+    }).catch(error => {
+      throw Error(error);
+    })
   }
 
   function revoke_token() {
@@ -51,7 +50,7 @@ function TokenManager() {
         if (!response.ok) {
           throw Error(`${response.statusText} - ${response.status}`);
         }
-        localStorage.removeItem("token");
+        sessionStorage.removeItem("token");
       })
       .catch((error) => {
         console.log(error);

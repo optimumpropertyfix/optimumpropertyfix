@@ -38,12 +38,16 @@ const student_delete_ticket_route = (netid, ticket_id) => {
   return `/student/${netid}/tickets/${ticket_id}/delete`;
 };
 
-const new_account_route = () => {
-  return `/new_account`;
+const new_user_route = () => {
+  return `/new_user`;
 };
 
+const reset_password_route = () => {
+  return `/reset_password`
+}
+
 const login_route = () => {
-  return `/token`;
+  return `/login`;
 };
 
 const logout_route = () => {
@@ -75,7 +79,8 @@ export {
   student_delete_ticket_route,
   login_route,
   logout_route,
-  new_account_route,
+  new_user_route,
+  reset_password_route,
   view_session_route,
   admin_create_faq_route,
   admin_create_announcement_route,
