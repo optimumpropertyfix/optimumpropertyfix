@@ -2,6 +2,11 @@
   .TicketView {
     overflow-y: auto;
   }
+  .feedback_disabled {
+    border: dashed 3px var(--color-light-gray);
+    border-radius: 7px;
+    padding: 0.8rem;
+  }
   .feedback_response {
     display: flex;
     flex-direction: column;

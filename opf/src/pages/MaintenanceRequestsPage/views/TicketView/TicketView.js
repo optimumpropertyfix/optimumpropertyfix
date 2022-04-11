@@ -16,7 +16,9 @@ export function AdminTicketView() {
 }
 
 export function StudentTicketView() {
-  const [ticket, setTicket] = useState({});
+  const [ticket, set_ticket] = useState({});
+
+  const [feedback_disabled, set_feedback_disabled] = useState(false)
 
   const status_color = (status) => {
     if (status === "C") {
@@ -38,8 +40,14 @@ export function StudentTicketView() {
     }
   };
 
+  const feedback_background = (styles) => {
+    if (feedback_disabled) {
+      return styles.feedback_disabled
+    }
+  }
+
   useEffect(() => {
-    setTicket({
+    set_ticket({
       ticket_title: "Fix Water Leak",
       ticket_description:
         "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -123,7 +131,7 @@ export function StudentTicketView() {
               ) : null}
             </div>
           </div>
-          <div className={styles.feedback}>
+          <div className={`${styles.feedback}`}>
             <p className={`${styles.page_subtitle_text} page_subtitle_text`}>
               Give Us Your Feedback
             </p>
@@ -165,28 +173,29 @@ export function StudentTicketView() {
                     />
                   </div>
                 ) : null}
-                <FormGroup label="Rating" className={styles.feedback_rating}>
+                <FormGroup label="Rating" className={`${styles.feedback_rating} ${feedback_background(styles)}`}>
                   <div className={styles.feedback_rating_container}>
                     <label>
-                      <input type="radio" value="1" name="rating" /> 1
+                      <input disabled={feedback_disabled} type="radio" value="1" name="rating" /> 1
                     </label>
                     <label>
-                      <input type="radio" value="2" name="rating" /> 2
+                      <input disabled={feedback_disabled} type="radio" value="2" name="rating" /> 2
                     </label>
                     <label>
-                      <input type="radio" value="3" name="rating" /> 3
+                      <input disabled={feedback_disabled} type="radio" value="3" name="rating" /> 3
                     </label>
                     <label>
-                      <input type="radio" value="4" name="rating" /> 4
+                      <input disabled={feedback_disabled} type="radio" value="4" name="rating" /> 4
                     </label>
                     <label>
-                      <input type="radio" value="5" name="rating" /> 5
+                      <input disabled={feedback_disabled} type="radio" value="5" name="rating" /> 5
                     </label>
                   </div>
                 </FormGroup>
-                <div className={styles.written_student_feedback}>
+                <div className={`${styles.written_student_feedback} ${feedback_background(styles)}`}>
                   <FormGroup label="Feedback">
                     <textarea
+                      disabled={feedback_disabled}
                       rows="10"
                       placeholder="The service was excellent! Only thing I would improve is that the handyman was 15 minutes late."
                     />
@@ -197,7 +206,8 @@ export function StudentTicketView() {
                     className={styles.written_student_feedback_timestamps}
                   />
                 </div>
-                <button>Submit Feedback</button>
+                { feedback_disabled ? null :
+                <button>Submit Feedback</button> }
               </div>
             ) : (
               <Card icon="error" label="Can't Submit Feedback Right Now">
