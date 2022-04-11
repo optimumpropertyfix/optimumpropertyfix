@@ -1,5 +1,5 @@
 //create a ticket view for a single ticket
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { student_new_ticket_route } from "../../../../Routes";
 import styles from "./CreateTicketView.module.css";
 import { useNavigate } from "react-router-dom";
@@ -31,9 +31,74 @@ export function StudentCreateTicketView() {
   // 2. When the page is rendered, a request is made to the database to grab
   // buildings in which the user can use to select which building to tie their
   // ticket too.
+  // *
   // 2a. This makes read operations to the database upon page render and write
   // operations upon sending of the ticket to the database.
   // ***
+
+  useEffect(() => {
+
+    // Function Note
+    // ***
+    // 1. When the page renders, the list of buildings is received from the database.
+
+    const building_data = [
+      {
+      building_id: 1,
+      buidling_name: "Argenta Hall"
+    }, {
+      building_id: 2,
+      building_name: "Nye Hall"
+    }]  
+
+    const location_data_argenta = [{
+      location_id: 1,
+      location_name: "Bedroom"
+    }, {
+      location_id: 2,
+      location_name: "Restroom"
+    }, {
+      location_id: 3,
+      location_name: "Living Area"
+    }]
+
+    const unit_data_argenta = [{
+      unit_id: 1,
+      unit_name: "1A"
+    }, {
+      unit_id: 2,
+      unit_name: "1B"
+    }, {
+      unit_id: 3,
+      unit_name: "1C"
+    }, {
+      unit_id: 4,
+      unit_name: "1D"
+    }]
+
+    const location_data_nye = [{
+      location_id: 1,
+      location_name: "Bedroom"
+    }, {
+      location_id: 2,
+      location_name: "Restroom"
+    }]
+
+    const unit_data_nye = [{
+      unit_id: 1,
+      unit_name: "1A"
+    }, {
+      unit_id: 2,
+      unit_name: "1B"
+    }, {
+      unit_id: 3,
+      unit_name: "1C"
+    }]
+
+  }, [])
+
+  const [unit_disabled, set_unit_disabled] = useState(true)
+  const [location_disabled, set_location_disabled] = useState(true)
 
   const navigate = useNavigate();
   const { get_token } = TokenManager();
@@ -57,6 +122,10 @@ export function StudentCreateTicketView() {
 
     return JSON.stringify(ticket);
   };
+
+  const populate_locations = (building_id) => {
+
+  }
 
   const create_ticket = () => {
     let ticket = serialize_ticket(
@@ -219,6 +288,7 @@ export function StudentCreateTicketView() {
                 value={location}
                 className={styles.location_form}
                 onChange={handle_location}
+                disabled={location_disabled}
               >
                 <option value="Select Location" disabled>
                   Select Location
@@ -237,6 +307,7 @@ export function StudentCreateTicketView() {
                 className={`${styles.unit_form}`}
                 onChange={handle_unit}
                 value={unit}
+                disabled={unit_disabled}
               >
                 <option value="Select Unit" disabled>
                   Select Unit
