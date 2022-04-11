@@ -21,6 +21,7 @@ import "./index.css";
 import AppointmentsPage from "./pages/AppointmentsPage/AppointmentsPage";
 import AccountPage from "./pages/AccountPage/AccountPage";
 import AllAppointmentsView from "./pages/AppointmentsPage/views/AllAppointmentsView/AllAppointmentsView";
+import AppointmentView from "./pages/AppointmentsPage/views/AppointmentView/AppointmentView";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -48,7 +49,7 @@ ReactDOM.render(
             />
             <Route path="appointments" element={<AppointmentsPage />}>
               <Route index element={<AllAppointmentsView />} />
-              <Route path=":appointment" element={<AllAppointmentsView />} />
+              <Route path=":appointment" element={<AppointmentView />} />
             </Route>
             <Route path="account" element={<AccountPage />} />
           </Route>

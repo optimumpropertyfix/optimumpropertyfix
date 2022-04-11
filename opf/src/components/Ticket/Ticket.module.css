@@ -1,0 +1,65 @@
+@media only screen and (min-width: 300px) {
+  .Ticket {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .status_metadata {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    width: unset;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 5px 2px var(--color-standard-gray);
+  }
+}
+@media only screen and (min-width: 600px) {
+  .Ticket {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .status_metadata {
+    grid-column-start: 1;
+    grid-column-end: span 2;
+  }
+  .title_metadata {
+    grid-column-start: 1;
+    grid-column-end: span 2;
+  }
+  .description_metadata {
+    grid-column-start: 1;
+    grid-column-end: span 2;
+  }
+  .additional_notes_metadata {
+    grid-column-start: 1;
+    grid-column-end: span 2;
+  }
+}
+@media only screen and (min-width: 900px) {
+  .Ticket {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .ticket_metadata {
+    grid-column-start: 1;
+    grid-column-end: 2;
+  }
+  .metadata_group {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .status_metadata {
+    grid-column-start: 1;
+    grid-column-end: span 3;
+  }
+  .title_metadata {
+    grid-column-start: 1;
+    grid-column-end: span 3;
+  }
+  .description_metadata {
+    grid-column-start: 1;
+    grid-column-end: span 3;
+  }
+  .additional_notes_metadata {
+    grid-column-start: 1;
+    grid-column-end: span 3;
+  }
+}

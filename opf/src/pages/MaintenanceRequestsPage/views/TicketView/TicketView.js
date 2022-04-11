@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Card, { ToggleableCard } from "../../../../components/Card/Card";
 import FormGroup from "../../../../components/FormGroup/FormGroup";
 import ItemGroup from "../../../../components/ItemGroup/ItemGroup";
+import Ticket from "../../../../components/Ticket/Ticket";
 import Timestamps from "../../../../components/Timestamps/Timestamps";
 import Widget from "../../../../components/Widget/Widget";
 import styles from "./TicketView.module.css";
