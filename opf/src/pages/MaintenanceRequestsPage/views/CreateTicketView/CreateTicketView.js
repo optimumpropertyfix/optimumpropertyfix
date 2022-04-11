@@ -7,192 +7,18 @@ import TokenManager from "../../../../TokenManager";
 import { ToggleableCard } from "../../../../components/Card/Card";
 import FormGroup from "../../../../components/FormGroup/FormGroup";
 
-export function AdminCreateTicketView() {
-  const [Title, setTitle] = useState("");
-  const [Description, setDescription] = useState("");
-  const [Location, setLocation] = useState("");
-  const [Building, setBuilding] = useState("");
-  const [Unit, setUnit] = useState("");
-  const [Notes, setNotes] = useState("");
-
-  const navigate = useNavigate();
-
-  //serialize account
-  const serialize_ticket = (
-    title,
-    description,
-    severity,
-    location,
-    building,
-    unit,
-    notes
-  ) => {
-    let ticket = {
-      title: title,
-      description: description,
-      severity: severity,
-      location: location,
-      building: building,
-      unit: unit,
-      notes: notes,
-    };
-
-    return JSON.stringify(ticket);
-  };
-
-  const ticket = (
-    title,
-    description,
-    severity,
-    location,
-    building,
-    unit,
-    notes
-  ) => {
-    let ticket = serialize_ticket(
-      title,
-      description,
-      severity,
-      location,
-      building,
-      unit,
-      notes
-    );
-
-    let request = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: ticket,
-    };
-
-    let route = student_new_ticket_route();
-
-    return fetch(route, request)
-      .then((response) => {
-        if (!response.ok) {
-          throw Error(`${response.statusText} - ${response.status}`);
-        }
-        return true;
-      })
-      .catch((error) => {
-        throw Error(error);
-      });
-  };
-
-  const handle_Title = (event) => {
-    setTitle(event.target.value);
-  };
-
-  const handle_Description = (event) => {
-    setDescription(event.target.value);
-  };
-
-  const handle_Location = (event) => {
-    setLocation(event.target.value);
-  };
-
-  const handle_Building = (event) => {
-    setBuilding(event.target.value);
-  };
-
-  const handle_Unit = (event) => {
-    setUnit(event.target.value);
-  };
-
-  const handle_Notes = (event) => {
-    setNotes(event.target.value);
-  };
-
-  const handle_SubmitTicket = (event) => {
-    event.preventDefault();
-  };
-
-  return (
-    <div className={styles.StudentCreateTicketView}>
-      <div>
-        <div className={styles.page_header}>
-          <p className="text_page_title">Create New Ticket</p>
-        </div>
-        <div className={styles.ticket_form}>
-          <div>
-            <div className={`${styles.form} layout_helper_FormGroup`}>
-              <label>Title</label>
-              <input type="text" onChange={handle_Title} />
-            </div>
-            <div className={`${styles.form} layout_helper_FormGroup`}>
-              <label>Please describe the problem</label>
-              <textarea
-                className={styles.description_form}
-                onChange={handle_Description}
-              />
-            </div>
-          </div>
-          <div>
-            <div className={`${styles.form} layout_helper_FormGroup`}>
-              <label>Location of problem</label>
-              <select
-                className={styles.location_form}
-                onChange={handle_Location}
-              >
-                <option value="livingroom">Living Room</option>
-                <option value="bathroom">Bathroom</option>
-                <option value="kitchen">Kitchen</option>
-                <option value="bedroom">Bedroom</option>
-              </select>
-            </div>
-            <div className={`${styles.form} layout_helper_FormGroup`}>
-              <label>Building</label>
-              <select
-                className={styles.building_form}
-                onChange={handle_Building}
-              >
-                <option value="argenta">Argenta Hall</option>
-                <option value="nye">Nye Hall</option>
-                <option value="greatbasin">Great Basin Hall</option>
-                <option value="juniper">Juniper Hall</option>
-                <option value="llc">Living Learning Center</option>
-                <option value="sierra">Sierra Hall</option>
-                <option value="canada">Cananda Hall</option>
-                <option value="manzanita">Manzanita Hall</option>
-              </select>
-            </div>
-            <div className={`${styles.form} layout_helper_FormGroup`}>
-              <label>Your unit #</label>
-              <input type="text" onChange={handle_Unit} />
-            </div>
-            <div className={`${styles.form} layout_helper_FormGroup`}>
-              <label>Additional Notes</label>
-              <textarea
-                className={styles.description_form}
-                onChange={handle_Notes}
-              />
-            </div>
-          </div>
-        </div>
-        <div className={styles.page_footer}>
-          <button onClick={handle_SubmitTicket}>Submit Ticket</button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export function StudentCreateTicketView() {
-  //first state is content passing in empty string, second is ticket
-  const [Title, setTitle] = useState("");
-  const [Description, setDescription] = useState("");
-  const [Severity, setSeverity] = useState("Select Severity");
-  const [Location, setLocation] = useState("Select Location");
-  const [Building, setBuilding] = useState("Select Building");
-  const [Unit, setUnit] = useState("Select Unit");
-  const [Notes, setNotes] = useState("");
+  const [title, set_title] = useState("");
+  const [description, set_description] = useState("");
+  const [severity, set_severity] = useState("Select Severity");
+  const [location, set_location] = useState("Select Location");
+  const [building, set_building] = useState("Select Building");
+  const [unit, set_unit] = useState("Select Unit");
+  const [notes, set_notes] = useState("");
 
   const navigate = useNavigate();
   const { get_token } = TokenManager();
 
-  //serialize account
   const serialize_ticket = (
     title,
     description,
@@ -257,37 +83,37 @@ export function StudentCreateTicketView() {
       });
   };
 
-  const handle_Title = (event) => {
-    setTitle(event.target.value);
+  const handle_title = (event) => {
+    set_title(event.target.value);
   };
 
-  const handle_Description = (event) => {
-    setDescription(event.target.value);
+  const handle_description = (event) => {
+    set_description(event.target.value);
   };
 
-  const handle_Severity = (event) => {
-    setSeverity(event.target.value);
+  const handle_severity = (event) => {
+    set_severity(event.target.value);
   };
 
-  const handle_Location = (event) => {
-    setLocation(event.target.value);
+  const handle_location = (event) => {
+    set_location(event.target.value);
   };
 
-  const handle_Building = (event) => {
-    setBuilding(event.target.value);
+  const handle_building = (event) => {
+    set_building(event.target.value);
   };
 
-  const handle_Unit = (event) => {
-    setUnit(event.target.value);
+  const handle_unit = (event) => {
+    set_unit(event.target.value);
   };
 
-  const handle_Notes = (event) => {
-    setNotes(event.target.value);
+  const handle_notes = (event) => {
+    set_notes(event.target.value);
   };
 
-  const handle_SubmitTicket = (event) => {
+  const handle_submit_ticket = (event) => {
     event.preventDefault();
-    create_ticket(Title, Description, Severity, Location, Building, Unit, Notes)
+    create_ticket(title, description, severity, location, building, unit, notes)
       .then((successful) => {
         navigate("/student/maintenance_requests");
       })
@@ -350,7 +176,7 @@ export function StudentCreateTicketView() {
               <input
                 type="text"
                 placeholder="Water Leak in Kitchen"
-                onChange={handle_Title}
+                onChange={handle_title}
               />
             </FormGroup>
             <FormGroup
@@ -360,7 +186,7 @@ export function StudentCreateTicketView() {
               <textarea
                 placeholder="Water is leaking in the kitchen below the sink. The water currently just leaking to the floor."
                 className={styles.description_form}
-                onChange={handle_Description}
+                onChange={handle_description}
               />
             </FormGroup>
             <FormGroup
@@ -368,9 +194,9 @@ export function StudentCreateTicketView() {
               label="Problem Location"
             >
               <select
-                value={Location}
+                value={location}
                 className={styles.location_form}
-                onChange={handle_Location}
+                onChange={handle_location}
               >
                 <option value="Select Location" disabled>
                   Select Location
@@ -387,8 +213,8 @@ export function StudentCreateTicketView() {
             >
               <select
                 className={styles.building_form}
-                onChange={handle_Building}
-                value={Building}
+                onChange={handle_building}
+                value={building}
               >
                 <option value="Select Building" disabled>
                   Select Building
@@ -409,8 +235,8 @@ export function StudentCreateTicketView() {
             >
               <select
                 className={`${styles.unit_form}`}
-                onChange={handle_Unit}
-                value={Unit}
+                onChange={handle_unit}
+                value={unit}
               >
                 <option value="Select Unit" disabled>
                   Select Unit
@@ -428,12 +254,12 @@ export function StudentCreateTicketView() {
               <textarea
                 placeholder="There is some water on the floor as you enter in the kitchen."
                 className={styles.description_form}
-                onChange={handle_Notes}
+                onChange={handle_notes}
               />
             </FormGroup>
           </div>
           <div className={styles.ticket_options}>
-            <button onClick={handle_SubmitTicket}>Submit Ticket</button>
+            <button onClick={handle_submit_ticket}>Submit Ticket</button>
             <button>Clear Ticket</button>
           </div>
         </div>
