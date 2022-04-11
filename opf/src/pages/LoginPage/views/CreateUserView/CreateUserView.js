@@ -108,16 +108,7 @@ function CreateUserView() {
 
   const handle_sign_up = (event) => {
     event.preventDefault();
-    create_user(
-      first_name,
-      last_name,
-      contact_email,
-      net_id,
-      nshe_id,
-      gender,
-      year,
-      password
-    )
+    create_user()
       .then((successful) => {
         navigate("/login");
       })
@@ -198,7 +189,7 @@ function CreateUserView() {
           className={`form_group ${styles.form_group} ${login_styles.form_group}`}
         >
           <select value={year} onChange={handle_year}>
-          <option value="Select Year" disabled>
+            <option value="Select Year" disabled>
               Select Year
             </option>
 

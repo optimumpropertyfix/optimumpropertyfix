@@ -1,5 +1,5 @@
 //create a ticket view for a single ticket
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { student_new_ticket_route } from "../../../../Routes";
 import styles from "./CreateTicketView.module.css";
 import { useNavigate } from "react-router-dom";
@@ -10,50 +10,127 @@ import FormGroup from "../../../../components/FormGroup/FormGroup";
 export function StudentCreateTicketView() {
   const [title, set_title] = useState("");
   const [description, set_description] = useState("");
-  const [severity, set_severity] = useState("Select Severity");
   const [location, set_location] = useState("Select Location");
   const [building, set_building] = useState("Select Building");
   const [unit, set_unit] = useState("Select Unit");
   const [notes, set_notes] = useState("");
 
+  // Few notes about the operation of this page.
+  // ***
+  // 1. When the user selects a building, the location and unit fields are
+  // updated with information from the database pretaining to
+  // what locations and units the building offers.
+  // *
+  // 1a. Making this happen involves making states for location and unit.
+  // The states are used to store an object array which holds the value of
+  // each unit and location (id and name).
+  // 1b. The fields for location and building are unclickable if building is
+  // set at the default. When building field is changed, a request is sent to
+  // get the building and units based upon the given building id.
+  // ***
+  // 2. When the page is rendered, a request is made to the database to grab
+  // buildings in which the user can use to select which building to tie their
+  // ticket too.
+  // *
+  // 2a. This makes read operations to the database upon page render and write
+  // operations upon sending of the ticket to the database.
+  // ***
+
+  useEffect(() => {
+
+    // Function Note
+    // ***
+    // 1. When the page renders, the list of buildings is received from the database.
+
+    const building_data = [
+      {
+      building_id: 1,
+      buidling_name: "Argenta Hall"
+    }, {
+      building_id: 2,
+      building_name: "Nye Hall"
+    }]  
+
+    const location_data_argenta = [{
+      location_id: 1,
+      location_name: "Bedroom"
+    }, {
+      location_id: 2,
+      location_name: "Restroom"
+    }, {
+      location_id: 3,
+      location_name: "Living Area"
+    }]
+
+    const unit_data_argenta = [{
+      unit_id: 1,
+      unit_name: "1A"
+    }, {
+      unit_id: 2,
+      unit_name: "1B"
+    }, {
+      unit_id: 3,
+      unit_name: "1C"
+    }, {
+      unit_id: 4,
+      unit_name: "1D"
+    }]
+
+    const location_data_nye = [{
+      location_id: 1,
+      location_name: "Bedroom"
+    }, {
+      location_id: 2,
+      location_name: "Restroom"
+    }]
+
+    const unit_data_nye = [{
+      unit_id: 1,
+      unit_name: "1A"
+    }, {
+      unit_id: 2,
+      unit_name: "1B"
+    }, {
+      unit_id: 3,
+      unit_name: "1C"
+    }]
+
+  }, [])
+
+  const [unit_disabled, set_unit_disabled] = useState(true)
+  const [location_disabled, set_location_disabled] = useState(true)
+
   const navigate = useNavigate();
   const { get_token } = TokenManager();
 
   const serialize_ticket = (
-    title,
-    description,
-    severity,
-    location,
-    building,
-    unit,
-    notes
+    title_param,
+    description_param,
+    location_param,
+    building_param,
+    unit_param,
+    notes_param
   ) => {
     let ticket = {
-      title: title,
-      description: description,
-      severity: severity,
-      location: location,
-      building: building,
-      unit: unit,
-      notes: notes,
+      ticket_title: title_param,
+      ticket_description: description_param,
+      ticket_location: location_param,
+      ticket_building: building_param,
+      ticket_unit: unit_param,
+      ticket_notes: notes_param,
     };
 
     return JSON.stringify(ticket);
   };
 
-  const create_ticket = (
-    title,
-    description,
-    severity,
-    location,
-    building,
-    unit,
-    notes
-  ) => {
+  const populate_locations = (building_id) => {
+
+  }
+
+  const create_ticket = () => {
     let ticket = serialize_ticket(
       title,
       description,
-      severity,
       location,
       building,
       unit,
@@ -91,10 +168,6 @@ export function StudentCreateTicketView() {
     set_description(event.target.value);
   };
 
-  const handle_severity = (event) => {
-    set_severity(event.target.value);
-  };
-
   const handle_location = (event) => {
     set_location(event.target.value);
   };
@@ -113,7 +186,7 @@ export function StudentCreateTicketView() {
 
   const handle_submit_ticket = (event) => {
     event.preventDefault();
-    create_ticket(title, description, severity, location, building, unit, notes)
+    create_ticket()
       .then((successful) => {
         navigate("/student/maintenance_requests");
       })
@@ -121,6 +194,8 @@ export function StudentCreateTicketView() {
         console.log(error);
       });
   };
+
+  const handle_clear_ticket = () => {};
 
   return (
     <div className={styles.StudentCreateTicketView}>
@@ -145,12 +220,6 @@ export function StudentCreateTicketView() {
               <div className={styles.instruction}>
                 <p>Select a Location From The Dropdown Menu</p>
                 <p>Example: "Bathroom", "Kitchen", "Bathroom", etc.</p>
-              </div>
-              <div className={styles.instruction}>
-                <p>Select a Severity Level</p>
-                <p>
-                  Example: "LOW" (4-7 days), "MILD" (2-3 days), "HIGH" (1 day).
-                </p>
               </div>
               <div className={styles.instruction}>
                 <p>Select a Building From The Dropdown Menu</p>
@@ -191,24 +260,6 @@ export function StudentCreateTicketView() {
             </FormGroup>
             <FormGroup
               className={`${styles.form_group} form_group`}
-              label="Problem Location"
-            >
-              <select
-                value={location}
-                className={styles.location_form}
-                onChange={handle_location}
-              >
-                <option value="Select Location" disabled>
-                  Select Location
-                </option>
-                <option value="livingroom">Living Room</option>
-                <option value="bathroom">Bathroom</option>
-                <option value="kitchen">Kitchen</option>
-                <option value="bedroom">Bedroom</option>
-              </select>
-            </FormGroup>
-            <FormGroup
-              className={`${styles.form_group} form_group`}
               label="Building"
             >
               <select
@@ -231,12 +282,32 @@ export function StudentCreateTicketView() {
             </FormGroup>
             <FormGroup
               className={`${styles.form_group} form_group`}
+              label="Problem Location"
+            >
+              <select
+                value={location}
+                className={styles.location_form}
+                onChange={handle_location}
+                disabled={location_disabled}
+              >
+                <option value="Select Location" disabled>
+                  Select Location
+                </option>
+                <option value="livingroom">Living Room</option>
+                <option value="bathroom">Bathroom</option>
+                <option value="kitchen">Kitchen</option>
+                <option value="bedroom">Bedroom</option>
+              </select>
+            </FormGroup>
+            <FormGroup
+              className={`${styles.form_group} form_group`}
               label="Unit"
             >
               <select
                 className={`${styles.unit_form}`}
                 onChange={handle_unit}
                 value={unit}
+                disabled={unit_disabled}
               >
                 <option value="Select Unit" disabled>
                   Select Unit
@@ -260,7 +331,7 @@ export function StudentCreateTicketView() {
           </div>
           <div className={styles.ticket_options}>
             <button onClick={handle_submit_ticket}>Submit Ticket</button>
-            <button>Clear Ticket</button>
+            <button onClick={handle_clear_ticket}>Clear Ticket</button>
           </div>
         </div>
       </div>

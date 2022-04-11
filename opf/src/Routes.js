@@ -43,8 +43,8 @@ const new_user_route = () => {
 };
 
 const reset_password_route = () => {
-  return `/reset_password`
-}
+  return `/reset_password`;
+};
 
 const login_route = () => {
   return `/login`;
@@ -77,6 +77,7 @@ export {
   admin_all_tickets_route,
   student_get_single_ticket_route,
   student_delete_ticket_route,
+  admin_get_single_ticket_route,
   login_route,
   logout_route,
   new_user_route,

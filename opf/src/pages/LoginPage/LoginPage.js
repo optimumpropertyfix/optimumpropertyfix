@@ -9,7 +9,7 @@ function LoginPage() {
     <div className={styles.LoginPage}>
       <div className={styles.container}>
         <div className={styles.header}>
-          <img className={styles.logo} src={logo} />
+          <img className={styles.logo} src={logo} alt="OPF Logo" />
         </div>
         <div className={styles.outlet}>
           <Outlet />

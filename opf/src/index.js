@@ -7,45 +7,16 @@ import App from "./App";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import SignInView from "./pages/LoginPage/views/SignInView/SignInView";
 import ResetPasswordView from "./pages/LoginPage/views/ResetPasswordView/ResetPasswordView";
-import CreateAccountView from "./pages/LoginPage/views/CreateAccountView/CreateAccountView";
+import CreateUserView from "./pages/LoginPage/views/CreateUserView/CreateUserView";
 import StudentPage from "./pages/StudentPage/StudentPage";
 
-import {
-  AdminDashboardPage,
-  StudentDashboardPage,
-} from "./pages/DashboardPage/DashboardPage";
-import {
-  AdminMaintenanceRequestsPage,
-  StudentMaintenanceRequestsPage,
-} from "./pages/MaintenanceRequestsPage/MaintenanceRequestsPage";
-import {
-  AdminAllTicketsView,
-  StudentAllTicketsView,
-} from "./pages/MaintenanceRequestsPage/views/AllTicketsView/AllTicketsView";
+import { StudentDashboardPage } from "./pages/DashboardPage/DashboardPage";
+import { StudentMaintenanceRequestsPage } from "./pages/MaintenanceRequestsPage/MaintenanceRequestsPage";
+import { StudentAllTicketsView } from "./pages/MaintenanceRequestsPage/views/AllTicketsView/AllTicketsView";
 
-import { AdminFormsPage } from "./pages/FormPage/FormPage";
-import { AdminCreateAnnouncementView } from "./pages/FormPage/views/AnnouncementView/AnnouncementView";
-import { AdminCreateFAQView } from "./pages/FormPage/views/FAQView/FAQView";
-
-import { AdminLandingView } from "./pages/FormPage/views/LandingView/LandingView";
-
-import {
-  AdminCreateTicketView,
-  StudentCreateTicketView,
-} from "./pages/MaintenanceRequestsPage/views/CreateTicketView/CreateTicketView";
-import {
-  AdminTicketView,
-  StudentTicketView,
-} from "./pages/MaintenanceRequestsPage/views/TicketView/TicketView";
-import {
-  AdminFeedbackPage,
-  StudentFeedbackPage,
-} from "./pages/FeedbackPage/FeedbackPage";
-import {
-  AdminFAQPage,
-  StudentFAQPage,
-} from "./pages/FrequentAskedQuestions/FrequentlyAskedQuestions";
-import { AppointmentView } from "./pages/FormPage/views/AppointmentView/AppointmentView";
+import { StudentCreateTicketView } from "./pages/MaintenanceRequestsPage/views/CreateTicketView/CreateTicketView";
+import { StudentTicketView } from "./pages/MaintenanceRequestsPage/views/TicketView/TicketView";
+import { StudentFAQPage } from "./pages/FrequentAskedQuestions/FrequentlyAskedQuestions";
 import "./index.css";
 import AppointmentsPage from "./pages/AppointmentsPage/AppointmentsPage";
 import AccountPage from "./pages/AccountPage/AccountPage";
