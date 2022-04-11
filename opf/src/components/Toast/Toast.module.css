@@ -1,17 +1,14 @@
 @media only screen and (min-width: 300px) {
-  .AppointmentsPage {
-    min-height: 100%;
+  .Toast {
+    position: absolute;
+    left: 10vh;
+    right: 10vh;
+    bottom: 4vh;
+    background: white;
+    border-radius: 7px;
   }
 }
-
 @media only screen and (min-width: 600px) {
-  .AppointmentsPage {
-    margin: 2rem;
-    max-height: 100%;
-  }
 }
-
 @media only screen and (min-width: 900px) {
-  .AppointmentsPage {
-  }
 }

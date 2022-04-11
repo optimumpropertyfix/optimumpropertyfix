@@ -28,11 +28,7 @@ function StudentPage() {
         <SectionNavLink to="/student/maintenance_requests" icon="receipt_long">
           TICKETS
         </SectionNavLink>
-        <SectionNavLink
-          end
-          to="/student/frequently_asked_questions"
-          icon="schedule"
-        >
+        <SectionNavLink end to="/student/appointments" icon="schedule">
           APPOINTMENTS
         </SectionNavLink>
         <SectionNavLink end to="/student/account" icon="account_circle">

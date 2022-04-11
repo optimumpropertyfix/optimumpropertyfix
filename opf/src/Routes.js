@@ -19,8 +19,8 @@ const admin_create_ticket_route = (netid) => {
   return `/admin/${netid}/tickets/create`;
 };
 
-const student_all_tickets_route = (netid) => {
-  return `/student/${netid}/tickets`;
+const student_all_tickets_route = () => {
+  return `/student/tickets`;
 };
 
 const admin_all_tickets_route = (netid) => {
