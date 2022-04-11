@@ -3,14 +3,14 @@ import styles from "./ResetPasswordView.module.css";
 import login_styles from "../../LoginPage.module.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { reset_password_route } from "../../../../Routes"
+import { reset_password_route } from "../../../../Routes";
 function ResetPasswordView() {
+  const [net_id, set_net_id] = useState("");
+  const [nshe_id, set_nshe_id] = useState("");
+  const [password, set_password] = useState("");
+  const [password_verify, set_password_verify] = useState("");
 
-  const [net_id, set_net_id] = useState("")
-  const [nshe_id, set_nshe_id] = useState("")
-  const [password, set_password] = useState("")
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const serialize_credentials = (
     net_id_param,
@@ -20,28 +20,26 @@ function ResetPasswordView() {
     let credentials = {
       user_net_id: net_id_param,
       user_nshe_id: nshe_id_param,
-      user_password: password_param
+      user_password: password_param,
     };
 
-    return JSON.stringify(credentials)
-  }
+    return JSON.stringify(credentials);
+  };
 
   const reset_password = () => {
-    let credentials = serialize_credentials(net_id, 
-      nshe_id, 
-      password);
+    let credentials = serialize_credentials(net_id, nshe_id, password);
 
-      let request = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: credentials,
-      };
+    let request = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: credentials,
+    };
 
-      let route = reset_password_route();
+    let route = reset_password_route();
 
-      return fetch(route, request)
+    return fetch(route, request)
       .then((response) => {
         if (!response.ok) {
           throw Error(`${response.statusText} - ${response.status}`);
@@ -65,22 +63,23 @@ function ResetPasswordView() {
     set_password(event.target.value);
   };
 
-  const validate_password_match = (event) => {
+  const handle_password_verify = (event) => {
+    set_password_verify(event.target.value);
+  };
 
-  }
+  const validate_password_match = (event) => {};
 
-  const validate_nonempty_field = (event) => {
-
-  }
+  const validate_nonempty_field = (event) => {};
 
   const handle_reset_password = (event) => {
-    reset_password().then((successful) => {
-      navigate("/login");
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-  }
+    reset_password()
+      .then((successful) => {
+        navigate("/login");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <div className={styles.ResetPasswordView}>
@@ -104,13 +103,21 @@ function ResetPasswordView() {
           label="Password"
           className={`form_group ${styles.form_group} ${login_styles.form_group}`}
         >
-          <input onChange={handle_password} type="password" placeholder="Password" />
+          <input
+            onChange={handle_password}
+            type="password"
+            placeholder="Password"
+          />
         </FormGroup>
         <FormGroup
           label="Re-enter Password"
           className={`form_group ${styles.form_group} ${login_styles.form_group}`}
         >
-          <input type="password" placeholder="Re-enter Password" />
+          <input
+            onChange={handle_password_verify}
+            type="password"
+            placeholder="Re-enter Password"
+          />
         </FormGroup>
       </form>
       <input

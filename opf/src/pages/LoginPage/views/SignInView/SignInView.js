@@ -20,6 +20,11 @@ function SignInView() {
     return JSON.stringify(credentials);
   };
 
+  const reset_password = (event) => {
+    event.preventDefault();
+    navigate("/login/reset");
+  };
+
   const handle_net_id = (event) => {
     set_net_id(event.target.value);
   };
@@ -45,11 +50,6 @@ function SignInView() {
       });
   };
 
-  const reset_password = (event) => {
-    event.preventDefault();
-    navigate("/login/reset");
-  };
-
   return (
     <div className={styles.SignInView}>
       <p className={`${login_styles.page_title} ${styles.page_title}`}>
@@ -60,11 +60,7 @@ function SignInView() {
           label="NetID"
           className={`form_group ${styles.form_group} ${login_styles.form_group}`}
         >
-          <input
-            onChange={handle_net_id}
-            type="text"
-            placeholder="NetID"
-          />
+          <input onChange={handle_net_id} type="text" placeholder="NetID" />
         </FormGroup>
         <FormGroup
           label="Password"
