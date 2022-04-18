@@ -26,6 +26,20 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  ::-webkit-scrollbar {
+    opacity: 100%;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: none !important;
+    opacity: 100%;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: none !important;
+    opacity: 100%;
+  }
+
+
   .italic {
     font-style: italic;
   }

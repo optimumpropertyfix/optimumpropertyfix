@@ -5,9 +5,6 @@
   .page_subtitle_text {
     margin-bottom: 0.5rem;
   }
-  .ticket_filter {
-    background: red;
-  }
   .filter_group {
     display: flex;
     flex-direction: column;
@@ -49,7 +46,6 @@
     display: grid;
     grid-template-columns: 2fr 250px;
     grid-template-rows: auto min-content auto;
-    background: red;
     box-sizing: content-box;
   }
   .filter_options {

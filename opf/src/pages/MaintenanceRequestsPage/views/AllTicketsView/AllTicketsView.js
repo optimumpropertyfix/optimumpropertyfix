@@ -49,24 +49,23 @@ export function StudentAllTicketsView() {
             <div className={styles.filter_group}>
               <FormGroup label="Severity">
                 <select value={"livingroom"} className={styles.location_form}>
-                  <option value="Select Location" disabled>
-                    Select Location
+                  <option value="Select Severity" disabled>
+                    Select Severity
                   </option>
-                  <option value="livingroom">Living Room</option>
-                  <option value="bathroom">Bathroom</option>
-                  <option value="kitchen">Kitchen</option>
-                  <option value="bedroom">Bedroom</option>
+                  <option value="low">Low</option>
+                  <option value="mild">Mild</option>
+                  <option value="high">High</option>
                 </select>
               </FormGroup>
               <FormGroup label="Status">
                 <select value={"livingroom"} className={styles.location_form}>
-                  <option value="Select Location" disabled>
-                    Select Location
+                  <option value="Select Status" disabled>
+                    Select Status
                   </option>
-                  <option value="livingroom">Living Room</option>
-                  <option value="bathroom">Bathroom</option>
-                  <option value="kitchen">Kitchen</option>
-                  <option value="bedroom">Bedroom</option>
+                  <option value="pending">Pending</option>
+                  <option value="received">Received</option>
+                  <option value="completed">Completed</option>
+                  <option value="deleted">Deleted</option>
                 </select>
               </FormGroup>
             </div>
