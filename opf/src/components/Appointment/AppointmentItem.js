@@ -8,12 +8,16 @@ const AppointmentItem = (props) => {
   return (
     <div className={`${styles.AppointmentItem} block_contrast_items`}>
       <div className={styles.appointment_content}>
-        <AppointmentDate date={props.appointment_date} />
+        <AppointmentDate
+          day_date={props.date.day_date}
+          month={props.date.month}
+          day={props.date.day}
+        />
         <div className={styles.appointment_details}>
-          <ItemGroup label="Time Frame" text="4:00 p.m. - 5:00 p.m." />
-          <ItemGroup label="Building" text="Argenta Hall" />
-          <ItemGroup label="Unit" text="1C" />
-          <ItemGroup label="Location" text="Kitchen" />
+          <ItemGroup label="Time Frame" text={props.time_frame} />
+          <ItemGroup label="Building" text={props.building} />
+          <ItemGroup label="Unit" text={props.unit} />
+          <ItemGroup label="Location" text={props.location} />
         </div>
       </div>
       <div className={styles.appointment_options}>{props.children}</div>

@@ -15,6 +15,12 @@ export function StudentCreateTicketView() {
   const [unit, set_unit] = useState("Select Unit");
   const [notes, set_notes] = useState("");
 
+  const [building_list] = useState({});
+  const [unit_disabled, set_unit_disabled] = useState(true);
+  const [unit_list] = useState({});
+  const [location_disabled, set_location_disabled] = useState(true);
+  const [location_list, set_location_list] = useState([]);
+
   // Few notes about the operation of this page.
   // ***
   // 1. When the user selects a building, the location and unit fields are
@@ -37,68 +43,85 @@ export function StudentCreateTicketView() {
   // ***
 
   useEffect(() => {
-
     // Function Note
     // ***
     // 1. When the page renders, the list of buildings is received from the database.
 
     const building_data = [
       {
-      building_id: 1,
-      buidling_name: "Argenta Hall"
-    }, {
-      building_id: 2,
-      building_name: "Nye Hall"
-    }]  
+        building_id: 1,
+        buidling_name: "Argenta Hall",
+      },
+      {
+        building_id: 2,
+        building_name: "Nye Hall",
+      },
+    ];
 
-    const location_data_argenta = [{
-      location_id: 1,
-      location_name: "Bedroom"
-    }, {
-      location_id: 2,
-      location_name: "Restroom"
-    }, {
-      location_id: 3,
-      location_name: "Living Area"
-    }]
+    const location_data_argenta = [
+      {
+        location_id: 1,
+        location_name: "Bedroom",
+      },
+      {
+        location_id: 2,
+        location_name: "Restroom",
+      },
+      {
+        location_id: 3,
+        location_name: "Living Area",
+      },
+    ];
 
-    const unit_data_argenta = [{
-      unit_id: 1,
-      unit_name: "1A"
-    }, {
-      unit_id: 2,
-      unit_name: "1B"
-    }, {
-      unit_id: 3,
-      unit_name: "1C"
-    }, {
-      unit_id: 4,
-      unit_name: "1D"
-    }]
+    const unit_data_argenta = [
+      {
+        unit_id: 1,
+        unit_name: "1A",
+      },
+      {
+        unit_id: 2,
+        unit_name: "1B",
+      },
+      {
+        unit_id: 3,
+        unit_name: "1C",
+      },
+      {
+        unit_id: 4,
+        unit_name: "1D",
+      },
+    ];
 
-    const location_data_nye = [{
-      location_id: 1,
-      location_name: "Bedroom"
-    }, {
-      location_id: 2,
-      location_name: "Restroom"
-    }]
+    const location_data_nye = [
+      {
+        id: 1,
+        value: "Bedroom",
+        name: "Bedroom",
+      },
+      {
+        location_id: 2,
+        value: "restroom",
+        name: "Restroom",
+      },
+    ];
 
-    const unit_data_nye = [{
-      unit_id: 1,
-      unit_name: "1A"
-    }, {
-      unit_id: 2,
-      unit_name: "1B"
-    }, {
-      unit_id: 3,
-      unit_name: "1C"
-    }]
+    const unit_data_nye = [
+      {
+        unit_id: 1,
+        unit_name: "1A",
+      },
+      {
+        unit_id: 2,
+        unit_name: "1B",
+      },
+      {
+        unit_id: 3,
+        unit_name: "1C",
+      },
+    ];
 
-  }, [])
-
-  const [unit_disabled, set_unit_disabled] = useState(true)
-  const [location_disabled, set_location_disabled] = useState(true)
+    set_location_list(location_data_nye);
+  }, []);
 
   const navigate = useNavigate();
   const { get_token } = TokenManager();
@@ -123,9 +146,7 @@ export function StudentCreateTicketView() {
     return JSON.stringify(ticket);
   };
 
-  const populate_locations = (building_id) => {
-
-  }
+  const populate_locations = (building_id) => {};
 
   const create_ticket = () => {
     let ticket = serialize_ticket(
@@ -195,7 +216,16 @@ export function StudentCreateTicketView() {
       });
   };
 
-  const handle_clear_ticket = () => {};
+  const handle_clear_ticket = (event) => {
+    set_title("");
+    set_description("");
+    set_building("Select Building");
+    set_location("Select Location");
+    set_unit("Select Unit");
+    set_unit("");
+    set_notes("");
+    event.preventDefault();
+  };
 
   return (
     <div className={styles.StudentCreateTicketView}>
@@ -245,6 +275,7 @@ export function StudentCreateTicketView() {
               <input
                 type="text"
                 placeholder="Water Leak in Kitchen"
+                value={title}
                 onChange={handle_title}
               />
             </FormGroup>
@@ -255,6 +286,7 @@ export function StudentCreateTicketView() {
               <textarea
                 placeholder="Water is leaking in the kitchen below the sink. The water currently just leaking to the floor."
                 className={styles.description_form}
+                value={description}
                 onChange={handle_description}
               />
             </FormGroup>
@@ -293,6 +325,13 @@ export function StudentCreateTicketView() {
                 <option value="Select Location" disabled>
                   Select Location
                 </option>
+                {location_list.map((location) => {
+                  return (
+                    <option key={location.id} value={location.value}>
+                      {location.name}
+                    </option>
+                  );
+                })}
                 <option value="livingroom">Living Room</option>
                 <option value="bathroom">Bathroom</option>
                 <option value="kitchen">Kitchen</option>
@@ -325,6 +364,7 @@ export function StudentCreateTicketView() {
               <textarea
                 placeholder="There is some water on the floor as you enter in the kitchen."
                 className={styles.description_form}
+                value={notes}
                 onChange={handle_notes}
               />
             </FormGroup>

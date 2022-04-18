@@ -8,26 +8,7 @@ import Ticket from "../../../../components/Ticket/Ticket";
 function AppointmentView(props) {
   const [ticket, setTicket] = useState({});
 
-  const status_color = (status) => {
-    if (status === "C") {
-      return "complete_status";
-    } else if (status === "P") {
-      return "pending_status";
-    } else {
-      return "delete_status";
-    }
-  };
-
-  const status_text = (status) => {
-    if (status === "C") {
-      return "COMPLETED";
-    } else if (status === "P") {
-      return "PENDING";
-    } else {
-      return "DELETED";
-    }
-  };
-
+  /*
   useEffect(() => {
     setTicket({
       ticket_title: "Fix Water Leak",
@@ -42,17 +23,29 @@ function AppointmentView(props) {
       ticket_created: "09/08/2022",
       ticket_status: "C",
     });
-  }, []);
+  }, []);*/
+
+  const appointment = {
+    appointment_id: 1,
+    time_frame: "4:00 p.m. to 5:00 p.m.",
+    building: "Argenta Hall",
+    unit: "1C",
+    location: "Kitchen",
+    date: {
+      month: "March",
+      day_date: 23,
+      day: "Tuesday",
+    },
+  };
 
   return (
     <div className={`${styles.Timestamps} ${props.className}`}>
       <div className={`${styles.view_container} view_layout`}>
         <p className={`${styles.page_title_text} page_title_text`}>
-          View All Your Appointments
+          Viewing Appointment
         </p>
         <div className={`${styles.content_container} view_content_layout`}>
-          <AppointmentItem></AppointmentItem>
-          <Ticket></Ticket>
+          <AppointmentItem {...appointment}></AppointmentItem>
         </div>
       </div>
     </div>
