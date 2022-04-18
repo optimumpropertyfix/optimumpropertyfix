@@ -11,13 +11,13 @@ const AppointmentDate = (props) => {
   return (
     <div className={styles.AppointmentDate}>
       <div className={styles.month}>
-        <p>March</p>
+        <p>{props.month}</p>
       </div>
       <div className={styles.day_date}>
-        <p>23 </p>
+        <p>{props.day_date}</p>
       </div>
       <div className={styles.day}>
-        <p>Tuesday</p>
+        <p>{props.day}</p>
       </div>
     </div>
   );
