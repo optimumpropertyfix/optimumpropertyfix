@@ -42,6 +42,20 @@ class TicketController:
         ticket_table = self.generate_ticket_objects(tickets)
         return ticket_table
 
+    def get_individual_ticket_by_ticket_id(self, ticket_id, net_id = None, is_student = True): 
+        ticket = None
+        if (is_student):
+            query = "view_individual_ticket"
+            args = [ticket_id]
+            ticket = self.query_database(query, args)
+        else:
+            query = "view_individual_ticket"
+            args = [ticket_id]
+            ticket = self.query_database(query, args)
+            
+        ticket_table = self.generate_ticket_object(ticket)
+        return ticket_table
+
 
     def get_all_tickets_by_severity(self, severity, net_id = None, is_student = True): 
         tickets = None
@@ -82,6 +96,12 @@ class TicketController:
         ticket_table = self.generate_ticket_objects(tickets)
         return ticket_table
 
+    def user_create_ticket(self, net_id_param, title_param, description_param, building_name_param, unit_number_param, additional_notes_param):
+        print("DEBUG: create_ticket Function Called.")
+        commit = "user_create_ticket"
+        values = [net_id_param, title_param, description_param, building_name_param, unit_number_param, additional_notes_param]
+        
+        print(self.commit_database(commit, values))
 
     def generate_ticket_objects(self, tickets):
         ticket_objects = list()
@@ -105,6 +125,35 @@ class TicketController:
         
         return ticket_objects
 
+    def generate_ticket_object(self, tickets):
+
+        for ticket in tickets:
+            ticket_id = ticket[0]
+            ticket_title = ticket[1]
+            ticket_status = ticket[2]
+            ticket_created = ticket[3].strftime("%m %d %Y %H %M %S")
+            ticket_location = ticket[4]
+            ticket_severity = ticket[5]
+            ticket_description = ticket[6]
+            ticket_building_name = ticket[7]
+            ticket_unit_number = ticket[8]
+            ticket_additional_notes = ticket[9]
+
+            ticket_json = self.serialize_ticket(
+                id = ticket_id,
+                title = ticket_title,
+                status =  ticket_status, 
+                created = ticket_created,
+                location = ticket_location,
+                severity = ticket_severity,
+                description=ticket_description,
+                building_name=ticket_building_name,
+                unit_number=ticket_unit_number,
+                additional_notes=ticket_additional_notes,
+            )
+
+        
+        return ticket_json
 
     def query_database(self, query, args = None): 
         query_result = None
@@ -129,6 +178,42 @@ class TicketController:
             cursor.close()
             connection.close()
             return query_result
+
+
+    def commit_database(self, commit, values = None):
+        commit_result = None
+
+        connection = None
+        cursor = None
+
+        try:
+            print("ATTEMPT FOR CONNECTION START")
+            db_config = database_configuration
+            connection = MySQLConnection(**db_config)
+            cursor = connection.cursor()
+
+        except:
+            return -1
+
+        try:
+            print("CURSOR ACTIVE")
+            if (values == None): 
+                print("EVAL 1")
+                cursor.callproc(commit)
+            else:
+                cursor.callproc(commit, values)
+
+            commit_result = connection.commit()
+
+        except Error as error:
+            print(error)
+            return -1
+
+        finally:
+            print("CURSOR CLOSED")
+            cursor.close()
+            connection.close()
+            return commit_result
 
 
     def serialize_ticket(self, id = None, title = None, description = None, severity = None, location = None, building_name = None, unit_number = None, additional_notes = None, status = None, created = None):

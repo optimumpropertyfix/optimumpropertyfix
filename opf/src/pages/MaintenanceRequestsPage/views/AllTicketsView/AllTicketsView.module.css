@@ -5,7 +5,13 @@
   .page_subtitle_text {
     margin-bottom: 0.5rem;
   }
-
+  .filter_options {
+    display: flex;
+    flex-direction: column;
+  }
+  .clear_filter_button {
+    margin-top: 1rem;
+  }
   .filter_group {
     display: flex;
     flex-direction: column;

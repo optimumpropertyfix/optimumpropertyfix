@@ -58,16 +58,28 @@ const view_session_route = () => {
   return `/session`;
 };
 
-const student_new_ticket_route = () => {
-  return "/student/tickets/create";
+const new_ticket_route = () => {
+  return "/tickets/create";
 };
 
-const student_view_all_tickets_route = () => {
-  return "/student/tickets";
+const view_all_tickets_route = () => {
+  return "/tickets";
 };
 
-const student_view_ticket_route = (ticket_id) => {
-  return `/student/tickets/${ticket_id}`;
+const view_ticket_route = (ticket_id) => {
+  return `/tickets/${ticket_id}`;
+};
+
+const get_all_tickets_by_status_route = (status) => {
+  return `/tickets/filter/status/${status}`;
+};
+
+const user_view_individual_feedback_route = (ticket_id) => {
+  return `/feedback/${ticket_id}`;
+};
+
+const user_create_ticket_route = () => {
+  return `/tickets/create`;
 };
 
 export {
@@ -85,7 +97,9 @@ export {
   view_session_route,
   admin_create_faq_route,
   admin_create_announcement_route,
-  student_new_ticket_route,
-  student_view_all_tickets_route,
-  student_view_ticket_route,
+  new_ticket_route,
+  view_all_tickets_route,
+  view_ticket_route,
+  get_all_tickets_by_status_route,
+  user_view_individual_feedback_route,
 };

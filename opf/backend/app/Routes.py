@@ -198,8 +198,9 @@ def view_all_feedback_route():
 
 
 @app.route("/feedback/<int:ticket_id>", methods=["GET"])
+@jwt_required()
 def view_individual_feedback_route(ticket_id):
-    feedback_objects = feedback_controller.view_individual_feedback(ticket_id = ticket_id)
+    feedback_objects = feedback_controller.user_view_individual_feedback(ticket_id = ticket_id)
     return jsonify(feedback_objects)
 
 
@@ -231,25 +232,26 @@ def view_all_tickets_route():
 
 
 @app.route("/tickets/<int:ticket_id>", methods=["GET"])
+@jwt_required()
 def view_individual_ticket_route(ticket_id):
 
     current_user = get_jwt_identity()
     user_net_id = current_user[3]
     user_is_student = current_user[4]
 
-    ticket_objects = ticket_controller.get_all_tickets_by_ticket_id(net_id = "araamzaremehjardi", is_student = False, ticket_id = ticket_id)
-    return jsonify(ticket_objects)
-
-
-@app.route("/tickets/filter/severity/<string:severity>", methods=["GET"])
-def view_individual_tickets_by_severity_route(severity):
-    ticket_objects = ticket_controller.get_all_tickets_by_severity(net_id = 'araamzaremehjardi', is_student = True, severity = severity)
+    ticket_objects = ticket_controller.get_individual_ticket_by_ticket_id(net_id = user_net_id, is_student = user_is_student, ticket_id = ticket_id)
     return jsonify(ticket_objects)
 
 
 @app.route("/tickets/filter/status/<string:status>", methods=["GET"])
+@jwt_required()
 def view_all_tickets_by_status_route(status):
-    ticket_objects = ticket_controller.get_all_tickets_by_status(net_id = 'araamzaremehjardi', is_student = True, status = status)
+
+    current_user = get_jwt_identity()
+    user_net_id = current_user[3]
+    user_is_student = current_user[4]
+
+    ticket_objects = ticket_controller.get_all_tickets_by_status(net_id = user_net_id, is_student = user_is_student, status = status)
     return jsonify(ticket_objects)
 
 
@@ -260,16 +262,21 @@ def view_all_tickets_by_user_route(net_id):
 
 
 @app.route("/tickets/create", methods=["POST"])
+@jwt_required()
 def create_ticket_route():
+    current_user = get_jwt_identity()
+    user_net_id = current_user[3]
+
+
     ticket = request.get_json()
     title = ticket.get('ticket_title')
     description = ticket.get('ticket_description')
-    severity = ticket.get('ticket_severity')
     location = ticket.get('ticket_location')
     building_name = ticket.get('ticket_building_name')
     unit_number = ticket.get('ticket_unit_number')
     additonal_notes = ticket.get('ticket_additonal_notes')
-    ticket_status = ticket.get('ticket_ticket_status')
+    
+    ticket_controller.user_create_ticket(net_id_param=user_net_id, title_param=title, description_param=description, building_name_param= building_name, unit_number_param=unit_number, additional_notes_param=additonal_notes)
     return f'Create Ticket'
 
 
