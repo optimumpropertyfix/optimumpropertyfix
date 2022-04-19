@@ -16,13 +16,13 @@ class FeedbackController:
         return feedback_table
 
 
-    def view_individual_feedback(self, ticket_id = None): 
+    def user_view_individual_feedback(self, ticket_id = None): 
         feedbacks = None
-        query = "view_individual_feedback"
+        query = "user_view_individual_feedback"
         args = [ticket_id]
         feedbacks = self.query_database(query, args)
 
-        feedback_table = self.generate_feedback_objects(feedbacks)
+        feedback_table = self.generate_feedback_object(feedbacks)
         return feedback_table
 
 
@@ -34,18 +34,39 @@ class FeedbackController:
             feedback_satisfaction_rating = feedback[1]
             feedback_message = feedback[2]
             feedback_date = feedback[3].strftime("%m %d %Y %H %M %S")
+            feedback_admin_date = feedback[4].strftime("%m %d %Y %H %M %S")
+            feedback_admin_message = feedback[5]
 
-            
             feedback_json = self.serialize_feedback(
                 id = feedback_id,
                 satisfaction_rating = feedback_satisfaction_rating, 
                 message = feedback_message,
                 date = feedback_date, 
-
+                admin_date=feedback_admin_date, 
+                admin_message=feedback_admin_message,
             )
             feedback_objects.append(feedback_json)
         
         return feedback_objects
+
+    def generate_feedback_object(self, feedbacks):
+        for feedback in feedbacks:
+            feedback_id = feedback[0]
+            feedback_message = feedback[1]
+            feedback_satisfaction_rating = feedback[2]
+            feedback_date = feedback[3].strftime("%m %d %Y %H %M %S")
+            feedback_admin_date = feedback[4].strftime("%m %d %Y %H %M %S")
+            feedback_admin_message = feedback[5]
+
+            feedback_json = self.serialize_feedback(
+                id = feedback_id,
+                satisfaction_rating = feedback_satisfaction_rating, 
+                message = feedback_message,
+                date = feedback_date, 
+                admin_date=feedback_admin_date, 
+                admin_message=feedback_admin_message,
+            )
+        return feedback_json
 
 
     def query_database(self, query, args = None): 
@@ -72,12 +93,14 @@ class FeedbackController:
             return query_result
 
 
-    def serialize_feedback(self, id = None, satisfaction_rating = None, message = None, date = None):
+    def serialize_feedback(self, id = None, satisfaction_rating = None, message = None, date = None, admin_date = None, admin_message = None):
         feedback = {
             "feedback_id": id,
-            "feedback_satisfaction" : satisfaction_rating, 
             "feedback_message": message, 
-            "feedback_date": date,         
+            "feedback_satisfaction" : satisfaction_rating, 
+            "feedback_date": date,  
+            "feedback_admin_date": admin_date, 
+            "feedback_admin_message": admin_message, 
         }
         return feedback
 

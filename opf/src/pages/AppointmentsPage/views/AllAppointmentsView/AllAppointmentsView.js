@@ -39,7 +39,7 @@ function AllAppointmentsView(props) {
         <div className={`${styles.content_container} view_content_layout`}>
           {appointments.map((appointment) => {
             return (
-              <AppointmentItem key={appointment.id} {...appointment}>
+              <AppointmentItem key={appointment.appointment_id} {...appointment}>
                 <button>VIEW APPOINTMENT</button>
               </AppointmentItem>
             );

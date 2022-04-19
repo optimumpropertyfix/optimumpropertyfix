@@ -6,7 +6,7 @@ import Timestamps from "../../../../components/Timestamps/Timestamps";
 import Widget from "../../../../components/Widget/Widget";
 import styles from "./TicketView.module.css";
 import TokenManager from "../../../../TokenManager";
-import { view_ticket_route } from "../../../../Routes";
+import { user_view_individual_feedback_route, view_ticket_route } from "../../../../Routes";
 import { useParams } from "react-router-dom";
 
 export function AdminTicketView() {
@@ -21,7 +21,8 @@ export function StudentTicketView() {
   const [ticket, set_ticket] = useState({});
   const { get_token } = TokenManager();
   let { ticket_id } = useParams();
-  const [feedback_disabled, set_feedback_disabled] = useState(false)
+  const [feedback_disabled, set_feedback_disabled] = useState(true)
+  const [feedback, set_feedback] = useState({})
 
   const status_color = (status) => {
     if (status === "Completed") {
@@ -61,11 +62,39 @@ export function StudentTicketView() {
     if (feedback_disabled) {
       return styles.feedback_disabled
     }
+  } 
+
+  const api_get_individual_feedback = () => {
+    
+    const options = {
+      method: "GET",
+      headers: {
+        'Authorization' : `Bearer ${get_token()}`,
+      },
+    };
+    const route = user_view_individual_feedback_route(ticket_id);
+
+    fetch(route, options)
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(`${response.statusText} - ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((feedback) => {
+        set_feedback(feedback)
+        console.log(feedback)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
   }
 
   useEffect(() => {
-    api_get_individual_tickets();
+      api_get_individual_tickets();
   }, []);
+
   const api_get_individual_tickets = () => {
     const options = {
       method: "GET",
@@ -85,6 +114,10 @@ export function StudentTicketView() {
       .then((ticket) => {
         console.log(ticket)
         set_ticket(ticket)
+
+        if (ticket.ticket_status === "Completed") {
+          api_get_individual_feedback()
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -192,41 +225,33 @@ export function StudentTicketView() {
                     </p>
                   </div>
                 </ToggleableCard>
-                {true ? (
+                {feedback.feedback_admin_message !== null ? (
                   <div className={`${styles.feedback_response}`}>
                     <p>Feedback Response</p>
                     <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      Duis aute irure dolor in reprehenderit in voluptate velit
-                      esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                      sint occaecat cupidatat non proident, sunt in culpa qui
-                      officia deserunt mollit anim id est laborum.
+                      {feedback.feedback_admin_message}
                     </p>
                     <Timestamps
-                      created_at="September 09, 2022 at 2:32 p.m."
-                      updated_at="September 12, 2022 at 6:32 p.m."
+                      created_at={feedback.feedback_admin_date}
                     />
                   </div>
                 ) : null}
                 <FormGroup label="Rating" className={`${styles.feedback_rating} ${feedback_background(styles)}`}>
                   <div className={styles.feedback_rating_container}>
                     <label>
-                      <input disabled={feedback_disabled} type="radio" value="1" name="rating" /> 1
+                      <input disabled={feedback_disabled} type="radio" value="1" name="rating" checked={feedback.feedback_satisfaction === 1} /> 1
                     </label>
                     <label>
-                      <input disabled={feedback_disabled} type="radio" value="2" name="rating" /> 2
+                      <input disabled={feedback_disabled} type="radio" value="2" name="rating" checked={feedback.feedback_satisfaction === 2}/> 2
                     </label>
                     <label>
-                      <input disabled={feedback_disabled} type="radio" value="3" name="rating" /> 3
+                      <input disabled={feedback_disabled} type="radio" value="3" name="rating" checked={feedback.feedback_satisfaction === 3}/> 3
                     </label>
                     <label>
-                      <input disabled={feedback_disabled} type="radio" value="4" name="rating" /> 4
+                      <input disabled={feedback_disabled} type="radio" value="4" name="rating" checked={feedback.feedback_satisfaction === 4}/> 4
                     </label>
                     <label>
-                      <input disabled={feedback_disabled} type="radio" value="5" name="rating" /> 5
+                      <input disabled={feedback_disabled} type="radio" value="5" name="rating" checked={feedback.feedback_satisfaction === 5}/> 5
                     </label>
                   </div>
                 </FormGroup>
@@ -236,13 +261,14 @@ export function StudentTicketView() {
                       disabled={feedback_disabled}
                       rows="10"
                       placeholder="The service was excellent! Only thing I would improve is that the handyman was 15 minutes late."
+                      value={feedback.feedback_message}
                     />
                   </FormGroup>
+                  { feedback.feedback_message ? 
                   <Timestamps
-                    created_at="September 09, 2022 at 2:32 p.m."
-                    updated_at="September 12, 2022 at 6:32 p.m."
+                    created_at={feedback.feedback_date}
                     className={styles.written_student_feedback_timestamps}
-                  />
+                    /> : null }
                 </div>
                 { feedback_disabled ? null :
                 <button>Submit Feedback</button> }

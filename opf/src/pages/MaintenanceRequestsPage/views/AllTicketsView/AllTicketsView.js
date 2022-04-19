@@ -110,7 +110,7 @@ export function StudentAllTicketsView() {
           </div>
           <div className={styles.tickets_list}>
             {tickets.map((ticket) => {
-              return <TicketItem key={ticket.id} {...ticket} />;
+              return <TicketItem key={ticket.ticket_id} {...ticket} />;
             })}
           </div>
         </div>

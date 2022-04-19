@@ -198,8 +198,9 @@ def view_all_feedback_route():
 
 
 @app.route("/feedback/<int:ticket_id>", methods=["GET"])
+@jwt_required()
 def view_individual_feedback_route(ticket_id):
-    feedback_objects = feedback_controller.view_individual_feedback(ticket_id = ticket_id)
+    feedback_objects = feedback_controller.user_view_individual_feedback(ticket_id = ticket_id)
     return jsonify(feedback_objects)
 
 
