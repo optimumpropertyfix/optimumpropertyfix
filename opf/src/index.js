@@ -41,7 +41,7 @@ ReactDOM.render(
             >
               <Route index element={<StudentAllTicketsView />} />
               <Route path="create" element={<StudentCreateTicketView />} />
-              <Route path=":ticket" element={<StudentTicketView />} />
+              <Route path=":ticket_id" element={<StudentTicketView />} />
             </Route>
             <Route
               path="frequently_asked_questions"

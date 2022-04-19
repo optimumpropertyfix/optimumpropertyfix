@@ -26,6 +26,20 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  ::-webkit-scrollbar {
+    opacity: 100%;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: none !important;
+    opacity: 100%;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: none !important;
+    opacity: 100%;
+  }
+
+
   .italic {
     font-style: italic;
   }
@@ -166,13 +180,16 @@
     padding: 0.5rem !important;
     box-sizing: border-box;
   }
+  .received_status {
+    background: var(--color-blue-gray) !important;
+  }
   .complete_status {
     background: var(--color-light-green) !important;
   }
   .pending_status {
     background: var(--color-light-yellow) !important;
   }
-  .delete_status {
+  .cancelled_status {
     background: var(--color-light-red) !important;
   }
 }

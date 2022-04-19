@@ -6,6 +6,7 @@ from configparser import ConfigParser
 # Setting Up Library Backend Objects
 app = Flask(__name__)
 app.config['JWT_SECRET_KEY'] = 'development-test'
+app.config['JWT_ACCESS_TOKEN_EXPIRES'] = False
 jwt = JWTManager(app)
 
 # Setting Up Custom Backend Objects
