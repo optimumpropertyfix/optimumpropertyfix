@@ -180,13 +180,16 @@
     padding: 0.5rem !important;
     box-sizing: border-box;
   }
+  .received_status {
+    background: var(--color-blue-gray) !important;
+  }
   .complete_status {
     background: var(--color-light-green) !important;
   }
   .pending_status {
     background: var(--color-light-yellow) !important;
   }
-  .delete_status {
+  .cancelled_status {
     background: var(--color-light-red) !important;
   }
 }

@@ -1,6 +1,6 @@
 //create a ticket view for a single ticket
 import { useEffect, useState } from "react";
-import { student_new_ticket_route } from "../../../../Routes";
+import { new_ticket_route } from "../../../../Routes";
 import styles from "./CreateTicketView.module.css";
 import { useNavigate } from "react-router-dom";
 import TokenManager from "../../../../TokenManager";
@@ -167,7 +167,7 @@ export function StudentCreateTicketView() {
       body: ticket,
     };
 
-    let route = student_new_ticket_route();
+    let route = new_ticket_route();
 
     return fetch(route, request)
       .then((response) => {

@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import Card, { ToggleableCard } from "../../../../components/Card/Card";
 import FormGroup from "../../../../components/FormGroup/FormGroup";
 import ItemGroup from "../../../../components/ItemGroup/ItemGroup";
-import Ticket from "../../../../components/Ticket/Ticket";
 import Timestamps from "../../../../components/Timestamps/Timestamps";
 import Widget from "../../../../components/Widget/Widget";
 import styles from "./TicketView.module.css";
+import TokenManager from "../../../../TokenManager";
+import { view_ticket_route } from "../../../../Routes";
+import { useParams } from "react-router-dom";
 
 export function AdminTicketView() {
   return (
@@ -17,26 +19,41 @@ export function AdminTicketView() {
 
 export function StudentTicketView() {
   const [ticket, set_ticket] = useState({});
-
+  const { get_token } = TokenManager();
+  let { ticket_id } = useParams();
   const [feedback_disabled, set_feedback_disabled] = useState(false)
 
   const status_color = (status) => {
-    if (status === "C") {
+    if (status === "Completed") {
       return "complete_status";
-    } else if (status === "P") {
+    } else if (status === "Pending") {
       return "pending_status";
+    } else if (status === "Received") {
+      return "received_status";
     } else {
-      return "delete_status";
+      return "cancelled_status";
     }
   };
 
   const status_text = (status) => {
-    if (status === "C") {
+    if (status === "Completed") {
       return "COMPLETED";
-    } else if (status === "P") {
+    } else if (status === "Pending") {
       return "PENDING";
+    } else if (status === "Received") {
+        return "RECEIVED";
     } else {
-      return "DELETED";
+      return "CANCELLED";
+    }
+  };
+
+  const severity_text = (severity) => {
+    if (severity === "Low") {
+      return "LOW";
+    } else if (severity === "Mild") {
+      return "MILD";
+    } else {
+      return "HIGH";
     }
   };
 
@@ -47,20 +64,41 @@ export function StudentTicketView() {
   }
 
   useEffect(() => {
-    set_ticket({
-      ticket_title: "Fix Water Leak",
-      ticket_description:
-        "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      ticket_severity: "HIGH",
-      ticket_location: "Restroom",
-      ticket_building_name: "Canada Hall",
-      ticket_unit_number: "1C",
-      ticket_additional_notes: "",
-      ticket_id: "800",
-      ticket_created: "09/08/2022",
-      ticket_status: "C",
-    });
+    api_get_individual_tickets();
   }, []);
+  const api_get_individual_tickets = () => {
+    const options = {
+      method: "GET",
+      headers: {
+        'Authorization' : `Bearer ${get_token()}`,
+      },
+    };
+    const route = view_ticket_route(ticket_id);
+
+    fetch(route, options)
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(`${response.statusText} - ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((ticket) => {
+        console.log(ticket)
+        set_ticket(ticket)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const datetime_text_converter = (datetime) => {
+    //ticket_created: "03 13 2022 00 45 00"
+    let datetime_string = String(datetime).split(" ")
+    let year = Number(datetime_string[2])
+    let date = Number(datetime_string[1])
+    let month = Number(datetime_string[0])
+    return `${month}/${date}/${year}`
+  }
 
   return (
     <div className={styles.TicketView}>
@@ -95,12 +133,12 @@ export function StudentTicketView() {
               <ItemGroup
                 className="block_contrast_items"
                 label="Severity"
-                text={ticket.ticket_severity}
+                text={severity_text(ticket.ticket_severity)}
               />
               <ItemGroup
                 className="block_contrast_items"
                 label="Time Created"
-                text={ticket.ticket_created}
+                text={datetime_text_converter(ticket.ticket_created)}
               />
               <ItemGroup
                 className="block_contrast_items"
@@ -122,7 +160,7 @@ export function StudentTicketView() {
                 label="Unit Number"
                 text={ticket.ticket_unit_number}
               />
-              {ticket.ticket_additional_notes !== "" ? (
+              {ticket.ticket_additional_notes !== null ? (
                 <ItemGroup
                   className={`block_contrast_items ${styles.additional_notes_metadata}`}
                   label="Additional Notes"
@@ -135,7 +173,7 @@ export function StudentTicketView() {
             <p className={`${styles.page_subtitle_text} page_subtitle_text`}>
               Give Us Your Feedback
             </p>
-            {ticket.ticket_status === "C" ? (
+            {ticket.ticket_status === "Completed" ? (
               <div className={styles.feedback_container}>
                 <ToggleableCard label="Instructions for Creating Feedback">
                   <div className={styles.feedback_instructions}>

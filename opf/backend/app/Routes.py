@@ -231,25 +231,26 @@ def view_all_tickets_route():
 
 
 @app.route("/tickets/<int:ticket_id>", methods=["GET"])
+@jwt_required()
 def view_individual_ticket_route(ticket_id):
 
     current_user = get_jwt_identity()
     user_net_id = current_user[3]
     user_is_student = current_user[4]
 
-    ticket_objects = ticket_controller.get_all_tickets_by_ticket_id(net_id = "araamzaremehjardi", is_student = False, ticket_id = ticket_id)
-    return jsonify(ticket_objects)
-
-
-@app.route("/tickets/filter/severity/<string:severity>", methods=["GET"])
-def view_individual_tickets_by_severity_route(severity):
-    ticket_objects = ticket_controller.get_all_tickets_by_severity(net_id = 'araamzaremehjardi', is_student = True, severity = severity)
+    ticket_objects = ticket_controller.get_individual_ticket_by_ticket_id(net_id = user_net_id, is_student = user_is_student, ticket_id = ticket_id)
     return jsonify(ticket_objects)
 
 
 @app.route("/tickets/filter/status/<string:status>", methods=["GET"])
+@jwt_required()
 def view_all_tickets_by_status_route(status):
-    ticket_objects = ticket_controller.get_all_tickets_by_status(net_id = 'araamzaremehjardi', is_student = True, status = status)
+
+    current_user = get_jwt_identity()
+    user_net_id = current_user[3]
+    user_is_student = current_user[4]
+
+    ticket_objects = ticket_controller.get_all_tickets_by_status(net_id = user_net_id, is_student = user_is_student, status = status)
     return jsonify(ticket_objects)
 
 

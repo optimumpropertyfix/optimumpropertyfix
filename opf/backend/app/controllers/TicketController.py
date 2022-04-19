@@ -42,6 +42,20 @@ class TicketController:
         ticket_table = self.generate_ticket_objects(tickets)
         return ticket_table
 
+    def get_individual_ticket_by_ticket_id(self, ticket_id, net_id = None, is_student = True): 
+        ticket = None
+        if (is_student):
+            query = "view_individual_ticket"
+            args = [ticket_id]
+            ticket = self.query_database(query, args)
+        else:
+            query = "view_individual_ticket"
+            args = [ticket_id]
+            ticket = self.query_database(query, args)
+            
+        ticket_table = self.generate_ticket_object(ticket)
+        return ticket_table
+
 
     def get_all_tickets_by_severity(self, severity, net_id = None, is_student = True): 
         tickets = None
@@ -105,6 +119,35 @@ class TicketController:
         
         return ticket_objects
 
+    def generate_ticket_object(self, tickets):
+
+        for ticket in tickets:
+            ticket_id = ticket[0]
+            ticket_title = ticket[1]
+            ticket_status = ticket[2]
+            ticket_created = ticket[3].strftime("%m %d %Y %H %M %S")
+            ticket_location = ticket[4]
+            ticket_severity = ticket[5]
+            ticket_description = ticket[6]
+            ticket_building_name = ticket[7]
+            ticket_unit_number = ticket[8]
+            ticket_additional_notes = ticket[9]
+
+            ticket_json = self.serialize_ticket(
+                id = ticket_id,
+                title = ticket_title,
+                status =  ticket_status, 
+                created = ticket_created,
+                location = ticket_location,
+                severity = ticket_severity,
+                description=ticket_description,
+                building_name=ticket_building_name,
+                unit_number=ticket_unit_number,
+                additional_notes=ticket_additional_notes,
+            )
+
+        
+        return ticket_json
 
     def query_database(self, query, args = None): 
         query_result = None
