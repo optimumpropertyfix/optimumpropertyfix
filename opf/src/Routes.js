@@ -76,8 +76,11 @@ const get_all_tickets_by_status_route = (status) => {
 
 const user_view_individual_feedback_route = (ticket_id) => {
   return `/feedback/${ticket_id}`;
+};
 
-}
+const user_create_ticket_route = () => {
+  return `/tickets/create`;
+};
 
 export {
   student_create_ticket_route,
