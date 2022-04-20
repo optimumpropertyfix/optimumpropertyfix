@@ -35,6 +35,8 @@ function TicketItem(props) {
       return "LOW";
     } else if (severity === "Mild") {
       return "MILD";
+    } else if (severity === "Tbd") {
+      return "TBD";
     } else {
       return "HIGH";
     }

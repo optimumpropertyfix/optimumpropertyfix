@@ -82,6 +82,10 @@ const user_create_ticket_route = () => {
   return `/tickets/create`;
 };
 
+const view_all_buildings_route = () => {
+  return `/buildings`
+}
+
 export {
   student_create_ticket_route,
   admin_create_ticket_route,
@@ -103,4 +107,5 @@ export {
   get_all_tickets_by_status_route,
   user_view_individual_feedback_route,
   user_create_ticket_route,
+  view_all_buildings_route
 };

@@ -1,6 +1,6 @@
 //create a ticket view for a single ticket
 import { useEffect, useState } from "react";
-import { user_create_ticket_route } from "../../../../Routes";
+import { user_create_ticket_route, view_all_buildings_route } from "../../../../Routes";
 import styles from "./CreateTicketView.module.css";
 import { useNavigate } from "react-router-dom";
 import TokenManager from "../../../../TokenManager";
@@ -15,10 +15,10 @@ export function StudentCreateTicketView() {
   const [unit, set_unit] = useState("select");
   const [notes, set_notes] = useState("");
 
-  const [building_list] = useState({});
-  const [unit_disabled, set_unit_disabled] = useState(false);
+  const [building_list, set_building_list] = useState([]);
+  const [unit_disabled, set_unit_disabled] = useState(true);
   const [unit_list] = useState({});
-  const [location_disabled, set_location_disabled] = useState(false);
+  const [location_disabled, set_location_disabled] = useState(true);
   const [location_list, set_location_list] = useState([]);
 
   // Few notes about the operation of this page.
@@ -121,6 +121,28 @@ export function StudentCreateTicketView() {
     ];
 
     set_location_list(location_data_nye);
+
+    const options = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization' : `Bearer ${get_token()}`,
+      },
+    }; 
+    const route = view_all_buildings_route();
+
+    fetch(route, options).then((response) => {
+      if (!response.ok) {
+        throw Error(`${response.statusText} - ${response.status}`);
+      }
+
+      return response.json()
+    }).then((buildings) => {
+      set_building_list(buildings);
+    }).catch((error) => {
+      console.log(error)
+    })
+
   }, []);
 
   const navigate = useNavigate();
@@ -194,6 +216,13 @@ export function StudentCreateTicketView() {
 
   const handle_building = (event) => {
     set_building(event.target.value);
+    if (building != "select") {
+      set_location_disabled(false)
+      set_unit_disabled(false)
+    } else {
+      set_location_disabled(true)
+      set_unit_disabled(true)
+    }
   };
 
   const handle_unit = (event) => {
@@ -300,14 +329,9 @@ export function StudentCreateTicketView() {
                 <option value="select" disabled>
                   Select Building
                 </option>
-                <option value="Argenta Hall">Argenta Hall</option>
-                <option value="nye">Nye Hall</option>
-                <option value="greatbasin">Great Basin Hall</option>
-                <option value="juniper">Juniper Hall</option>
-                <option value="llc">Living Learning Center</option>
-                <option value="sierra">Sierra Hall</option>
-                <option value="canada">Cananda Hall</option>
-                <option value="manzanita">Manzanita Hall</option>
+                {building_list.map((building_item) => {
+                  return <option key={building_item.building_id} value={building_item.building_name}>{building_item.building_name}</option>
+                })}
               </select>
             </FormGroup>
             <FormGroup

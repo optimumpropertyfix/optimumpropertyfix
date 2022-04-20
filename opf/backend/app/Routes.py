@@ -117,6 +117,7 @@ def delete_appointment_route(ticket_id):
 '''
 
 @app.route("/buildings", methods=["GET"])
+@jwt_required()
 def view_all_buildings_route():
     building_objects = building_controller.view_all_buildings()
     return jsonify(building_objects) 
