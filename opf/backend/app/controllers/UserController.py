@@ -183,7 +183,10 @@ class UserController:
         user_nshe_id = basic_user_information[2]
         user_net_id = basic_user_information[3]
         user_is_student = basic_user_information[4]
-        access_token = create_access_token(identity = [user_first_name, user_last_name, user_nshe_id, user_net_id, user_is_student])
+        user_id = basic_user_information[5]
+        access_token = create_access_token(identity = [user_first_name, user_last_name, user_nshe_id, user_net_id, user_is_student, user_id])
+
+        print(user_id)
 
         basic_user_information = self.serialize_user(is_student=user_is_student,
         access_token=access_token)

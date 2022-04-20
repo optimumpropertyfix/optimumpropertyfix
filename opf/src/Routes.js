@@ -102,4 +102,5 @@ export {
   view_ticket_route,
   get_all_tickets_by_status_route,
   user_view_individual_feedback_route,
+  user_create_ticket_route,
 };
