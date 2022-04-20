@@ -1,0 +1,24 @@
+@media only screen and (min-width: 300px) {
+  .status_metadata {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    width: unset;
+    align-items: center;
+    justify-content: center;
+  }
+  .page_subtitle_text {
+    margin-bottom: 0.5rem;
+  }
+  .metadata_group {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .metadata_group > div {
+    box-shadow: 0 1px 5px 2px var(--color-standard-gray);
+  }
+}
+@media only screen and (min-width: 600px) {
+}
+@media only screen and (min-width: 900px) {
+}
