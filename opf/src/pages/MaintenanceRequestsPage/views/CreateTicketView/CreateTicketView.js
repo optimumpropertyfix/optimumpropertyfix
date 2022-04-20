@@ -1,6 +1,6 @@
 //create a ticket view for a single ticket
 import { useEffect, useState } from "react";
-import { new_ticket_route } from "../../../../Routes";
+import { user_create_ticket_route, view_all_buildings_route } from "../../../../Routes";
 import styles from "./CreateTicketView.module.css";
 import { useNavigate } from "react-router-dom";
 import TokenManager from "../../../../TokenManager";
@@ -10,12 +10,12 @@ import FormGroup from "../../../../components/FormGroup/FormGroup";
 export function StudentCreateTicketView() {
   const [title, set_title] = useState("");
   const [description, set_description] = useState("");
-  const [location, set_location] = useState("Select Location");
-  const [building, set_building] = useState("Select Building");
-  const [unit, set_unit] = useState("Select Unit");
+  const [location, set_location] = useState("select");
+  const [building, set_building] = useState("select");
+  const [unit, set_unit] = useState("select");
   const [notes, set_notes] = useState("");
 
-  const [building_list] = useState({});
+  const [building_list, set_building_list] = useState([]);
   const [unit_disabled, set_unit_disabled] = useState(true);
   const [unit_list] = useState({});
   const [location_disabled, set_location_disabled] = useState(true);
@@ -121,6 +121,28 @@ export function StudentCreateTicketView() {
     ];
 
     set_location_list(location_data_nye);
+
+    const options = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization' : `Bearer ${get_token()}`,
+      },
+    }; 
+    const route = view_all_buildings_route();
+
+    fetch(route, options).then((response) => {
+      if (!response.ok) {
+        throw Error(`${response.statusText} - ${response.status}`);
+      }
+
+      return response.json()
+    }).then((buildings) => {
+      set_building_list(buildings);
+    }).catch((error) => {
+      console.log(error)
+    })
+
   }, []);
 
   const navigate = useNavigate();
@@ -138,9 +160,9 @@ export function StudentCreateTicketView() {
       ticket_title: title_param,
       ticket_description: description_param,
       ticket_location: location_param,
-      ticket_building: building_param,
-      ticket_unit: unit_param,
-      ticket_notes: notes_param,
+      ticket_building_name: building_param,
+      ticket_unit_number: unit_param,
+      ticket_additonal_notes: notes_param,
     };
 
     return JSON.stringify(ticket);
@@ -148,7 +170,7 @@ export function StudentCreateTicketView() {
 
   const populate_locations = (building_id) => {};
 
-  const create_ticket = () => {
+  const api_user_create_ticket = () => {
     let ticket = serialize_ticket(
       title,
       description,
@@ -158,18 +180,17 @@ export function StudentCreateTicketView() {
       notes
     );
 
-    let request = {
+    const options = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${get_token()}`,
+        'Authorization' : `Bearer ${get_token()}`,
       },
       body: ticket,
     };
+    const route = user_create_ticket_route();
 
-    let route = new_ticket_route();
-
-    return fetch(route, request)
+    return fetch(route, options)
       .then((response) => {
         if (!response.ok) {
           throw Error(`${response.statusText} - ${response.status}`);
@@ -195,6 +216,13 @@ export function StudentCreateTicketView() {
 
   const handle_building = (event) => {
     set_building(event.target.value);
+    if (building != "select") {
+      set_location_disabled(false)
+      set_unit_disabled(false)
+    } else {
+      set_location_disabled(true)
+      set_unit_disabled(true)
+    }
   };
 
   const handle_unit = (event) => {
@@ -207,7 +235,7 @@ export function StudentCreateTicketView() {
 
   const handle_submit_ticket = (event) => {
     event.preventDefault();
-    create_ticket()
+    api_user_create_ticket()
       .then((successful) => {
         navigate("/student/maintenance_requests");
       })
@@ -219,10 +247,9 @@ export function StudentCreateTicketView() {
   const handle_clear_ticket = (event) => {
     set_title("");
     set_description("");
-    set_building("Select Building");
-    set_location("Select Location");
-    set_unit("Select Unit");
-    set_unit("");
+    set_building("select");
+    set_location("select");
+    set_unit("select");
     set_notes("");
     event.preventDefault();
   };
@@ -299,17 +326,12 @@ export function StudentCreateTicketView() {
                 onChange={handle_building}
                 value={building}
               >
-                <option value="Select Building" disabled>
+                <option value="select" disabled>
                   Select Building
                 </option>
-                <option value="argenta">Argenta Hall</option>
-                <option value="nye">Nye Hall</option>
-                <option value="greatbasin">Great Basin Hall</option>
-                <option value="juniper">Juniper Hall</option>
-                <option value="llc">Living Learning Center</option>
-                <option value="sierra">Sierra Hall</option>
-                <option value="canada">Cananda Hall</option>
-                <option value="manzanita">Manzanita Hall</option>
+                {building_list.map((building_item) => {
+                  return <option key={building_item.building_id} value={building_item.building_name}>{building_item.building_name}</option>
+                })}
               </select>
             </FormGroup>
             <FormGroup
@@ -322,20 +344,13 @@ export function StudentCreateTicketView() {
                 onChange={handle_location}
                 disabled={location_disabled}
               >
-                <option value="Select Location" disabled>
+                <option value="select" disabled>
                   Select Location
                 </option>
-                {location_list.map((location) => {
-                  return (
-                    <option key={location.id} value={location.value}>
-                      {location.name}
-                    </option>
-                  );
-                })}
-                <option value="livingroom">Living Room</option>
-                <option value="bathroom">Bathroom</option>
-                <option value="kitchen">Kitchen</option>
-                <option value="bedroom">Bedroom</option>
+                <option value="Livingroom">Living Room</option>
+                <option value="Bathroom">Bathroom</option>
+                <option value="Kitchen">Kitchen</option>
+                <option value="Bedroom">Bedroom</option>
               </select>
             </FormGroup>
             <FormGroup
@@ -348,13 +363,11 @@ export function StudentCreateTicketView() {
                 value={unit}
                 disabled={unit_disabled}
               >
-                <option value="Select Unit" disabled>
+                <option value="select" disabled>
                   Select Unit
                 </option>
                 <option value="1A">1A</option>
-                <option value="1B">1B</option>
                 <option value="1C">1C</option>
-                <option value="1D">1D</option>
               </select>
             </FormGroup>
             <FormGroup

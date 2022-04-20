@@ -117,6 +117,7 @@ def delete_appointment_route(ticket_id):
 '''
 
 @app.route("/buildings", methods=["GET"])
+@jwt_required()
 def view_all_buildings_route():
     building_objects = building_controller.view_all_buildings()
     return jsonify(building_objects) 
@@ -265,8 +266,7 @@ def view_all_tickets_by_user_route(net_id):
 @jwt_required()
 def create_ticket_route():
     current_user = get_jwt_identity()
-    user_net_id = current_user[3]
-
+    user_id = current_user[5]
 
     ticket = request.get_json()
     title = ticket.get('ticket_title')
@@ -275,8 +275,8 @@ def create_ticket_route():
     building_name = ticket.get('ticket_building_name')
     unit_number = ticket.get('ticket_unit_number')
     additonal_notes = ticket.get('ticket_additonal_notes')
-    
-    ticket_controller.user_create_ticket(net_id_param=user_net_id, title_param=title, description_param=description, building_name_param= building_name, unit_number_param=unit_number, additional_notes_param=additonal_notes)
+
+    ticket_controller.user_create_ticket(user_id_param=user_id, title_param=title,location_param=location, description_param=description, building_name_param= building_name, unit_number_param=unit_number, additional_notes_param=additonal_notes)
     return f'Create Ticket'
 
 

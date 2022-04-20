@@ -7,7 +7,7 @@ import json
 class BuildingController:
     def view_all_buildings(self):
         buildings = None
-        query = "admin_view_all_buildings"
+        query = "view_all_buildings"
         buildings = self.query_database(query)
 
         building_table = self.generate_building_objects(buildings)
@@ -22,6 +22,7 @@ class BuildingController:
 
         building_table = self.generate_building_objects(buildings)
         return building_table
+
 
 
     def generate_building_objects(self, buildings):

@@ -96,10 +96,10 @@ class TicketController:
         ticket_table = self.generate_ticket_objects(tickets)
         return ticket_table
 
-    def user_create_ticket(self, net_id_param, title_param, description_param, building_name_param, unit_number_param, additional_notes_param):
+    def user_create_ticket(self, user_id_param, title_param, description_param, location_param, building_name_param, unit_number_param, additional_notes_param):
         print("DEBUG: create_ticket Function Called.")
         commit = "user_create_ticket"
-        values = [net_id_param, title_param, description_param, building_name_param, unit_number_param, additional_notes_param]
+        values = [user_id_param, title_param, description_param, location_param, building_name_param, unit_number_param, additional_notes_param]
         
         print(self.commit_database(commit, values))
 
