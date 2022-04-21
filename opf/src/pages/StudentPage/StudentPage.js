@@ -10,7 +10,7 @@ function StudentPage() {
   const { revoke_token } = TokenManager();
   const navigate = useNavigate();
 
-  const handle_SignOut = (event) => {
+  const logout_click = (event) => {
     event.preventDefault();
 
     revoke_token().then(() => {
@@ -41,6 +41,10 @@ function StudentPage() {
         >
           FAQ
         </SectionNavLink>
+        <button onClick={logout_click} className={styles.logout_button}>
+          <span className="material-icons">arrow_forward</span>
+          <p>LOGOUT</p>
+        </button>
       </SectionNavigation>
     </div>
   );
