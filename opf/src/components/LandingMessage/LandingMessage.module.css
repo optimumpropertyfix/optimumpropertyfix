@@ -1,0 +1,26 @@
+@media only screen and (min-width: 300px) {
+  .LandingMessage {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+  .LandingMessage > p {
+    font-size: 1rem;
+    text-align: center;
+    color: var(--color-standard-gray);
+    margin-bottom: 2rem;
+  }
+  .LandingMessage > img {
+    width: 70%;
+    opacity: 20%;
+  }
+}
+@media only screen and (min-width: 600px) {
+  .LandingMessage > img {
+    width: 20rem;
+    opacity: 20%;
+  }
+}
+@media only screen and (min-width: 900px) {
+}

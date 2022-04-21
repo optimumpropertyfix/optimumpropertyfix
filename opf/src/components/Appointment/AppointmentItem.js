@@ -1,7 +1,6 @@
 import styles from "./AppointmentItem.module.css";
 import ItemGroup from "../ItemGroup/ItemGroup";
 import AppointmentDate from "./AppointmentDate";
-import Widget from "../Widget/Widget";
 
 //trigger to run again by using state
 const AppointmentItem = (props) => {

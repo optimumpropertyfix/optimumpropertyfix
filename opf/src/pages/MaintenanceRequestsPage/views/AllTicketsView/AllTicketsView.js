@@ -10,10 +10,11 @@ import styles from "./AllTicketsView.module.css";
 import TicketItem from "../../../../components/TicketItem/TicketItem";
 import FormGroup from "../../../../components/FormGroup/FormGroup";
 import TokenManager from "../../../../TokenManager";
+import LandingMessage from "../../../../components/LandingMessage/LandingMessage";
 
 export function StudentAllTicketsView() {
   const [tickets, setTickets] = useState([]);
-  const [status_filter, set_status_filter] = useState("select")
+  const [status_filter, set_status_filter] = useState("select");
   const { get_token } = TokenManager();
 
   useEffect(() => {
@@ -23,34 +24,34 @@ export function StudentAllTicketsView() {
   }, []);
 
   const api_get_all_tickets_by_severity = (status) => {
-
     const options = {
       method: "GET",
       headers: {
-        'Authorization' : `Bearer ${get_token()}`,
+        Authorization: `Bearer ${get_token()}`,
       },
     };
     const route = get_all_tickets_by_status_route(status);
 
-    fetch(route, options).then((response) => {
-      if (!response.ok) {
-        throw Error(`${response.statusText} - ${response.status}`);
-      }
-      return response.json();
-    }).then((tickets) => {
-      setTickets(tickets)
-    })
-    .catch((error) => {
-      console.log(error);
-    })
-
-  } 
+    fetch(route, options)
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(`${response.statusText} - ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((tickets) => {
+        setTickets(tickets);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const api_get_all_tickets = () => {
     const options = {
       method: "GET",
       headers: {
-        'Authorization' : `Bearer ${get_token()}`,
+        Authorization: `Bearer ${get_token()}`,
       },
     };
     const route = view_all_tickets_route();
@@ -63,7 +64,7 @@ export function StudentAllTicketsView() {
         return response.json();
       })
       .then((tickets) => {
-        setTickets(tickets)
+        setTickets(tickets);
       })
       .catch((error) => {
         console.log(error);
@@ -72,13 +73,13 @@ export function StudentAllTicketsView() {
 
   const status_filter_change = (event) => {
     set_status_filter(event.target.value);
-    api_get_all_tickets_by_severity(event.target.value)
-  }
+    api_get_all_tickets_by_severity(event.target.value);
+  };
 
   const clear_filter_click = () => {
-    set_status_filter("select")
-    api_get_all_tickets()
-  }
+    set_status_filter("select");
+    api_get_all_tickets();
+  };
 
   return (
     <div className={styles.StudentAllTicketsView}>
@@ -93,7 +94,11 @@ export function StudentAllTicketsView() {
             </p>
             <div className={styles.filter_group}>
               <FormGroup label="Status">
-                <select onChange={status_filter_change} value={status_filter} className={styles.location_form}>
+                <select
+                  onChange={status_filter_change}
+                  value={status_filter}
+                  className={styles.location_form}
+                >
                   <option value="select" disabled>
                     Select Status
                   </option>
@@ -104,7 +109,10 @@ export function StudentAllTicketsView() {
                 </select>
               </FormGroup>
             </div>
-            <button onClick={clear_filter_click} className={styles.clear_filter_button}>
+            <button
+              onClick={clear_filter_click}
+              className={styles.clear_filter_button}
+            >
               Clear Filter
             </button>
           </div>
@@ -112,6 +120,11 @@ export function StudentAllTicketsView() {
             {tickets.map((ticket) => {
               return <TicketItem key={ticket.ticket_id} {...ticket} />;
             })}
+            {tickets.length == 0 ? (
+              <LandingMessage>
+                No tickets here...Create a new ticket!
+              </LandingMessage>
+            ) : null}
           </div>
         </div>
       </div>

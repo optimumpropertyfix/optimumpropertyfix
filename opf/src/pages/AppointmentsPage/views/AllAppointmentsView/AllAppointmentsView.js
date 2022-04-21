@@ -1,6 +1,6 @@
 import styles from "./AllAppointmentsView.module.css";
 import AppointmentItem from "../../../../components/Appointment/AppointmentItem";
-import { useEffect } from "react";
+import LandingMessage from "../../../../components/LandingMessage/LandingMessage";
 
 function AllAppointmentsView(props) {
   const appointments = [
@@ -36,15 +36,22 @@ function AllAppointmentsView(props) {
         <p className={`${styles.page_title_text} page_title_text`}>
           View All Your Appointments
         </p>
-        <div className={`${styles.content_container} view_content_layout`}>
-          {appointments.map((appointment) => {
-            return (
-              <AppointmentItem key={appointment.appointment_id} {...appointment}>
-                <button>VIEW APPOINTMENT</button>
-              </AppointmentItem>
-            );
-          })}
-        </div>
+        {appointments.length == 0 ? (
+          <LandingMessage>No appointments here...Woo Hoo!</LandingMessage>
+        ) : (
+          <div className={`${styles.content_container} view_content_layout`}>
+            {appointments.map((appointment) => {
+              return (
+                <AppointmentItem
+                  key={appointment.appointment_id}
+                  {...appointment}
+                >
+                  <button>VIEW APPOINTMENT</button>
+                </AppointmentItem>
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );

@@ -53,6 +53,7 @@ ReactDOM.render(
             </Route>
             <Route path="account" element={<StudentAccountPage />} />
           </Route>
+          <Route path="admin"></Route>
         </Route>
       </Routes>
     </BrowserRouter>

@@ -4,6 +4,9 @@
     min-height: 100%;
     overflow-y: auto;
   }
+  .page_subtitle_text {
+    margin-bottom: 0.5rem !important;
+  }
 }
 @media only screen and (min-width: 600px) {
   .DashboardPage {

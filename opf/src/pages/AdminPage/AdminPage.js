@@ -1,11 +1,10 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import {
-  Navigation,
-  NavigationLink,
+  SectionNavigation,
+  SectionNavLink,
 } from "../../components/Navigation/Navigation";
 import TokenManager from "../../TokenManager";
 import styles from "./AdminPage.module.css";
-import symbol from "../../assets/symbol.png";
 
 function AdminPage() {
   const { revoke_token } = TokenManager();
@@ -20,21 +19,29 @@ function AdminPage() {
   };
 
   return (
-    <div className={`${styles.AdminPage} page_helper_container`}>
-      <header
-        className={`${styles.header} page_header page_header page_helper_HeaderSection`}
-      >
-        <button
-          onClick={handle_SignOut}
-          className="header_widget logout_widget"
+    <div className={`${styles.AdminPage} page_layout`}>
+      <Outlet />
+      <SectionNavigation className="page_navigation">
+        <SectionNavLink end to="/student" icon="dashboard">
+          DASHBOARD
+        </SectionNavLink>
+        <SectionNavLink to="/student/maintenance_requests" icon="receipt_long">
+          TICKETS
+        </SectionNavLink>
+        <SectionNavLink to="/student/appointments" icon="schedule">
+          APPOINTMENTS
+        </SectionNavLink>
+        <SectionNavLink end to="/student/account" icon="account_circle">
+          ACCOUNT
+        </SectionNavLink>
+        <SectionNavLink
+          end
+          to="/student/frequently_asked_questions"
+          icon="help_outline"
         >
-          <p>Sign Out</p>
-          <span className="material-icons">logout</span>
-        </button>
-      </header>
-      <div className={`${styles.outlet} page_helper_OutletSection`}>
-        <Outlet />
-      </div>
+          FAQ
+        </SectionNavLink>
+      </SectionNavigation>
     </div>
   );
 }
