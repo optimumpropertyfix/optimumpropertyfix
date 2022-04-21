@@ -102,10 +102,10 @@ export function StudentAllTicketsView() {
                   <option value="select" disabled>
                     Select Status
                   </option>
-                  <option value="pending">Pending</option>
-                  <option value="received">Received</option>
-                  <option value="completed">Completed</option>
-                  <option value="cancelled">Cancelled</option>
+                  <option value="Pending">Pending</option>
+                  <option value="Received">Received</option>
+                  <option value="Completed">Completed</option>
+                  <option value="Cancelled">Cancelled</option>
                 </select>
               </FormGroup>
             </div>
