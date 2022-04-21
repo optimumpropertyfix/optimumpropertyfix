@@ -9,7 +9,7 @@ from distutils.log import error
 from msilib.schema import Error
 from netrc import netrc
 import json
-from flask_jwt_extended import jwt_required, get_jwt_identity
+from flask_jwt_extended import jwt_required, get_jwt_identity, unset_jwt_cookies
 from flask import Flask, jsonify, request
 
 from app import app
@@ -75,17 +75,35 @@ def create_announcement_route():
 
 
 @app.route("/appointment", methods=["GET"])
+@jwt_required()
 def view_all_appointment_route():
-    net_id = "1"
-    appointment_objects = appointment_controller.view_all_appointments(net_id = net_id)
+
+    current_user = get_jwt_identity()
+    print(current_user)
+    user_is_student = current_user[4]
+    user_id = current_user[5]
+
+    appointment_objects = appointment_controller.view_all_appointments(user_id=user_id, is_student=user_is_student)
     return jsonify(appointment_objects)
 
+@app.route("/appointment/<int:appointment_id>", methods=["GET"])
+@jwt_required()
+def view_individual_appointment_route(appointment_id):
 
+    current_user = get_jwt_identity()
+    user_is_student = current_user[4]
+    user_id = current_user[5]
+
+
+    appointment_objects = appointment_controller.view_individual_appointment(appointment_id=appointment_id, user_id=user_id, is_student=user_is_student)
+    return jsonify(appointment_objects)
+
+'''
 @app.route("/appointment/<int:ticket_id>/read", methods=["GET"])
 def view_individual_appointment_route(ticket_id):
     appointment_objects = appointment_controller.view_individual_appointment(ticket_id = ticket_id)
     return jsonify(appointment_objects)
-
+'''
 
 @app.route("/appointment/filter/ticket_status/<string:status>", methods=["GET"])
 def view_all_appointments_by_status_route(status):
@@ -117,6 +135,7 @@ def delete_appointment_route(ticket_id):
 '''
 
 @app.route("/buildings", methods=["GET"])
+@jwt_required()
 def view_all_buildings_route():
     building_objects = building_controller.view_all_buildings()
     return jsonify(building_objects) 
@@ -198,8 +217,9 @@ def view_all_feedback_route():
 
 
 @app.route("/feedback/<int:ticket_id>", methods=["GET"])
+@jwt_required()
 def view_individual_feedback_route(ticket_id):
-    feedback_objects = feedback_controller.view_individual_feedback(ticket_id = ticket_id)
+    feedback_objects = feedback_controller.user_view_individual_feedback(ticket_id = ticket_id)
     return jsonify(feedback_objects)
 
 
@@ -261,16 +281,20 @@ def view_all_tickets_by_user_route(net_id):
 
 
 @app.route("/tickets/create", methods=["POST"])
+@jwt_required()
 def create_ticket_route():
+    current_user = get_jwt_identity()
+    user_id = current_user[5]
+
     ticket = request.get_json()
     title = ticket.get('ticket_title')
     description = ticket.get('ticket_description')
-    severity = ticket.get('ticket_severity')
     location = ticket.get('ticket_location')
     building_name = ticket.get('ticket_building_name')
     unit_number = ticket.get('ticket_unit_number')
     additonal_notes = ticket.get('ticket_additonal_notes')
-    ticket_status = ticket.get('ticket_ticket_status')
+
+    ticket_controller.user_create_ticket(user_id_param=user_id, title_param=title,location_param=location, description_param=description, building_name_param= building_name, unit_number_param=unit_number, additional_notes_param=additonal_notes)
     return f'Create Ticket'
 
 
@@ -394,8 +418,11 @@ def login_route():
 
 @app.route("/logout", methods=["POST"])
 def logout_route():
-    return f'TESTING LOGOOUT'
 
+    revoke_user_response = jsonify({"msg":"Authorization Revoked"})
+    unset_jwt_cookies(revoke_user_response)
+
+    return revoke_user_response, 200
 
 @app.route("/reset_password", methods=["POST"])
 def reset_password_route():

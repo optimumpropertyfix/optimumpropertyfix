@@ -96,6 +96,12 @@ class TicketController:
         ticket_table = self.generate_ticket_objects(tickets)
         return ticket_table
 
+    def user_create_ticket(self, user_id_param, title_param, description_param, location_param, building_name_param, unit_number_param, additional_notes_param):
+        print("DEBUG: create_ticket Function Called.")
+        commit = "user_create_ticket"
+        values = [user_id_param, title_param, description_param, location_param, building_name_param, unit_number_param, additional_notes_param]
+        
+        print(self.commit_database(commit, values))
 
     def generate_ticket_objects(self, tickets):
         ticket_objects = list()
@@ -172,6 +178,42 @@ class TicketController:
             cursor.close()
             connection.close()
             return query_result
+
+
+    def commit_database(self, commit, values = None):
+        commit_result = None
+
+        connection = None
+        cursor = None
+
+        try:
+            print("ATTEMPT FOR CONNECTION START")
+            db_config = database_configuration
+            connection = MySQLConnection(**db_config)
+            cursor = connection.cursor()
+
+        except:
+            return -1
+
+        try:
+            print("CURSOR ACTIVE")
+            if (values == None): 
+                print("EVAL 1")
+                cursor.callproc(commit)
+            else:
+                cursor.callproc(commit, values)
+
+            commit_result = connection.commit()
+
+        except Error as error:
+            print(error)
+            return -1
+
+        finally:
+            print("CURSOR CLOSED")
+            cursor.close()
+            connection.close()
+            return commit_result
 
 
     def serialize_ticket(self, id = None, title = None, description = None, severity = None, location = None, building_name = None, unit_number = None, additional_notes = None, status = None, created = None):

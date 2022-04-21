@@ -51,7 +51,7 @@ const login_route = () => {
 };
 
 const logout_route = () => {
-  return `/revoke`;
+  return `/logout`;
 };
 
 const view_session_route = () => {
@@ -74,6 +74,26 @@ const get_all_tickets_by_status_route = (status) => {
   return `/tickets/filter/status/${status}`;
 };
 
+const user_view_individual_feedback_route = (ticket_id) => {
+  return `/feedback/${ticket_id}`;
+};
+
+const user_create_ticket_route = () => {
+  return `/tickets/create`;
+};
+
+const view_all_buildings_route = () => {
+  return `/buildings`
+}
+
+const view_all_appointments = () => {
+  return `/appointment`
+}
+
+const view_individual_appointment = (appointment_id) => {
+  return `/appointment/${appointment_id}`
+}
+
 export {
   student_create_ticket_route,
   admin_create_ticket_route,
@@ -93,4 +113,9 @@ export {
   view_all_tickets_route,
   view_ticket_route,
   get_all_tickets_by_status_route,
+  user_view_individual_feedback_route,
+  user_create_ticket_route,
+  view_all_buildings_route,
+  view_all_appointments,
+  view_individual_appointment
 };

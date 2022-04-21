@@ -14,11 +14,11 @@ import json
 
 
 class AppointmentController:
-    def view_all_appointments(self, net_id = None, is_student = True):
+    def view_all_appointments(self, user_id = None, is_student = True):
         appointments = None
         if (is_student):
             query = "user_view_all_appointments"
-            args = [net_id]
+            args = [user_id]
             appointments = self.query_database(query, args)
         else:
             query = "admin_view_all_appointments"
@@ -27,18 +27,17 @@ class AppointmentController:
         appointments_table = self.generate_appointment_objects(appointments)
         return appointments_table       
    
-   
-    def view_individual_appointment(self, ticket_id = None, is_student = True):
+    def view_individual_appointment(self, appointment_id = None, user_id = None, is_student = True):
         appointments = None
         if (is_student):
             query = "user_view_individual_appointment"
-            args = [ticket_id]
+            args = [user_id, appointment_id]
             appointments = self.query_database(query, args)
         else:
             query = "admin_view_individual_appointment"
             appointments = self.query_database(query)
 
-        appointments_table = self.generate_appointment_objects(appointments)
+        appointments_table = self.generate_appointment_object(appointments)
         return appointments_table 
 
 
@@ -49,7 +48,6 @@ class AppointmentController:
 
         appointments_table = self.generate_appointment_objects(appointments)
         return appointments_table 
-        
 
     def view_all_appointments_by_status(self, status = None, is_student = True):
         appointments = None
@@ -60,7 +58,6 @@ class AppointmentController:
         appointments_table = self.generate_appointment_objects(appointments)
         return appointments_table 
 
-
     def generate_appointment_objects(self, appointments):
         appointment_objects = list()
 
@@ -69,21 +66,49 @@ class AppointmentController:
             appointment_start_time = appointment[1].strftime("%m %d %Y %H %M %S")
             appointment_end_time = appointment[2].strftime("%m %d %Y %H %M %S")
             appointment_status = appointment[3]
-            appointment_is_cancelled = appointment[4]
-            appointment_cancelled_reason = appointment[5]
+            appointment_building_name = appointment[4]
+            appointment_unit_number = appointment[5]
+            appointment_location = appointment[6]
             
             appointment_json = self.serialize_appointment(
                 id = appointment_id,
                 start_time = appointment_start_time,
                 end_time = appointment_end_time,
                 status = appointment_status,
-                is_cancelled = appointment_is_cancelled, 
-                cancelled_reason = appointment_cancelled_reason,
-
+                building_name=appointment_building_name,
+                unit_number= appointment_unit_number,
+                location=appointment_location,
             )
             appointment_objects.append(appointment_json)
         
         return appointment_objects
+
+    def generate_appointment_object(self, appointments):
+
+        for appointment in appointments:
+            appointment_id = appointment[0]
+            appointment_start_time = appointment[1].strftime("%m %d %Y %H %M %S")
+            appointment_end_time = appointment[2].strftime("%m %d %Y %H %M %S")
+            appointment_status = appointment[3]
+            appointment_cancelled_reason = appointment[4]
+            appointment_building_name = appointment[5]
+            appointment_unit_number = appointment[6]
+            appointment_location = appointment[7]
+            appointment_ticket_id = appointment[8]
+            
+            appointment_json = self.serialize_appointment(
+                id = appointment_id,
+                start_time = appointment_start_time,
+                end_time = appointment_end_time,
+                status = appointment_status,
+                building_name=appointment_building_name,
+                unit_number= appointment_unit_number,
+                location=appointment_location,
+                ticket_id=appointment_ticket_id,
+                cancelled_reason=appointment_cancelled_reason
+            )
+        
+        return appointment_json
 
     def query_database(self, query, args = None): 
         query_result = None
@@ -109,14 +134,17 @@ class AppointmentController:
             return query_result
 
 
-    def serialize_appointment(self, id = None, start_time = None, end_time = None, status = None,  is_cancelled = None, cancelled_reason = None):
+    def serialize_appointment(self, id = None, start_time = None, end_time = None, status = None, cancelled_reason = None, building_name = None, unit_number = None, location = None, ticket_id = None):
         appointment = {
             "appointment_id": id,
             "appointment_start_time": start_time,
             "appointment_end_time": end_time,
             "appointment_status": status,
-            "appointment_is_cancelled": is_cancelled,
             "appointment_cancelled_reason": cancelled_reason,
+            "appointment_building_name": building_name,
+            "appointment_unit_number": unit_number,
+            "appointment_location": location,
+            "appointment_ticket_id": ticket_id
         }
         return appointment
          

@@ -1,34 +1,38 @@
 import styles from "./AllAppointmentsView.module.css";
 import AppointmentItem from "../../../../components/Appointment/AppointmentItem";
-import { useEffect } from "react";
+import LandingMessage from "../../../../components/LandingMessage/LandingMessage";
+import {view_all_appointments} from "../../../../Routes"
+import { useEffect, useState } from "react"
+import TokenManager from "../../../../TokenManager";
 
 function AllAppointmentsView(props) {
-  const appointments = [
-    {
-      appointment_id: 1,
-      time_frame: "4:00 p.m. to 5:00 p.m.",
-      building: "Argenta Hall",
-      unit: "1C",
-      location: "Kitchen",
-      date: {
-        month: "March",
-        day_date: 23,
-        day: "Tuesday",
+  const [appointments, set_appointments] = useState([])
+  const { get_token } = TokenManager()
+
+  useEffect(() => {
+
+    const options = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${get_token()}`,
       },
-    },
-    {
-      appointment_id: 2,
-      time_frame: "4:00 p.m. to 5:00 p.m.",
-      building: "Argenta Hall",
-      unit: "1C",
-      location: "Kitchen",
-      date: {
-        month: "March",
-        day_date: 23,
-        day: "Tuesday",
-      },
-    },
-  ];
+    };
+    const route = view_all_appointments();
+
+    fetch(route, options)
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(`${response.statusText} - ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((appointments) => {
+        set_appointments(appointments);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <div className={styles.AllAppointmentsView}>
@@ -36,15 +40,20 @@ function AllAppointmentsView(props) {
         <p className={`${styles.page_title_text} page_title_text`}>
           View All Your Appointments
         </p>
-        <div className={`${styles.content_container} view_content_layout`}>
-          {appointments.map((appointment) => {
-            return (
-              <AppointmentItem key={appointment.id} {...appointment}>
-                <button>VIEW APPOINTMENT</button>
-              </AppointmentItem>
-            );
-          })}
-        </div>
+        {appointments.length === 0 ? (
+          <LandingMessage>No appointments here...Woo Hoo!</LandingMessage>
+        ) : (
+          <div className={`${styles.content_container} view_content_layout`}>
+            {appointments.map((appointment) => {
+              return (
+                <AppointmentItem
+                  key={appointment.appointment_id}
+                  {...appointment}
+                />
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );
