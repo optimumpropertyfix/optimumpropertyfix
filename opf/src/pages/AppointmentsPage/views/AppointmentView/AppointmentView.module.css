@@ -1,4 +1,17 @@
 @media only screen and (min-width: 300px) {
+  .AppointmentView {
+    overflow-y: auto;
+  }
+  .cancellation_message_disabled {
+    border: dashed 3px var(--color-light-gray);
+    border-radius: 7px;
+    padding: 0.8rem;
+  }
+  .cancellation_reason {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
   .status_metadata {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
@@ -9,16 +22,46 @@
   .page_subtitle_text {
     margin-bottom: 0.5rem;
   }
+  .appointment_metadata_container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
   .metadata_group {
     display: flex;
     flex-direction: column;
     gap: 2rem;
+  }
+  .metadata_options {
+    display: flex;
+    flex-direction: column;
   }
   .metadata_group > div {
     box-shadow: 0 1px 5px 2px var(--color-standard-gray);
   }
 }
 @media only screen and (min-width: 600px) {
+  .AppointmentView {
+    height: 90%;
+  }
+  .appointment_metadata_container {
+    gap: 2rem;
+  }
+  .status_metadata {
+    grid-column-start: 0;
+    grid-column-end: span 2;
+  }
+  .metadata_group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .metadata_options {
+    flex-direction: row;
+  }
 }
 @media only screen and (min-width: 900px) {
+  .content_container {
+    display: grid;
+    grid-template-columns: 1fr 250px;
+  }
 }

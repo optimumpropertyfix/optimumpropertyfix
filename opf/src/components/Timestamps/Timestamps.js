@@ -25,7 +25,7 @@ function Timestamps(props) {
       </p> : null}
       { props.updated_at ?       
       <p>
-        <span>Created </span> {datetime_text(props.updated_at)}
+        <span>Updated </span> {datetime_text(props.updated_at)}
       </p> : null}
     </div>
   );

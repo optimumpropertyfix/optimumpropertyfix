@@ -51,17 +51,19 @@ export function StudentFAQPage() {
   });
   return (
     <div className={styles.StudentFAQPage}>
-      <div className={styles.container}>
+      <div className={`${styles.view_container} view_layout`}>
         <p className={`${styles.page_title_text} page_title_text`}>
-          Frequent Asked Questions
+          Frequently Asked Questions
         </p>
-        {studentData.map((faq) => {
-          return (
-            <ToggleableCard label={faq.question} className={styles.faq_card}>
-              <p className={styles.faq_answer}>{faq.answer}</p>
-            </ToggleableCard>
-          );
-        })}
+        <div className={`${styles.content_container} view_content_layout`}>
+          {studentData.map((faq) => {
+            return (
+              <ToggleableCard key={faq.id} label={faq.question} className={styles.faq_card}>
+                <p className={styles.faq_answer}>{faq.answer}</p>
+              </ToggleableCard>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

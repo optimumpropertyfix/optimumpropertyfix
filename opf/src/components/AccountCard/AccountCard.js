@@ -36,10 +36,6 @@ function AccountCard(props) {
           <p>NSHE ID</p>
           <p>{props.user.nshe_id}</p>
         </div>
-        <div>
-          <p>Account Created</p>
-          <p>{props.user.account_created}</p>
-        </div>
       </div>
     </div>
   );

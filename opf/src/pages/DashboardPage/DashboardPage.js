@@ -12,10 +12,13 @@ export function AdminDashboardPage() {
 
 export function StudentDashboardPage() {
   return (
-    <div className={`${styles.DashboardPage} section_helper_Section`}>
-      <div className="section_helper_Container">
-        <div className="text_page_title">
-          <p>Your Living Space Dashboard</p>
+    <div className={`${styles.DashboardPage}`}>
+      <div className={`${styles.view_container} view_layout`}>
+        <p className={`${styles.page_title_text} page_title_text`}>
+          Your Living Space Dashboard
+        </p>
+        <div className={`${styles.content_container} view_content_layout`}>
+
         </div>
       </div>
     </div>
