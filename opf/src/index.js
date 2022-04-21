@@ -49,7 +49,7 @@ ReactDOM.render(
             />
             <Route path="appointments" element={<AppointmentsPage />}>
               <Route index element={<AllAppointmentsView />} />
-              <Route path=":appointment" element={<AppointmentView />} />
+              <Route path=":appointment_id" element={<AppointmentView />} />
             </Route>
             <Route path="account" element={<StudentAccountPage />} />
           </Route>

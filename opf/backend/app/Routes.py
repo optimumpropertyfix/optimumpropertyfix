@@ -9,7 +9,7 @@ from distutils.log import error
 from msilib.schema import Error
 from netrc import netrc
 import json
-from flask_jwt_extended import jwt_required, get_jwt_identity
+from flask_jwt_extended import jwt_required, get_jwt_identity, unset_jwt_cookies
 from flask import Flask, jsonify, request
 
 from app import app
@@ -75,17 +75,35 @@ def create_announcement_route():
 
 
 @app.route("/appointment", methods=["GET"])
+@jwt_required()
 def view_all_appointment_route():
-    net_id = "1"
-    appointment_objects = appointment_controller.view_all_appointments(net_id = net_id)
+
+    current_user = get_jwt_identity()
+    print(current_user)
+    user_is_student = current_user[4]
+    user_id = current_user[5]
+
+    appointment_objects = appointment_controller.view_all_appointments(user_id=user_id, is_student=user_is_student)
     return jsonify(appointment_objects)
 
+@app.route("/appointment/<int:appointment_id>", methods=["GET"])
+@jwt_required()
+def view_individual_appointment_route(appointment_id):
 
+    current_user = get_jwt_identity()
+    user_is_student = current_user[4]
+    user_id = current_user[5]
+
+
+    appointment_objects = appointment_controller.view_individual_appointment(appointment_id=appointment_id, user_id=user_id, is_student=user_is_student)
+    return jsonify(appointment_objects)
+
+'''
 @app.route("/appointment/<int:ticket_id>/read", methods=["GET"])
 def view_individual_appointment_route(ticket_id):
     appointment_objects = appointment_controller.view_individual_appointment(ticket_id = ticket_id)
     return jsonify(appointment_objects)
-
+'''
 
 @app.route("/appointment/filter/ticket_status/<string:status>", methods=["GET"])
 def view_all_appointments_by_status_route(status):
@@ -400,8 +418,11 @@ def login_route():
 
 @app.route("/logout", methods=["POST"])
 def logout_route():
-    return f'TESTING LOGOOUT'
 
+    revoke_user_response = jsonify({"msg":"Authorization Revoked"})
+    unset_jwt_cookies(revoke_user_response)
+
+    return revoke_user_response, 200
 
 @app.route("/reset_password", methods=["POST"])
 def reset_password_route():

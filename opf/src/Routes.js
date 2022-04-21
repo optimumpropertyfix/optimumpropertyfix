@@ -51,7 +51,7 @@ const login_route = () => {
 };
 
 const logout_route = () => {
-  return `/revoke`;
+  return `/logout`;
 };
 
 const view_session_route = () => {
@@ -86,6 +86,14 @@ const view_all_buildings_route = () => {
   return `/buildings`
 }
 
+const view_all_appointments = () => {
+  return `/appointment`
+}
+
+const view_individual_appointment = (appointment_id) => {
+  return `/appointment/${appointment_id}`
+}
+
 export {
   student_create_ticket_route,
   admin_create_ticket_route,
@@ -107,5 +115,7 @@ export {
   get_all_tickets_by_status_route,
   user_view_individual_feedback_route,
   user_create_ticket_route,
-  view_all_buildings_route
+  view_all_buildings_route,
+  view_all_appointments,
+  view_individual_appointment
 };
