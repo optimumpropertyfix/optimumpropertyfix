@@ -26,6 +26,10 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  ::placeholder {
+    color: #d8d8d8;
+  }
+
   :root:-webkit-scrollbar {
     opacity: 100%;
     width: none;
