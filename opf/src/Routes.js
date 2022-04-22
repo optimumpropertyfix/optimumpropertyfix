@@ -94,6 +94,19 @@ const view_individual_appointment = (appointment_id) => {
   return `/appointment/${appointment_id}`
 }
 
+const view_current_user_route = () => {
+  return `/user`
+}
+
+const user_reset_account_info_route = () => {
+  return `/user/update_account_info`
+}
+
+const user_update_password = () => {
+  return `/user/update_account_password`
+}
+
+
 export {
   student_create_ticket_route,
   admin_create_ticket_route,
@@ -117,5 +130,8 @@ export {
   user_create_ticket_route,
   view_all_buildings_route,
   view_all_appointments,
-  view_individual_appointment
+  view_individual_appointment,
+  view_current_user_route,
+  user_reset_account_info_route,
+  user_update_password
 };
