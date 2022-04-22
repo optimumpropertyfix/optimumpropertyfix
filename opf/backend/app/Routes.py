@@ -1,10 +1,3 @@
-####################################################################
-# ACTION | 'REST TERM' | Definition :
-# Create | 'POST' | Creates a new object
-# Read | 'GET' | Read information about object (or multiple objects)
-# Update | 'PUT | Updates info about existing object
-# Delete | 'DELETE' | Delete an object
-#####################################################################
 from distutils.log import error
 from msilib.schema import Error
 from netrc import netrc
@@ -338,17 +331,15 @@ def create_unit_route(building_id):
     return f'Create Unit {building_id}'
 
 
-'''
-@app.route("/unit/<int:building_id>/<int:unit_id>/delete", methods=["DELETE"])
-def delete_unit_route(building_id, unit_id):
-    return f'Delete Unit {building_id} - {unit_id}'
-'''
-
-
+#views current user log into opf
 @app.route("/user", methods=["GET"])
+@jwt_required()
 def view_current_user_route():
-    net_id = 'joannalopez'
-    user_objects = user_controller.view_current_user(net_id = net_id)
+
+    current_user = get_jwt_identity()
+    user_id = current_user[5]
+
+    user_objects = user_controller.view_individual_user(user_id = user_id)
     return jsonify(user_objects)
 
 
@@ -363,7 +354,22 @@ def view_individual_user_route(user_id):
     user_objects = user_controller.view_individual_user(user_id = user_id)
     return jsonify(user_objects)
 
+@app.route("/user/update_account_password", methods=["PATCH"])
+@jwt_required()
+def user_update_password():
 
+    current_user = get_jwt_identity()
+    user_id = current_user[5]
+
+    credentials = request.get_json()
+    current_password = credentials.get('user_current_password')
+    new_password = credentials.get('user_new_password')
+
+    user_controller.user_update_password(user_id_param=user_id, current_password_param=current_password, new_password_param=new_password)
+
+    return f'Update Password'
+
+#creates a new user in the opf system :)
 @app.route("/new_user", methods=["POST"])
 def create_user_route():
     user = request.get_json()
@@ -380,34 +386,34 @@ def create_user_route():
 
     return f'Create User'
 
-'''
-@app.route("/user/delete", methods=["DELETE"])
-def student_delete_user_route():
-    return f'Delete Self User';
-'''
+# user account info :)
+@app.route("/user/update_account_info", methods=["PATCH"])
+@jwt_required()
+def user_reset_account_info_route():
+    current_user = get_jwt_identity()
+    user_id = current_user[5]
 
-@app.route("/user/update", methods=["PATCH"])
-def student_edit_user_route():
-    return f'Edit Self User'
+    user = request.get_json()
+    first_name = user.get('user_first_name')
+    last_name = user.get('user_last_name')
+    contact_email = user.get('user_contact_email')
+    gender = user.get('user_gender')
 
-'''
-@app.route("/user/<int:user_id>/delete", methods=["DELETE"])
-def admin_delete_user_route(user_id):
-    return f'Delete Self User {user_id}';
-'''
+    user_controller.user_reset_account_info(user_id_param= user_id, first_name_param=first_name, last_name_param=last_name, contact_email_param=contact_email, gender_param=gender)
 
-@app.route("/user/<int:user_id>/update", methods=["PATCH"])
+    return f'Edit Account Information'
+
+'''@app.route("/user/<int:user_id>/update", methods=["PATCH"])
 def admin_edit_user_route(user_id):
-    return f'Edit Self User {user_id}';
+    return f'Edit Self User {user_id}';'''
 
 
+#login given credentials for a user :)
 @app.route("/login", methods=["POST"])
 def login_route():
-
     credentials = request.get_json()
     net_id = credentials.get('user_net_id')
     password = credentials.get('user_password')
-
     response_data = user_controller.login_user(net_id_param=net_id, password_param=password)
 
     if (response_data == None):
@@ -416,23 +422,22 @@ def login_route():
     return jsonify(response_data)
 
 
+#user logout route :)
 @app.route("/logout", methods=["POST"])
 def logout_route():
-
     revoke_user_response = jsonify({"msg":"Authorization Revoked"})
     unset_jwt_cookies(revoke_user_response)
-
+    
     return revoke_user_response, 200
 
+
+#reset the users password given fields for login :)
 @app.route("/reset_password", methods=["POST"])
 def reset_password_route():
     credentials = request.get_json()
     net_id = credentials.get('user_net_id')
     nshe_id = credentials.get('user_nshe_id')
     password = credentials.get('user_password')
-
-    user_controller.reset_user_password(net_id_param=net_id,
-    nshe_id_param=nshe_id,
-    password_param=password)
+    user_controller.reset_user_password(net_id_param=net_id, nshe_id_param=nshe_id, password_param=password)
 
     return f'Reset User Password'

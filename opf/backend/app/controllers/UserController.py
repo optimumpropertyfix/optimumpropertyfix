@@ -1,3 +1,4 @@
+from ast import arg
 from mysql.connector import MySQLConnection, Error
 from app.DatabaseConfiguration import database_configuration
 from flask import Flask, jsonify 
@@ -6,16 +7,12 @@ from time import strftime
 
 from flask_jwt_extended import create_access_token
 
-
 class UserController:
-    def view_current_user(self, net_id):
-        users = None
-        query = "view_current_user"
-        args = [net_id]
-        users = self.query_database(query, args)
 
-        user_table = self.generate_user_objects(users)
-        return user_table
+    def user_update_password(self, user_id_param, current_password_param, new_password_param):
+        commit = "user_update_password"
+        values = [user_id_param, current_password_param, new_password_param]
+        print(self.commit_database(commit=commit, values=values))
 
     def view_all_users(self):
         users = None
@@ -31,11 +28,13 @@ class UserController:
         args = [user_id]
         users = self.query_database(query, args)
 
-        user_table = self.generate_user_objects(users)
+        user_table = self.generate_user_object(users)
         return user_table
 
-
-
+    def user_reset_account_info(self, user_id_param = None, first_name_param = None, last_name_param = None, contact_email_param = None, gender_param = None):
+        commit = "user_reset_account_info"
+        values = [user_id_param, first_name_param, last_name_param, contact_email_param, gender_param]
+        print(self.commit_database(commit=commit, values=values))
 
     def generate_user_objects(self, users):
         user_objects = list()
@@ -65,6 +64,38 @@ class UserController:
             user_objects.append(user_json) 
               
         return user_objects
+
+    def generate_user_object(self, user):
+
+        for user in user:
+            user_id = user[0]
+            user_first_name = user[1]
+            user_last_name = user[2]
+            user_is_student = user[3]
+            user_contact_email = user[4]
+            user_net_id = user[5]
+            user_nshe_id = user[6]
+            user_gender = user[7]
+            user_year = user[8]
+            user_account_created = user[9].strftime("%m %d %Y %H %M %S")
+            user_account_updated = user[10].strftime("%m %d %Y %H %M %S")
+            
+            user_json = self.serialize_user(
+                id = user_id,
+                first_name = user_first_name,
+                last_name = user_last_name,
+                contact_email = user_contact_email, 
+                is_student=user_is_student,
+                net_id = user_net_id, 
+                nshe_id = user_nshe_id, 
+                gender = user_gender, 
+                year = user_year, 
+                account_created = user_account_created,  
+                account_updated = user_account_updated
+            )
+              
+        return user_json
+
 
 
     def query_database(self, query, args = None): 
@@ -139,7 +170,7 @@ class UserController:
             connection.close()
             return commit_result
 
-    def serialize_user(self, id = None, first_name = None, last_name = None, contact_email = None, net_id = None, nshe_id = None, gender = None, year = None, account_created = None, is_student = None, access_token = None):
+    def serialize_user(self, id = None, first_name = None, last_name = None, contact_email = None, net_id = None, nshe_id = None, gender = None, year = None, account_created = None, account_updated = None, is_student = None, access_token = None):
         user = {
             "user_id": id,
             "user_first_name": first_name, 
@@ -150,6 +181,7 @@ class UserController:
             "user_gender": gender, 
             "user_year": year, 
             "user_account_created": account_created,
+            "user_updated_account": account_updated,
             "user_is_student": is_student,
             "access_token": access_token
         }
