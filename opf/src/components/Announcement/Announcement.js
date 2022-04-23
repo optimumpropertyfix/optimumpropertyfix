@@ -3,7 +3,7 @@ import Timestamps from "../Timestamps/Timestamps";
 
 function Announcement(props) {
   return (
-    <div className={`${styles.Announcement} block_contrast_items`}>
+    <div className={`block_contrast_items ${props.className} ${styles.Announcement}`}>
       <div className={styles.header}>
         <p>{props.announcement_title}</p>
         <p>Submitted by {props.announcement_user}</p>
