@@ -2,7 +2,6 @@ import AccountCard from "../../components/AccountCard/AccountCard";
 import styles from "./StudentAccountPage.module.css";
 import FormGroup from "../../components/FormGroup/FormGroup";
 import Timestamps from "../../components/Timestamps/Timestamps";
-import calneva_profile_picture from "../../assets/profile_pictures/calneva.jpeg"
 import { useEffect, useState } from "react";
 import TokenManager from "../../TokenManager";
 import { view_current_user_route, user_reset_account_info_route, user_update_password } from "../../Routes"

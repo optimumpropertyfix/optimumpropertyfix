@@ -3,8 +3,9 @@ import card_styles from "./Card.module.css";
 import toggleable_card_styles from "./ToggleableCard.module.css";
 
 export default function Card(props) {
+
   return (
-    <div className={`${card_styles.Card} ${props.className}`}>
+    <div className={`${card_styles.Card} ${props.className} ${props.theme === "light" ? card_styles.light_card : card_styles.dark_card}`}>
       <div className={card_styles.card_header}>
         <div>
           <span className="material-icons">
@@ -34,7 +35,7 @@ export function ToggleableCard(props) {
   };
 
   return (
-    <div className={`${card_styles.Card} ${props.className}`}>
+    <div className={`${card_styles.Card} ${props.className} ${props.theme === "light" ? card_styles.light_card : card_styles.dark_card}`}>
       <div className={toggleable_card_styles.card_header}>
         <div>
           <span className="material-icons">

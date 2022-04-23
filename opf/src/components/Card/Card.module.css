@@ -1,6 +1,17 @@
 @media only screen and (min-width: 300px) {
-  .Card {
+  .light_card {
+    background-color: white;
+  }
+  .light_card > .card_header > div {
+    color: var(--color-navy-blue);
+  }
+  .dark_card {
     background-color: var(--color-navy-blue);
+  }
+  .dark_card > .card_header > div {
+    color: white;
+  }
+  .Card {
     padding: 1rem;
     border-radius: 7px;
     height: min-content;
@@ -12,7 +23,6 @@
     gap: 1rem;
   }
   .card_header > div {
-    color: white;
     display: flex;
     align-items: center;
     gap: 0.8rem;
@@ -32,9 +42,6 @@
     height: 100%;
     align-self: center;
     transition: color 0.1s ease-in !important;
-  }
-  .card_header > button:hover {
-    color: var(--color-orange);
   }
   .card_header > button > span {
     font-size: 1.8rem;

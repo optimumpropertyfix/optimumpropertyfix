@@ -34,7 +34,7 @@ const AppointmentItem = (props) => {
   }
 
   return (
-    <div className={`${styles.AppointmentItem} block_contrast_items`}>
+    <div className={`${styles.AppointmentItem} ${props.className} block_contrast_items`}>
       <div className={styles.appointment_content}>
         <AppointmentDate
           date={props.appointment_start_time}
