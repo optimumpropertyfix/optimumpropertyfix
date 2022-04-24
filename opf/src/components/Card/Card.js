@@ -35,7 +35,7 @@ export function ToggleableCard(props) {
   };
 
   return (
-    <div className={`${card_styles.Card} ${props.className} ${props.theme === "light" ? card_styles.light_card : card_styles.dark_card}`}>
+    <div className={`${card_styles.Card} ${props.className} ${props.theme === "light" ? toggleable_card_styles.light_card : toggleable_card_styles.dark_card}`}>
       <div className={toggleable_card_styles.card_header}>
         <div>
           <span className="material-icons">

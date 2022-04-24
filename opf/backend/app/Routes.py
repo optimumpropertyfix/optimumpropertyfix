@@ -28,7 +28,9 @@ response_successful = json.dumps({'success':True}), 200, {'ContentType':'applica
 response_unsuccessful = json.dumps({'success':False}), 400, {'ContentType':'application/json'}
 
 @app.route("/announcements", methods=["GET"])     
+@jwt_required()
 def view_all_announcements_route():
+
     annoucement_objects = announcement_controller.view_all_announcements()
     return jsonify(annoucement_objects)
 
@@ -51,13 +53,6 @@ def edit_individual_announcement_route(announcement_id):
     message='TEST'
     annoucement_objects = announcement_controller.edit_individual_announcement(announcement_id = announcement_id, title = title, message = message)
     return jsonify(annoucement_objects)
-
-
-'''
-@app.route("/announcements/<int:ticket_id>/delete", methods=["DELETE"])     
-def delete_individual_announcement_route(ticket_id):
-    return "Delete Announcement"
-'''
 
 
 @app.route("/announcements/create", methods=["POST"])
@@ -91,12 +86,18 @@ def view_individual_appointment_route(appointment_id):
     appointment_objects = appointment_controller.view_individual_appointment(appointment_id=appointment_id, user_id=user_id, is_student=user_is_student)
     return jsonify(appointment_objects)
 
-'''
-@app.route("/appointment/<int:ticket_id>/read", methods=["GET"])
-def view_individual_appointment_route(ticket_id):
-    appointment_objects = appointment_controller.view_individual_appointment(ticket_id = ticket_id)
+
+@app.route("/appointment/scheduled_appointments", methods=["GET"])
+@jwt_required()
+def user_view_latest_appointment_route():
+
+    current_user = get_jwt_identity()
+    user_id = current_user[5]
+
+
+    appointment_objects = appointment_controller.user_view_latest_appointment(user_id=user_id)
     return jsonify(appointment_objects)
-'''
+
 
 @app.route("/appointment/filter/ticket_status/<string:status>", methods=["GET"])
 def view_all_appointments_by_status_route(status):
@@ -350,6 +351,7 @@ def view_all_users_route():
 
 
 @app.route("/user/<int:user_id>", methods=["GET"])
+@jwt_required()
 def view_individual_user_route(user_id):
     user_objects = user_controller.view_individual_user(user_id = user_id)
     return jsonify(user_objects)
@@ -365,9 +367,13 @@ def user_update_password():
     current_password = credentials.get('user_current_password')
     new_password = credentials.get('user_new_password')
 
-    user_controller.user_update_password(user_id_param=user_id, current_password_param=current_password, new_password_param=new_password)
+    if (user_controller.user_update_password(user_id_param=user_id, current_password_param=current_password, new_password_param=new_password)):
 
-    return f'Update Password'
+        return json.dumps({'success':True}), 200, {'ContentType':'application/json'}
+
+    else: 
+
+        return json.dumps({'success':False}), 400, {'ContentType':'application/json'}
 
 #creates a new user in the opf system :)
 @app.route("/new_user", methods=["POST"])

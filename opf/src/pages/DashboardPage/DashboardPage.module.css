@@ -1,5 +1,8 @@
 @media only screen and (min-width: 300px) {
-  
+  .landing_message {
+    margin-top: 2rem;
+  }
+
   .block_contrast_items_alternative {
     box-shadow: 0 1px 5px 2px var(--color-dark-gray) !important;
     background: white;
@@ -33,9 +36,12 @@
     padding: 0.5rem;
   }
   .appointments {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
     padding: 0.5rem;
   }
-  .test {
+  .resources_card {
     box-shadow: 0 1px 5px 2px var(--color-dark-gray) !important;
   }
 }
@@ -50,34 +56,34 @@
   .content_container {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(4, 1fr);
+    grid-template-rows: repeat(10, 1fr);
   }
   .announcements_container {
-    grid-column-start: 0;
-    grid-column-end: span 4;
-    grid-row-start: 0;
-    grid-row-end: span 3;
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-end: 8;
   }
   .announcements {
-    max-height: 30rem;
+    max-height: min-content;
   }
   .appointments_container {
-    grid-column-start: 0;
-    grid-column-end: span 4;
-    grid-row-start: 4;
-    grid-row-end: 6;
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row-start: 8;
+    grid-row-end: span 11;
   }
   .resources_container {
     grid-column-start: 5;
     grid-column-end: 7;
-    grid-row-start: 0;
-    grid-row-end: span 3;
+    grid-row-start: 1;
+    grid-row-end: span 11;
   }
 
 }
 
 @media only screen and (min-width: 900px) { 
   .content_container {
-    max-width: 1400px;;
+    max-width: 1400px;
   }
 }

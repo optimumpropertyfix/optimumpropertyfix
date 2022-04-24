@@ -106,6 +106,14 @@ const user_update_password = () => {
   return `/user/update_account_password`
 }
 
+const user_view_latest_appointment_route = () => {
+  return `/appointment/scheduled_appointments`
+}
+
+const view_all_announcements_route = () => {
+  return `/announcements`
+}
+
 
 export {
   student_create_ticket_route,
@@ -133,5 +141,7 @@ export {
   view_individual_appointment,
   view_current_user_route,
   user_reset_account_info_route,
-  user_update_password
+  user_update_password,
+  user_view_latest_appointment_route,
+  view_all_announcements_route
 };

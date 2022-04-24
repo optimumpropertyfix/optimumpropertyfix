@@ -5,14 +5,6 @@ from flask import Flask, jsonify
 import json
 
 
-# General Structure of Controller: 
-#   General Logic
-#   Helper Functions
-#   Write Query
-#   Read Query
-#   Serializer
-
-
 class AppointmentController:
     def view_all_appointments(self, user_id = None, is_student = True):
         appointments = None
@@ -53,6 +45,15 @@ class AppointmentController:
         appointments = None
         query = "admin_view_all_appointments_by_status"
         args = [status]
+        appointments = self.query_database(query, args)
+
+        appointments_table = self.generate_appointment_objects(appointments)
+        return appointments_table 
+
+    def user_view_latest_appointment(self, user_id):
+        appointments = None
+        query = "user_view_latest_appointment"
+        args = [user_id]
         appointments = self.query_database(query, args)
 
         appointments_table = self.generate_appointment_objects(appointments)
