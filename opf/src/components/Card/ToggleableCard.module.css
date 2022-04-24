@@ -1,6 +1,17 @@
 @media only screen and (min-width: 300px) {
-  .InformationCard {
+  .light_card {
+    background-color: white;
+  }
+  .light_card > .card_header > div {
+    color: var(--color-navy-blue);
+  }
+  .light_card > .card_header > button {
+    color: var(--color-navy-blue);
+  }
+  .dark_card {
     background-color: var(--color-navy-blue);
+  }
+  .InformationCard {
     padding: 1rem;
     border-radius: 7px;
     height: min-content;

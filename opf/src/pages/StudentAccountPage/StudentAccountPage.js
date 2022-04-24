@@ -118,7 +118,19 @@ export default function StudentAccountPage(props) {
     }; 
     const route = user_update_password();
 
-    fetch(route, options);
+    fetch(route, options).then((response) => {
+    
+      if (!response.ok) {
+        throw Error(response.statusText)
+      }
+
+      set_verify_password("")
+      set_new_password("")
+      set_current_password("")
+
+    }).catch((error) => {
+      console.log(error)
+    });
 
   }
 

@@ -1,4 +1,6 @@
 from ast import arg
+from operator import ge
+from types import NoneType
 from mysql.connector import MySQLConnection, Error
 from app.DatabaseConfiguration import database_configuration
 from flask import Flask, jsonify 
@@ -12,7 +14,8 @@ class UserController:
     def user_update_password(self, user_id_param, current_password_param, new_password_param):
         commit = "user_update_password"
         values = [user_id_param, current_password_param, new_password_param]
-        print(self.commit_database(commit=commit, values=values))
+        if (self.commit_database(commit=commit, values=values) != -1):
+            return True
 
     def view_all_users(self):
         users = None
@@ -23,13 +26,58 @@ class UserController:
         return user_table
 
     def view_individual_user(self, user_id):
-        users = None
+        serialized_user = None
         query = "view_individual_user"
         args = [user_id]
         users = self.query_database(query, args)
 
-        user_table = self.generate_user_object(users)
-        return user_table
+        # Divide Point
+
+        for user in users:
+            id = user[0]
+            first_name = user[1]
+            last_name = user[2]
+            is_student = user[3]
+            contact_email = user[4]
+            net_id = user[5]
+            nshe_id = user[6]
+            gender = user[7]
+            year = user[8]
+            account_created = user[9].strftime("%m %d %Y %H %M %S")
+            
+            if (user[10] is None):
+                
+                serialized_user = self.serialize_user(
+                    id=id,
+                    first_name=first_name,
+                    last_name=last_name,
+                    is_student=is_student,
+                    contact_email=contact_email,
+                    net_id=net_id,
+                    nshe_id=nshe_id,
+                    gender=gender,
+                    year=year,
+                    account_created=account_created,
+                ) 
+
+            else: 
+
+                account_updated = user[10].strftime("%m %d %Y %H %M %S")
+                serialized_user = self.serialize_user(
+                    id=id,
+                    first_name=first_name,
+                    last_name=last_name,
+                    is_student=is_student,
+                    contact_email=contact_email,
+                    net_id=net_id,
+                    nshe_id=nshe_id,
+                    gender=gender,
+                    year=year,
+                    account_created=account_created,
+                    account_updated=account_updated
+                )
+
+        return serialized_user
 
     def user_reset_account_info(self, user_id_param = None, first_name_param = None, last_name_param = None, contact_email_param = None, gender_param = None):
         commit = "user_reset_account_info"
