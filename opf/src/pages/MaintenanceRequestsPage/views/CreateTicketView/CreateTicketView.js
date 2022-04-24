@@ -16,9 +16,9 @@ export function StudentCreateTicketView() {
   const [notes, set_notes] = useState("");
 
   const [building_list, set_building_list] = useState([]);
-  const [unit_disabled, set_unit_disabled] = useState(true);
+  const [unit_disabled, set_unit_disabled] = useState(false);
   const [unit_list] = useState({});
-  const [location_disabled, set_location_disabled] = useState(true);
+  const [location_disabled, set_location_disabled] = useState(false);
   const [location_list, set_location_list] = useState([]);
 
   // Few notes about the operation of this page.
@@ -216,13 +216,14 @@ export function StudentCreateTicketView() {
 
   const handle_building = (event) => {
     set_building(event.target.value);
+    /*
     if (building != "select") {
       set_location_disabled(false)
       set_unit_disabled(false)
     } else {
       set_location_disabled(true)
       set_unit_disabled(true)
-    }
+    }*/
   };
 
   const handle_unit = (event) => {

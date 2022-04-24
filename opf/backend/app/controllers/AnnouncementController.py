@@ -35,7 +35,6 @@ class AnnouncementController:
         return announcement_table 
 
 
-#-------------------------------------------------------------------------------------------#
     def edit_individual_announcement(self, announcement_id = None, title = None, message = None):
         announcements = None
         query = "edit_individual_announcement"
@@ -46,7 +45,6 @@ class AnnouncementController:
         return announcements_table 
 
 
-#-------------------------------------------------------------------------------------------#
     def generate_announcement_objects(self, announcements):
         announcement_objects = list()
 

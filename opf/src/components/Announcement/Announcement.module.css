@@ -9,10 +9,11 @@
     font-size: 1.4rem;
     font-weight: 700;
     margin-bottom: 0.2rem;
+    color: var(--color-navy-blue);
   }
-  .header > p:nth-child(2) {
-    font-size: 0.7rem;
-    font-weight: 700;
+  .message > p {
+    font-size: 1rem;
+    color: var(--color-gray) !important;
   }
 }
 

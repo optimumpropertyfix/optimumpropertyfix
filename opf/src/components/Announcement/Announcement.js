@@ -6,7 +6,6 @@ function Announcement(props) {
     <div className={`block_contrast_items ${props.className} ${styles.Announcement}`}>
       <div className={styles.header}>
         <p>{props.announcement_title}</p>
-        <p>Submitted by {props.announcement_user}</p>
       </div>
       <div className={styles.message}>
         <p>{props.announcement_message}</p>

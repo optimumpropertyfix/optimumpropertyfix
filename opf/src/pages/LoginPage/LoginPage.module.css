@@ -23,7 +23,7 @@
     width: 300px;
   }
   .outlet {
-    overflow-y: scroll;
+    overflow-y: auto;
   }
   .nav {
     margin-bottom: 2rem;
