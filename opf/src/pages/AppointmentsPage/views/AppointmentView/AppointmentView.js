@@ -10,7 +10,7 @@ import TokenManager from "../../../../TokenManager";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-function AppointmentView(props) {
+export function StudentAppointmentView(props) {
   const [appointment, set_appointment] = useState({});
   const [cancellation_message_disabled, set_cancellation_message_disabled] =
   useState(true);
@@ -174,5 +174,3 @@ function AppointmentView(props) {
     </div>
   );
 }
-
-export default AppointmentView;

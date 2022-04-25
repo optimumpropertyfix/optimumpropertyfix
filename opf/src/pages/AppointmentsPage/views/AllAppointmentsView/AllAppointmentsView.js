@@ -5,7 +5,7 @@ import {view_all_appointments} from "../../../../Routes"
 import { useEffect, useState } from "react"
 import TokenManager from "../../../../TokenManager";
 
-function AllAppointmentsView(props) {
+export function StudentAllAppointmentsView(props) {
   const [appointments, set_appointments] = useState([])
   const { get_token } = TokenManager()
 
@@ -58,5 +58,3 @@ function AllAppointmentsView(props) {
     </div>
   );
 }
-
-export default AllAppointmentsView;

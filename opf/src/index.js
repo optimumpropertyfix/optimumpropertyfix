@@ -18,10 +18,12 @@ import { StudentCreateTicketView } from "./pages/MaintenanceRequestsPage/views/C
 import { StudentTicketView } from "./pages/MaintenanceRequestsPage/views/TicketView/TicketView";
 import { StudentFAQPage } from "./pages/FrequentAskedQuestions/FrequentlyAskedQuestions";
 import "./index.css";
-import AppointmentsPage from "./pages/AppointmentsPage/AppointmentsPage";
+import { StudentAppointmentsPage } from "./pages/AppointmentsPage/AppointmentsPage";
 import StudentAccountPage from "./pages/StudentAccountPage/StudentAccountPage";
-import AllAppointmentsView from "./pages/AppointmentsPage/views/AllAppointmentsView/AllAppointmentsView";
-import AppointmentView from "./pages/AppointmentsPage/views/AppointmentView/AppointmentView";
+import { StudentAllAppointmentsView } from "./pages/AppointmentsPage/views/AllAppointmentsView/AllAppointmentsView";
+import { StudentAppointmentView } from "./pages/AppointmentsPage/views/AppointmentView/AppointmentView";
+import AdminPage from "./pages/AdminPage/AdminPage";
+import { AdminDashboardPage } from "./pages/DashboardPage/DashboardPage";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -47,11 +49,51 @@ ReactDOM.render(
               path="frequently_asked_questions"
               element={<StudentFAQPage />}
             />
-            <Route path="appointments" element={<AppointmentsPage />}>
-              <Route index element={<AllAppointmentsView />} />
-              <Route path=":appointment_id" element={<AppointmentView />} />
+            <Route path="appointments" element={<StudentAppointmentsPage />}>
+              <Route index element={<StudentAllAppointmentsView />} />
+              <Route path=":appointment_id" element={<StudentAppointmentView />} />
             </Route>
             <Route path="account" element={<StudentAccountPage />} />
+          </Route>
+          </Route>
+          <Route path="admin" element={<AdminPage />}>
+            <Route index element={<AdminDashboardPage />} />
+            <Route
+              path="maintenance_requests"
+              element={<AdminMaintenanceRequestsPage />}
+            >
+              <Route index element={<AdminAllTicketsView />} />
+              <Route path="create" element={<AdminCreateTicketView />} />
+              <Route path=":ticket_id" element={<AdminTicketView />} />
+            </Route>
+            <Route path="appointments" element={<AdminAppointmentsForm />}>
+              <Route index element={<AdminAllAppointmentsView />} />
+              <Route path="create" element={<AdminAppointmentView />} />
+              <Route path=":appointment_id" element={<AdminAppointmentView />} />
+            </Route>
+            <Route path="account" element={<AdminAccountPage />} />
+            <Route path="users" element={<AdminUsersPage />} />
+            <Route path="forms" element={<AdminFormsPage />} >
+              <Route index element={<AdminFormsOptionPage />}/>
+              <Route path="announcements" element={<AdminAnnouncementsForm />}>
+                <Route path=":announcement_id" element={<AdminAnnouncementView />} />
+                <Route path="create" element={<AdminCreateAnnouncementView />} />
+                <Route index element={<AdminAllAnnouncementsView />} />
+              </Route>
+              <Route path="frequently_asked_questions" element={<AdminFAQForm />}> 
+                <Route path=":frequently_asked_questions_id" element={<AdminCreateFAQView />} />
+                <Route path="create" element={<AdminCreateFAQView />} />
+                <Route index element={<AdminAllFAQView />} />
+              </Route>
+              <Route path="dormitories" element={<AdminDormitoriesForm />}>
+                <Route path=":dormitory_id" element={<AppointmentView />}>
+                  <Route path=":unit_id" />
+                  <Route path="create" />
+                  <Route index />
+                </Route>
+              <Route path="create" element={<AppointmentView />} />
+              <Route index element={<AppointmentView />} />
+            </Route>
           </Route>
         </Route>
       </Routes>

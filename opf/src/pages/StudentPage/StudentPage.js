@@ -37,7 +37,7 @@ function StudentPage() {
         <SectionNavLink
           end
           to="/student/frequently_asked_questions"
-          icon="help_outline"
+          icon="help"
         >
           FAQ
         </SectionNavLink>
