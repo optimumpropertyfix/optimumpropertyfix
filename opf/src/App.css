@@ -235,7 +235,6 @@
     grid-row-start: 1;
     grid-row-end: span 2;
   }
-
 }
 
 @media only screen and (min-width: 900px) {
@@ -252,7 +251,7 @@
 
   .form_content_layout {
     overflow: auto;
-    width: 1400px;
+    max-width: 1400px;
     display: flex;
     flex-direction: column;
     gap: 1rem;
