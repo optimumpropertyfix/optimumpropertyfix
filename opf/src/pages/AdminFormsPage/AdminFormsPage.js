@@ -16,10 +16,10 @@ export function AdminFormsPage() {
         <ViewNavLink icon="add" to="/admin/forms/announcements">
           Manage Announcements
         </ViewNavLink>
-        <ViewNavLink icon="add" to="create">
+        <ViewNavLink icon="add" to="/admin/forms/frequently_asked_questions">
           Manage Frequently Asked Questions
         </ViewNavLink>
-        <ViewNavLink icon="add" to="create">
+        <ViewNavLink icon="add" to="/admin/forms/dormitories">
           Manage Dormitories
         </ViewNavLink>
       </ViewNavigation>

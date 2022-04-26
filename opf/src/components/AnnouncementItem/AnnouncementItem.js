@@ -25,6 +25,7 @@ function AnnouncementItem(props) {
           />
           <ItemGroup label="Date" text={props.announcement_date} />
           <ItemGroup label="User" text={props.announcement_user} />
+          <ItemGroup label="ID" text={props.announcement_id} />
         </div>
         <div className={styles.announcement_options}>
           <button onClick={view_announcement_click}>VIEW ANNOUNCEMENT</button>
