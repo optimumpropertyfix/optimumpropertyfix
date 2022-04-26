@@ -3,7 +3,10 @@ import AnnouncementItem from "../../../../../../components/AnnouncementItem/Anno
 export function AdminAllAnnouncementsView() {
   return (
     <div className={styles.AdminAllAnnouncementsView}>
-      <div className={`${styles.form_container} form_layout`}>
+      <p className={`${styles.page_subtitle_text} page_subtitle_text`}>
+        View All Announcements
+      </p>
+      <div className={`${styles.form_container}`}>
         <div className={styles.announcement_list}>
           <AnnouncementItem
             announcement_title="Testing"

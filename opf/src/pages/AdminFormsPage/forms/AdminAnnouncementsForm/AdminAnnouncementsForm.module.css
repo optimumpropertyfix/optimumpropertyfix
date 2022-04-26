@@ -2,4 +2,7 @@
   .AdminAnnouncementsForm {
     overflow-y: auto;
   }
+  .content_container {
+    max-width: 1400px;
+  }
 }

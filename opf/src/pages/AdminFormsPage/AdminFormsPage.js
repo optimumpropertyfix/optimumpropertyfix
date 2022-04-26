@@ -7,8 +7,8 @@ import styles from "./AdminFormsPage.module.css";
 
 export function AdminFormsPage() {
   return (
-    <div className={styles.AdminFormsPage}>
-      <Outlet className={styles.view_outlet} />
+    <div className={`${styles.AdminFormsPage}`}>
+      <Outlet/>
       <ViewNavigation
         label="AVAILABLE FORMS"
         className={styles.view_navigation}
