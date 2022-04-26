@@ -11,7 +11,7 @@ export function AdminAnnouncementsForm() {
           Manage Student Announcements
         </p>
         <div className={`${styles.content_container} form_content_layout`}>
-          <FormNavigation>
+          <FormNavigation label="ANNOUNCEMENT OPTIONS">
             <FormNavLink end to="/admin/forms/announcements">
               View Announcements
             </FormNavLink>

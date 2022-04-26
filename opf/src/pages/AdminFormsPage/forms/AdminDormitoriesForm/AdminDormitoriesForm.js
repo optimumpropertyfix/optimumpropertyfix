@@ -11,7 +11,7 @@ export function AdminDormitoriesForm() {
           Manage Student Dormitories
         </p>
         <div className={`${styles.content_container} form_content_layout`}>
-          <FormNavigation>
+          <FormNavigation label="DORMITORY OPTIONS">
             <FormNavLink end to="/admin/forms/dormitories">
               View Dormitories
             </FormNavLink>

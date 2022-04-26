@@ -11,7 +11,7 @@ export function AdminFAQForm() {
           Manage Student Frequently Asked Questions
         </p>
         <div className={`${styles.content_container} form_content_layout`}>
-          <FormNavigation>
+          <FormNavigation label="FREQUENTLY ASKED QUESTIONS OPTIONS">
             <FormNavLink end to="/admin/forms/frequently_asked_questions">
               View Frequently Asked Questions
             </FormNavLink>
