@@ -1,5 +1,4 @@
 @media only screen and (min-width: 300px) {
-
   :root {
     --color-light-red: #ef5350;
     --color-light-green: #66bb6a;
@@ -200,6 +199,9 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+  }
+  .form_layout {
+    margin-top: 1rem;
   }
 
   .received_status {

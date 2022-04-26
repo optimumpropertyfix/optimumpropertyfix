@@ -12,6 +12,10 @@ import FormGroup from "../../../../components/FormGroup/FormGroup";
 import TokenManager from "../../../../TokenManager";
 import LandingMessage from "../../../../components/LandingMessage/LandingMessage";
 
+export function AdminAllTicketsView() {
+  return <div></div>;
+}
+
 export function StudentAllTicketsView() {
   const [tickets, setTickets] = useState([]);
   const [status_filter, set_status_filter] = useState("select");

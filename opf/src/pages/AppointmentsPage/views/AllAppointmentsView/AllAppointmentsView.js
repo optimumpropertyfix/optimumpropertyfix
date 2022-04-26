@@ -1,16 +1,19 @@
 import styles from "./AllAppointmentsView.module.css";
 import AppointmentItem from "../../../../components/Appointment/AppointmentItem";
 import LandingMessage from "../../../../components/LandingMessage/LandingMessage";
-import {view_all_appointments} from "../../../../Routes"
-import { useEffect, useState } from "react"
+import { view_all_appointments } from "../../../../Routes";
+import { useEffect, useState } from "react";
 import TokenManager from "../../../../TokenManager";
 
+export function AdminAllAppointmentsView(props) {
+  return <div></div>;
+}
+
 export function StudentAllAppointmentsView(props) {
-  const [appointments, set_appointments] = useState([])
-  const { get_token } = TokenManager()
+  const [appointments, set_appointments] = useState([]);
+  const { get_token } = TokenManager();
 
   useEffect(() => {
-
     const options = {
       method: "GET",
       headers: {

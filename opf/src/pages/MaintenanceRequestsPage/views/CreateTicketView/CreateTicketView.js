@@ -1,11 +1,16 @@
 //create a ticket view for a single ticket
 import { useEffect, useState } from "react";
-import { user_create_ticket_route, view_all_buildings_route } from "../../../../Routes";
+import {
+  user_create_ticket_route,
+  view_all_buildings_route,
+} from "../../../../Routes";
 import styles from "./CreateTicketView.module.css";
 import { useNavigate } from "react-router-dom";
 import TokenManager from "../../../../TokenManager";
 import { ToggleableCard } from "../../../../components/Card/Card";
 import FormGroup from "../../../../components/FormGroup/FormGroup";
+
+export function AdminCreateTicketView() {}
 
 export function StudentCreateTicketView() {
   const [title, set_title] = useState("");
@@ -126,23 +131,25 @@ export function StudentCreateTicketView() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        'Authorization' : `Bearer ${get_token()}`,
+        Authorization: `Bearer ${get_token()}`,
       },
-    }; 
+    };
     const route = view_all_buildings_route();
 
-    fetch(route, options).then((response) => {
-      if (!response.ok) {
-        throw Error(`${response.statusText} - ${response.status}`);
-      }
+    fetch(route, options)
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(`${response.statusText} - ${response.status}`);
+        }
 
-      return response.json()
-    }).then((buildings) => {
-      set_building_list(buildings);
-    }).catch((error) => {
-      console.log(error)
-    })
-
+        return response.json();
+      })
+      .then((buildings) => {
+        set_building_list(buildings);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   const navigate = useNavigate();
@@ -184,7 +191,7 @@ export function StudentCreateTicketView() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        'Authorization' : `Bearer ${get_token()}`,
+        Authorization: `Bearer ${get_token()}`,
       },
       body: ticket,
     };
@@ -331,7 +338,14 @@ export function StudentCreateTicketView() {
                   Select Building
                 </option>
                 {building_list.map((building_item) => {
-                  return <option key={building_item.building_id} value={building_item.building_name}>{building_item.building_name}</option>
+                  return (
+                    <option
+                      key={building_item.building_id}
+                      value={building_item.building_name}
+                    >
+                      {building_item.building_name}
+                    </option>
+                  );
                 })}
               </select>
             </FormGroup>
