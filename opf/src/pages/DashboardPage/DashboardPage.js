@@ -14,10 +14,11 @@ import {
 } from "../../Routes";
 import TokenManager from "../../TokenManager";
 import LandingMessage from "../../components/LandingMessage/LandingMessage";
+import { KanbanBoard } from "../../components/KanbanBoard/KanbanBoard";
 
 export function AdminDashboardPage() {
   return (
-    <div className={admin_dashboard_styles.AdminDashboardPage}>
+    <div className={`${admin_dashboard_styles.AdminDashboardPage}`}>
       <div className={`${admin_dashboard_styles.view_container} view_layout`}>
         <p
           className={`${admin_dashboard_styles.page_title_text} page_title_text`}
@@ -27,12 +28,7 @@ export function AdminDashboardPage() {
         <div
           className={`${admin_dashboard_styles.content_container} view_content_layout`}
         >
-          <div className={admin_dashboard_styles.kanban_board}>
-            <div className={admin_dashboard_styles.received_tickets}></div>
-            <div className={admin_dashboard_styles.pending_tickets}></div>
-            <div className={admin_dashboard_styles.completed_tickets}></div>
-            <div className={admin_dashboard_styles.cancelled_tickets}></div>
-          </div>
+          <KanbanBoard />
         </div>
       </div>
     </div>

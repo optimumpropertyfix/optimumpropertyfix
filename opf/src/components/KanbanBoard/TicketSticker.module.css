@@ -1,0 +1,42 @@
+@media only screen and (min-width: 900px) {
+  .TicketSticker {
+    background: white;
+    box-shadow: 0 1px 5px 2px var(--color-standard-gray);
+    padding: 1rem 1rem 1rem 1rem;
+    border-radius: 7px;
+  }
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .ticket_details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .ticket_options {
+  }
+  .sticker_options {
+    display: flex;
+    justify-content: space-between;
+  }
+  .sticker_option {
+    font-size: 0.6rem;
+    padding: 0.2rem 0.6rem;
+    box-shadow: none;
+    background: none;
+    border: 2px var(--color-standard-gray) dotted;
+    color: var(--color-standard-gray);
+  }
+  .sticker_option:hover {
+    background: none;
+    color: var(--color-navy-blue);
+  }
+  .sticker_option:disabled {
+    background: var(--color-navy-blue);
+    border: none;
+    color: white;
+    border: 2px var(--color-navy-blue) solid;
+  }
+}
