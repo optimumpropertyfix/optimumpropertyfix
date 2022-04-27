@@ -3,32 +3,18 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr;
-    gap: 1rem;
+    gap: 2rem;
   }
-  .kanban_stack {
-    padding: 2rem;
-    border-radius: 7px;
-  }
-  .kanban_stack > p {
-    text-align: center;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-  }
-  .KanbanBoard > div:nth-child(1) {
+  .received_tickets {
     background: #eceff1;
   }
-  .KanbanBoard > div:nth-child(2) {
+  .pending_tickets {
     background: #fffde7;
   }
-  .KanbanBoard > div:nth-child(3) {
+  .completed_tickets {
     background: #e8f5e9;
   }
-  .KanbanBoard > div:nth-child(4) {
+  .cancelled_tickets {
     background: #ffebee;
-  }
-  .kanban_content {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
   }
 }

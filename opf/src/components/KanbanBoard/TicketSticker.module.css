@@ -8,6 +8,10 @@
   .content {
     display: flex;
     flex-direction: column;
+    background: var(--color-light-gray);
+    padding: 1rem;
+    border-radius: 7px;
+    margin-bottom: 1rem;
     gap: 0.5rem;
   }
   .ticket_details {
@@ -16,6 +20,11 @@
     gap: 0.5rem;
   }
   .ticket_options {
+    display: flex;
+    flex-direction: column;
+  }
+  .ticket_option {
+    padding: 0.5rem;
   }
   .sticker_options {
     display: flex;
@@ -25,18 +34,27 @@
     font-size: 0.6rem;
     padding: 0.2rem 0.6rem;
     box-shadow: none;
-    background: none;
-    border: 2px var(--color-standard-gray) dotted;
-    color: var(--color-standard-gray);
+    transition: border 0.1s ease-in;
+    transition: color 0.1s ease-in;
+    background: white;
+
+    background: var(--color-navy-blue);
+    color: white;
+    border: 2px var(--color-navy-blue) solid;
   }
   .sticker_option:hover {
     background: none;
     color: var(--color-navy-blue);
+    border: 2px var(--color-navy-blue) solid; 
   }
   .sticker_option:disabled {
-    background: var(--color-navy-blue);
-    border: none;
-    color: white;
-    border: 2px var(--color-navy-blue) solid;
+    background: none;
+    border: 2px var(--color-standard-gray) dotted;
+    color: var(--color-standard-gray);
+  }
+  .sticker_option_active {
+    background: var(--color-orange) !important;
+    color: white !important;
+    border: 2px var(--color-orange) solid !important;
   }
 }

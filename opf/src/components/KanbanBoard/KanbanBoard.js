@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import kanban_board_styles from "./KanbanBoard.module.css";
+import kanban_stack_styles from "./KanbanStack.module.css";
 import ticket_sticker_styles from "./TicketSticker.module.css";
 import ItemGroup from "../ItemGroup/ItemGroup";
 import FormGroup from "../FormGroup/FormGroup";
 
 export function KanbanBoard() {
+
   const [received_tickets, set_received_tickets] = useState([]);
   const [pending_tickets, set_pending_tickets] = useState([]);
   const [completed_tickets, set_completed_tickets] = useState([]);
@@ -42,39 +44,6 @@ export function KanbanBoard() {
       ticket_unit_number: "1C",
       ticket_status: "Pending",
       ticket_created: "03 13 2022 00 45 00",
-      ticket_id: 3,
-    },
-    {
-      ticket_title: "Water Leak",
-      ticket_description: "Water leak in the kitchen, underneath the sink.",
-      ticket_severity: "Mild",
-      ticket_location: "Kitchen",
-      ticket_building_name: "Peavine Hall",
-      ticket_unit_number: "1C",
-      ticket_status: "Pending",
-      ticket_created: "03 13 2022 00 45 00",
-      ticket_id: 3,
-    },
-    {
-      ticket_title: "Water Leak",
-      ticket_description: "Water leak in the kitchen, underneath the sink.",
-      ticket_severity: "Mild",
-      ticket_location: "Kitchen",
-      ticket_building_name: "Peavine Hall",
-      ticket_unit_number: "1C",
-      ticket_status: "Pending",
-      ticket_created: "03 13 2022 00 45 00",
-      ticket_id: 3,
-    },
-    {
-      ticket_title: "Water Leak",
-      ticket_description: "Water leak in the kitchen, underneath the sink.",
-      ticket_severity: "Mild",
-      ticket_location: "Kitchen",
-      ticket_building_name: "Peavine Hall",
-      ticket_unit_number: "1C",
-      ticket_status: "Pending",
-      ticket_created: "03 13 2022 00 45 00",
       ticket_id: 5,
     },
     {
@@ -90,7 +59,7 @@ export function KanbanBoard() {
     },
   ];
 
-  const order_tickets = (tickets) => {
+  const populate_ticket_stacks = (tickets) => {
     let received_tickets_buffer = [];
     let pending_tickets_buffer = [];
     let completed_tickets_buffer = [];
@@ -117,41 +86,137 @@ export function KanbanBoard() {
     set_cancelled_tickets(cancelled_tickets_buffer);
   };
 
+  const api_get_tickets = () => {
+
+  }
+
+  const refresh_kanban_board = () => {
+    console.log("kanban refreshed")
+    // get tickets
+    // pass tickets data into populate_ticket_stacks
+  }
+
   useEffect(() => {
-    order_tickets(tickets_test);
+
+    document.addEventListener('refresh-kanban', refresh_kanban_board)
+    // api_get_tickets - except it will be straight code
+    populate_ticket_stacks(tickets_test);
+
+    return () => {
+      document.removeEventListener('refresh-kanban', refresh_kanban_board);
+    }
   }, []);
 
   return (
     <div className={kanban_board_styles.KanbanBoard}>
-      <div className={kanban_board_styles.kanban_stack}>
-        <p>Received Tickets</p>
-        <div className={kanban_board_styles.kanban_content}>
-          {received_tickets.map((ticket) => {
-            return <TicketSticker key={ticket.ticket_id} {...ticket} />;
-          })}
-        </div>
-      </div>
-      <div className={kanban_board_styles.kanban_stack}>
-        <p>Pending Tickets</p>
-        <div className={kanban_board_styles.kanban_content}>
-          {pending_tickets.map((ticket) => {
-            return <TicketSticker key={ticket.ticket_id} {...ticket} />;
-          })}
-        </div>
-      </div>
-      <div className={kanban_board_styles.kanban_stack}>
-        <p>Completed Tickets</p>
-        <div className={kanban_board_styles.kanban_content}>
-          {completed_tickets.map((ticket) => {
-            return <TicketSticker key={ticket.ticket_id} {...ticket} />;
-          })}
-        </div>
+      <KanbanStack stack={received_tickets} flag="Received" className={kanban_board_styles.received_tickets}/>
+      <KanbanStack stack={pending_tickets} flag="Pending" className={kanban_board_styles.pending_tickets}/>
+      <KanbanStack stack={completed_tickets} flag="Completed" className={kanban_board_styles.completed_tickets} />
+    </div>
+  );
+}
+
+function KanbanStack(props) {
+
+  return (
+    <div className={`${kanban_stack_styles.KanbanStack} ${props.className}`}>
+      <p>
+        {props.flag} Tickets
+      </p>  
+      <div>
+        {props.stack.map((ticket) => {
+          return <TicketSticker flag={props.flag} key={ticket.ticket_id} {...ticket} />;
+        })}
       </div>
     </div>
   );
 }
 
 function TicketSticker(props) {
+
+  const [received_disable, set_received_disable] = useState(true)
+  const [pending_disable, set_pending_disable] = useState(true)
+  const [completed_disable, set_completed_disable] = useState(true)
+
+  const refresh_kanban_board = () => {
+    const refresh_event = new Event('refresh-kanban')
+    document.dispatchEvent(refresh_event)
+  }
+
+  const received_button_click = () => {
+    refresh_kanban_board()
+    // get ticket id
+    // hit server with id
+    // change status
+    // refresh_kanban_board
+  }
+
+  const pending_button_click = () => {
+    refresh_kanban_board()
+  }
+
+  const completed_button_click = () => {
+    refresh_kanban_board()
+  }
+
+
+
+  const form_enables = () => {
+    
+    const status = String(props.ticket_status);
+
+    if (status === "Received") {
+      set_received_disable(true);
+      set_pending_disable(false)
+    } else if (status === "Pending") {
+      set_pending_disable(true)
+      set_completed_disable(false)
+    } else {
+      set_completed_disable(false)
+    }
+
+  }
+
+  const received_active_background = (styles) => {
+
+    const status = String(props.ticket_status)
+
+    if (status === "Received") {
+      
+      return styles.sticker_option_active
+
+    }
+
+  }
+
+  const pending_active_background = (styles) => {
+
+    const status = String(props.ticket_status)
+
+    if (status === "Pending") {
+      
+      return styles.sticker_option_active
+
+    }
+
+  }
+
+  const completed_active_background = (styles) => {
+
+    const status = String(props.ticket_status)
+
+    if (status === "Completed") {
+      
+      return styles.sticker_option_active
+
+    }
+
+  }
+
+  useEffect(() => {
+    form_enables()
+  }, [])
+
   return (
     <div className={ticket_sticker_styles.TicketSticker}>
       <div className={ticket_sticker_styles.content}>
@@ -163,19 +228,24 @@ function TicketSticker(props) {
             <p>{props.ticket_description}</p>
           </ItemGroup>
         </div>
-        <div className={ticket_sticker_styles.ticket_options}></div>
+        <div className={ticket_sticker_styles.ticket_options}>
+          <button className={ticket_sticker_styles.ticket_option}>
+            View Ticket
+          </button>
+        </div>
       </div>
       <div className={ticket_sticker_styles.sticker_options}>
         <button
-          className={ticket_sticker_styles.sticker_option}
-          disabled={true}
+          onClick={received_button_click}
+          className={`${ticket_sticker_styles.sticker_option} ${received_active_background(ticket_sticker_styles)}`}
+          disabled={received_disable}
         >
           RECEIVED
         </button>
-        <button className={ticket_sticker_styles.sticker_option}>
+        <button onClick={pending_button_click} className={`${ticket_sticker_styles.sticker_option} ${pending_active_background(ticket_sticker_styles)}`} disabled={pending_disable}>
           PENDING
         </button>
-        <button className={ticket_sticker_styles.sticker_option}>
+        <button onClick={completed_button_click} className={`${ticket_sticker_styles.sticker_option} ${completed_active_background(ticket_sticker_styles)}`} disabled={completed_disable}>
           COMPLETED
         </button>
       </div>
