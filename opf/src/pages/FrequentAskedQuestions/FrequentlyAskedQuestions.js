@@ -12,7 +12,7 @@ import styles from "./FrequentlyAskedQuestion.module.css";
 export function AdminFAQPage() {
   return (
     <div className={styles.StudentFAQPage}>
-      <div className={`${styles.view_container} view_layout`}>
+      <div className={`${styles.view_container} form_layout`}>
         <p className={`${styles.page_title_text} page_title_text`}>
           Frequently Asked Questions
         </p>

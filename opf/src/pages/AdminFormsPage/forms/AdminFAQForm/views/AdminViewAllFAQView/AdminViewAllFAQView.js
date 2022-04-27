@@ -14,36 +14,6 @@ export function AdminViewAllFAQView() {
             faq_user="John Doe"
             faq_id="23"
           />
-          <FAQItem
-            faq_question="Who are we?"
-            faq_answer="Goon Squad Goon Squad Goon Squad Goon Squad Goon Squad"
-            faq_user="John Doe"
-            faq_id="23"
-          />
-          <FAQItem
-            faq_question="Who are we?"
-            faq_answer="Goon Squad Goon Squad Goon Squad Goon Squad Goon Squad"
-            faq_user="John Doe"
-            faq_id="23"
-          />
-          <FAQItem
-            faq_question="Who are we?"
-            faq_answer="Goon Squad Goon Squad Goon Squad Goon Squad Goon Squad"
-            faq_user="John Doe"
-            faq_id="23"
-          />
-          <FAQItem
-            faq_question="Who are we?"
-            faq_answer="Goon Squad Goon Squad Goon Squad Goon Squad Goon Squad"
-            faq_user="John Doe"
-            faq_id="23"
-          />
-          <FAQItem
-            faq_question="Who are we?"
-            faq_answer="Goon Squad Goon Squad Goon Squad Goon Squad Goon Squad"
-            faq_user="John Doe"
-            faq_id="23"
-          />
         </div>
       </div>
     </div>

@@ -1,7 +1,11 @@
 import ItemGroup from "../ItemGroup/ItemGroup";
 import styles from "./AnnouncementItem.module.css";
+import { useNavigate } from "react-router-dom";
 function AnnouncementItem(props) {
-  const view_announcement_click = () => {};
+  const navigate = useNavigate();
+  const view_announcement_click = () => {
+    navigate(`/admin/forms/announcements/${props.announcement_id}`);
+  };
 
   const message_text = (message) => {
     let message_string = new String(message);

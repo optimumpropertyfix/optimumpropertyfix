@@ -1,25 +1,19 @@
 import styles from "./AdminViewDormitoryView.module.css";
-import ItemGroup from "../../../../../../components/ItemGroup/ItemGroup";
 import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 import FormGroup from "../../../../../../components/FormGroup/FormGroup";
 
 export function AdminViewDormitoryView() {
-
   let location = useLocation();
   const navigate = useNavigate();
   let { dormitory_id, unit_id } = useParams();
-  
+
   const create_unit_click = () => {
-
-    navigate(`/admin/forms/dormitories/${dormitory_id}/create`)
-
-  }
+    navigate(`/admin/forms/dormitories/${dormitory_id}/create`);
+  };
 
   const view_units_click = () => {
-   
-    navigate(`/admin/forms/dormitories/${dormitory_id}`)
-
-  }
+    navigate(`/admin/forms/dormitories/${dormitory_id}`);
+  };
 
   return (
     <div className={styles.AdminViewDormitoryView}>
@@ -28,7 +22,7 @@ export function AdminViewDormitoryView() {
           <p className={`${styles.page_subtitle_text} page_subtitle_text`}>
             Edit Dormitory Units
           </p>
-          <div className={styles.dormitory_units}> 
+          <div className={styles.dormitory_units}>
             <Outlet />
           </div>
         </div>
@@ -58,12 +52,19 @@ export function AdminViewDormitoryView() {
               </FormGroup>
             </div>
             <div className={styles.dormitory_options}>
-              <button>
-                Update Dormitory
-              </button>
-              { location.pathname === `/admin/forms/dormitories/${dormitory_id}` ? <button onClick={create_unit_click}> Create Unit </button> : null}
-              { location.pathname === `/admin/forms/dormitories/${dormitory_id}/${unit_id}` ? <button onClick={view_units_click}> View Units </button> : null}
-              { location.pathname === `/admin/forms/dormitories/${dormitory_id}/create` ? <button onClick={view_units_click}> View Units </button> : null}
+              <button>Update Dormitory</button>
+              {location.pathname ===
+              `/admin/forms/dormitories/${dormitory_id}` ? (
+                <button onClick={create_unit_click}> Create Unit </button>
+              ) : null}
+              {location.pathname ===
+              `/admin/forms/dormitories/${dormitory_id}/${unit_id}` ? (
+                <button onClick={view_units_click}> View Units </button>
+              ) : null}
+              {location.pathname ===
+              `/admin/forms/dormitories/${dormitory_id}/create` ? (
+                <button onClick={view_units_click}> View Units </button>
+              ) : null}
             </div>
           </div>
         </div>

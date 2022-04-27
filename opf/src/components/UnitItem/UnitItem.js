@@ -1,18 +1,21 @@
 import ItemGroup from "../ItemGroup/ItemGroup";
 import styles from "./UnitItem.module.css";
+import { useNavigate, useParams } from "react-router-dom";
 
 function UnitItem(props) {
-  const view_unit_click = () => {};
+  const navigate = useNavigate();
+  const { dormitory_id } = useParams();
+  const view_unit_click = () => {
+    navigate(`/admin/forms/dormitories/${dormitory_id}/${props.unit_id}`);
+  };
 
   const unit_text = () => {
-
     if (props.unit_letter != null) {
-        return `${props.unit_number}${props.unit_letter}`
+      return `${props.unit_number}${props.unit_letter}`;
     } else {
-        return `${props.unit_number}`
+      return `${props.unit_number}`;
     }
-
-  }
+  };
 
   return (
     <div
@@ -20,11 +23,9 @@ function UnitItem(props) {
     >
       <div className={styles.unit_content}>
         <div className={styles.unit_details}>
-            <div className={styles.unit_text}>
-                <p>
-                    { unit_text() }
-                </p>
-            </div>
+          <div className={styles.unit_text}>
+            <p>{unit_text()}</p>
+          </div>
           <ItemGroup label="Type" text={props.unit_type} />
           <ItemGroup label="Occupancy" text={props.unit_occupancy} />
           <ItemGroup label="ID" text={props.unit_id} />

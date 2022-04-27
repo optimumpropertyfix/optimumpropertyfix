@@ -1,8 +1,12 @@
 import ItemGroup from "../ItemGroup/ItemGroup";
 import styles from "./BuildingItem.module.css";
+import { useNavigate } from "react-router-dom";
 
 function BuildingItem(props) {
-  const view_building_click = () => {};
+  const navigate = useNavigate();
+  const view_building_click = () => {
+    navigate(`/admin/forms/dormitories/${props.building_id}`);
+  };
 
   return (
     <div

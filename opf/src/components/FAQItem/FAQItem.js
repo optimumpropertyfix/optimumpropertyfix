@@ -1,7 +1,11 @@
 import ItemGroup from "../ItemGroup/ItemGroup";
 import styles from "./FAQItem.module.css";
+import { useNavigate } from "react-router-dom";
 function FAQItem(props) {
-  const view_faq_click = () => {};
+  const navigate = useNavigate();
+  const view_faq_click = () => {
+    navigate(`/admin/forms/frequently_asked_questions/${props.faq_id}`);
+  };
 
   const question_text = (question) => {
     let question_string = new String(question);
@@ -24,14 +28,14 @@ function FAQItem(props) {
   return (
     <div
       className={`${styles.FAQItem} ${props.className} block_contrast_items`}
-    >  
+    >
       <div className={styles.faq_content}>
         <div className={styles.faq_details}>
-          <ItemGroup label="Question" text={question_text(props.faq_question)} />
           <ItemGroup
-            label="Answer"
-            text={answer_text(props.faq_answer)}
+            label="Question"
+            text={question_text(props.faq_question)}
           />
+          <ItemGroup label="Answer" text={answer_text(props.faq_answer)} />
           <ItemGroup label="User" text={props.faq_user} />
           <ItemGroup label="ID" text={props.faq_id} />
         </div>

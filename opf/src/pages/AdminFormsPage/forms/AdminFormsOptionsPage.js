@@ -1,6 +1,21 @@
 import styles from "./AdminFormsOptionsPage.module.css";
 import Card from "../../../components/Card/Card";
+import { useNavigate } from "react-router-dom";
 export function AdminFormsOptionsPage() {
+  const navigate = useNavigate();
+
+  const manage_announcements_click = () => {
+    navigate(`/admin/forms/announcements`);
+  };
+
+  const manage_faq_click = () => {
+    navigate(`/admin/forms/frequently_asked_questions`);
+  };
+
+  const manage_dormitories_click = () => {
+    navigate(`/admin/forms/dormitories`);
+  };
+
   return (
     <div className={styles.AdminFormsOptionsPage}>
       <div className={`${styles.view_container} view_layout`}>
@@ -17,7 +32,10 @@ export function AdminFormsOptionsPage() {
                   announcements, and view all information pretaining to created
                   announcements.
                 </p>
-                <button className={styles.selection_button}>
+                <button
+                  className={styles.selection_button}
+                  onClick={manage_announcements_click}
+                >
                   Manage Announcements
                 </button>
               </div>
@@ -30,7 +48,10 @@ export function AdminFormsOptionsPage() {
                   view all information pretaining to created FAQs.
                   Administrators can also edit an existing FAQ.
                 </p>
-                <button className={styles.selection_button}>
+                <button
+                  className={styles.selection_button}
+                  onClick={manage_faq_click}
+                >
                   Manage Frequently Asked Questions
                 </button>
               </div>
@@ -44,7 +65,10 @@ export function AdminFormsOptionsPage() {
                   delete, and create new dormitories and units associated to a
                   dormitory.
                 </p>
-                <button className={styles.selection_button}>
+                <button
+                  className={styles.selection_button}
+                  onClick={manage_dormitories_click}
+                >
                   Manage Dormitories
                 </button>
               </div>

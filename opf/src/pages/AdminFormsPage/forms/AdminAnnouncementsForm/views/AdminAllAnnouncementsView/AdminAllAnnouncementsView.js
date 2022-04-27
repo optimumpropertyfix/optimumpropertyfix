@@ -12,26 +12,7 @@ export function AdminAllAnnouncementsView() {
             announcement_title="Testing"
             announcement_date="09/06/2000"
             announcement_user="John Doe"
-          />
-          <AnnouncementItem
-            announcement_title="Testing"
-            announcement_date="09/06/2000"
-            announcement_user="John Doe"
-          />
-          <AnnouncementItem
-            announcement_title="Testing"
-            announcement_date="09/06/2000"
-            announcement_user="John Doe"
-          />
-          <AnnouncementItem
-            announcement_title="Testing"
-            announcement_date="09/06/2000"
-            announcement_user="John Doe"
-          />
-          <AnnouncementItem
-            announcement_title="Testing"
-            announcement_date="09/06/2000"
-            announcement_user="John Doe"
+            announcement_id={1}
           />
         </div>
       </div>
