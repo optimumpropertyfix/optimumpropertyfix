@@ -13,9 +13,11 @@ class AppointmentController:
             args = [user_id]
             appointments = self.query_database(query, args)
         else:
+            #Not being used rn
+            '''
             query = "admin_view_all_appointments"
             appointments = self.query_database(query)
-
+            '''
         appointments_table = self.generate_appointment_objects(appointments)
         return appointments_table       
    
@@ -26,29 +28,15 @@ class AppointmentController:
             args = [user_id, appointment_id]
             appointments = self.query_database(query, args)
         else:
+            #Not being used rn
+            '''
             query = "admin_view_individual_appointment"
             appointments = self.query_database(query)
+            '''
 
         appointments_table = self.generate_appointment_object(appointments)
         return appointments_table 
-
-
-    def view_all_appointments_by_datetime(self):
-        appointments = None
-        query = "admin_view_all_appointments_by_datetime"
-        appointments = self.query_database(query)
-
-        appointments_table = self.generate_appointment_objects(appointments)
-        return appointments_table 
-
-    def view_all_appointments_by_status(self, status = None, is_student = True):
-        appointments = None
-        query = "admin_view_all_appointments_by_status"
-        args = [status]
-        appointments = self.query_database(query, args)
-
-        appointments_table = self.generate_appointment_objects(appointments)
-        return appointments_table 
+  
 
     def user_view_latest_appointment(self, user_id):
         appointments = None

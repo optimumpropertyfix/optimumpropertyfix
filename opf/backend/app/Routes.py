@@ -34,38 +34,68 @@ def view_all_announcements_route():
     annoucement_objects = announcement_controller.view_all_announcements()
     return jsonify(annoucement_objects)
 
+@app.route("/admin_announcements", methods=["GET"])
+def admin_view_all_announcements_route():
 
-@app.route("/announcements/latest", methods=["GET"])     
-def view_latest_announcement_route():
-    annoucement_objects = announcement_controller.view_latest_announcements()
+    annoucement_objects = announcement_controller.admin_view_all_announcements()
     return jsonify(annoucement_objects)
 
-
+'''
 @app.route("/announcements/<int:announcement_id>", methods=["GET"])     
 def view_individual_announcement_route(announcement_id):
    annoucement_objects = announcement_controller.view_announcement_by_id(announcement_id=announcement_id)
    return jsonify(annoucement_objects)
+'''
 
 
+'''
 @app.route("/announcements/<int:announcement_id>/update", methods=["PATCH"])     
 def edit_individual_announcement_route(announcement_id):
     title='test'
     message='TEST'
     annoucement_objects = announcement_controller.edit_individual_announcement(announcement_id = announcement_id, title = title, message = message)
     return jsonify(annoucement_objects)
+'''
+@app.route("/announcements/<int:announcement_id>", methods=["GET"])
+def admin_view_individual_announcement_route(announcement_id):
 
+    annoucement_object = announcement_controller.admin_view_individual_announcement(announcement_id_param = announcement_id)
+    return jsonify(annoucement_object)
 
 @app.route("/announcements/create", methods=["POST"])
-def create_announcement_route():
+@jwt_required()
+def admin_create_announcement():
+
+    current_user = get_jwt_identity()
+    user_id = current_user[5]
+
     announcement = request.get_json()
     title = announcement.get('announcement_title')
     message = announcement.get('announcement_message')
 
+    if (announcement_controller.admin_create_announcement(user_id_param=user_id, announcement_message_param=message, announcement_title_param=title) != -1):
+        return response_successful
+    else:
+        return response_unsuccessful
+
+
+
+@app.route("/announcements/<int:announcement_id>/update", methods=["PATCH"])
+@jwt_required()
+def admin_edit_individual_announcement_route(announcement_id):
+
+    announcement = request.get_json()
+    title = announcement.get('announcement_title')
+    message = announcement.get('announcement_message')
+
+    if (announcement_controller.admin_edit_individual_announcement(announcement_id_param=announcement_id, announcement_message_param=message, announcement_title_param=title ) != -1):
+        return response_successful
+    else:
+        return response_unsuccessful
 
 @app.route("/appointment", methods=["GET"])
 @jwt_required()
 def view_all_appointment_route():
-
     current_user = get_jwt_identity()
     print(current_user)
     user_is_student = current_user[4]
@@ -74,14 +104,13 @@ def view_all_appointment_route():
     appointment_objects = appointment_controller.view_all_appointments(user_id=user_id, is_student=user_is_student)
     return jsonify(appointment_objects)
 
+
 @app.route("/appointment/<int:appointment_id>", methods=["GET"])
 @jwt_required()
 def view_individual_appointment_route(appointment_id):
-
     current_user = get_jwt_identity()
     user_is_student = current_user[4]
     user_id = current_user[5]
-
 
     appointment_objects = appointment_controller.view_individual_appointment(appointment_id=appointment_id, user_id=user_id, is_student=user_is_student)
     return jsonify(appointment_objects)
@@ -90,36 +119,39 @@ def view_individual_appointment_route(appointment_id):
 @app.route("/appointment/scheduled_appointments", methods=["GET"])
 @jwt_required()
 def user_view_latest_appointment_route():
-
     current_user = get_jwt_identity()
     user_id = current_user[5]
-
-
     appointment_objects = appointment_controller.user_view_latest_appointment(user_id=user_id)
     return jsonify(appointment_objects)
 
 
+'''
 @app.route("/appointment/filter/ticket_status/<string:status>", methods=["GET"])
 def view_all_appointments_by_status_route(status):
     appointment_objects = appointment_controller.view_all_appointments_by_status(status = status)
     return jsonify(appointment_objects)
+'''
 
 
+'''
 @app.route("/appointment/<int:ticket_id>/update", methods=["PATCH"])
 def edit_appointment_route(ticket_id):
     ticket_id = '1'
     title='test'
     message='TEST'
-    annoucement_objects = announcement_controller.edit_individual_announcement(ticket_id = ticket_id, title = title, message = message)
+    annoucement_objects = appointment_controller.edit_individual_appointment(ticket_id = ticket_id, title = title, message = message)
     return jsonify(annoucement_objects)
+'''
 
 
+'''
 @app.route("/appointments/<int:ticket_id>/create", methods=["POST"])
 def create_appointment_route(ticket_id):
     appointment = request.get_json()
     start_time = appointment.get('appointment_start_time')
     end_time = appointment.get('appointment_end_time')
     return f'Create Appointment {ticket_id}' 
+'''
 
 
 '''
@@ -128,19 +160,26 @@ def delete_appointment_route(ticket_id):
     return f'Delete Appointment {ticket_id}' 
 '''
 
+
+'''
 @app.route("/buildings", methods=["GET"])
 @jwt_required()
 def view_all_buildings_route():
     building_objects = building_controller.view_all_buildings()
     return jsonify(building_objects) 
+'''
 
 
+'''
 @app.route("/buildings/<int:building_id>", methods=["GET"])
 def view_individual_building_route(building_id):
     building_objects = building_controller.view_individual_building(building_id = building_id)
     return jsonify(building_objects)
+''' 
 
 
+
+'''
 @app.route("/buildings/create", methods=["POST"])
 def create_building_route():
     building = request.get_json()
@@ -151,8 +190,9 @@ def create_building_route():
     capacity = building.get('building_capacity')
     map_number = building.get('building_map_number')
     return f'Create Building' 
+'''
 
-
+'''
 @app.route("/buildings/<int:building_id>/update", methods=["PATCH"])
 def edit_building_route(building_id):
     building = request.get_json()
@@ -163,7 +203,7 @@ def edit_building_route(building_id):
     capacity = building.get('building_capacity')
     map_number = building.get('building_map_number')
     return f'Edit Building {building_id}' 
-
+'''
 
 '''
 @app.route("/buildings/<int:building_id>/delete", methods=["DELETE"])
@@ -171,32 +211,74 @@ def delete_building_route(building_id):
     return f'Delete Building {building_id}' 
 '''
 
+
+
 @app.route("/faq", methods=["GET"])
+@jwt_required()
 def view_all_faqs_route():
-    faq_objects = faq_controller.view_all_faqs()
+    faq_objects = faq_controller.admin_view_all_faq()
     return jsonify(faq_objects)
 
+@app.route("/faq/<int:faq_id>", methods=["GET"])
+@jwt_required()
+def admin_view_individual_faq_route(faq_id):
+    faq_object = faq_controller.admin_view_individual_faq(faq_id_param=faq_id)
+    return jsonify(faq_object)
 
+@app.route("/faq/<int:faq_id>", methods=["PATCH"])
+@jwt_required()
+def admin_edit_individual_faq_route(faq_id):
+
+    faq = request.get_json()
+    question = faq.get('faq_question')
+    answer = faq.get('faq_answer')
+
+    if (faq_controller.admin_edit_individual_faq(faq_id_param=faq_id, faq_answer_param=answer, faq_question_param=question) != -1):
+        return response_successful
+    else:
+        return response_unsuccessful
+
+@app.route("/faq/create", methods=["POST"])
+@jwt_required()
+def admin_create_individual_faq_route():
+
+    faq = request.get_json()
+    question = faq.get('faq_question')
+    answer = faq.get('faq_answer')
+
+    current_user = get_jwt_identity()
+    user_id = current_user[5]
+
+    if (faq_controller.admin_create_faq(user_id_param=user_id, faq_answer_param=answer, faq_question_param=question) != -1):
+        return response_successful
+    else:
+        return response_unsuccessful
+
+'''
 @app.route("/faq/<int:faq_id>", methods=["GET"])
 def view_individual_faq_route(faq_id):
     faq_objects = faq_controller.view_individual_faq(faq_id=faq_id)
     return jsonify(faq_objects)
+'''
 
 
+'''
 @app.route("/faq/create", methods=["POST"])
 def create_faq_route():
     faq = request.get_json()
     question = faq.get('faq_question')
     answer = faq.get('faq_answer')
     return f'Create FAQ'
+'''
 
-
+'''
 @app.route("/faq/<int:faq_id>/update", methods=["PATCH"])
 def edit_faq_route(faq_id):
     faq = request.get_json()
     question = faq.get('faq_question')
     answer = faq.get('faq_answer')
     return f'Edit FAQ {faq_id}'
+'''
 
 '''
 @app.route("/faq/<int:faq_id>/delete", methods=["DELETE"])
@@ -310,18 +392,24 @@ def delete_ticket_route(ticket_id):
     return f'Delete Ticket {ticket_id}'
 '''
 
+
+'''
 @app.route("/unit/<int:building_id>", methods=["GET"])
 def view_all_units_route(building_id):
     unit_objects = unit_controller.view_all_units(building_id = building_id)
     return jsonify(unit_objects)
+'''
 
 
+'''
 @app.route("/unit/<int:building_id>/<int:unit_id>", methods=["GET"])
 def view_individual_unit_route(building_id, unit_id):
     unit_objects = unit_controller.view_individual_unit(building_id = building_id, unit_id = unit_id)
     return jsonify(unit_objects)
+'''
 
 
+'''
 @app.route("/unit/<int:building_id>/create", methods=["POST"])
 def create_unit_route(building_id):
     unit = request.get_json()
@@ -330,7 +418,7 @@ def create_unit_route(building_id):
     letter = unit.get('unit_letter')
     occupancy = unit.get('unit_occupancy')
     return f'Create Unit {building_id}'
-
+'''
 
 #views current user log into opf
 @app.route("/user", methods=["GET"])
@@ -387,7 +475,6 @@ def create_user_route():
     gender = user.get('user_gender')
     year = user.get('user_year')
     password = user.get('user_password')
-
     user_controller.create_new_user(first_name_param=first_name, last_name_param=last_name, contact_email_param=contact_email, net_id_param=net_id, nshe_id_param=nshe_id, gender_param=gender, year_param=year, password_param=password)
 
     return f'Create User'
@@ -398,7 +485,6 @@ def create_user_route():
 def user_reset_account_info_route():
     current_user = get_jwt_identity()
     user_id = current_user[5]
-
     user = request.get_json()
     first_name = user.get('user_first_name')
     last_name = user.get('user_last_name')
@@ -406,7 +492,6 @@ def user_reset_account_info_route():
     gender = user.get('user_gender')
 
     user_controller.user_reset_account_info(user_id_param= user_id, first_name_param=first_name, last_name_param=last_name, contact_email_param=contact_email, gender_param=gender)
-
     return f'Edit Account Information'
 
 '''@app.route("/user/<int:user_id>/update", methods=["PATCH"])
@@ -447,3 +532,11 @@ def reset_password_route():
     user_controller.reset_user_password(net_id_param=net_id, nshe_id_param=nshe_id, password_param=password)
 
     return f'Reset User Password'
+
+@app.route("/buildings", methods=["GET"])
+@jwt_required()
+def view_dormitories_route():
+
+    building_objects = building_controller.view_all_dormitories()
+
+    return jsonify(building_objects)

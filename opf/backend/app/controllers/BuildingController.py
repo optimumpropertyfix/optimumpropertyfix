@@ -5,13 +5,30 @@ import json
 
 
 class BuildingController:
-    def view_all_buildings(self):
+    def view_all_dormitories(self):
         buildings = None
-        query = "view_all_buildings"
+        query = "view_all_dormitories"
         buildings = self.query_database(query)
 
-        building_table = self.generate_building_objects(buildings)
-        return building_table
+        building_objects = []
+
+        for building in buildings:
+            building_name = building[0]
+            building_abbreviation = building[1]
+            building_map_number = building[2]
+            building_capacity = building[3]
+            building_id = building[4]
+            
+            building_json = self.serialize_building(
+                id = building_id,
+                name = building_name, 
+                abbreviation = building_abbreviation, 
+                capacity = building_capacity, 
+                map_number = building_map_number,
+            )
+            building_objects.append(building_json)
+
+        return building_objects
     
 
     def view_individual_building(self, building_id = None):
@@ -22,8 +39,6 @@ class BuildingController:
 
         building_table = self.generate_building_objects(buildings)
         return building_table
-
-
 
     def generate_building_objects(self, buildings):
         building_objects = list()
@@ -82,8 +97,8 @@ class BuildingController:
             "building_abbreviation": abbreviation, 
             "building_year" : year, 
             "building_address": address, 
-            "building_ capacity" : capacity,
-             "building_map_number": map_number,         
+            "building_capacity" : capacity,
+            "building_map_number": map_number,         
         }
         return building
 
