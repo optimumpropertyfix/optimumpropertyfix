@@ -13,7 +13,6 @@ function Timestamps(props) {
     let second = Number(datetime_string[5])
     
     let formatted_time = new Date(year, month, date, hour, minute, second);
-    console.log(formatted_time.toDateString())
     return formatted_time.toString()
   }
 

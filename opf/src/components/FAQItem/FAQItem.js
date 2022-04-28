@@ -25,6 +25,10 @@ function FAQItem(props) {
     return answer_string;
   };
 
+  const user_name_text = () => {
+    return `${props.user_first_name} ${props.user_last_name}`
+  }
+
   return (
     <div
       className={`${styles.FAQItem} ${props.className} block_contrast_items`}
@@ -36,7 +40,7 @@ function FAQItem(props) {
             text={question_text(props.faq_question)}
           />
           <ItemGroup label="Answer" text={answer_text(props.faq_answer)} />
-          <ItemGroup label="User" text={props.faq_user} />
+          <ItemGroup label="User" text={user_name_text()} />
           <ItemGroup label="ID" text={props.faq_id} />
         </div>
         <div className={styles.faq_options}>

@@ -16,6 +16,20 @@ function AnnouncementItem(props) {
     return message_string;
   };
 
+  const datetime_text = () => {
+    //ticket_created: "03 13 2022 00 45 00"
+    let datetime_string = String(props.announcement_date).split(" ")
+    let year = Number(datetime_string[2])
+    let date = Number(datetime_string[1])
+    let month = Number(datetime_string[0])-1
+
+    return `${month}/${date}/${year}`
+  }
+
+  const full_name_text = () => {
+    return `${props.announcement_first_name} ${props.announcement_last_name}`
+  }
+
   return (
     <div
       className={`${styles.AnnouncementItem} ${props.className} block_contrast_items`}
@@ -27,8 +41,8 @@ function AnnouncementItem(props) {
             label="Message"
             text={message_text(props.announcement_message)}
           />
-          <ItemGroup label="Date" text={props.announcement_date} />
-          <ItemGroup label="User" text={props.announcement_user} />
+          <ItemGroup label="Date" text={datetime_text()} />
+          <ItemGroup label="User" text={full_name_text()} />
           <ItemGroup label="ID" text={props.announcement_id} />
         </div>
         <div className={styles.announcement_options}>

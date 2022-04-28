@@ -3,12 +3,23 @@
 Backend Route List for Frontend Calls. Add new routes here with descriptive names for application availability.
 
 */
-const admin_create_faq_route = (netid) => {
-  return `admin/${netid}/faq/create`;
+const view_all_faqs_route = () => {
+  return `/faq`;
 };
 
-const admin_create_announcement_route = (netid) => {
-  return `admin/${netid}/announcement/create`;
+const admin_view_individual_faq_route = (faq_id) => {
+  return `/faq/${faq_id}`;
+};
+
+const admin_edit_individual_faq_route = (faq_id) => {
+  return `/faq/${faq_id}`;
+};
+const admin_create_individual_faq_route = () => {
+  return `/faq/create`;
+};
+
+const admin_create_announcement_route = () => {
+  return `/announcements/create`
 };
 
 const student_create_ticket_route = (netid) => {
@@ -114,6 +125,21 @@ const view_all_announcements_route = () => {
   return `/announcements`
 }
 
+const admin_view_all_announcements_route = () => {
+  return `/admin_announcements`
+}
+
+const admin_edit_individual_announcement_route = (announcement_id) => {
+  return `/announcements/${announcement_id}/update`
+}
+
+const admin_view_individual_announcement_route = (announcement_id) => {
+  return `/announcements/${announcement_id}`
+}
+
+const view_dormitories_route = () => {
+  return `/buildings`
+}
 
 export {
   student_create_ticket_route,
@@ -128,7 +154,6 @@ export {
   new_user_route,
   reset_password_route,
   view_session_route,
-  admin_create_faq_route,
   admin_create_announcement_route,
   new_ticket_route,
   view_all_tickets_route,
@@ -143,5 +168,13 @@ export {
   user_reset_account_info_route,
   user_update_password,
   user_view_latest_appointment_route,
-  view_all_announcements_route
+  view_all_announcements_route,
+  admin_view_all_announcements_route,
+  admin_edit_individual_announcement_route,
+  admin_view_individual_announcement_route,
+  view_all_faqs_route,
+  admin_view_individual_faq_route,
+  admin_edit_individual_faq_route,
+  admin_create_individual_faq_route,
+  view_dormitories_route
 };
