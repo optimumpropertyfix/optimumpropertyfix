@@ -32,7 +32,9 @@ const user_type_text = () => {
           <ItemGroup label="Contact Email" text={props.user_content_email} />
         </div>
         <div className={styles.user_options}>
+          { props.user_is_student === "1" ?
           <button onClick={view_user_click}>VIEW USER</button>
+          : null }
         </div>
       </div>
     </div>

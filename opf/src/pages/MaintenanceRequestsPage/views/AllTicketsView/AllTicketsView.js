@@ -13,7 +13,17 @@ import TokenManager from "../../../../TokenManager";
 import LandingMessage from "../../../../components/LandingMessage/LandingMessage";
 
 export function AdminAllTicketsView() {
-  return <div></div>;
+  return (    
+  <div className={styles.StudentAllTicketsView}>
+    <div className={`${styles.view_container} view_layout`}>
+      <p className={`${styles.page_title_text} page_title_text`}>
+        View All Your Tickets
+      </p>
+      <div className={`${styles.content_container} view_content_layout`}>
+      </div>
+    </div>
+  </div> 
+  );
 }
 
 export function StudentAllTicketsView() {
