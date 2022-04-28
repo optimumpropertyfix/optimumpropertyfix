@@ -1,7 +1,15 @@
 import styles from "./AdminCreateUnitView.module.css";
 import FormGroup from "../../../../../../components/FormGroup/FormGroup";
+import { useState } from "react";
 
 export function AdminCreateUnitView() {
+
+  const [type, set_type] = useState("select")
+
+  const handle_type = (event) => {
+    set_type(event.target.value)
+  }
+
   return (
     <div className={styles.AdminCreateUnitView}>
       <p className={`${styles.page_subtitle_text} page_subtitle_text`}>
@@ -10,22 +18,22 @@ export function AdminCreateUnitView() {
       <div className={`${styles.form_container}`}>
         <div className={styles.fields_container}>
           <div className={styles.unit_fields}>
-            <FormGroup label="Name">
-              <input type="text" placeholder="Peavine Hall" />
+            <FormGroup label="Unit Type">
+              <select value={type} onChange={handle_type}>
+                <option value="select" disabled>
+                  Select Type
+                </option>
+                <option value="Single">Single</option>
+                <option value="Double">Double</option>
+                <option value="Triple">Triple</option>
+                <option value="Quadruple">Quadruple</option>
+                <option value="Suite">Suite</option>
+              </select>
             </FormGroup>
-            <FormGroup label="Address">
-              <input type="text" placeholder="38 W 11th St, Reno, NV 89503" />
+            <FormGroup label="Unit Number">
+              <input type="text" placeholder="1A" />
             </FormGroup>
-            <FormGroup label="Abbreviation">
-              <input type="text" placeholder="PH" />
-            </FormGroup>
-            <FormGroup label="Year">
-              <input type="text" placeholder="2014" />
-            </FormGroup>
-            <FormGroup label="Map Number">
-              <input type="text" placeholder="K2" />
-            </FormGroup>
-            <FormGroup label="Capacity">
+            <FormGroup label="Unit Occupancy">
               <input type="text" placeholder="600" />
             </FormGroup>
           </div>

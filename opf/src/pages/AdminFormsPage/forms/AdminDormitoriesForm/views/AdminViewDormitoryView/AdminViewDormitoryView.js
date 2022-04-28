@@ -20,7 +20,7 @@ export function AdminViewDormitoryView() {
       <div className={`${styles.form_container}`}>
         <div className={styles.dormitory_units_container}>
           <p className={`${styles.page_subtitle_text} page_subtitle_text`}>
-            Edit Dormitory Units
+            View Dormitory Units
           </p>
           <div className={styles.dormitory_units}>
             <Outlet />

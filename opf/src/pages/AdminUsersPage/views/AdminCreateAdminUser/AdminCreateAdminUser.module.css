@@ -1,0 +1,20 @@
+@media only screen and (min-width: 900px) {
+  .AdminCreateAdminUser {
+    overflow-y: auto;
+    height: 90%;
+  }
+	.form_fields {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 2rem
+	}
+	.contact_email_form {
+		grid-column-start: 1;
+		grid-column-end: 3;
+	}
+	.user_options {
+		display: flex;
+		gap: 1rem;
+	}
+}
+  

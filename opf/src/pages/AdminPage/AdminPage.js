@@ -40,14 +40,14 @@ function AdminPage() {
             <SectionNavLink to="/admin/appointments" icon="schedule">
               APPOINTMENTS
             </SectionNavLink>
-            <SectionNavLink end to="/admin/account" icon="account_circle">
-              ACCOUNT
-            </SectionNavLink>
-            <SectionNavLink end to="/admin/users" icon="group">
-              USER MANAGEMENT
-            </SectionNavLink>
             <SectionNavLink to="/admin/forms" icon="description">
               FORMS
+            </SectionNavLink>
+            <SectionNavLink to="/admin/users" icon="group">
+              USER MANAGEMENT
+            </SectionNavLink>
+            <SectionNavLink end to="/admin/account" icon="account_circle">
+              ACCOUNT
             </SectionNavLink>
             <SectionNavLink
               end

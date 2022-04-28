@@ -48,7 +48,10 @@ import AdminAccountPage from "./pages/AdminAccountPage/AdminAccountPage";
 // Admin FAQ Functionality of OPF
 import { AdminFAQPage } from "./pages/FrequentAskedQuestions/FrequentlyAskedQuestions";
 // Admin Users Management Functionality of OPF
-import { AdminUsersPage } from "./pages/UsersPage/UsersPage";
+import { AdminUsersPage } from "./pages/AdminUsersPage/AdminUsersPage";
+import { AdminViewAllUsers } from "./pages/AdminUsersPage/views/AdminAllUsers/AdminViewAllUsers";
+import { AdminCreateAdminUser } from "./pages/AdminUsersPage/views/AdminCreateAdminUser/AdminCreateAdminUser";
+import { AdminViewUser } from "./pages/AdminUsersPage/views/AdminViewUser/AdminViewUser";
 // Admin Forms Functionality of OPF
 import { AdminFormsPage } from "./pages/AdminFormsPage/AdminFormsPage";
 import { AdminFormsOptionsPage } from "./pages/AdminFormsPage/forms/AdminFormsOptionsPage";
@@ -122,7 +125,11 @@ ReactDOM.render(
             <Route path=":appointment_id" element={<AdminAppointmentView />} />
           </Route>
           <Route path="account" element={<AdminAccountPage />} />
-          <Route path="users" element={<AdminUsersPage />} />
+          <Route path="users" element={<AdminUsersPage />}>
+            <Route index element={<AdminViewAllUsers />} />
+            <Route path="create_admin" element={<AdminCreateAdminUser />} />
+            <Route path=":user_id" element={<AdminViewUser />} />
+          </Route>
           <Route path="forms" element={<AdminFormsPage />}>
             <Route index element={<AdminFormsOptionsPage />} />
             <Route path="announcements" element={<AdminAnnouncementsForm />}>
