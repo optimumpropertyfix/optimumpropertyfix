@@ -1,15 +1,18 @@
 export const adminData = [
   {
+    id: 1,
     question: "Who are we?",
     answer:
       "Optimum Property Fix (OPF) aims to revamp the University of Nevada, Reno current system through a new and improved maintenance request system that is accessible to dormitory students, facilities & service members, and administrators.",
   },
   {
+    id: 2,
     question: "How can I contact OPF?",
     answer:
       "Contact Optimum Property Fix (OPF) at optimumpropertyfix@gmail.com. You will receive a response within 48 hours from one of our team members.",
   },
   {
+    id: 3,
     question: "Can I edit the time and date of the request?",
     answer: ` Yes, you're able to edit the time and date of a request by clicking on the ‘Edit’ button. You will then be prompted to confirm the changes.`,
   },

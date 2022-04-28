@@ -1,0 +1,30 @@
+@media only screen and (min-width: 900px) {
+  .page_subtitle_text {
+    margin-bottom: 0.5rem;
+  }
+  .form_container {
+    display: grid;
+    grid-template-columns: 4fr 250px;
+    gap: 2rem;
+  }
+  .metadata_group {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .dormitory_fields {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+  }
+  .field_group {
+    display: flex;
+    gap: 2rem;
+    flex-direction: column;
+  }
+  .dormitory_options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+}

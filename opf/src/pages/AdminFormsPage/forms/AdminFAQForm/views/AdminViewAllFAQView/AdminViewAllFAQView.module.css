@@ -1,0 +1,13 @@
+@media only screen and (min-width: 900px) {
+    .faq_list {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      padding: 0.5rem;
+      overflow-y: auto;
+    }
+    .page_subtitle_text {
+      margin-bottom: 0.5rem;
+    }
+  }
+  

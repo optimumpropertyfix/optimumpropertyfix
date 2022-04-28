@@ -1,0 +1,17 @@
+@media only screen and (min-width: 900px) {
+  .AdminFormsPage {
+    display: grid;
+    height: 0;
+    max-height: 90%;
+    min-height: 90%;
+    grid-template-columns: 200px 4fr;
+    grid-template-rows: 1fr;
+    margin: 2rem;
+  }
+  .view_navigation {
+    margin: 0;
+    padding: 1rem;
+    grid-row-start: 1;
+    grid-row-end: 2;
+  }
+}

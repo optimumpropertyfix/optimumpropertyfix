@@ -1,0 +1,15 @@
+@media only screen and (min-width: 900px) {
+    .building_content {
+      display: flex;
+      gap: 1rem;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    .building_details {
+      display: flex;
+      gap: 2rem;
+      flex-direction: row;
+      flex-grow: 1;
+    }
+  }
+  

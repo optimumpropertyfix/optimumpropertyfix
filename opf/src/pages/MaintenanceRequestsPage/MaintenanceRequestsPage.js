@@ -19,7 +19,7 @@ export function AdminMaintenanceRequestsPage() {
 export function StudentMaintenanceRequestsPage() {
   return (
     <div className={styles.StudentMaintenanceRequestsPage}>
-      <Outlet className={styles.view_outlet} />
+      <Outlet />
       <ViewNavigation label="TICKET OPTIONS" className={styles.view_navigation}>
         <ViewNavLink end icon="list" to="/student/maintenance_requests">
           View Tickets

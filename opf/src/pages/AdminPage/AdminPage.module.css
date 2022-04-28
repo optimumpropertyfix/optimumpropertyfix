@@ -1,8 +1,28 @@
-@media only screen and (min-width: 300px) {
-}
-
-@media only screen and (min-width: 600px) {
-}
-
 @media only screen and (min-width: 900px) {
+  .logout_button {
+    background: none;
+    padding: 0;
+    box-shadow: none;
+    text-decoration: none;
+    flex-basis: 100%;
+    color: #969696 !important;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.4rem;
+    transition: color 0.1s ease-in !important;
+    flex-basis: auto;
+    margin-bottom: 1rem;
+  }
+  .logout_button:hover {
+    background: none;
+    color: var(--color-orange) !important;
+  }
+  .logout_button > p {
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+  .logout_button > span {
+    font-size: 1.2rem;
+  }
 }
