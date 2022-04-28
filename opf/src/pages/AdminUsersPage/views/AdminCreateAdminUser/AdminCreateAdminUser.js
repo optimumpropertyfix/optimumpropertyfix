@@ -9,6 +9,7 @@ export function AdminCreateAdminUser() {
   const [net_id, set_net_id] = useState("")
   const [gender, set_gender] = useState("select")
   const [password, set_password] = useState("")
+  const [verify_password, set_verify_password] = useState("")
 
   const handle_first_name = (event) => {
     set_first_name(event.target.value)
@@ -32,6 +33,10 @@ export function AdminCreateAdminUser() {
 
   const handle_password = (event) => {
     set_password(event.target.value)
+  }
+
+  const handle_verify_password = (event) => {
+    set_verify_password(event.target.value)
   }
 
     return (
@@ -69,6 +74,9 @@ export function AdminCreateAdminUser() {
                   </FormGroup>
                   <FormGroup label="Password">
                     <input type="password" placeholder="Password" onChange={handle_password} value={password} />
+                  </FormGroup>
+                  <FormGroup label="Re-enter Password">
+                    <input type="password" placeholder="Password" onChange={handle_verify_password} value={verify_password} />
                   </FormGroup>
                 </div>
               </div>

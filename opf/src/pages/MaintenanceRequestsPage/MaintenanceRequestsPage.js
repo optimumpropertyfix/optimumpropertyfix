@@ -4,14 +4,12 @@ import {
   ViewNavLink,
 } from "../../components/Navigation/Navigation";
 import styles from "./MaintenanceRequestsPage.module.css";
+import admin_styles from "./AdminMaintenanceRequestsPage.module.css";
 
 export function AdminMaintenanceRequestsPage() {
   return (
-    <div>
-      <div></div>
-      <div>
-        <Outlet />
-      </div>
+    <div className={admin_styles.AdminMaintenanceRequestsPage}>
+      <Outlet />
     </div>
   );
 }
