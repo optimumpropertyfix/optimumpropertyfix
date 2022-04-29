@@ -6,23 +6,99 @@ import {
   admin_all_tickets_route,
   get_all_tickets_by_status_route,
 } from "../../../../Routes";
-import styles from "./AllTicketsView.module.css";
+import styles from "./AdminAllTickets.module.css";
+import admin_styles from "./AdminAllTickets.module.css";
 import TicketItem from "../../../../components/TicketItem/TicketItem";
 import FormGroup from "../../../../components/FormGroup/FormGroup";
 import TokenManager from "../../../../TokenManager";
 import LandingMessage from "../../../../components/LandingMessage/LandingMessage";
 
 export function AdminAllTicketsView() {
-  return (    
-  <div className={styles.StudentAllTicketsView}>
-    <div className={`${styles.view_container} view_layout`}>
-      <p className={`${styles.page_title_text} page_title_text`}>
-        View All Your Tickets
-      </p>
-      <div className={`${styles.content_container} view_content_layout`}>
+  const [tickets, setTickets] = useState([]);
+  const [status_filter, set_status_filter] = useState("select");
+  const { get_token } = TokenManager();
+
+  const status_filter_change = (event) => {
+    set_status_filter(event.target.value);
+    // show all tickets with filter condition
+  };
+
+  const clear_filter_click = () => {
+    set_status_filter("select");
+    // show all tickets refresh
+  };
+
+  useEffect(() => {
+    /*
+    const options = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${get_token()}`,
+      },
+    };
+    const route = view_all_appointments();
+
+    fetch(route, options)
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(`${response.statusText} - ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((appointments) => {
+      })
+      .catch((error) => {
+        console.log(error);
+      });*/
+  }, []);
+
+  return (
+    <div className={admin_styles.AdminAllTicketsView}>
+      <div className={`${admin_styles.view_container} view_layout`}>
+        <p className={`${admin_styles.page_title_text} page_title_text`}>
+          View All Student Tickets
+        </p>
+        <div className={`${admin_styles.content_container} view_content_layout`}>
+          <div className={admin_styles.filter_options}>
+            <p className={`${admin_styles.page_subtitle_text} page_subtitle_text`}>
+              Filter Appointments
+            </p>
+            <div className={admin_styles.filter_group}>
+              <FormGroup label="Status">
+                <select
+                  onChange={status_filter_change}
+                  value={status_filter}
+                  className={admin_styles.location_form}
+                >
+                  <option value="select" disabled>
+                    Select Status
+                  </option>
+                  <option value="Scheduled">Scheduled</option>
+                  <option value="Completed">Completed</option>
+                  <option value="Cancelled">Cancelled</option>
+                </select>
+              </FormGroup>
+            </div>
+            <button
+              onClick={clear_filter_click}
+              className={admin_styles.clear_filter_button}
+            >
+              Clear Filter
+            </button>
+          </div>
+          <div className={admin_styles.tickets_list}>
+            {tickets.map((ticket) => {
+              return <TicketItem key={ticket.ticket_id} {...ticket} />;
+            })}
+            {tickets.length == 0 ? (
+              <LandingMessage>
+                No tickets here...Create a new ticket!
+              </LandingMessage>
+            ) : null}
+          </div>
+        </div>
       </div>
     </div>
-  </div> 
   );
 }
 
