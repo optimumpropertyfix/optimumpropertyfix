@@ -9,13 +9,8 @@ export function AdminViewUser() {
 
     const user_profile = {}
 
-    const [current_password, set_current_password] = useState("")
     const [new_password, set_new_password] = useState("")
     const [verify_password, set_verify_password] = useState("")
-
-    const handle_current_password = (event) => {
-      set_current_password(event.target.value)
-    }
   
     const handle_new_password = (event) => {
       set_new_password(event.target.value)
@@ -54,9 +49,6 @@ export function AdminViewUser() {
               </p>
               <div className={styles.credentials_settings}>
                 <div className={styles.credentials_forms}>
-                  <FormGroup label="Current Password">
-                    <input onChange={handle_current_password} value={current_password} type="password" placeholder="Current Password" /> 
-                  </FormGroup>
                   <FormGroup label="New Password">
                     <input onChange={handle_new_password} value={new_password} type="password" placeholder="New Password" /> 
                   </FormGroup>

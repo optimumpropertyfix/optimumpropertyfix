@@ -7,6 +7,7 @@
       grid-template-columns: 200px 4fr;
       grid-template-rows: 1fr;
       margin: 2rem;
+      overflow-y: auto;
     }
     .view_navigation {
       margin: 0;

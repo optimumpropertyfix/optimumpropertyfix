@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import {
-  new_ticket_route,
   view_all_tickets_route,
-  view_ticket_route,
-  admin_all_tickets_route,
+  admin_get_all_tickets_route,
   get_all_tickets_by_status_route,
+  admin_view_all_tickets_by_status_route
 } from "../../../../Routes";
 import styles from "./AdminAllTickets.module.css";
 import admin_styles from "./AdminAllTickets.module.css";
@@ -18,25 +17,14 @@ export function AdminAllTicketsView() {
   const [status_filter, set_status_filter] = useState("select");
   const { get_token } = TokenManager();
 
-  const status_filter_change = (event) => {
-    set_status_filter(event.target.value);
-    // show all tickets with filter condition
-  };
-
-  const clear_filter_click = () => {
-    set_status_filter("select");
-    // show all tickets refresh
-  };
-
-  useEffect(() => {
-    /*
+  const api_get_all_tickets = () => {
     const options = {
       method: "GET",
       headers: {
         Authorization: `Bearer ${get_token()}`,
       },
     };
-    const route = view_all_appointments();
+    const route = admin_get_all_tickets_route();
 
     fetch(route, options)
       .then((response) => {
@@ -45,11 +33,71 @@ export function AdminAllTicketsView() {
         }
         return response.json();
       })
-      .then((appointments) => {
+      .then((tickets) => {
+        setTickets(tickets);
       })
       .catch((error) => {
         console.log(error);
-      });*/
+      });
+  };
+
+  const api_get_all_tickets_by_severity = (status) => {
+    const options = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${get_token()}`,
+      },
+    };
+    const route = admin_view_all_tickets_by_status_route(status);
+
+    fetch(route, options)
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(`${response.statusText} - ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((tickets) => {
+        setTickets(tickets);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+
+  const status_filter_change = (event) => {
+    set_status_filter(event.target.value);
+    api_get_all_tickets_by_severity(event.target.value)
+  };
+
+  const clear_filter_click = () => {
+    set_status_filter("select");
+    api_get_all_tickets()
+  };
+
+  useEffect(() => {
+    const options = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${get_token()}`,
+      },
+    };
+    const route = admin_get_all_tickets_route();
+
+    fetch(route, options)
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(`${response.statusText} - ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((tickets) => {
+        setTickets(tickets)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   return (
@@ -61,7 +109,7 @@ export function AdminAllTicketsView() {
         <div className={`${admin_styles.content_container} view_content_layout`}>
           <div className={admin_styles.filter_options}>
             <p className={`${admin_styles.page_subtitle_text} page_subtitle_text`}>
-              Filter Appointments
+              Filter Tickets
             </p>
             <div className={admin_styles.filter_group}>
               <FormGroup label="Status">
@@ -73,7 +121,8 @@ export function AdminAllTicketsView() {
                   <option value="select" disabled>
                     Select Status
                   </option>
-                  <option value="Scheduled">Scheduled</option>
+                  <option value="Pending">Pending</option>
+                  <option value="Received">Received</option>
                   <option value="Completed">Completed</option>
                   <option value="Cancelled">Cancelled</option>
                 </select>
@@ -88,7 +137,7 @@ export function AdminAllTicketsView() {
           </div>
           <div className={admin_styles.tickets_list}>
             {tickets.map((ticket) => {
-              return <TicketItem key={ticket.ticket_id} {...ticket} />;
+              return <TicketItem key={ticket.ticket_id} admin={true} {...ticket} />;
             })}
             {tickets.length == 0 ? (
               <LandingMessage>

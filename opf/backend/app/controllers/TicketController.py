@@ -14,6 +14,63 @@ import json
 
 
 class TicketController:
+
+    def admin_get_all_tickets_status(self, status):
+        tickets = None
+        query = "admin_get_all_tickets_status"
+        args = [status]
+        tickets = self.query_database(query, args)
+
+        ticket_objects = []
+
+        for ticket in tickets:
+            ticket_id = ticket[0]
+            ticket_title = ticket[1]
+            ticket_status = ticket[2]
+            ticket_created = ticket[3].strftime("%m %d %Y %H %M %S")
+            ticket_location = ticket[4]
+            ticket_severity = ticket[5]
+
+            ticket_json = self.serialize_ticket(
+                id = ticket_id,
+                title = ticket_title,
+                status =  ticket_status, 
+                created = ticket_created,
+                location = ticket_location,
+                severity = ticket_severity,
+            )
+            ticket_objects.append(ticket_json)
+        
+        return ticket_objects
+
+    def admin_get_all_tickets(self):
+        query = "admin_get_all_tickets"
+        args = []
+        tickets = self.query_database(query, args)
+        ticket_objects = []
+
+        for ticket in tickets:
+            ticket_id = ticket[0]
+            ticket_title = ticket[1]
+            ticket_status = ticket[2]
+            ticket_created = ticket[3].strftime("%m %d %Y %H %M %S")
+            ticket_location = ticket[4]
+            ticket_severity = ticket[5]
+
+            ticket_json = self.serialize_ticket(
+                id = ticket_id,
+                title = ticket_title,
+                status =  ticket_status, 
+                created = ticket_created,
+                location = ticket_location,
+                severity = ticket_severity,
+            )
+            ticket_objects.append(ticket_json)
+        
+        return ticket_objects
+
+
+
     def get_all_tickets(self, net_id = None, is_student = True):
         tickets = None
         if (is_student):

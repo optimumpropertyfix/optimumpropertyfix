@@ -14,6 +14,7 @@ from app.controllers.FeedbackController import FeedbackController
 from app.controllers.TicketController import TicketController
 from app.controllers.UnitController import UnitController
 from app.controllers.UserController import UserController
+from app.controllers.KanbanController import KanbanController
 
 announcement_controller = AnnouncementController()
 appointment_controller = AppointmentController()
@@ -23,6 +24,7 @@ feedback_controller = FeedbackController()
 ticket_controller = TicketController()
 unit_controller = UnitController()
 user_controller = UserController()
+kanban_controller = KanbanController()
 
 response_successful = json.dumps({'success':True}), 200, {'ContentType':'application/json'}
 response_unsuccessful = json.dumps({'success':False}), 400, {'ContentType':'application/json'}
@@ -392,34 +394,6 @@ def delete_ticket_route(ticket_id):
     return f'Delete Ticket {ticket_id}'
 '''
 
-
-'''
-@app.route("/unit/<int:building_id>", methods=["GET"])
-def view_all_units_route(building_id):
-    unit_objects = unit_controller.view_all_units(building_id = building_id)
-    return jsonify(unit_objects)
-'''
-
-
-'''
-@app.route("/unit/<int:building_id>/<int:unit_id>", methods=["GET"])
-def view_individual_unit_route(building_id, unit_id):
-    unit_objects = unit_controller.view_individual_unit(building_id = building_id, unit_id = unit_id)
-    return jsonify(unit_objects)
-'''
-
-
-'''
-@app.route("/unit/<int:building_id>/create", methods=["POST"])
-def create_unit_route(building_id):
-    unit = request.get_json()
-    type = unit.get('unit_type')
-    number = unit.get('unit_number')
-    letter = unit.get('unit_letter')
-    occupancy = unit.get('unit_occupancy')
-    return f'Create Unit {building_id}'
-'''
-
 #views current user log into opf
 @app.route("/user", methods=["GET"])
 @jwt_required()
@@ -540,3 +514,120 @@ def view_dormitories_route():
     building_objects = building_controller.view_all_dormitories()
 
     return jsonify(building_objects)
+
+@app.route("/buildings/create", methods=["POST"])
+@jwt_required()
+def admin_create_dormitory_route():
+    building = request.get_json()
+    name = building.get('building_name')
+    abbreviation = building.get('buidling_abbreviation')
+    year = building.get('building_year')
+    address = building.get('building_address')
+    capacity = building.get('building_capacity')
+    map_number = building.get('building_map_number')
+
+    if (building_controller.admin_create_dormitory(building_name_param=name, building_abbreviation_param=abbreviation, building_year_param=year, building_address_param=address, building_capacity_param=capacity, building_map_number_param=map_number) != -1):
+        return response_successful
+    else: 
+        return response_unsuccessful
+
+@app.route("/buildings/<int:building_id>/edit", methods=['PATCH'])
+@jwt_required()
+def edit_individual_dormitory_route(building_id):
+    building = request.get_json()
+    name = building.get('building_name')
+    abbreviation = building.get('buidling_abbreviation')
+    year = building.get('building_year')
+    address = building.get('building_address')
+    capacity = building.get('building_capacity')
+    map_number = building.get('building_map_number')
+
+    if (building_controller.edit_individual_dormitory(building_id_param=building_id, building_name_param=name, building_abbreviation_param=abbreviation, building_year_param=year, building_address_param=address, building_capacity_param=capacity, building_map_number_param=map_number) != -1):
+        return response_successful
+    else: 
+        return response_unsuccessful
+
+@app.route("/buildings/<int:building_id>", methods=['GET'])
+@jwt_required()
+def view_individual_dormitory_route(building_id):
+
+    building_object = building_controller.view_individual_dormitory(building_id_param=building_id)
+
+    return jsonify(building_object)
+
+@app.route("/units/<int:building_id>", methods=['GET'])
+@jwt_required()
+def view_dormitory_units_route(building_id):
+
+    unit_objects = unit_controller.view_dormitory_units(building_id_param=building_id)
+
+    return jsonify(unit_objects)
+
+@app.route("/units/<int:building_id>/create", methods=['POST'])
+@jwt_required()
+def admin_create_unit_route(building_id):
+
+    unit = request.get_json()
+    type = unit.get('unit_type')
+    number = unit.get('unit_number')
+    occupancy = unit.get('unit_occupancy')
+
+    unit_objects = unit_controller.admin_create_unit(unit_building_param=building_id, unit_type_param=type, unit_number_param=number, unit_occupancy_param=occupancy)
+
+    return jsonify(unit_objects)
+
+@app.route("/admin_appointments", methods=['GET'])
+@jwt_required()
+def admin_view_all_appointments_route():
+
+    appointment_objects = appointment_controller.admin_view_all_appointments()
+
+    return jsonify(appointment_objects)
+
+@app.route("/admin_appointments/filter/appointment_status/<string:status>", methods=['GET'])
+@jwt_required()
+def admin_view_all_appointments_by_status(status):
+    appointment_objects = appointment_controller.admin_view_all_appointments_by_status(status = status)
+    return jsonify(appointment_objects)
+    
+
+@app.route("/admin/users", methods=['GET'])
+@jwt_required()
+def view_all_opf_users_route():
+    user_objects = user_controller.view_all_opf_users()
+    return jsonify(user_objects)
+
+'''
+@app.route("/admin/users/<int:>", methods = ['PATCH'])
+@jwt_required()
+def view_opf_reset_password(): 
+    return
+'''
+@app.route("/admin_tickets", methods=['GET'])
+def admin_get_all_tickets_route():
+
+    ticket_objects = ticket_controller.admin_get_all_tickets()
+    return jsonify(ticket_objects)
+
+@app.route("/admin_tickets/filter/ticket_status/<string:status>", methods=['GET'])
+@jwt_required()
+def admin_view_all_tickets_by_status_route(status):
+    appointment_objects = ticket_controller.admin_get_all_tickets_status(status = status)
+    return jsonify(appointment_objects)
+
+@app.route("/kanban_board/tickets", methods=['GET'])
+@jwt_required()
+def kanban_receive_all_tickets_route():
+
+    ticket_objects = kanban_controller.kanban_receive_all_tickets()
+
+    return jsonify(ticket_objects)
+
+@app.route("/kanban_board/<int:ticket_id>/<string:status>", methods=['PATCH'])
+@jwt_required()
+def change_ticket_kanban_status(ticket_id, status):
+
+    if (kanban_controller.change_ticket_kanban_status(ticket_id_param=ticket_id, status_param=status) != -1):
+        return response_successful
+    else: 
+        return response_unsuccessful

@@ -4,60 +4,19 @@ import kanban_stack_styles from "./KanbanStack.module.css";
 import ticket_sticker_styles from "./TicketSticker.module.css";
 import ItemGroup from "../ItemGroup/ItemGroup";
 import FormGroup from "../FormGroup/FormGroup";
+import { useNavigate } from "react-router-dom";
+
+import TokenManager from "../../TokenManager";
+import { kanban_receive_all_tickets_route, change_ticket_kanban_status } from "../../Routes";
 
 export function KanbanBoard() {
+
+  const {get_token} = TokenManager()
 
   const [received_tickets, set_received_tickets] = useState([]);
   const [pending_tickets, set_pending_tickets] = useState([]);
   const [completed_tickets, set_completed_tickets] = useState([]);
   const [cancelled_tickets, set_cancelled_tickets] = useState([]);
-
-  const tickets_test = [
-    {
-      ticket_title: "Water Leak",
-      ticket_description: "Water leak in the kitchen, underneath the sink.",
-      ticket_severity: "Mild",
-      ticket_location: "Kitchen",
-      ticket_building_name: "Peavine Hall",
-      ticket_unit_number: "1C",
-      ticket_status: "Pending",
-      ticket_created: "03 13 2022 00 45 00",
-      ticket_id: 1,
-    },
-    {
-      ticket_title: "Water Leak",
-      ticket_description: "Water leak in the kitchen, underneath the sink.",
-      ticket_severity: "Mild",
-      ticket_location: "Kitchen",
-      ticket_building_name: "Peavine Hall",
-      ticket_unit_number: "1C",
-      ticket_status: "Pending",
-      ticket_created: "03 13 2022 00 45 00",
-      ticket_id: 3,
-    },
-    {
-      ticket_title: "Water Leak",
-      ticket_description: "Water leak in the kitchen, underneath the sink.",
-      ticket_severity: "Mild",
-      ticket_location: "Kitchen",
-      ticket_building_name: "Peavine Hall",
-      ticket_unit_number: "1C",
-      ticket_status: "Pending",
-      ticket_created: "03 13 2022 00 45 00",
-      ticket_id: 5,
-    },
-    {
-      ticket_title: "Toilet does not flush",
-      ticket_description: "Toilet does not flush and overflows..",
-      ticket_severity: "High",
-      ticket_location: "Kitchen",
-      ticket_building_name: "Peavine Hall",
-      ticket_unit_number: "1C",
-      ticket_status: "Received",
-      ticket_created: "03 13 2022 00 45 00",
-      ticket_id: 2,
-    },
-  ];
 
   const populate_ticket_stacks = (tickets) => {
     let received_tickets_buffer = [];
@@ -88,19 +47,60 @@ export function KanbanBoard() {
 
   const api_get_tickets = () => {
 
+    const options = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${get_token()}`,
+      },
+    };
+    const route = kanban_receive_all_tickets_route();
+
+    fetch(route, options)
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(`${response.statusText} - ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((tickets) => {
+        populate_ticket_stacks(tickets)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
   }
 
   const refresh_kanban_board = () => {
     console.log("kanban refreshed")
-    // get tickets
-    // pass tickets data into populate_ticket_stacks
+    api_get_tickets()
   }
 
   useEffect(() => {
 
+    const options = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${get_token()}`,
+      },
+    };
+    const route = kanban_receive_all_tickets_route();
+
+    fetch(route, options)
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(`${response.statusText} - ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((tickets) => {
+        populate_ticket_stacks(tickets)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
     document.addEventListener('refresh-kanban', refresh_kanban_board)
-    // api_get_tickets - except it will be straight code
-    populate_ticket_stacks(tickets_test);
 
     return () => {
       document.removeEventListener('refresh-kanban', refresh_kanban_board);
@@ -134,6 +134,9 @@ function KanbanStack(props) {
 
 function TicketSticker(props) {
 
+  const {get_token} = TokenManager()
+  const navigate = useNavigate()
+
   const [received_disable, set_received_disable] = useState(true)
   const [pending_disable, set_pending_disable] = useState(true)
   const [completed_disable, set_completed_disable] = useState(true)
@@ -143,20 +146,41 @@ function TicketSticker(props) {
     document.dispatchEvent(refresh_event)
   }
 
+  const view_ticket_click = () => {
+    navigate(`/admin/maintenance_requests/${props.ticket_id}`)
+  }
+
   const received_button_click = () => {
-    refresh_kanban_board()
     // get ticket id
     // hit server with id
     // change status
     // refresh_kanban_board
+    api_update_status("Received")
+    refresh_kanban_board()
   }
 
   const pending_button_click = () => {
+    api_update_status("Pending")
     refresh_kanban_board()
   }
 
   const completed_button_click = () => {
+    api_update_status("Completed")
     refresh_kanban_board()
+  }
+
+  const api_update_status = (status) => {
+
+    const options = {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${get_token()}`,
+      },
+    };
+    const route = change_ticket_kanban_status(props.ticket_id, status);
+
+    fetch(route, options);
+
   }
 
 
@@ -221,15 +245,18 @@ function TicketSticker(props) {
     <div className={ticket_sticker_styles.TicketSticker}>
       <div className={ticket_sticker_styles.content}>
         <div className={ticket_sticker_styles.ticket_details}>
-          <ItemGroup label={"Title"}>
+        <ItemGroup label={"Ticket ID"}>
+            <p>{props.ticket_id}</p>
+          </ItemGroup>
+          <ItemGroup label={"Ticket Title"}>
             <p>{props.ticket_title}</p>
           </ItemGroup>
-          <ItemGroup label={"Description"}>
+          <ItemGroup label={"Ticket Description"}>
             <p>{props.ticket_description}</p>
           </ItemGroup>
         </div>
         <div className={ticket_sticker_styles.ticket_options}>
-          <button className={ticket_sticker_styles.ticket_option}>
+          <button className={ticket_sticker_styles.ticket_option} onClick={view_ticket_click}>
             View Ticket
           </button>
         </div>

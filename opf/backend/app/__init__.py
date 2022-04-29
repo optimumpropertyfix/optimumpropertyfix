@@ -10,7 +10,7 @@ app.config['JWT_ACCESS_TOKEN_EXPIRES'] = False
 jwt = JWTManager(app)
 
 # Setting Up Custom Backend Objects
-from app.controllers import AnnouncementController, AppointmentController, BuildingController, FaqController, FeedbackController, TicketController, UnitController, UserController
+from app.controllers import AnnouncementController, AppointmentController, BuildingController, FaqController, FeedbackController, TicketController, UnitController, UserController, KanbanController 
 from app import Routes
 
 # Dependencies for SQL Connection

@@ -5,6 +5,87 @@ import json
 
 
 class BuildingController:
+
+    def view_individual_dormitory(self, building_id_param):
+
+        buildings = None
+        query = "view_individual_dormitory"
+        args = [building_id_param]
+        buildings = self.query_database(query, args=args)
+
+        building_object = None
+
+        for building in buildings:
+            building_name = building[0]
+            building_address = building[1]
+            building_abbreviation = building[2]
+            building_year = building[3]
+            building_map_number = building[4]
+            building_capacity = building[5]
+            
+            building_json = self.serialize_building(
+                address=building_address,
+                year=building_year,
+                name = building_name, 
+                abbreviation = building_abbreviation, 
+                capacity = building_capacity, 
+                map_number = building_map_number,
+            )
+
+            building_object = building_json
+
+        return building_object
+
+
+    def edit_individual_dormitory(self, building_id_param, building_name_param, building_abbreviation_param, building_year_param, building_address_param, building_capacity_param, building_map_number_param):
+        
+        commit = "edit_individual_dormitory"
+        values = [building_id_param, building_name_param, building_abbreviation_param, building_year_param, building_address_param, building_capacity_param, building_map_number_param]
+
+        return self.commit_database(commit, values) 
+
+    def admin_create_dormitory(self, building_name_param, building_abbreviation_param, building_map_number_param, building_address_param, building_year_param, building_capacity_param):
+
+        commit = "admin_create_dormitory"
+        values = [building_name_param, building_abbreviation_param, building_map_number_param, building_address_param, building_year_param, building_capacity_param]
+
+        return self.commit_database(commit, values)
+        
+    def commit_database(self, commit, values = None):
+        commit_result = None
+
+        connection = None
+        cursor = None
+
+        try:
+            print("ATTEMPT FOR CONNECTION START")
+            db_config = database_configuration
+            connection = MySQLConnection(**db_config)
+            cursor = connection.cursor()
+
+        except:
+            return -1
+
+        try:
+            print("CURSOR ACTIVE")
+            if (values == None): 
+                print("EVAL 1")
+                cursor.callproc(commit)
+            else:
+                cursor.callproc(commit, values)
+
+            commit_result = connection.commit()
+
+        except Error as error:
+            print(error)
+            return -1
+
+        finally:
+            print("CURSOR CLOSED")
+            cursor.close()
+            connection.close()
+            return commit_result
+
     def view_all_dormitories(self):
         buildings = None
         query = "view_all_dormitories"
@@ -102,6 +183,5 @@ class BuildingController:
         }
         return building
 
-         
     def __init__(self):
         print("DEBUG: building Controller Loaded.")
