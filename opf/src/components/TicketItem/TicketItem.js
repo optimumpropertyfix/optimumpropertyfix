@@ -43,7 +43,11 @@ function TicketItem(props) {
   };
 
   const view_ticket_click = () => {
-    navigate(`/student/maintenance_requests/${props.ticket_id}`)
+    if (props.admin === true) {
+      navigate(`/admin/maintenance_requests/${props.ticket_id}`)
+    } else {
+      navigate(`/student/maintenance_requests/${props.ticket_id}`)
+    }
   }
 
   const title_text = (title) => {

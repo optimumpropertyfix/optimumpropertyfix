@@ -2,7 +2,7 @@ import styles from "./AllAppointmentsView.module.css";
 import admin_styles from "./AdminAllAppointmentsView.module.css";
 import AppointmentItem from "../../../../components/Appointment/AppointmentItem";
 import LandingMessage from "../../../../components/LandingMessage/LandingMessage";
-import { view_all_appointments } from "../../../../Routes";
+import { view_all_appointments, admin_view_all_appointments_route, admin_view_all_appointments_by_status } from "../../../../Routes";
 import { useEffect, useState } from "react";
 import TokenManager from "../../../../TokenManager";
 import FormGroup from "../../../../components/FormGroup/FormGroup";
@@ -14,12 +14,12 @@ export function AdminAllAppointmentsView(props) {
 
   const status_filter_change = (event) => {
     set_status_filter(event.target.value);
-    // show all tickets with filter condition
+    api_get_all_appointments_by_status(event.target.value)
   };
 
   const clear_filter_click = () => {
     set_status_filter("select");
-    // show all tickets refresh
+    api_get_all_appointments()
   };
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export function AdminAllAppointmentsView(props) {
         Authorization: `Bearer ${get_token()}`,
       },
     };
-    const route = view_all_appointments();
+    const route = admin_view_all_appointments_route();
 
     fetch(route, options)
       .then((response) => {
@@ -46,11 +46,59 @@ export function AdminAllAppointmentsView(props) {
       });
   }, []);
 
+  const api_get_all_appointments = () => {
+    const options = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${get_token()}`,
+      },
+    };
+    const route = admin_view_all_appointments_route();
+
+    fetch(route, options)
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(`${response.statusText} - ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((appointments) => {
+        set_appointments(appointments);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  const api_get_all_appointments_by_status = (status) => {
+    const options = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${get_token()}`,
+      },
+    };
+    const route = admin_view_all_appointments_by_status(status);
+
+    fetch(route, options)
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(`${response.statusText} - ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((appointments) => {
+        set_appointments(appointments);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   return (
     <div className={admin_styles.AllAppointmentsView}>
       <div className={`${admin_styles.view_container} view_layout`}>
         <p className={`${admin_styles.page_title_text} page_title_text`}>
-          View All Your Appointments
+          View All Student Appointments
         </p>
         <div className={`${admin_styles.content_container} view_content_layout`}>
           <div className={admin_styles.filter_options}>
@@ -84,6 +132,7 @@ export function AdminAllAppointmentsView(props) {
             {appointments.map((appointment) => {
               return (
                 <AppointmentItem
+                  admin={true}
                   key={appointment.appointment_id}
                   {...appointment}
                 />

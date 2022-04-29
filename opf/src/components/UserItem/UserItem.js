@@ -29,10 +29,10 @@ const user_type_text = () => {
           <ItemGroup label="First Name" text={props.user_first_name} />
           <ItemGroup label="Last Name" text={props.user_last_name} />
           <ItemGroup label="User Type" text={user_type_text()} />
-          <ItemGroup label="Contact Email" text={props.user_content_email} />
+          <ItemGroup label="Contact Email" text={props.user_contact_email} />
         </div>
         <div className={styles.user_options}>
-          { props.user_is_student === "1" ?
+          { props.user_is_student === 1 ?
           <button onClick={view_user_click}>VIEW USER</button>
           : null }
         </div>

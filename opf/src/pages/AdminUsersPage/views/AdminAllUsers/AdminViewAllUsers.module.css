@@ -1,7 +1,11 @@
 @media only screen and (min-width: 900px) {
     .AdminUsersPage {
-        max-height: 90%;
         overflow-y: auto;
+    }
+    .accounts_list {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
     }
 
   }

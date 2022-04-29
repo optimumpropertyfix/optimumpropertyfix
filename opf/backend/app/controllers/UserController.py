@@ -10,6 +10,39 @@ from time import strftime
 from flask_jwt_extended import create_access_token
 
 class UserController:
+    def view_all_opf_users(self):
+        users = None
+        query = "view_all_opf_users"
+        users = self.query_database(query)
+
+        user_objects = []
+        
+        for user in users:
+            user_id = user[0]
+            user_first_name = user[1]
+            user_last_name = user[2]
+            user_contact_email = user[3]
+            user_net_id = user[4]
+            user_is_student = user[5]
+                    
+            user_json = self.serialize_user(
+                id = user_id,
+                first_name = user_first_name,
+                last_name = user_last_name,
+                contact_email = user_contact_email, 
+                net_id = user_net_id, 
+                is_student= user_is_student,
+            )
+            user_objects.append(user_json)         
+        return user_objects
+
+
+    def view_opf_reset_password(self, user_id_param, new_password_param):
+        commit = "view_opf_reset_password"
+        values = [user_id_param, new_password_param]
+        if (self.commit_database(commit=commit, values=values) != -1):
+            return True
+
 
     def user_update_password(self, user_id_param, current_password_param, new_password_param):
         commit = "user_update_password"

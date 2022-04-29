@@ -6,6 +6,69 @@ import json
 
 
 class AppointmentController:
+
+    def admin_view_all_appointments(self):
+
+        appointments = None
+        query = "admin_view_all_appointments"
+        args = []
+        appointments = self.query_database(query, args)
+
+        appointment_objects = []
+
+        for appointment in appointments:
+            appointment_id = appointment[0]
+            appointment_start_time = appointment[1].strftime("%m %d %Y %H %M %S")
+            appointment_end_time = appointment[2].strftime("%m %d %Y %H %M %S")
+            appointment_status = appointment[3]
+            appointment_building_name = appointment[4]
+            appointment_unit_number = appointment[5]
+            appointment_location = appointment[6]
+
+            appointment_json = self.serialize_appointment(
+                id = appointment_id,
+                start_time = appointment_start_time,
+                end_time = appointment_end_time,
+                status = appointment_status,
+                building_name=appointment_building_name,
+                unit_number= appointment_unit_number,
+                location=appointment_location,
+            )
+            appointment_objects.append(appointment_json)
+        
+        return appointment_objects
+
+    def admin_view_all_appointments_by_status(self, status):
+
+        appointments = None
+        query = "admin_view_all_appointments_by_status"
+        args = [status]
+        appointments = self.query_database(query, args)
+
+        appointment_objects = []
+
+        for appointment in appointments:
+            appointment_id = appointment[0]
+            appointment_start_time = appointment[1].strftime("%m %d %Y %H %M %S")
+            appointment_end_time = appointment[2].strftime("%m %d %Y %H %M %S")
+            appointment_status = appointment[3]
+            appointment_building_name = appointment[4]
+            appointment_unit_number = appointment[5]
+            appointment_location = appointment[6]
+
+            appointment_json = self.serialize_appointment(
+                id = appointment_id,
+                start_time = appointment_start_time,
+                end_time = appointment_end_time,
+                status = appointment_status,
+                building_name=appointment_building_name,
+                unit_number= appointment_unit_number,
+                location=appointment_location,
+            )
+            appointment_objects.append(appointment_json)
+        
+        return appointment_objects
+        
     def view_all_appointments(self, user_id = None, is_student = True):
         appointments = None
         if (is_student):

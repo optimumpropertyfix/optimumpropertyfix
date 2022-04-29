@@ -30,7 +30,11 @@ const AppointmentItem = (props) => {
   }
   
   const view_appointment_click = () => {
-    navigate(`/student/appointments/${props.appointment_id}`)
+    if (props.admin == true) {
+      navigate(`/admin/appointments/${props.appointment_id}`)
+    } else {
+      navigate(`/student/appointments/${props.appointment_id}`)
+    }
   }
 
   return (

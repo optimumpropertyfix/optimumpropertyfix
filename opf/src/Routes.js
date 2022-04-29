@@ -141,6 +141,55 @@ const view_dormitories_route = () => {
   return `/buildings`
 }
 
+const admin_create_dormitory_route = () => {
+  return '/buildings/create'
+}
+
+const edit_individual_dormitory_route = (building_id) => {
+  return `/buildings/${building_id}/edit`
+}
+
+const view_individual_dormitory_route = (building_id) => {
+  return `/buildings/${building_id}`
+}
+
+const view_dormitory_units_route = (building_id) => {
+  return `/units/${building_id}`
+}
+
+const admin_create_unit_route = (building_id) => {
+  return `/units/${building_id}/create`
+}
+
+const admin_view_all_appointments_route = () => {
+  return `/admin_appointments`
+}
+const admin_view_all_appointments_by_status = (status) => {
+  return `/admin_appointments/filter/appointment_status/${status}`
+}
+
+const view_all_opf_users_route = () =>{
+  return `/admin/users`
+}
+
+const admin_get_all_tickets_route = () =>{
+  return `/admin_tickets`
+}
+
+const admin_view_all_tickets_by_status_route = (status) => {
+  return `/admin_tickets/filter/ticket_status/${status}`
+}
+
+const kanban_receive_all_tickets_route = () => {
+  return `/kanban_board/tickets`
+}
+
+const change_ticket_kanban_status = (ticket_id, status) => {
+
+  return `/kanban_board/${ticket_id}/${status}`
+
+}
+
 export {
   student_create_ticket_route,
   admin_create_ticket_route,
@@ -176,5 +225,17 @@ export {
   admin_view_individual_faq_route,
   admin_edit_individual_faq_route,
   admin_create_individual_faq_route,
-  view_dormitories_route
+  view_dormitories_route,
+  admin_create_dormitory_route,
+  edit_individual_dormitory_route,
+  view_individual_dormitory_route,
+  view_dormitory_units_route,
+  admin_create_unit_route,
+  admin_view_all_appointments_route,
+  admin_view_all_appointments_by_status,
+  view_all_opf_users_route,
+  admin_get_all_tickets_route,
+  admin_view_all_tickets_by_status_route,
+  kanban_receive_all_tickets_route,
+  change_ticket_kanban_status
 };
